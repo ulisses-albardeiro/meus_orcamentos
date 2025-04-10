@@ -24,7 +24,7 @@
                         <td>{{ orcamento.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
                         <td>R$ {{ orcamento.vl_total }}</td>
                         <td class="text-center">
-                            <a title="Ver Orçamento" href="{{ url('ver-orcamento/'~orcamento.id) }}" class="text-success text-decoration-none fs-4">
+                            <a title="Ver Orçamento" target="_blank" href="{{ url('ver-orcamento/'~orcamento.id) }}" class="text-success text-decoration-none fs-4">
                                 <i class="bi bi-filetype-pdf"></i>
                             </a>
                             

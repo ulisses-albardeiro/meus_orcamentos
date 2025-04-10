@@ -53,6 +53,9 @@ try {
         //Listar Meus orcamentos
         SimpleRouter::get(URL. 'meus-orcamentos', 'MeusOrcamentos@listar');
 
+        //Ver orcamento
+        SimpleRouter::get(URL. 'ver-orcamento/{id_orcamento}', 'VerOrcamento@gerar');
+
     });
 
     SimpleRouter::start();
