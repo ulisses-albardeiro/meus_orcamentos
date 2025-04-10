@@ -27,7 +27,7 @@ class EmaiRecuperacao extends Controlador
             $dados_usuario = $this->verificacaoEmail($email);
             $this->salvarToken($dados_usuario->id, $this->token);
             $this->enviarEmail($email, $dados_usuario->nome);
-            $this->mensagem->mensagemSucesso("Um link de reculperação de senha foi enviado para o seu email")->flash();
+            $this->mensagem->mensagemSucesso("Um link de recuperação de senha foi enviado para o seu email")->flash();
             Helpers::redirecionar('login');
         }
 
@@ -40,7 +40,7 @@ class EmaiRecuperacao extends Controlador
         return <<<HTML
                    <body style="font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px;">
                        <div style="max-width: 500px; background: #ffffff; padding: 20px; margin: auto; border-radius: 5px;">
-                           <h2 style="color: #333;">Recuperação de Senha</h2>
+                           <h2 style="color: #333;">Recuperação de Senha - Meus Orçamentos</h2>
                            <p>Olá,</p>
                            <p>Clique no botão abaixo para redefinir sua senha.</p>
                            <a href="{$url}" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 10px 15px; text-decoration: none; border-radius: 3px;">
@@ -52,7 +52,6 @@ class EmaiRecuperacao extends Controlador
                 HTML;
     }
 
-
     private function verificacaoEmail(string $email): ?object
     {
         $verificacao = (new UsuarioModelo)->busca("email = '{$email}'")->resultado();
@@ -60,9 +59,10 @@ class EmaiRecuperacao extends Controlador
         if ($verificacao != null) {
             return $verificacao;
         }
-        return null;
-        $this->mensagem->mensagemSucesso("Email desconhecido")->flash();
+
+        $this->mensagem->mensagemAtencao("Email desconhecido")->flash();
         Helpers::redirecionar('recuperacao-de-senha');
+        return null;
     }
 
     private function salvarToken(int $id, string $token): void
