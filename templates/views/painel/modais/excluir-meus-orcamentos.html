@@ -1,0 +1,25 @@
+<!-- Modal Excluir -->
+<div class="modal fade" id="modalConfirmDelete{{ orcamento.id }}" tabindex="-1" aria-labelledby="modalLabel{{ post.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalLabel{{ orcamento.id }}">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <span class="text-dark">Atenção!</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="text-dark">Deseja realmente excluir o Orçamento do cliente <strong>{{ orcamento.cliente }}</strong>?</p>
+                <p class="text-muted">Esta ação não poderá ser desfeita.</p>
+            </div>
+            <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i> Cancelar
+                </button>
+                <a href="{{ url('excluir-orcamento/'~orcamento.id) }}" class="btn-sm btn btn-danger">
+                    <i class="bi bi-trash-fill me-1"></i> Excluir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

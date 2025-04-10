@@ -36,6 +36,7 @@ try {
         SimpleRouter::match(['get', 'post'], URL . 'salvar-senha', 'NovaSenha@salvarNovaSenha');
     });
 
+    //Grupo de Rotas Orçamento
     SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
 
         //Cadastro novos usuários
@@ -45,6 +46,9 @@ try {
         //Criar orçamento
         SimpleRouter::get(URL. 'novo-orcamento', 'GerarOrcamento@criar');
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento@gerar');
+
+        //Excluir Orçamento
+        SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'ExcluirOrcamento@excluir');
 
         //Listar Meus orcamentos
         SimpleRouter::get(URL. 'meus-orcamentos', 'MeusOrcamentos@listar');
