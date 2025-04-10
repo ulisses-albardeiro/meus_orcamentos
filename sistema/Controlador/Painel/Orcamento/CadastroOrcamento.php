@@ -13,6 +13,7 @@ class CadastroOrcamento extends PainelControlador
         $orcamento->cliente = $cliente;
         $orcamento->vl_total = $vl_total;
         $orcamento->orcamento_completo = json_encode($dados);
+        $orcamento->id_usuario = $this->usuario->id;
         $orcamento->salvar();
     }
 }
