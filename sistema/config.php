@@ -14,24 +14,24 @@ if (Helpers::localhost()) {
     define('SITE_DESC', '');
 
     define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', '');
-    define('SENHA_EMAIL', '@');
+    define('USUARIO_EMAIL', 'suporte@meusorcamentos.online');
+    define('SENHA_EMAIL', '6QgFkAq[');
     define('PORTA_EMAIL', 465);
 
     define('DEVELOPMENT_URL', 'http://localhost/pessoal/meus_orcamentos');
     define('URL', '/pessoal/meus_orcamentos/');
 } else {
-    define('DB_NOME', '');
+    define('DB_NOME', 'u997346094_blog');
     define('DB_HOST', 'localhost');
-    define('DB_USUARIO', '');
-    define('DB_SENHA', '');
+    define('DB_USUARIO', 'u997346094_blog');
+    define('DB_SENHA', 'hAtmMv+8');
 
     define('SITE_NAME', 'Meus Orçamentos');
     define('SITE_DESC', '');
 
     define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', '');
-    define('SENHA_EMAIL', '@');
+    define('USUARIO_EMAIL', 'suporte@meusorcamentos.online');
+    define('SENHA_EMAIL', '6QgFkAq[');
     define('PORTA_EMAIL', 465);
 
     define('PRODUCTION_URL', 'https://meusorcamentos.online');

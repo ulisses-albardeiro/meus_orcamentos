@@ -1,0 +1,27 @@
+{
+    "name": "note/sistema_consult",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        },
+        "files": [
+            "sistema/config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Ulisses Alba",
+            "email": "ualbardeiro@gmail.com"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "5.4.1.7",
+        "twig/twig": "^3.14",
+        "guzzlehttp/guzzle": "^7.9",
+        "phpmailer/phpmailer": "^6.9",
+        "cboden/ratchet": "^0.4.4",
+        "dompdf/dompdf": "^3.1",
+        "smalot/pdfparser": "^2.11",
+        "phpoffice/phpspreadsheet": "^4.1"
+    }
+}

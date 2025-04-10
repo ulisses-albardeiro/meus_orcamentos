@@ -1,0 +1,14 @@
+<br />
+<b>Fatal error</b>:  Uncaught TypeError: sistema\Controlador\Painel\Orcamento::html(): Argument #1 ($dados) must be of type array, null given, called in /opt/lampp/htdocs/pessoal/meus_orcamentos/sistema/Controlador/Painel/Orcamento.php on line 20 and defined in /opt/lampp/htdocs/pessoal/meus_orcamentos/sistema/Controlador/Painel/Orcamento.php:28
+Stack trace:
+#0 /opt/lampp/htdocs/pessoal/meus_orcamentos/sistema/Controlador/Painel/Orcamento.php(20): sistema\Controlador\Painel\Orcamento-&gt;html(NULL)
+#1 [internal function]: sistema\Controlador\Painel\Orcamento-&gt;gerar()
+#2 /opt/lampp/htdocs/pessoal/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/ClassLoader/ClassLoader.php(34): call_user_func_array(Array, Array)
+#3 /opt/lampp/htdocs/pessoal/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Route/Route.php(117): Pecee\SimpleRouter\ClassLoader\ClassLoader-&gt;loadClassMethod(Object(sistema\Controlador\Painel\Orcamento), 'gerar', Array)
+#4 /opt/lampp/htdocs/pessoal/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(427): Pecee\SimpleRouter\Route\Route-&gt;renderRoute(Object(Pecee\Http\Request), Object(Pecee\SimpleRouter\Router))
+#5 /opt/lampp/htdocs/pessoal/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(353): Pecee\SimpleRouter\Router-&gt;routeRequest()
+#6 /opt/lampp/htdocs/pessoal/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/SimpleRouter.php(69): Pecee\SimpleRouter\Router-&gt;start()
+#7 /opt/lampp/htdocs/pessoal/meus_orcamentos/sistema/rotas.php(26): Pecee\SimpleRouter\SimpleRouter::start()
+#8 /opt/lampp/htdocs/pessoal/meus_orcamentos/index.php(4): require('/opt/lampp/htdo...')
+#9 {main}
+  thrown in <b>/opt/lampp/htdocs/pessoal/meus_orcamentos/sistema/Controlador/Painel/Orcamento.php</b> on line <b>28</b><br />

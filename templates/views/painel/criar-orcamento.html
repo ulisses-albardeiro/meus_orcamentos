@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+
+<h3 class="text-center">Seus Dados</h3>
+<p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+<form action="{{ url('gerar-orcamento') }}" method="post" target="_blank">
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3">
+            <label class="form-label">Seu nome*</label>
+            <input required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label"> Seu Facebook</label>
+                <input value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
+            </div>
+            <div class="col-6">
+                <label class="form-label"> Seu Instagram</label>
+                <input value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label"> Seu Telefone*</label>
+                <input required value="{{ usuario().telefone }}" type="text" class="form-control" name="tel-empresa">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Seu CNPJ</label>
+                <input value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa" id="cnpj-input"
+                    placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Seu Email</label>
+            <input value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Seu Endereço</label>
+            <input value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
+        </div>
+    </div>
+
+    <h3 class="text-center mt-4">Dados do cliente</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3">
+            <label class="form-label">Nome*</label>
+            <input required type="text" class="form-control" name="nome-cliente">
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label">Telefone Fixo</label>
+                <input type="text" class="form-control" name="tel-cliente">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Celular</label>
+                <input type="text" class="form-control" name="cel-cliente">
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label">CNPJ</label>
+                <input type="text" class="form-control" name="doc-cliente"
+                    id="cnpj-input-cliente" placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email-cliente">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Endereço*</label>
+            <input required placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control" name="end-cliente">
+        </div>
+    </div>
+
+    <h3 class="mt-4 text-center">Itens do Orçamento</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+    <div class="card border-1 shadow-lg p-3">
+        <div id="itens-container" class="mb-3">
+            <div class="row g-2 item">
+                <div class="col-7">
+                    <input required type="text" class="form-control" placeholder="Nome do Serviço*"
+                        name="itens[0][nome-item]">
+                </div>
+                <div class="col-2">
+                    <input required type="number" class="form-control" placeholder="Qtd*" name="itens[0][qtd-item]">
+                </div>
+                <div class="col-3">
+                    <input required type="text" class="form-control valor-unitario" placeholder="Valor unitário*"
+                        name="itens[0][valor-item]" id="valor-unitario">
+                </div>
+
+                <div class="col-12">
+                    <textarea class="form-control" placeholder="Descrição" name="itens[0][descricao-item]"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary mb-3" onclick="adicionarItem()">Adicionar Item</button>
+    </div>
+
+    <h3 class="mt-4 text-center">Detalhes finais</h3>
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="col-md-2">
+                <label class="form-label">Validade do orçamento</label>
+                <input type="date" class="form-control" name="validade-orcamento">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Anotações sobre o Orçamento</label>
+            <textarea class="form-control" placeholder="Anotações" name="anotacoes"></textarea>
+        </div>
+    </div>
+
+    <div class="text-center my-4">
+        <button type="submit" class="btn btn-success">Gerar Orçamento</button>
+        <!-- <button type="button" class="btn btn-danger">Gerar Orçamento em PDF</button> -->
+    </div>
+</form>
+
+
+
+<script>
+    // Função para adicionar novos itens ao orçamento
+    function adicionarItem() {
+        let container = document.getElementById('itens-container');
+        let index = document.querySelectorAll('.item').length;
+        let item = document.createElement('div');
+        item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
+        item.innerHTML = `
+            <div class="col-6">
+                <input required type="text" class="form-control" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
+            </div>
+            <div class="col-2">
+                <input required type="number" class="form-control" name="itens[${index}][qtd-item]" placeholder="Qtd*">
+            </div>
+            <div class="col-3">
+                <input required type="text" class="form-control valor-unitario" name="itens[${index}][valor-item]" placeholder="Valor unitário">
+            </div>
+            <div class="col-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+            </div>
+            <div class="col-12">
+                <textarea class="form-control" name="itens[${index}][descricao-item]" placeholder="Descrição"></textarea>
+            </div>
+        `;
+        container.appendChild(item);
+
+        // Aplica a máscara monetária ao novo campo criado
+        aplicarMascaraMonetaria(item.querySelector('.valor-unitario'));
+    }
+
+    // Função para remover itens do orçamento
+    function removerItem(button) {
+        button.closest('.item').remove();
+    }
+
+    // Função para aplicar máscara monetária a um campo específico
+    function aplicarMascaraMonetaria(campo) {
+        if (!campo) return;
+
+        campo.addEventListener('input', function (e) {
+            // Remove todos os caracteres não numéricos
+            let valor = this.value.replace(/[^\d]/g, '');
+
+            // Se estiver vazio, define como vazio
+            if (valor === '') {
+                this.value = '';
+                return;
+            }
+
+            // Converte para número com centavos
+            valor = (parseInt(valor, 10) / 100);
+
+            // Formata com 2 casas decimais e vírgula
+            this.value = valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).replace('.', '~').replace(',', '.').replace('~', ',');
+        });
+
+        campo.addEventListener('blur', function () {
+            let valor = this.value.replace(/[^\d]/g, '');
+
+            if (!valor) {
+                this.value = '';
+                return;
+            }
+
+            valor = parseInt(valor, 10) / 100;
+
+            // Formata como moeda brasileira completa
+            this.value = valor.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        });
+
+        // Formata inicialmente se houver valor
+        if (campo.value) {
+            campo.dispatchEvent(new Event('blur'));
+        }
+    }
+
+    // Função para aplicar máscara de CNPJ a um campo específico
+    function aplicarMascaraCNPJ(campo) {
+        if (!campo) return;
+
+        campo.addEventListener('input', function (e) {
+            // Remove todos os caracteres não numéricos
+            let value = this.value.replace(/\D/g, '');
+
+            // Aplica a máscara conforme o usuário digita
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '.' + value.substring(2);
+            }
+            if (value.length > 6) {
+                value = value.substring(0, 6) + '.' + value.substring(6);
+            }
+            if (value.length > 10) {
+                value = value.substring(0, 10) + '/' + value.substring(10);
+            }
+            if (value.length > 15) {
+                value = value.substring(0, 15) + '-' + value.substring(15);
+            }
+
+            // Limita o tamanho máximo
+            this.value = value.substring(0, 18);
+        });
+    }
+
+    // Quando o DOM estiver completamente carregado
+    document.addEventListener('DOMContentLoaded', function () {
+        // Aplica máscara CNPJ aos campos existentes
+        aplicarMascaraCNPJ(document.getElementById('cnpj-input'));
+        aplicarMascaraCNPJ(document.getElementById('cnpj-input-cliente'));
+
+        // Aplica máscara monetária ao campo inicial
+        const camposValor = document.querySelectorAll('.valor-unitario');
+        camposValor.forEach(campo => {
+            aplicarMascaraMonetaria(campo);
+        });
+
+        // Adiciona evento para aplicar máscara a novos itens adicionados dinamicamente
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('valor-unitario')) {
+                aplicarMascaraMonetaria(e.target);
+            }
+        });
+    });
+</script>
+
+{% endblock %}

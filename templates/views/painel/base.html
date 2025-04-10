@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Orçamentos</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url('templates/assets/DataTables/datatables.min.css') }}">
+
+
+    <style>
+        .app-header {
+            background: #1E30F3;
+            color: white;
+            font-size: 20px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #1E30F3;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            text-align: center;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-header d-flex justify-content-between px-5 pt-1">
+        <div class="pt-2 pb-3">Meus Orçamentos</div>
+        <a href="{{ url("sair") }}">
+            <div class="px-2 align-items-center text-white"><i class="bi bi-box-arrow-left fs-1"></i></div>
+        </a>
+    </div>
+
+    <div class="container pb-5 pt-3">
+
+        {% block conteudo %}
+
+        {% endblock %}
+
+    </div>
+
+    <div class="bottom-nav">
+        <div class="border border-white rounded px-2"><a href="{{ url('perfil') }}"><i
+                    class="bi bi-person fs-4"></i></a></div>
+
+        <div class="border border-white rounded px-2"><a href="{{ url('novo-orcamento') }}"><i
+                    class="bi bi-clipboard-plus fs-4"></i></a></div>
+
+        <div class="border border-white rounded px-2"><a href="{{ url('meus-orcamentos') }}"><i
+                    class="bi bi-list-ol fs-4"></i></a></div>
+
+        <!-- <div class="border border-white rounded px-2"><a href="#"><i class="bi bi-people fs-4"></i></i></a></div> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+<!-- DataTables JS -->
+<script src="{{ url('templates/assets/DataTables/datatables.min.js') }}"></script>
+
+</html>

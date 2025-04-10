@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url('templates/assets/img/gerais/favicon.png')}}" type="image/x-icon">
+    <title>Nova Senha</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+
+    <div class="card p-4 shadow" style="width: 22rem;">
+        {{ flash() }}
+        <form action="{{url('salvar-senha')}}" method="post">
+                <div class="pb-3">
+                    <li>8 caracteres não sequenciais</li>
+                    <li>1 letra maiúscula</li>
+                    <li>1 simbolo (!@#$%^&*()_+{}[]<>? etc.)</li>
+                </div>
+            <input hidden type="text" value="{{ token }}" name="token">
+            <div class="mb-3">
+                <label for="senha1" class="form-label fw-bold">Nova senha</label>
+                <input type="password" class="form-control" id="senha1" name="senha1"
+                    placeholder="Digite sua nova senha">
+            </div>
+            <div class="mb-3">
+                <label for="senha2" class="form-label fw-bold">Confirmar senha</label>
+                <input type="password" class="form-control" id="senha2" name="senha2"
+                    placeholder="Confirme sua nova senha">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Salvar</button>
+            <span class="text-danger" id="mensagem"></span>
+            
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").on("submit", function (event) {
+                let senha = $("#senha1").val();
+                let confirmarSenha = $("#senha2").val();
+                let mensagem = $("#mensagem");
+
+                mensagem.text(""); // Limpa mensagem anterior
+
+                if (senha.length < 8) {
+                    mensagem.text("A senha deve ter no mínimo 8 caracteres.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (senha !== confirmarSenha) {
+                    mensagem.text("As senhas não coincidem.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (ehSequencial(senha)) {
+                    mensagem.text("A senha não pode ser uma sequência simples.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (!temMaiuscula(senha)) {
+                    mensagem.text("A senha deve conter pelo menos uma letra maiúscula.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (!temSimbolo(senha)) {
+                    mensagem.text("A senha deve conter pelo menos um símbolo especial.");
+                    event.preventDefault();
+                    return;
+                }
+            });
+
+            function ehSequencial(senha) {
+                let sequencias = ["12345678", "abcdefgh", "87654321", "qwertyui",];
+                return sequencias.some(seq => senha.includes(seq));
+            }
+
+            function temMaiuscula(senha) {
+                return /[A-Z]/.test(senha);
+            }
+
+            function temSimbolo(senha) {
+                return /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(senha);
+            }
+        });
+    </script>
+    <!-- Script do Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
