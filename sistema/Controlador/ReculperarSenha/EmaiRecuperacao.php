@@ -77,7 +77,7 @@ class EmaiRecuperacao extends Controlador
     private function enviarEmail(string $email, string $nome): void
     {
         $enviar = (new Email(HOST_EMAIL, USUARIO_EMAIL, SENHA_EMAIL, PORTA_EMAIL));
-        $enviar->criar('Reculperação de senha', $this->corpoEmail(), $email, $nome);
-        $enviar->enviar(USUARIO_EMAIL, 'Reculperação de senha - Meus Orçamentos (Não responda)');
+        $enviar->criar('Recuperação de senha', $this->corpoEmail(), $email, $nome);
+        $enviar->enviar(USUARIO_EMAIL, 'Recuperação de senha - Meus Orçamentos (Não responda)');
     }
 }
