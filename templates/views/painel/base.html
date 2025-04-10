@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Orçamentos</title>
+
+     <!-- Custom Google font-->
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{{ url("templates/views/site/assets/icone.png")}}" />
 
@@ -21,6 +27,9 @@
 
 
     <style>
+        .font{
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         .app-header {
             background: #373643;
             color: white;
@@ -49,7 +58,7 @@
 
 <body>
     <div class="app-header d-flex justify-content-between px-5 pt-1">
-        <div class="pt-2 pb-3">Meus Orçamentos</div>
+        <div class="pt-2 pb-3 font">Meus Orçamentos<img style="width: 15px; padding-bottom: 20px;" src="{{ url("templates/views/site/assets/icone.png") }}" alt=""></div>
         <a href="{{ url("sair") }}">
             <div class="px-2 align-items-center text-white"><i class="bi bi-box-arrow-left fs-1"></i></div>
         </a>
