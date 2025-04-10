@@ -17,7 +17,7 @@ class GerarOrcamento extends PainelControlador
 
     public function gerar(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 
         $html = $this->html($dados);
 
@@ -38,7 +38,7 @@ class GerarOrcamento extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Orçamento".$dados['nome-cliente'].".pdf");
+        $pdf->exibir("Orçamento_".$dados['nome-cliente'].".pdf");
     }
 
     private function html(array $dados): string
