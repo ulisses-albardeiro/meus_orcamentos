@@ -28,7 +28,7 @@ try {
         SimpleRouter::post(URL. 'perfil-editar', 'Perfil@editar');
     });  
 
-    //Grupo de Rotas Reculperação de senha
+    //Grupo de Rotas Recuperação de senha
     SimpleRouter::group(['namespace' => 'ReculperarSenha'], function () {
 
         SimpleRouter::match(['get', 'post'], URL . 'recuperacao-de-senha', 'EmaiRecuperacao@emaiRecuperacao');
