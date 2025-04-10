@@ -26,19 +26,19 @@ class GerarOrcamento extends PainelControlador
 
             $valor = (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $item['valor-item']);
             $valor = $valor / 100;
-            $qtd_item = (int) $item['qtd-item'];        
+            $qtd_item = (int) $item['qtd-item'];
             $subtotal = $qtd_item * $valor;
             $total += $subtotal;
             $total = number_format($total, 2, ',', '.');
         }
-             
+
         (new CadastroOrcamento)->cadastrar($dados['nome-cliente'], $total, $dados);
 
         $pdf = new Pdf();
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Orçamento_".$dados['nome-cliente'].".pdf");
+        $pdf->exibir("Orçamento_" . $dados['nome-cliente'] . ".pdf");
     }
 
     private function html(array $dados): string
@@ -78,7 +78,7 @@ class GerarOrcamento extends PainelControlador
 
         $instagram = "";
         if ($dados['instagram']) {
-            $instagram = '<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon"> '.$dados['instagram'];
+            $instagram = '<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon"> ' . $dados['instagram'];
         }
 
 
@@ -103,12 +103,14 @@ class GerarOrcamento extends PainelControlador
             </tr>
     HTML;
         }
-        $validade_orcamento = $dados['validade-orcamento'];
-        $data = new DateTime($validade_orcamento);
-        $data_formatada = $data->format('d/m/Y');
+        if (!empty($dados['validade-orcamento'])) {
+            $validade_orcamento = $dados['validade-orcamento'];
+            $data = new DateTime($validade_orcamento);
+            $data_formatada = $data->format('d/m/Y');
+            $validade = isset($dados['validade-orcamento']) ? "*Validade do orçamento: " . $data_formatada : null;
+        }
 
-        $validade = isset($dados['validade-orcamento']) ? "*Validade do orçamento: " . $data_formatada : null;
-        $anotacoes = isset($dados['anotacoes']) ? "*" . $dados['anotacoes'] : null;
+        $anotacoes = !empty($dados['anotacoes']) ? "*" . $dados['anotacoes'] : null;
         $totalFormatado = number_format($total, 2, ',', '.');
 
         $html = <<<HTML
