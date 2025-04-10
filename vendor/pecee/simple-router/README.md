@@ -697,7 +697,7 @@ The `prefix` group attribute may be used to prefix each route in the group with 
 ```php
 SimpleRouter::group(['prefix' => '/admin'], function () {
     SimpleRouter::get('/users', function ()    {
-        // Matches The "/users" URL
+        // Matches The "/admin/users" URL
     });
 });
 ```

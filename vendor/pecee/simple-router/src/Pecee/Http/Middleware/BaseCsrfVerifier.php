@@ -14,7 +14,7 @@ class BaseCsrfVerifier implements IMiddleware
 
     /**
      * Urls to ignore. You can use * to exclude all sub-urls on a given path.
-     * For example: /*
+     * For example: /admin/*
      * @var array|null
      */
     protected array $except = [];

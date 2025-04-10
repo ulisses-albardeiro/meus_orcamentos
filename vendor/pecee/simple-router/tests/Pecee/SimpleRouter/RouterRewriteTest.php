@@ -73,7 +73,7 @@ class RouterRewriteTest extends \PHPUnit\Framework\TestCase
         });
 
         try {
-            TestRouter::debug('/my-path-test', 'get');
+            TestRouter::debug('/admin/my-path-test', 'get');
         } catch (\Pecee\SimpleRouter\Exceptions\NotFoundHttpException $e) {
 
         }

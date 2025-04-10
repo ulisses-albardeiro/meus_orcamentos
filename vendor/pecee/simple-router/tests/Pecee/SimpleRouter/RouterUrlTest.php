@@ -153,20 +153,20 @@ class RouterUrlTest extends \PHPUnit\Framework\TestCase
         // Should match /about/
         $this->assertEquals('/about/', TestRouter::getUrl('DummyController@about'));
 
-        // Should match /
-        $this->assertEquals('/', TestRouter::getUrl('DummyController@method2'));
+        // Should match /admin/
+        $this->assertEquals('/admin/', TestRouter::getUrl('DummyController@method2'));
 
-        // Should match /
-        $this->assertEquals('/', TestRouter::getUrl('admin.home'));
+        // Should match /admin/
+        $this->assertEquals('/admin/', TestRouter::getUrl('admin.home'));
 
-        // Should match /2/
-        $this->assertEquals('/2/', TestRouter::getUrl('admin.home', ['id' => 2]));
+        // Should match /admin/2/
+        $this->assertEquals('/admin/2/', TestRouter::getUrl('admin.home', ['id' => 2]));
 
-        // Should match /users/
-        $this->assertEquals('/users/', TestRouter::getUrl('admin.users'));
+        // Should match /admin/users/
+        $this->assertEquals('/admin/users/', TestRouter::getUrl('admin.users'));
 
-        // Should match /users/home/
-        $this->assertEquals('/users/home/', TestRouter::getUrl('admin.users@home'));
+        // Should match /admin/users/home/
+        $this->assertEquals('/admin/users/home/', TestRouter::getUrl('admin.users@home'));
 
         // Should match /cats/
         $this->assertEquals('/cats/', TestRouter::getUrl('CatsController'));
@@ -194,11 +194,11 @@ class RouterUrlTest extends \PHPUnit\Framework\TestCase
     {
         TestRouter::request()->setHost('google.com');
 
-        TestRouter::get('/', function () {
+        TestRouter::get('/admin/', function () {
             return 'match';
         })->setMatch('/^\/admin\/?(.*)/i');
 
-        $output = TestRouter::debugOutput('/asd/bec/123', 'get');
+        $output = TestRouter::debugOutput('/admin/asd/bec/123', 'get');
         $this->assertEquals('match', $output);
 
         TestRouter::router()->reset();
@@ -380,7 +380,7 @@ class RouterUrlTest extends \PHPUnit\Framework\TestCase
 
         });
 
-        TestRouter::debug("/lang/$expectedLanguage/test");
+        TestRouter::debug("/lang/$expectedLanguage/admin/test");
 
         $this->assertEquals($expectedLanguage, $result);
 
