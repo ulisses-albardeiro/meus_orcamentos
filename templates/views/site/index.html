@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Meus Orçamentos</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="{{ url("templates/views/site/assets/icone.png")}}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,10 +23,10 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="{{ url() }}"><span class="fw-bolder text-primary">Meus Orçamentos</span></a>
+                    <a class="navbar-brand" href="{{ url() }}"><span class="fw-bolder" style="color: #373643;">Meus Orçamentos</span><img style="width: 15px; padding-bottom: 20px;" src="{{ url("templates/views/site/assets/icone.png") }}" alt=""></a>
                     <div>
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <a class="btn btn-primary btn-lg px-3 py-2 me-sm-3 fs-6 fw-bolder" href="{{ url('login') }}">Acessar</a>
+                            <a class="btn btn-lg px-3 py-2 me-sm-3 fs-6 fw-bolder" href="{{ url('login') }}" style="background-color: #373643; color: white;">Acessar</a>
                         </ul>
                     </div>
                 </div>
@@ -46,8 +46,8 @@
                                 <div class="fs-3 fw-light text-muted">Profissionalize Seu Trabalho</div>
                                 <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Orçamentos que Geram Valor</span></h1>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}">Primeiro Acesso</a>
-                                    <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('login') }}">Gerar Orçamento</a>
+                                    <a class="btn btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}" style="background-color: #373643; color: white;">Primeiro Acesso</a>
+                                    <a class="btn btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('login') }}" style="border: 1px solid #373643;">Gerar Orçamento</a>
                                 </div>
                             </div>
                         </div>
@@ -188,8 +188,8 @@
                                 <p class="text-muted">Pintor &middot; Pedreiro &middot; Mestre de Obras &middot; Carpinteiro &middot; Eletricista &middot; Encanador &middot; Gesseiro &middot; Azulejista &middot; Serralheiro &middot; Marceneiro &middot; Vidraceiro &middot; Advogado &middot; Arquiteto &middot; Contador &middot; Dentista &middot; Engenheiro &middot; Médico &middot; Psicólogo &middot; Designer Gráfico &middot; Programador &middot; Redator &middot; Fotógrafo &middot; Personal Trainer &middot; Consultor Financeiro &middot; Fisioterapeuta &middot; Nutricionista &middot; E muitos Outros... </p>
 
                                 <div class="d-flex justify-content-center fs-2 gap-4">
-                                    <a class="text-gradient" href="#!"><i class="bi bi-facebook"></i></i></a>
-                                    <a class="text-gradient" href="#!"><i class="bi bi-instagram"></i></a>
+                                    <!-- <a class="text-gradient" href="#!"><i class="bi bi-facebook"></i></i></a>
+                                    <a class="text-gradient" href="#!"><i class="bi bi-instagram"></i></a> -->
                                 </div>
                             </div>
                         </div>
