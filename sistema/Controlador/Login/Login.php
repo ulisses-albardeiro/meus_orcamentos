@@ -29,7 +29,7 @@ class Login extends Controlador
             } else {
                 $usuario = (new UsuarioModelo())->login($dados, 1);
                 if ($usuario) {
-                    Helpers::redirecionar('perfil');
+                    Helpers::redirecionar('home');
                 }
             }
         }
@@ -47,7 +47,7 @@ class Login extends Controlador
     private function checarSessao(): void
     {
         if ((new Sessao)->checarSessao('usuarioId')) {
-            Helpers::redirecionar('perfil');
+            Helpers::redirecionar('home');
         }
     }
 

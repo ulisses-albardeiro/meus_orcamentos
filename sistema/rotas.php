@@ -36,8 +36,18 @@ try {
         SimpleRouter::match(['get', 'post'], URL . 'salvar-senha', 'NovaSenha@salvarNovaSenha');
     });
 
+     //Grupo de Rotas Home
+     SimpleRouter::group(['namespace' => 'Painel\Home'], function () {
+
+        //Home
+        SimpleRouter::get(URL. 'home', 'Home@listar');
+     });
+
     //Grupo de Rotas Orçamento
     SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
+
+        //Home
+        SimpleRouter::get(URL. 'home', 'Home@listar');
 
         //Cadastro novos usuários
         SimpleRouter::get(URL. 'form-cadastro', 'CadastroUsuario@form');

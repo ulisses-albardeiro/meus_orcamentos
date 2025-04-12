@@ -2,6 +2,16 @@
 
 {% block conteudo %}
 
+<style>
+     .botao{
+        background-color: #373643;
+    }
+
+    .botao:hover {
+        background-color: #373643e7 !important;
+        
+    }
+</style>
 
 <h3 class="text-center">Seus Dados</h3>
 <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
@@ -121,12 +131,10 @@
     </div>
 
     <div class="text-center my-4">
-        <button type="submit" class="btn btn-success">Gerar Orçamento</button>
+        <button type="submit" class="btn botao text-white"><i style="color: #18cb96;" class="bi bi-plus-circle"></i> Gerar Orçamento</button>
         <!-- <button type="button" class="btn btn-danger">Gerar Orçamento em PDF</button> -->
     </div>
 </form>
-
-
 
 <script>
     // Função para adicionar novos itens ao orçamento
