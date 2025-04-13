@@ -200,7 +200,7 @@ abstract class Modelo
         if (empty($this->id)) {
             $this->cadastrar($this->armazenar());
             if ($this->erro) {
-                $this->mensagem->mensagemErro("Houve um erro ao cadastrar os dados")->flash();
+                $this->mensagem->mensagemErro("Houve um erro ao cadastrar os dados". $this->getErro())->flash();
                 return false;
             }
         }
@@ -210,7 +210,7 @@ abstract class Modelo
             $id = $this->id;
             $this->atualizar($this->armazenar(), "id = {$id}");
             if ($this->erro) {
-                $this->mensagem->mensagemErro("Houve um erro ao atualizar os dados")->flash();
+                $this->mensagem->mensagemErro("Houve um erro ao atualizar os dados". $this->getErro())->flash();
                 return false;
             }
 

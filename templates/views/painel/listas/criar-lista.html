@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<style>
+     .botao{
+        background-color: #373643;
+    }
+
+    .botao:hover {
+        background-color: #373643e7 !important;
+        
+    }
+</style>
+
+<h3 class="text-center">Seus Dados</h3>
+<p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+<form action="{{ url('gerar-lista') }}" method="get" target="_blank">
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3">
+            <label class="form-label">Seu nome*</label>
+            <input required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label"> Seu Facebook</label>
+                <input value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
+            </div>
+            <div class="col-6">
+                <label class="form-label"> Seu Instagram</label>
+                <input value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label"> Seu Telefone*</label>
+                <input required value="{{ usuario().telefone }}" type="text" class="form-control" name="tel-empresa">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Seu CNPJ</label>
+                <input value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa" id="cnpj-input"
+                    placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Seu Email</label>
+            <input value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Seu Endereço</label>
+            <input value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
+        </div>
+    </div>
+
+    <h3 class="text-center mt-4">Dados do cliente</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3">
+            <label class="form-label">Nome*</label>
+            <input required type="text" class="form-control" name="nome-cliente">
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label">Telefone Fixo</label>
+                <input type="text" class="form-control" name="tel-cliente">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Celular</label>
+                <input type="text" class="form-control" name="cel-cliente">
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label">CNPJ</label>
+                <input type="text" class="form-control" name="doc-cliente"
+                    id="cnpj-input-cliente" placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email-cliente">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Endereço*</label>
+            <input required placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control" name="end-cliente">
+        </div>
+    </div>
+
+    <h3 class="mt-4 text-center">Lista de Materiais</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+    <div class="card border-1 shadow-lg p-3">
+        <div id="itens-container" class="mb-3">
+            <div class="row g-2 item">
+                <div class="col-8">
+                    <input required type="text" class="form-control" placeholder="Nome do Material*"
+                        name="itens[0][nome-item]">
+                </div>
+                <div class="col-4">
+                    <input required type="number" class="form-control" placeholder="Quantidade*" name="itens[0][qtd-item]">
+                </div>
+                <div class="col-12">
+                    <textarea class="form-control" placeholder="Descrição ou especificações" name="itens[0][descricao-item]"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary mb-3" onclick="adicionarItem()">Adicionar Material</button>
+    </div>
+
+    <h3 class="mt-4 text-center">Detalhes finais</h3>
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3">
+            <label class="form-label">Observações sobre os Materiais</label>
+            <textarea class="form-control" placeholder="Observações" name="anotacoes"></textarea>
+        </div>
+    </div>
+
+    <div class="text-center my-4">
+        <button type="submit" class="btn botao text-white"><i style="color: #18cb96;" class="bi bi-plus-circle"></i> Gerar Lista de Materiais</button>
+    </div>
+</form>
+
+<script>
+    // Função para adicionar novos itens à lista de materiais
+    function adicionarItem() {
+        let container = document.getElementById('itens-container');
+        let index = document.querySelectorAll('.item').length;
+        let item = document.createElement('div');
+        item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
+        item.innerHTML = `
+            <div class="col-8">
+                <input required type="text" class="form-control" name="itens[${index}][nome-item]" placeholder="Nome do Material*">
+            </div>
+            <div class="col-3">
+                <input required type="number" class="form-control" name="itens[${index}][qtd-item]" placeholder="Quantidade*">
+            </div>
+            <div class="col-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+            </div>
+            <div class="col-12">
+                <textarea class="form-control" name="itens[${index}][descricao-item]" placeholder="Descrição ou especificações"></textarea>
+            </div>
+        `;
+        container.appendChild(item);
+    }
+
+    // Função para remover itens da lista
+    function removerItem(button) {
+        button.closest('.item').remove();
+    }
+
+    // Função para aplicar máscara de CNPJ a um campo específico
+    function aplicarMascaraCNPJ(campo) {
+        if (!campo) return;
+
+        campo.addEventListener('input', function (e) {
+            // Remove todos os caracteres não numéricos
+            let value = this.value.replace(/\D/g, '');
+
+            // Aplica a máscara conforme o usuário digita
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '.' + value.substring(2);
+            }
+            if (value.length > 6) {
+                value = value.substring(0, 6) + '.' + value.substring(6);
+            }
+            if (value.length > 10) {
+                value = value.substring(0, 10) + '/' + value.substring(10);
+            }
+            if (value.length > 15) {
+                value = value.substring(0, 15) + '-' + value.substring(15);
+            }
+
+            // Limita o tamanho máximo
+            this.value = value.substring(0, 18);
+        });
+    }
+
+    // Quando o DOM estiver completamente carregado
+    document.addEventListener('DOMContentLoaded', function () {
+        // Aplica máscara CNPJ aos campos existentes
+        aplicarMascaraCNPJ(document.getElementById('cnpj-input'));
+        aplicarMascaraCNPJ(document.getElementById('cnpj-input-cliente'));
+    });
+</script>
+
+{% endblock %}

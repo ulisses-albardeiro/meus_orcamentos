@@ -38,9 +38,24 @@ try {
 
      //Grupo de Rotas Home
      SimpleRouter::group(['namespace' => 'Painel\Home'], function () {
-
         //Home
         SimpleRouter::get(URL. 'home', 'Home@listar');
+     });
+
+     //Grupo de Rotas Home
+     SimpleRouter::group(['namespace' => 'Painel\Financas'], function () {
+        //Home
+        SimpleRouter::get(URL. 'dashboard-financas', 'Dashboard@listar');
+     });
+
+       //Grupo de Rotas Lista
+       SimpleRouter::group(['namespace' => 'Painel\Lista'], function () {
+        //Criar lista
+        SimpleRouter::get(URL. 'criar-lista', 'GerarLista@criar');
+        SimpleRouter::match(['get', 'post'], URL . 'gerar-lista', 'GerarLista@gerar');
+        SimpleRouter::get(URL. 'minhas-listas', 'MinhasListas@listar');
+        SimpleRouter::get(URL. 'ver-lista/{id_lista}', 'VerLista@gerar');
+        SimpleRouter::match(['get', 'post'], URL . 'excluir-lista/{id_lista}', 'ExcluirLista@excluir');
      });
 
     //Grupo de Rotas Orçamento

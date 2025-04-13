@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <h4 class="mb-4">Dashboard Financeiro</h4>
+
+    <!-- Cards Resumo -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-success text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita no mês</h6>
+                    <h4>R$ {{ receita_total|default('12.350,00') }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-danger text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas no mês</h6>
+                    <h4>R$ {{ despesas_total|default('4.700,00') }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-primary text-white h-100">
+                <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo Atual</h6>
+                    <h4>R$ {{ saldo|default('7.650,00') }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0 bg-warning text-dark h-100">
+                <div class="card-body">
+                    <h6 class="card-title"><i class="bi bi-clipboard-data me-2"></i>Orçamentos Pendentes</h6>
+                    <h4>{{ orcamentos_pendentes|default(5) }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="mb-3"><i class="bi bi-bar-chart-line me-2"></i>Receitas e Despesas - Últimos 3 meses</h6>
+                    <canvas id="graficoBarra"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="mb-3"><i class="bi bi-pie-chart-fill me-2"></i>Despesas por Categoria</h6>
+                    <canvas id="graficoPizza"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script dos gráficos -->
+<script>
+    const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
+    new Chart(ctxBarra, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março'],
+            datasets: [
+                {
+                    label: 'Receitas',
+                    data: [10000, 12000, 11200],
+                    backgroundColor: '#198754'
+                },
+                {
+                    label: 'Despesas',
+                    data: [3500, 4200, 3900],
+                    backgroundColor: '#dc3545'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' }
+            }
+        }
+    });
+
+    const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+    new Chart(ctxPizza, {
+        type: 'pie',
+        data: {
+            labels: ['Transporte', 'Impostos', 'Materiais', 'Outros'],
+            datasets: [{
+                data: [1200, 1000, 1800, 700],
+                backgroundColor: ['#0d6efd', '#ffc107', '#20c997', '#6c757d']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+</script>
+
+
+
+
+{% endblock %}

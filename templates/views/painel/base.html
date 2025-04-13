@@ -73,17 +73,47 @@
     </div>
 
     <div class="bottom-nav z-3">
-        <div class="border border-white rounded px-2"><a href="{{ url('home') }}"><i class="bi bi-house fs-4"></i></i></a></div>
-
-        <div class="border border-white rounded px-2"><a href="{{ url('perfil') }}"><i
-                    class="bi bi-person fs-4"></i></a></div>
-
-        <div class="border border-white rounded px-2"><a href="{{ url('novo-orcamento') }}"><i
-                    class="bi bi-clipboard-plus fs-4"></i></a></div>
-
-        <div class="border border-white rounded px-2"><a href="{{ url('meus-orcamentos') }}"><i
-                    class="bi bi-list-ol fs-4"></i></a></div>
-
+        <!-- Home -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('home') }}" title="Home">
+                <i class="bi bi-house fs-4"></i>
+            </a>
+        </div>
+    
+        <!-- Perfil -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('perfil') }}" title="Perfil">
+                <i class="bi bi-person-circle fs-4"></i>
+            </a>
+        </div>
+    
+        <!-- Novo Orçamento -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('novo-orcamento') }}" title="Novo Orçamento">
+                <i class="bi bi-file-earmark-plus fs-4"></i>
+            </a>
+        </div>
+    
+        <!-- Meus Orçamentos -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('meus-orcamentos') }}" title="Meus Orçamentos">
+                <i class="bi bi-folder2-open fs-4"></i>
+            </a>
+        </div>
+    
+        <!-- Nova Lista -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('nova-lista') }}" title="Nova Lista">
+                <i class="bi bi-plus-square fs-4"></i>
+            </a>
+        </div>
+    
+        <!-- Minhas Listas -->
+        <div class="border border-white rounded px-2">
+            <a href="{{ url('minhas-listas') }}" title="Minhas Listas">
+                <i class="bi bi-card-checklist fs-4"></i>
+            </a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
