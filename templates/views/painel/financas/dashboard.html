@@ -4,15 +4,30 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="container mt-4">
-    <h4 class="mb-4">Dashboard Financeiro</h4>
 
+    {{ flash() }}
+
+    <div class="d-flex justify-content-end mb-3">
+        <div class="col-auto">
+            <button data-bs-toggle="modal" data-bs-target="#modalAdicionarReceita" class="btn btn-success btn-sm">Nova Receita</button>
+            {% include 'financas/modais/add-receita.html' %}
+        </div>
+        <div class="col-auto mx-2">
+            <button data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa" class="btn btn-danger btn-sm">Nova Despesa</button>
+            {% include 'financas/modais/add-despesa.html' %}
+        </div>
+        <div class="col-auto">
+            <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria" class="btn btn-secondary btn-sm">Nova Categoria</button>
+            {% include 'financas/modais/add-categoria.html' %}
+        </div>
+    </div>
     <!-- Cards Resumo -->
     <div class="row g-3 mb-4">
         <div class="col-md-6 col-lg-3">
             <div class="card shadow-sm border-0 bg-success text-white h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita no mês</h6>
-                    <h4>R$ {{ receita_total|default('12.350,00') }}</h4>
+                    <h4>R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
@@ -20,7 +35,7 @@
             <div class="card shadow-sm border-0 bg-danger text-white h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas no mês</h6>
-                    <h4>R$ {{ despesas_total|default('4.700,00') }}</h4>
+                    <h4>R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
@@ -28,7 +43,7 @@
             <div class="card shadow-sm border-0 bg-primary text-white h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo Atual</h6>
-                    <h4>R$ {{ saldo|default('7.650,00') }}</h4>
+                    <h4>R$ {{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
