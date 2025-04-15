@@ -9,7 +9,7 @@ class MinhasListas extends PainelControlador
 {
     public function listar(): void
     {
-        $listas = (new ListaModelo)->busca()->resultado(true);
+        $listas = (new ListaModelo)->busca("id = {$this->usuario->id}")->resultado(true);
 
         echo $this->template->rendenizar("listas/minhas-listas.html", [
             'listas' => $listas
