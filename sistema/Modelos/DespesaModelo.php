@@ -15,6 +15,7 @@ class DespesaModelo extends Modelo
     {
         $this->valor = $dados["despesa"] * 100;
         $this->id_categoria = $dados["id-categoria"];
+        $this->dt_despesa = $dados["data"];
         if ($this->salvar()) {
             return true;
         }

@@ -10,18 +10,36 @@
             </div>
             <form method="post" action="{{ url("add-receita") }}">
                 <div class="modal-body">
-                    <div class="mb-3 d-flex">
-                        <div class="col-md-4 pe-2">
-                            <input type="text" class="form-control money-mask" name="receita" placeholder="R$ 0,00" required>
+                    <div class="mb-3 d-flex align-items-end gap-2">
+                        <!-- Campo Valor -->
+                        <div class="flex-grow-1" style="max-width: 140px;">
+                            <label for="valorReceita" class="form-label small mb-1">Valor</label>
+                            <div class="input-group">
+                                <span class="input-group-text">R$</span>
+                                <input type="text" class="form-control money-mask text-end" 
+                                       id="valorReceita" name="receita" 
+                                       placeholder="0,00" required>
+                            </div>
                         </div>
-
-                        <div class="col-md-8">
-                            <select required name="id-categoria" class="form-select">
-                                <option selected disabled>Escolha uma categoria</option>
+                    
+                        <!-- Campo Categoria -->
+                        <div class="flex-grow-1">
+                            <label for="categoriaReceita" class="form-label small mb-1">Categoria</label>
+                            <select required name="id-categoria" id="categoriaReceita" class="form-select">
+                                <option value="" selected disabled>Selecione...</option>
                                 {% for categoria in categorias %}
                                 <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
                                 {% endfor %}
                             </select>
+                        </div>
+                    
+                        <!-- Campo Data -->
+                        <div class="flex-grow-1" style="max-width: 140px;">
+                            <label for="dataReceita" class="form-label small mb-1">Data</label>
+                            <div class="input-group">
+                                <input required class="form-control" type="date" id="dataReceita" name="data">
+                            
+                            </div>
                         </div>
                     </div>
                 </div>
