@@ -9,25 +9,33 @@ use sistema\Modelos\ReceitaModelo;
 
 class Dashboard extends PainelControlador
 {
-    public function listar() : void
+    public function listar(): void
     {
-        echo $this->template->rendenizar("financas/dashboard.html", 
-        [
-            "categorias" => (new CategoriaModelo)->busca()->resultado(true),
-            "receita_total" => $this->somarReceita(),
-            "despesas_total" => $this->somarDespesa()
-        ]);    
+        echo $this->template->rendenizar(
+            "financas/dashboard.html",
+            [
+                "categorias" => (new CategoriaModelo)->busca()->resultado(true),
+                "receita_total" => $this->somarReceita(),
+                "despesas_total" => $this->somarDespesa()
+            ]
+        );
     }
 
-    private function somarReceita()
+    private function somarReceita(): int
     {
-        $receitas = (new ReceitaModelo)->busca(null, null, 'valor')->resultado(true);  
-        return array_sum(array_column($receitas, 'valor'))/100;  
+        $receitas = (new ReceitaModelo)->busca(null, null, 'valor')->resultado(true);
+        if (empty($receitas)) {
+            return 0;
+        }
+        return array_sum(array_column($receitas, 'valor')) / 100;
     }
 
-    private function somarDespesa()
+    private function somarDespesa(): int
     {
-        $despesa = (new DespesaModelo)->busca(null, null, 'valor')->resultado(true);  
-        return array_sum(array_column($despesa, 'valor'))/100;  
+        $despesa = (new DespesaModelo)->busca(null, null, 'valor')->resultado(true);
+        if (empty($despesa)) {
+            return 0;
+        }
+        return array_sum(array_column($despesa, 'valor')) / 100;
     }
 }
