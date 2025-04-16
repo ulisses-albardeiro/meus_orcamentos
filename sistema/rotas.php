@@ -48,10 +48,18 @@ try {
         SimpleRouter::get(URL. 'dashboard-financas', 'Dashboard@listar');
         //Nova Categoria
         SimpleRouter::post(URL. 'add-categoria', 'Categoria@cadastrar');
-        //Nova Despesa
+
+        //Despesas
         SimpleRouter::post(URL. 'add-despesa', 'Despesa@cadastrar');
-        //Nova Receita
+        SimpleRouter::get(URL. 'despesas', 'Despesa@listar');
+        SimpleRouter::get(URL. 'excluir-despesa/{id_despesa}', 'Despesa@excluir');
+        SimpleRouter::match(['get', 'post'], URL. 'editar-despesa/{id_despesa}', 'Despesa@editar');
+
+        //Receitas
         SimpleRouter::post(URL. 'add-receita', 'Receita@cadastrar');
+        SimpleRouter::get(URL. 'receitas', 'Receita@listar');
+        SimpleRouter::get(URL. 'excluir-receita/{id_receita}', 'Receita@excluir');
+        SimpleRouter::match(['get', 'post'], URL. 'editar-receita/{id_receita}', 'Receita@editar');
      });
 
        //Grupo de Rotas Lista

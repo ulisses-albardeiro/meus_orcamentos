@@ -1,42 +1,45 @@
-<!-- Modal Adicionar Despesa -->
-<div class="modal fade" id="modalAdicionarDespesa" tabindex="-1" aria-labelledby="modalLabelAdicionarCategoria" aria-hidden="true">
+<!-- Modal Adicionar/Editar Despesa -->
+<div class="modal fade" id="modalAdicionarDespesa{{ despesa.id }}" tabindex="-1" aria-labelledby="modalLabelAdicionarDespesa{{ despesa.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabelAdicionarDespesa">
-                    <i class="bi bi-cart-x-fill text-danger"></i> <span class="text-dark">Nova Despesa</span>
+                <h5 class="modal-title fw-bold" id="modalLabelAdicionarDespesa{{ despesa.id }}">
+                    <i class="bi bi-cart-x-fill text-danger"></i>
+                    <span class="text-dark">
+                        {% if despesa.id %}Editar Despesa{% else %}Nova Despesa{% endif %}
+                    </span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ url("add-despesa") }}">
+            <form method="post" {% if despesa.id %} action="{{ url('editar-despesa/' ~ despesa.id) }}" {% else %} action="{{ url('add-despesa') }}" {% endif %}>
                 <div class="modal-body">
                     <div class="mb-3 d-flex align-items-end gap-2">
                         <!-- Campo Valor -->
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="valorDespesa" class="form-label small mb-1">Valor</label>
+                            <label for="valorDespesa{{ despesa.id }}" class="form-label small mb-1">Valor</label>
                             <div class="input-group">
                                 <span class="input-group-text">R$</span>
-                                <input type="text" class="form-control money-mask text-end" 
-                                       id="valorDespesa" name="despesa" 
+                                <input value="{{ (despesa.valor/100) | number_format(2, ",", ".") }}" type="text" class="form-control money-mask text-end" 
+                                       id="valorDespesa{{ despesa.id }}" name="despesa" 
                                        placeholder="0,00" required>
                             </div>
                         </div>
                     
                         <!-- Campo Categoria -->
                         <div class="flex-grow-1">
-                            <label for="categoriaDespesa" class="form-label small mb-1">Categoria</label>
-                            <select required name="id-categoria" id="categoriaDespesa" class="form-select">
-                                <option value="" selected disabled>Selecione...</option>
+                            <label for="categoriaDespesa{{ despesa.id }}" class="form-label small mb-1">Categoria</label>
+                            <select required name="id-categoria" id="categoriaDespesa{{ despesa.id }}" class="form-select">
+                                <option value="" disabled {% if not despesa.id %}selected{% endif %}>Selecione...</option>
                                 {% for categoria in categorias %}
-                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                <option {% if despesa.id_categoria == categoria.id %} selected {% endif %} value="{{ categoria.id }}">{{ categoria.nome }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     
                         <!-- Campo Data -->
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="dataDespesa" class="form-label small mb-1">Data</label>
-                            <input required class="form-control" type="date" id="dataDespesa" name="data">
+                            <label for="dataDespesa{{ despesa.id }}" class="form-label small mb-1">Data</label>
+                            <input value="{{ despesa.dt_despesa }}" required class="form-control" type="date" id="dataDespesa{{ despesa.id }}" name="data">
                         </div>
                     </div>
                 </div>
@@ -52,56 +55,3 @@
         </div>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Máscara para valores monetários
-    const moneyInputs = document.querySelectorAll('.money-mask');
-    
-    moneyInputs.forEach(input => {
-        input.addEventListener('input', function(e) {
-            // Remove tudo que não é dígito
-            let value = this.value.replace(/\D/g, '');
-            
-            // Converte para número e divide por 100 para ter decimais
-            value = (value / 100).toFixed(2);
-            
-            // Formata como moeda brasileira
-            this.value = formatCurrency(value);
-        });
-        
-        // Formata o valor inicial se existir
-        if(input.value) {
-            input.value = formatCurrency(input.value);
-        }
-    });
-    
-    function formatCurrency(value) {
-        // Converte para float e formata como moeda BRL
-        return parseFloat(value).toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2
-        }).replace('R$', '').trim();
-    }
-    
-    // Antes de enviar o formulário, remove a formatação
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            const moneyFields = this.querySelectorAll('.money-mask');
-            moneyFields.forEach(field => {
-                // Remove formatação e mantém apenas números e decimais
-                field.value = field.value.replace(/\D/g, '').replace(/(\d+)(\d{2})$/, '$1.$2');
-            });
-        });
-    });
-});
-</script>
-
-<style>
-.money-mask {
-    text-align: right;
-    padding-right: 10px;
-}
-</style>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div>
+
+    <h3 class="text-center">Suas Receitas</h3>
+
+    <div class="d-flex justify-content-end pb-1">
+        <div class="col-auto">
+            <button data-bs-toggle="modal" data-bs-target="#modalAdicionarReceita" class="btn btn-success btn-sm">Nova
+                Receita</button>
+            {% include 'financas/modais/add-receita.html' %}
+        </div>
+
+        <div class="col-auto ms-2">
+            <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
+                class="btn btn-secondary btn-sm">Nova Categoria</button>
+            {% include 'financas/modais/add-categoria.html' %}
+        </div>
+    </div>
+    
+        {{ flash() }}
+
+    <div class="card shadow-lg border-0 mb-3">
+
+        <div class="card-body">
+            <small>
+                <table id="data-table" class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-start">Valor</th>
+                            <th class="text-center">Categoria</th>
+                            <th class="text-center">Data</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for receita in receitas %}
+                        <td class="text-start">R$ {{ (receita.valor / 100) | number_format(2, ',', '.') }}</td>
+                        <td class="text-center">{{ receita.categoria }}</td>
+                        <td class="text-center">{{ receita.dt_receita | date("d/m/Y")}}</td>
+                        <td class="text-center">
+
+                            <a href title="Editar" class="text-primary text-decoration-none" data-bs-toggle="modal"
+                                data-bs-target="#modalAdicionarReceita{{ receita.id }}"><i
+                                    class="bi bi-pencil-square fs-4"></i></a>
+
+                            {% include 'financas/modais/add-receita.html' %}
+
+                            <a href="#" title="Excluir" class="text-danger text-decoration-none" data-bs-toggle="modal"
+                                data-bs-target="#modalConfirmDelete{{ receita.id }}"><i
+                                    class="bi bi-trash fs-4"></i></a>
+                            {% include 'financas/modais/excluir-receitas.html' %}
+                        </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </small>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //DataTable
+    $(document).ready(function () {
+        $('#data-table').DataTable({
+            language: {
+                url: "templates/assets/DataTables/pt_br.json"
+            },
+            pageLength: 10, // Define o número de linhas por página
+            lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
+            ordering: false, // Habilita ordenação
+            responsive: true // Torna a tabela responsiva
+        });
+    });
+</script>
+
+{% endblock %}

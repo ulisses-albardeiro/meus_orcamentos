@@ -11,8 +11,9 @@
             <form method="post" action="{{ url("add-categoria") }}">
                 <div class="modal-body">
                     <div class="mb-3">
-                        
-                        <input type="text" class="form-control" name="categoria" placeholder="Digite o nome da categoria" required maxlength="50">
+                        <input hidden type="text" class="form-control" name="tipo" value="{{ tipo }}">
+
+                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome da categoria" required maxlength="50">
                     </div>
                 </div>
                 <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">

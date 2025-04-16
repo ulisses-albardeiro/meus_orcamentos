@@ -10,10 +10,10 @@ class Categoria extends PainelControlador
 {
     public function cadastrar(): void
     {
-        $categoria = filter_input(INPUT_POST, "categoria", FILTER_DEFAULT);
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
 
-        if ($salvar->cadastrarCategoria($categoria)) {
+        if ($salvar->cadastrarCategoria($dados, $this->usuario->id)) {
             $this->mensagem->mensagemSucesso("Categoria Cadastrada com Sucesso!")->flash();
             Helpers::voltar();
         }else {

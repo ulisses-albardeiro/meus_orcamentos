@@ -11,9 +11,11 @@ class CategoriaModelo extends Modelo
         parent::__construct("categorias");
     }
 
-    public function cadastrarCategoria(string $categoria): bool
+    public function cadastrarCategoria(array $dados, int $id_usuario): bool
     {
-        $this->nome = $categoria;
+        $this->nome = $dados['nome'];
+        $this->tipo = $dados['tipo'];
+        $this->id_usuario = $id_usuario;
         if ($this->salvar()) {
             return true;
         }

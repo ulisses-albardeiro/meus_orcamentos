@@ -1,14 +1,14 @@
-<!-- Modal Adicionar Despesa -->
-<div class="modal fade" id="modalAdicionarReceita" tabindex="-1" aria-labelledby="modalLabelAdicionarCategoria" aria-hidden="true">
+<!-- Modal Adicionar/Editar Despesa -->
+<div class="modal fade" id="modalAdicionarReceita{{ receita.id }}" tabindex="-1" aria-labelledby="modalLabelAdicionarReceita{{ receita.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabelAdicionarReceita">
-                    <i class="bi bi-cash-coin text-success"></i> <span class="text-dark">Nova Receita</span>
+                <h5 class="modal-title fw-bold" id="modalLabelAdicionarReceita{{ receita.id }}">
+                    <i class="bi bi-cash-coin text-success"></i> <span class="text-dark">{% if receita.id %}Editar Receita{% else %}Nova Receita{% endif %}</span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{ url("add-receita") }}">
+            <form method="post" {% if receita.id %} action="{{ url('editar-receita/'~receita.id) }}" {% else %} action="{{ url('add-receita') }}" {% endif %}>
                 <div class="modal-body">
                     <div class="mb-3 d-flex align-items-end gap-2">
                         <!-- Campo Valor -->
@@ -16,7 +16,7 @@
                             <label for="valorReceita" class="form-label small mb-1">Valor</label>
                             <div class="input-group">
                                 <span class="input-group-text">R$</span>
-                                <input type="text" class="form-control money-mask text-end" 
+                                <input value="{{ (receita.valor/100) | number_format(2, ",", ".") }}" type="text" class="form-control money-mask text-end" 
                                        id="valorReceita" name="receita" 
                                        placeholder="0,00" required>
                             </div>
@@ -25,10 +25,10 @@
                         <!-- Campo Categoria -->
                         <div class="flex-grow-1">
                             <label for="categoriaReceita" class="form-label small mb-1">Categoria</label>
-                            <select required name="id-categoria" id="categoriaReceita" class="form-select">
+                            <select required name="id-categoria" id="categoriaReceita{{ receita.id }}" class="form-select">
                                 <option value="" selected disabled>Selecione...</option>
                                 {% for categoria in categorias %}
-                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                <option {% if receita.id_categoria == categoria.id %} selected {% endif %} value="{{ categoria.id }}">{{ categoria.nome }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -37,7 +37,7 @@
                         <div class="flex-grow-1" style="max-width: 140px;">
                             <label for="dataReceita" class="form-label small mb-1">Data</label>
                             <div class="input-group">
-                                <input required class="form-control" type="date" id="dataReceita" name="data">
+                                <input value="{{ receita.dt_receita }}" required class="form-control" type="date" id="dataReceita{{ receita.id }}" name="data">
                             
                             </div>
                         </div>
