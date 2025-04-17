@@ -18,7 +18,7 @@ class Despesa extends PainelControlador
             [
                 "despesas" => $this->getNomeCategoria($despesas, $categorias),
                 "categorias" => $categorias,
-                "tipo" => "despesa"      
+                "tipo" => "Despesa"      
             ]
         );
     }

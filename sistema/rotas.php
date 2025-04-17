@@ -45,9 +45,10 @@ try {
      //Grupo de Rotas Home
      SimpleRouter::group(['namespace' => 'Painel\Financas'], function () {
         //dashboard
-        SimpleRouter::get(URL. 'dashboard-financas', 'Dashboard@listar');
+        SimpleRouter::match(["get", "post"], URL. 'dashboard-financas', 'Dashboard@listar');
         //Nova Categoria
         SimpleRouter::post(URL. 'add-categoria', 'Categoria@cadastrar');
+        SimpleRouter::get(URL. 'categoria', 'Categoria@listar');
 
         //Despesas
         SimpleRouter::post(URL. 'add-despesa', 'Despesa@cadastrar');

@@ -21,4 +21,12 @@ class Categoria extends PainelControlador
             Helpers::voltar();
         }
     }
+
+    public function listar() : void
+    {
+        echo $this->template->rendenizar("financas/categorias.html", 
+        [
+            "categorias" => (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true)
+        ]);    
+    }
 }
