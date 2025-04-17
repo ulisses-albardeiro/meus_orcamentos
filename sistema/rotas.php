@@ -49,6 +49,10 @@ try {
         //Nova Categoria
         SimpleRouter::post(URL. 'add-categoria', 'Categoria@cadastrar');
         SimpleRouter::get(URL. 'categoria', 'Categoria@listar');
+        SimpleRouter::match(['get', 'post'], URL. 'editar-categoria/{id_categoria}', 'Categoria@editar');
+        SimpleRouter::get(URL. 'excluir-categoria/{id_categoria}', 'Categoria@excluir');
+
+
 
         //Despesas
         SimpleRouter::post(URL. 'add-despesa', 'Despesa@cadastrar');

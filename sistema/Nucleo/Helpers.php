@@ -51,7 +51,7 @@ class Helpers
         if (isset($_SERVER['HTTP_REFERER'])) {
             $pagina_anterior = $_SERVER['HTTP_REFERER'];
         } else {
-            $pagina_anterior = 'dashboard';
+            $pagina_anterior = 'home';
         }
         header("Location: $pagina_anterior");
         exit();

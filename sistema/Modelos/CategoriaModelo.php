@@ -21,4 +21,14 @@ class CategoriaModelo extends Modelo
         }
         return false;
     }
+
+    public function editarCategoria(array $dados, int $id_categoria): bool
+    {
+        $this->id = $id_categoria;
+        $this->nome = $dados['nome'];
+        if ($this->salvar()) {
+            return true;
+        }
+        return false;
+    }
 }

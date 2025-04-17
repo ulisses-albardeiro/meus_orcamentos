@@ -14,7 +14,7 @@ class Categoria extends PainelControlador
         $salvar = (new CategoriaModelo);
 
         if ($salvar->cadastrarCategoria($dados, $this->usuario->id)) {
-            $this->mensagem->mensagemSucesso("Categoria Cadastrada com Sucesso!")->flash();
+            $this->mensagem->mensagemSucesso("Categoria cadastrada com Sucesso!")->flash();
             Helpers::voltar();
         }else {
             $this->mensagem->mensagemErro("ERRO: ". $salvar->getErro())->flash();
@@ -28,5 +28,31 @@ class Categoria extends PainelControlador
         [
             "categorias" => (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true)
         ]);    
+    }
+
+    public function editar(int $id_categoria) : void
+    {
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $salvar = (new CategoriaModelo);
+
+        if ($salvar->editarCategoria($dados, $this->usuario->id)) {
+            $this->mensagem->mensagemSucesso("Categoria editada com Sucesso!")->flash();
+            Helpers::voltar();
+        }else {
+            $this->mensagem->mensagemErro("ERRO: ". $salvar->getErro())->flash();
+            Helpers::voltar();
+        }
+    }
+
+    public function excluir(int $id_categoria) : void
+    {
+        $excluir = (new CategoriaModelo);
+        if ($excluir->apagar("id = {$id_categoria}")) {
+            $this->mensagem->mensagemSucesso("Categoria excluida com sucesso!")->flash();
+            Helpers::voltar();
+        }else {
+            $this->mensagem->mensagemErro("Houve um erro inesperado")->flash();
+            Helpers::voltar();
+        }
     }
 }

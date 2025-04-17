@@ -37,13 +37,13 @@
                         <td class="text-center">
 
                             <a href title="Editar" class="text-primary text-decoration-none"
-                            data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa{{ categoria.id }}"><i class="bi bi-pencil-square fs-4"></i></a>
+                            data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria{{ categoria.id }}"><i class="bi bi-pencil-square fs-4"></i></a>
 
                             {% include 'financas/modais/add-categoria.html' %}
 
                             <a href="#" title="Excluir" class="text-danger text-decoration-none" data-bs-toggle="modal"
                                 data-bs-target="#modalConfirmDelete{{ categoria.id }}"><i class="bi bi-trash fs-4"></i></a>
-                                {% include 'financas/modais/excluir-despesa.html' %}
+                                {% include 'financas/modais/excluir-categoria.html' %}
                         </td>
                         </tr>
                         {% endfor %}
