@@ -26,7 +26,8 @@ class Categoria extends PainelControlador
     {
         echo $this->template->rendenizar("financas/categorias.html", 
         [
-            "categorias" => (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true)
+            "categorias" => (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->ordem("id DESC")->resultado(true),
+            "tipos" => ["Despesas", "Receitas"]
         ]);    
     }
 

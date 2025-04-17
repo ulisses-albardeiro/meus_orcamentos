@@ -14,9 +14,17 @@
             <form method="post" {% if categoria.id %} action="{{ url('editar-categoria/' ~ categoria.id) }}" {% else %} action="{{ url('add-categoria') }}" {% endif %}>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <!-- Campo Hidden (mantido conforme solicitado) -->
-                        <input hidden type="text" class="form-control" name="tipo" value="{{ tipo }}">
-                        
+
+                        {% if tipos is null %}
+                        <!-- Campo Hidden -->
+                        <input readonly disabled type="text" class="form-control mb-3" name="tipo" value="{{ tipo }}">
+                        {% else %}
+                        <select name="tipo" class="form-select mb-3">
+                            <option selected disabled>Selecione o tipo da categoria</option>
+                            <option value="{{ tipos[0] }}">{{ tipos[0] }}</option>
+                            <option value="{{ tipos[1] }}">{{ tipos[1] }}</option>   
+                        </select>
+                        {% endif %}
                         <!-- Campo Nome da Categoria -->
                         <input type="text" class="form-control" name="nome" 
                                placeholder="Digite o nome da categoria" 

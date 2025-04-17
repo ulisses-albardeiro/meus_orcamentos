@@ -12,13 +12,13 @@ class Receita extends PainelControlador
     public function listar(): void
     {
         $receitas = (new ReceitaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
+        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id} AND tipo = 'Receitas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/receitas.html",
             [
                 "receitas" => $this->getNomeCategoria($receitas, $categorias),
                 "categorias" => $categorias,
-                "tipo" => "Receita"   
+                "tipo" => "Receitas"   
             ]
         );
     }

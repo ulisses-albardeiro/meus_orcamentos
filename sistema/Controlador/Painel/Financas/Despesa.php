@@ -12,13 +12,13 @@ class Despesa extends PainelControlador
     public function listar(): void
     {
         $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
+        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id} AND tipo = 'Despesas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/despesas.html",
             [
                 "despesas" => $this->getNomeCategoria($despesas, $categorias),
                 "categorias" => $categorias,
-                "tipo" => "Despesa"      
+                "tipo" => "Despesas"      
             ]
         );
     }

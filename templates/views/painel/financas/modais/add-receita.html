@@ -11,6 +11,8 @@
             <form method="post" {% if receita.id %} action="{{ url('editar-receita/'~receita.id) }}" {% else %} action="{{ url('add-receita') }}" {% endif %}>
                 <div class="modal-body">
                     <div class="mb-3 d-flex align-items-end gap-2">
+
+                    {% if categorias %}
                         <!-- Campo Valor -->
                         <div class="flex-grow-1" style="max-width: 140px;">
                             <label for="valorReceita" class="form-label small mb-1">Valor</label>
@@ -41,13 +43,19 @@
                             
                             </div>
                         </div>
+
+                        {% else %}
+                        <div class="text-center">
+                            <span>Para cadastrar uma receita você precisa cadastrar pelo menos uma categoria do tipo "Receita"</span>
+                        </div>
+                    {% endif %}
                     </div>
                 </div>
                 <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle me-1"></i> Cancelar
                     </button>
-                    <button type="submit" class="btn-sm btn btn-success">
+                    <button {% if categorias is null %}disabled{% endif %} type="submit" class="btn-sm btn btn-success">
                         <i class="bi bi-check-circle-fill me-1"></i> Salvar
                     </button>
                 </div>
@@ -58,7 +66,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Máscara para valores monetários
     const moneyInputs = document.querySelectorAll('.money-mask');
     
     moneyInputs.forEach(input => {
