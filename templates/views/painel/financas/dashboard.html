@@ -28,7 +28,7 @@
     <div class="row g-3 mb-4">
         <!-- Receita -->
         <div class="col-md-6 col-lg-4">
-            <a href="{{ url(" receitas") }}" class="text-decoration-none">
+            <a href="{{ url("receitas") }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 bg-success text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
@@ -44,7 +44,7 @@
 
         <!-- Despesas -->
         <div class="col-md-6 col-lg-4">
-            <a href="{{ url(" despesas") }}" class="text-decoration-none">
+            <a href="{{ url("despesas") }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 bg-danger text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
@@ -105,6 +105,11 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <h6 class="mb-3"><i class="bi bi-pie-chart-fill me-2"></i>Despesas por Categoria</h6>
+                    {% if despesas_categoria == null %}
+                    <div>
+                        <p>Você ainda não tem despesas para mostrar nos gráficos</p>
+                    </div>
+                    {% endif %}
                     <canvas id="graficoPizza"></canvas>
                 </div>
             </div>
