@@ -19,20 +19,19 @@ class Dashboard extends PainelControlador
             $data = date('Y-m-01');
         }
 
-        $data_final = date('Y-m-t', strtotime($data));
-
         echo $this->template->rendenizar(
             "financas/dashboard.html",
             [
                 "categorias" => (new CategoriaModelo)->busca()->resultado(true),
-                "receita_total" => $this->somarReceita($data, $data_final),
-                "despesas_total" => $this->somarDespesa($data, $data_final),
-                "data" => substr($data, 0, 7)
+                "receita_total" => $this->somarReceita($data, date('Y-m-t', strtotime($data))),
+                "despesas_total" => $this->somarDespesa($data, date('Y-m-t', strtotime($data))),
+                "data" => substr($data, 0, 7),
+                "despesas_categoria" => $this->despesasPorCategoria($data, date('Y-m-t', strtotime($data))),
             ]
         );
     }
 
-    private function somarReceita(string $data, string $data_final): int
+    private function somarReceita(string $data, string $data_final): float
     {
         $receitas = (new ReceitaModelo)->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$this->usuario->id}")->resultado(true);
         if (empty($receitas)) {
@@ -41,7 +40,7 @@ class Dashboard extends PainelControlador
         return array_sum(array_column($receitas, 'valor')) / 100;
     }
 
-    private function somarDespesa(string $data, $data_final): int
+    private function somarDespesa(string $data, $data_final): float
     {
         $despesa = (new DespesaModelo)->busca('dt_despesa >= :inicio AND dt_despesa <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$this->usuario->id}")->resultado(true);
         if (empty($despesa)) {
@@ -49,4 +48,45 @@ class Dashboard extends PainelControlador
         }
         return array_sum(array_column($despesa, 'valor')) / 100;
     }
+
+    private function despesasPorCategoria(string $data, string $data_final): array
+    {
+        $despesas = (new DespesaModelo)->busca('dt_despesa >= :inicio AND dt_despesa <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$this->usuario->id}")->resultado(true);
+
+        $despesas = $this->getNomeCategoria($despesas);
+
+        $categorias = [];
+
+        foreach ($despesas as $despesa) {
+            $nome_categoria = $despesa->categoria ?? 'Outros';
+            $valor = $despesa->valor / 100;
+            if (!isset($categorias[$nome_categoria])) {
+                $categorias[$nome_categoria] = 0;
+            }
+            $categorias[$nome_categoria] += $valor;
+        }
+
+        return $categorias;
+    }
+
+    private function getNomeCategoria(array $despesas) : array
+    { 
+        $categorias = (new CategoriaModelo)->busca()->resultado(true);
+
+        if (empty($despesas)) {
+            return [];
+        }
+
+        $despesas = array_map(function($despesa) use ($categorias){
+            foreach($categorias as $categoria){
+                if ($despesa->id_categoria == $categoria->id) {
+                    $despesa->categoria = $categoria->nome;
+                }
+            }
+            return $despesa;
+        }, $despesas);
+
+        return $despesas;
+    }
 }
+

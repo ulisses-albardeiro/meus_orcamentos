@@ -17,23 +17,25 @@
     <form action="dashboard-financas" method="post">
         <div class="mb-3 d-flex justify-content-end">
             <div class="d-flex align-items-center gap-2 flex-wrap">
-                <input value="{{ data }}" class="form-control form-control-md" type="month" name="data" id="data" style="width: 160px;">
+                <input value="{{ data }}" class="form-control form-control-md" type="month" name="data" id="data"
+                    style="width: 160px;">
                 <button type="submit" class="btn btn-dark text-nowrap btn-md">Buscar dados financeiros</button>
             </div>
         </div>
-    </form>   
-    
+    </form>
+
     <!-- Cards Resumo -->
     <div class="row g-3 mb-4">
         <!-- Receita -->
         <div class="col-md-6 col-lg-4">
-            <a href="{{ url("receitas") }}" class="text-decoration-none">
+            <a href="{{ url(" receitas") }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 bg-success text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita no mês</h6>
                         <h4>R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"> Mais</i>
+                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
+                            Mais</i>
                         <span class="stretched-link"></span>
                     </div>
                 </div>
@@ -42,13 +44,14 @@
 
         <!-- Despesas -->
         <div class="col-md-6 col-lg-4">
-            <a href="{{ url("despesas") }}" class="text-decoration-none">
+            <a href="{{ url(" despesas") }}" class="text-decoration-none">
                 <div class="card shadow-sm border-0 bg-danger text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas no mês</h6>
                         <h4>R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"> Mais</i>
+                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
+                            Mais</i>
                         <span class="stretched-link"></span>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo Atual</h6>
                         <h4>R$ {{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</h4>
-                        
+
                         <span class="stretched-link"></span>
                     </div>
                 </div>
@@ -109,6 +112,8 @@
     </div>
 </div>
 
+
+
 <!-- Script dos gráficos -->
 <script>
     const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
@@ -138,13 +143,28 @@
     });
 
     const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+    const despesasCategoria = JSON.parse('{{ despesas_categoria|json_encode|raw }}');
+
+    const categorias = Object.keys(despesasCategoria);
+    const valores = Object.values(despesasCategoria);
+
+    // Função para gerar cores aleatórias
+    function gerarCores(qtd) {
+        const cores = [];
+        for (let i = 0; i < qtd; i++) {
+            const hue = Math.floor(360 * i / qtd); // espalha as cores no espectro
+            cores.push(`hsl(${hue}, 70%, 60%)`);
+        }
+        return cores;
+    }
+
     new Chart(ctxPizza, {
         type: 'pie',
         data: {
-            labels: ['Transporte', 'Impostos', 'Materiais', 'Outros'],
+            labels: categorias,
             datasets: [{
-                data: [1200, 1000, 1800, 700],
-                backgroundColor: ['#0d6efd', '#ffc107', '#20c997', '#6c757d']
+                data: valores,
+                backgroundColor: gerarCores(categorias.length)
             }]
         },
         options: {
@@ -154,9 +174,7 @@
             }
         }
     });
+
+
 </script>
-
-
-
-
 {% endblock %}
