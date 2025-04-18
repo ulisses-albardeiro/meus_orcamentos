@@ -53,6 +53,10 @@ class Dashboard extends PainelControlador
     {
         $despesas = (new DespesaModelo)->busca('dt_despesa >= :inicio AND dt_despesa <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$this->usuario->id}")->resultado(true);
 
+        if (empty($despesas)) {
+            return [];
+        }
+        
         $despesas = $this->getNomeCategoria($despesas);
 
         $categorias = [];
@@ -72,10 +76,6 @@ class Dashboard extends PainelControlador
     private function getNomeCategoria(array $despesas) : array
     { 
         $categorias = (new CategoriaModelo)->busca()->resultado(true);
-
-        if (empty($despesas)) {
-            return [];
-        }
 
         $despesas = array_map(function($despesa) use ($categorias){
             foreach($categorias as $categoria){
