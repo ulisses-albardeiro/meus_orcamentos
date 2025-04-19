@@ -9,7 +9,7 @@ class MeusOrcamentos extends PainelControlador
 {
     public function listar(): void
     {
-        $orcamentos = (new OrcamentoModelo)->busca("id = {$this->usuario->id}")->resultado(true);
+        $orcamentos = (new OrcamentoModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true);
 
         echo $this->template->rendenizar("meus-orcamentos.html", [
             'orcamentos' => $orcamentos
