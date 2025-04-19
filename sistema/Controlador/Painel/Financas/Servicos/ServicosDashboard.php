@@ -90,21 +90,21 @@ class ServicosDashboard
         $despesas = $this->getDespesaTrimestral($data_fim, $id_usuario);
 
         $meses_exibidos = [
-            date('Y-m', strtotime('first day of -2 months', strtotime($data_fim))), // Mês 1 (ex: "2025-02")
-            date('Y-m', strtotime('first day of -1 month', strtotime($data_fim))),  // Mês 2 (ex: "2025-03")
-            date('Y-m', strtotime($data_fim))                                       // Mês 3 (ex: "2025-04")
+            date('Y-m', strtotime('first day of -2 months', strtotime($data_fim))), 
+            date('Y-m', strtotime('first day of -1 month', strtotime($data_fim))),  
+            date('Y-m', strtotime($data_fim))                                       
         ];
 
         $receitas_agrupadas = [];
         foreach ($receitas as $receita) {
             $mes = date('Y-m', strtotime($receita->dt_receita));
-            $receitas_agrupadas[$mes] = ($receitas_agrupadas[$mes] ?? 0) + $receita->valor;
+            $receitas_agrupadas[$mes] = ($receitas_agrupadas[$mes] ?? 0) + ($receita->valor/100);
         }
 
         $despesas_agrupadas = [];
         foreach ($despesas as $despesa) {
             $mes = date('Y-m', strtotime($despesa->dt_despesa));
-            $despesas_agrupadas[$mes] = ($despesas_agrupadas[$mes] ?? 0) + $despesa->valor;
+            $despesas_agrupadas[$mes] = ($despesas_agrupadas[$mes] ?? 0) + ($despesa->valor/100);
         }
 
         $meses_traduzidos = [
