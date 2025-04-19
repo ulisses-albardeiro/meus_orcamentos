@@ -21,8 +21,8 @@
                         {% else %}
                         <select name="tipo" class="form-select mb-3">
                             <option selected disabled>Selecione o tipo da categoria</option>
-                            <option value="{{ tipos[0] }}">{{ tipos[0] }}</option>
-                            <option value="{{ tipos[1] }}">{{ tipos[1] }}</option>   
+                            <option {% if categoria.tipo == tipos[0] %} selected {% endif %} value="{{ tipos[0] }}">{{ tipos[0] }}</option>
+                            <option {% if categoria.tipo == tipos[1] %} selected {% endif %} value="{{ tipos[1] }}">{{ tipos[1] }}</option>   
                         </select>
                         {% endif %}
                         <!-- Campo Nome da Categoria -->

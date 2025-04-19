@@ -69,7 +69,7 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}
                         </h6>
-                        <h4>R$ {{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</h4>
+                        <h4>R$ <span {% if (receita_total - despesas_total) < 0 %} class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</span></h4>
 
                         <span class="stretched-link"></span>
                     </div>

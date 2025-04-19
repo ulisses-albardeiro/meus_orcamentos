@@ -13,6 +13,11 @@ class Categoria extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
 
+        if ($salvar->categoriaExiste($dados)) {
+            $this->mensagem->mensagemAtencao("A categoria {$dados['nome']} do tipo {$dados['tipo']} já está cadastrada!")->flash();
+            Helpers::voltar();
+        }
+
         if ($salvar->cadastrarCategoria($dados, $this->usuario->id)) {
             $this->mensagem->mensagemSucesso("Categoria cadastrada com Sucesso!")->flash();
             Helpers::voltar();
@@ -26,7 +31,7 @@ class Categoria extends PainelControlador
     {
         echo $this->template->rendenizar("financas/categorias.html", 
         [
-            "categorias" => (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id}")->ordem("id DESC")->resultado(true),
+            "categorias" => (new CategoriaModelo)->getCategorias($this->usuario->id),
             "tipos" => ["Despesas", "Receitas"]
         ]);    
     }
@@ -36,7 +41,7 @@ class Categoria extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
 
-        if ($salvar->editarCategoria($dados, $this->usuario->id)) {
+        if ($salvar->editarCategoria($dados, $id_categoria)) {
             $this->mensagem->mensagemSucesso("Categoria editada com Sucesso!")->flash();
             Helpers::voltar();
         }else {

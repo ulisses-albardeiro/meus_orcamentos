@@ -11,6 +11,12 @@ class CategoriaModelo extends Modelo
         parent::__construct("categorias");
     }
 
+    public function getCategorias(int $id_usuario) : array
+    {
+        $categorias = $this->busca("id_usuario = {$id_usuario}")->ordem("id DESC")->resultado(true) ?? [];
+        return $categorias;
+    }
+
     public function cadastrarCategoria(array $dados, int $id_usuario): bool
     {
         $this->nome = $dados['nome'];
@@ -27,6 +33,15 @@ class CategoriaModelo extends Modelo
         $this->id = $id_categoria;
         $this->nome = $dados['nome'];
         if ($this->salvar()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function categoriaExiste(array $dados) : bool
+    {
+        $resultado = $this->busca("nome = :n AND tipo = :t", ":n={$dados['nome']}&:t={$dados['tipo']}")->resultado();
+        if (!empty($resultado)) {
             return true;
         }
         return false;
