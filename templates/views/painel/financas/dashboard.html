@@ -32,7 +32,8 @@
                 <div class="card shadow-sm border-0 bg-success text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita do mês {{ data|date("m/Y") }}</h6>
+                        <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita do mês {{ data|date("m/Y") }}
+                        </h6>
                         <h4>R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
                         <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
                             Mais</i>
@@ -48,7 +49,8 @@
                 <div class="card shadow-sm border-0 bg-danger text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas do mês {{ data|date("m/Y") }}</h6>
+                        <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas do mês {{ data|date("m/Y")
+                            }}</h6>
                         <h4>R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
                         <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
                             Mais</i>
@@ -64,7 +66,8 @@
                 <div class="card shadow-sm border-0 bg-primary text-white h-100 position-relative"
                     style="cursor: pointer; transition: all 0.2s ease;">
                     <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}</h6>
+                        <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}
+                        </h6>
                         <h4>R$ {{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</h4>
 
                         <span class="stretched-link"></span>
@@ -107,7 +110,8 @@
                     <h6 class="mb-3"><i class="bi bi-pie-chart-fill me-2"></i>Despesas por Categoria</h6>
                     {% if despesas_categoria == null %}
                     <div>
-                        <p>Você ainda não tem despesas no mês <span class="fw-bold">{{ data|date("m/Y") }}</span> para mostrar nos gráficos</p>
+                        <p>Você ainda não tem despesas no mês <span class="fw-bold">{{ data|date("m/Y") }}</span> para
+                            mostrar nos gráficos</p>
                     </div>
                     {% endif %}
                     <canvas id="graficoPizza"></canvas>
@@ -122,28 +126,28 @@
 <!-- Script dos gráficos -->
 <script>
     const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
+    const dadosGrafico = JSON.parse('{{ dados_grafico_trimestral|json_encode|raw }}');
+
     new Chart(ctxBarra, {
         type: 'bar',
         data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março'],
+            labels: dadosGrafico.labels,
             datasets: [
                 {
                     label: 'Receitas',
-                    data: [10000, 12000, 11200],
+                    data: dadosGrafico.receitas, 
                     backgroundColor: '#198754'
                 },
                 {
                     label: 'Despesas',
-                    data: [3500, 4200, 3900],
+                    data: dadosGrafico.despesas, 
                     backgroundColor: '#dc3545'
                 }
             ]
         },
         options: {
             responsive: true,
-            plugins: {
-                legend: { position: 'top' }
-            }
+            plugins: { legend: { position: 'top' } }
         }
     });
 

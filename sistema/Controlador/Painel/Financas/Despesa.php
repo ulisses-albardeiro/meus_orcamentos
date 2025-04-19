@@ -2,6 +2,7 @@
 
 namespace sistema\Controlador\Painel\Financas;
 
+use sistema\Controlador\Painel\Financas\Servicos\ServicoDespesa;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\DespesaModelo;
@@ -9,6 +10,14 @@ use sistema\Nucleo\Helpers;
 
 class Despesa extends PainelControlador
 {
+    private object $servico;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->servico = new ServicoDespesa;
+    }
+
     public function listar(): void
     {
         $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
@@ -16,7 +25,7 @@ class Despesa extends PainelControlador
         echo $this->template->rendenizar(
             "financas/despesas.html",
             [
-                "despesas" => $this->getNomeCategoria($despesas, $categorias),
+                "despesas" => $this->servico->getNomeCategoria($despesas, $categorias),
                 "categorias" => $categorias,
                 "tipo" => "Despesas"      
             ]
@@ -62,16 +71,4 @@ class Despesa extends PainelControlador
         }
     }
 
-    private function getNomeCategoria(array $despesas, array $categorias): array
-    {
-        $despesas = array_map(function ($despesa) use ($categorias) {
-            foreach ($categorias as $categoria) {
-                if ($despesa->id_categoria == $categoria->id) {
-                    $despesa->categoria = $categoria->nome;
-                }
-            }
-            return $despesa;
-        }, $despesas);
-        return $despesas;
-    }
 }

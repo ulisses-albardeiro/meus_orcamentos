@@ -2,6 +2,7 @@
 
 namespace sistema\Controlador\Painel\Financas;
 
+use sistema\Controlador\Painel\Financas\Servicos\ServicoReceita;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\ReceitaModelo;
@@ -9,6 +10,14 @@ use sistema\Nucleo\Helpers;
 
 class Receita extends PainelControlador
 {
+    private object $servico;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->servico = new ServicoReceita;
+    }
+    
     public function listar(): void
     {
         $receitas = (new ReceitaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
@@ -16,7 +25,7 @@ class Receita extends PainelControlador
         echo $this->template->rendenizar(
             "financas/receitas.html",
             [
-                "receitas" => $this->getNomeCategoria($receitas, $categorias),
+                "receitas" => $this->servico->getNomeCategoria($receitas, $categorias),
                 "categorias" => $categorias,
                 "tipo" => "Receitas"   
             ]
@@ -61,18 +70,5 @@ class Receita extends PainelControlador
             Helpers::voltar();
         }
         ;
-    }
-
-    private function getNomeCategoria(array $receitas, array $categorias): array
-    {
-        $receitas = array_map(function ($receita) use ($categorias) {
-            foreach ($categorias as $categoria) {
-                if ($receita->id_categoria == $categoria->id) {
-                    $receita->categoria = $categoria->nome;
-                }
-            }
-            return $receita;
-        }, $receitas);
-        return $receitas;
     }
 }

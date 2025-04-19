@@ -34,4 +34,17 @@ class ReceitaModelo extends Modelo
 
         return false;
     }
+
+    public function getReceitasPorData(string $data, string $data_final, int $id_usuario) : array
+    {
+        $receitas = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$id_usuario}")->resultado(true) ?? [];
+        return $receitas;    
+    }
+
+    public function getReceitaTrimestral(string $data_inicio, string $data_fim, int $id_usuario) : array
+    {
+        $receita_trimestral = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$data_inicio}&:fim={$data_fim}&:id={$id_usuario}")->resultado(true)??[];    
+
+        return $receita_trimestral;
+    }
 }
