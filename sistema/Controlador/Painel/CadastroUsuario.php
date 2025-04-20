@@ -26,6 +26,7 @@ class CadastroUsuario extends Controlador
         $novo_usuario = (new UsuarioModelo);
         $novo_usuario->nome = $dados['nome'];
         $novo_usuario->email = $dados['email'];
+        $novo_usuario->cadastrado_em = date('Y-m-d H:i:s');
         $novo_usuario->senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
 
         if ($novo_usuario->salvar()) {

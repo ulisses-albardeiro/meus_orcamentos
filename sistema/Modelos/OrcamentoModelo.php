@@ -21,6 +21,7 @@ class OrcamentoModelo extends Modelo
     {
         $this->cliente = $cliente;
         $this->vl_total = $vl_total;
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->orcamento_completo = json_encode($dados);
         $this->id_usuario = $id_usuario;
         if ($this->salvar()) {

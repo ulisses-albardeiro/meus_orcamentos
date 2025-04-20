@@ -21,6 +21,7 @@ class CategoriaModelo extends Modelo
     {
         $this->nome = $dados['nome'];
         $this->tipo = $dados['tipo'];
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $id_usuario;
         if ($this->salvar()) {
             return true;

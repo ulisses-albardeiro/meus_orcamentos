@@ -16,6 +16,7 @@ class ReceitaModelo extends Modelo
         $this->valor = $dados["receita"] * 100;
         $this->id_categoria = $dados["id-categoria"];
         $this->dt_receita = $dados["data"];
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $usuario;
         if ($this->salvar()) {
             return true;

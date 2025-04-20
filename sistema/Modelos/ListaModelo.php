@@ -21,6 +21,7 @@ class ListaModelo extends Modelo
     {
         $this->cliente = $cliente;
         $this->lista_completa = json_encode($dados);
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $id_usuario;
         $this->salvar();
     }

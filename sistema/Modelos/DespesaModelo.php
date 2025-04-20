@@ -15,6 +15,7 @@ class DespesaModelo extends Modelo
     {
         $this->valor = $dados["despesa"] * 100;
         $this->id_categoria = $dados["id-categoria"];
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->dt_despesa = $dados["data"];
         $this->id_usuario = $id_usuario;
         if ($this->salvar()) {
