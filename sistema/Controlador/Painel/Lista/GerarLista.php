@@ -9,15 +9,23 @@ use sistema\Nucleo\Helpers;
 
 class GerarLista extends PainelControlador
 {
-    public function criar(): void
+    public function gerar(?int $id_lista = null): void
     {
-        echo $this->template->rendenizar("listas/criar-lista.html", []);
-    }
+        if ($id_lista) {
+            $modelo = new ListaModelo();
+            $lista_array = (array) $modelo->buscaPorId($id_lista);
 
-    public function gerar(): void
-    {
-        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+            $obj_dados = $lista_array["\0*\0dados"] ?? null;
 
+            if (!$obj_dados || !isset($obj_dados->lista_completa)) {
+                echo "Lista não encontrada ou dados inválidos.";
+                return;
+            }
+            $dados = json_decode($obj_dados->lista_completa, true);
+        }else {
+            $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+        }
+        
         $html = $this->html($dados);
 
         (new ListaModelo)->cadastrarLista($dados['nome-cliente'], $dados, $this->usuario->id);
@@ -26,7 +34,7 @@ class GerarLista extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Lista_Materiais_" . $dados['nome-cliente'] . ".pdf");
+        $pdf->baixar("Lista_Materiais_" . $dados['nome-cliente'] . ".pdf");
     }
 
     private function html(array $dados): string

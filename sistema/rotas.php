@@ -68,11 +68,15 @@ try {
        //Grupo de Rotas Lista
        SimpleRouter::group(['namespace' => 'Painel\Lista'], function () {
         //Criar lista
-        SimpleRouter::get(URL. 'criar-lista', 'GerarLista@criar');
+        SimpleRouter::get(URL. 'criar-lista', 'Lista@cadastrar');
+        //Gerar Lista
         SimpleRouter::match(['get', 'post'], URL . 'gerar-lista', 'GerarLista@gerar');
-        SimpleRouter::get(URL. 'minhas-listas', 'MinhasListas@listar');
-        SimpleRouter::get(URL. 'ver-lista/{id_lista}', 'VerLista@gerar');
-        SimpleRouter::match(['get', 'post'], URL . 'excluir-lista/{id_lista}', 'ExcluirLista@excluir');
+        //Listar Listas
+        SimpleRouter::get(URL. 'minhas-listas', 'Lista@listar');
+        //Ver Lista
+        SimpleRouter::get(URL. 'ver-lista/{id_lista}', 'GerarLista@gerar');
+        //Excluir Lista
+        SimpleRouter::match(['get', 'post'], URL . 'excluir-lista/{id_lista}', 'Lista@excluir');
      });
 
     //Grupo de Rotas Orçamento

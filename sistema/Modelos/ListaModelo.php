@@ -24,4 +24,12 @@ class ListaModelo extends Modelo
         $this->id_usuario = $id_usuario;
         $this->salvar();
     }
+
+    public function excluirLista(int $id_lista) : bool
+    {
+        if ($this->apagar("id = '{$id_lista}'")) {
+            return true;
+        }
+        return false;
+    }
 }
