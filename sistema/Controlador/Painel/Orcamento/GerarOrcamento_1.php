@@ -178,7 +178,7 @@ class GerarOrcamento_1 extends PainelControlador
                     </div>
                     <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
                         <p style="margin: 2px 0; line-height: 1.2;"><strong>Telefone:</strong> {$dados['tel-cliente']} / {$dados['cel-cliente']}  |  
-                        <strong>Email:</strong> maria@gmail.com</p>      
+                        <strong>Email:</strong> {$dados['email-cliente']}</p>      
                     </div>
                     <div style="padding: 2px 10px;">
                         <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
