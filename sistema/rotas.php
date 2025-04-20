@@ -42,7 +42,7 @@ try {
         SimpleRouter::get(URL. 'home', 'Home@listar');
      });
 
-     //Grupo de Rotas Home
+     //Grupo de Rotas Finanças
      SimpleRouter::group(['namespace' => 'Painel\Financas'], function () {
         //dashboard
         SimpleRouter::match(["get", "post"], URL. 'dashboard-financas', 'Dashboard@listar');
@@ -51,8 +51,6 @@ try {
         SimpleRouter::get(URL. 'categoria', 'Categoria@listar');
         SimpleRouter::match(['get', 'post'], URL. 'editar-categoria/{id_categoria}', 'Categoria@editar');
         SimpleRouter::get(URL. 'excluir-categoria/{id_categoria}', 'Categoria@excluir');
-
-
 
         //Despesas
         SimpleRouter::post(URL. 'add-despesa', 'Despesa@cadastrar');
@@ -88,14 +86,14 @@ try {
         SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
 
         //Criar orçamento
-        SimpleRouter::get(URL. 'novo-orcamento', 'GerarOrcamento@criar');
-        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento@gerar');
+        SimpleRouter::get(URL. 'novo-orcamento', 'Orcamento@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento_1@gerar');
 
         //Excluir Orçamento
-        SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'ExcluirOrcamento@excluir');
+        SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'Orcamento@excluir');
 
         //Listar Meus orcamentos
-        SimpleRouter::get(URL. 'meus-orcamentos', 'MeusOrcamentos@listar');
+        SimpleRouter::get(URL. 'meus-orcamentos', 'Orcamento@listar');
 
         //Ver orcamento
         SimpleRouter::get(URL. 'ver-orcamento/{id_orcamento}', 'VerOrcamento@gerar');

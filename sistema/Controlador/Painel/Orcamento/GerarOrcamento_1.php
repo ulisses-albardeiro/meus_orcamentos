@@ -5,16 +5,12 @@ namespace sistema\Controlador\Painel\Orcamento;
 use DateTime;
 use sistema\Controlador\Painel\Orcamento\CadastroOrcamento;
 use sistema\Controlador\Painel\PainelControlador;
+use sistema\Modelos\OrcamentoModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Suporte\Pdf;
 
-class GerarOrcamento extends PainelControlador
+class GerarOrcamento_1 extends PainelControlador
 {
-    public function criar(): void
-    {
-        echo $this->template->rendenizar("criar-orcamento.html", []);
-    }
-
     public function gerar(): void
     {
         $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
@@ -32,13 +28,17 @@ class GerarOrcamento extends PainelControlador
             $total = number_format($total, 2, ',', '.');
         }
 
-        (new CadastroOrcamento)->cadastrar($dados['nome-cliente'], $total, $dados);
+        $cadastrar = (new OrcamentoModelo);
+        if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $total, $dados, $this->usuario->id)) {
+            echo "falhou";
+            die;
+        }
 
         $pdf = new Pdf();
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Orçamento_" . $dados['nome-cliente'] . ".pdf");
+        $pdf->baixar("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
     }
 
     private function html(array $dados): string

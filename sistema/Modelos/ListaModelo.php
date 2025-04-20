@@ -11,6 +11,12 @@ class ListaModelo extends Modelo
         parent::__construct("listas");
     } 
 
+    public function getListas() : array
+    {
+        $listas = $this->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];   
+        return $listas; 
+    }
+
     public function cadastrarLista(string $cliente, array $dados, int $id_usuario) : void
     {
         $this->cliente = $cliente;
