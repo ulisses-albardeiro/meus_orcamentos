@@ -2,18 +2,30 @@
 
 namespace sistema\Controlador\Painel\Orcamento;
 
-use DateTime;
-use sistema\Controlador\Painel\Orcamento\CadastroOrcamento;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Suporte\Pdf;
+use DateTime;
 
 class GerarOrcamento_1 extends PainelControlador
 {
-    public function gerar(): void
+    public function gerar(?int $id_orcamento = null): void
     {
-        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+        if ($id_orcamento) {
+            $modelo = new OrcamentoModelo();
+            $orcamento_array = (array) $modelo->buscaPorId($id_orcamento);
+
+            $obj_dados = $orcamento_array["\0*\0dados"] ?? null;
+
+            if (!$obj_dados || !isset($obj_dados->orcamento_completo)) {
+                echo "Orçamento não encontrado ou dados inválidos.";
+                return;
+            }
+            $dados = json_decode($obj_dados->orcamento_completo, true);
+        } else {
+            $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+        }
 
         $html = $this->html($dados);
 
@@ -114,100 +126,100 @@ class GerarOrcamento_1 extends PainelControlador
         $totalFormatado = number_format($total, 2, ',', '.');
 
         $html = <<<HTML
-<!DOCTYPE html>
-<html lang="pt_BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{$css}">
-    <title>Orçamento - {$dados['nome-cliente']}</title>
-</head>
-<body>
-    <div class="container">
-            <!-- Cabeçalho do PDF -->
-        <div class="cabecalho-orcamento">
-            <div class="cabecalho-container">
-                <div class="logo-dados">
-                    <!-- <img src="{$url}" alt="Logo" class="logo"> -->
-                    
-                    <div class="dados-prestador">
-                        <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
-                        <p class="info-contato">
-                            <span class="icone"></span>{$dados['tel-empresa']}
-                        </p>
-                        {$doc_empresa}
-                        <p class="info-contato">
-                            <span class="icone"></span>{$dados['email-empresa']}
-                        </p>
-                        {$end_empresa}
+        <!DOCTYPE html>
+        <html lang="pt_BR">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+            <link rel="stylesheet" href="{$css}">
+            <title>Orçamento - {$dados['nome-cliente']}</title>
+        </head>
+        <body>
+            <div class="container">
+                    <!-- Cabeçalho do PDF -->
+                <div class="cabecalho-orcamento">
+                    <div class="cabecalho-container">
+                        <div class="logo-dados">
+                            <!-- <img src="{$url}" alt="Logo" class="logo"> -->
+                            
+                            <div class="dados-prestador">
+                                <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
+                                <p class="info-contato">
+                                    <span class="icone"></span>{$dados['tel-empresa']}
+                                </p>
+                                {$doc_empresa}
+                                <p class="info-contato">
+                                    <span class="icone"></span>{$dados['email-empresa']}
+                                </p>
+                                {$end_empresa}
+                            </div>
+                        </div>
+                        
+                        <div class="redes-sociais">
+                            <p class="social-link">
+                                {$facebook}
+                                {$instagram}
+                             </p>
+                        </div>
+                    </div>
+                </div>
+                    <!-- End Cabeçalho PDF -->
+                     
+                <div style="background-color: var(--dark); margin-bottom: -20px">
+                    <h3 style="color: white; text-align: center; padding: 8px 0;">Dados do Cliente</h3>
+                </div>
+                <div style="border: 1px solid #e9ecef">
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Nome:</strong> {$dados['nome-cliente']}</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Endereço:</strong> {$dados['end-cliente']}</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Telefone:</strong> {$dados['tel-cliente']} / {$dados['cel-cliente']}  |  
+                        <strong>Email:</strong> maria@gmail.com</p>      
+                    </div>
+                    <div style="padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
+                    </div>
+                </div>
+        
+        
+                <div class="section-title-orcamento">
+                        Orçamento
+                    </div>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Qtd.</th>
+                            <th>Descrição</th>
+                            <th class="text-right">Valor Unit.</th>
+                            <th class="text-right">Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {$itensHTML}
+                    </tbody>
+                </table>
+                
+                <div class="total-section">
+                    <div class="total-line">
+                        <div class="total-label">Total:</div>
+                        <div class="total-value grand-total">R$ {$totalFormatado}</div>
                     </div>
                 </div>
                 
-                <div class="redes-sociais">
-                    <p class="social-link">
-                        {$facebook}
-                        {$instagram}
-                     </p>
+                <div class="footer">
+                    <p>{$validade}</p>
+                    <p>{$anotacoes}</p>
+                    <p>Obrigado por solicitar um orçamento conosco! Para dúvidas, entre em contato.</p>
                 </div>
             </div>
-        </div>
-            <!-- End Cabeçalho PDF -->
-             
-        <div style="background-color: var(--dark); margin-bottom: -20px">
-            <h3 style="color: white; text-align: center; padding: 8px 0;">Dados do Cliente</h3>
-        </div>
-        <div style="border: 1px solid #e9ecef">
-            <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
-                <p style="margin: 2px 0; line-height: 1.2;"><strong>Nome:</strong> {$dados['nome-cliente']}</p>
-            </div>
-            <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
-                <p style="margin: 2px 0; line-height: 1.2;"><strong>Endereço:</strong> {$dados['end-cliente']}</p>
-            </div>
-            <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
-                <p style="margin: 2px 0; line-height: 1.2;"><strong>Telefone:</strong> {$dados['tel-cliente']} / {$dados['cel-cliente']}  |  
-                <strong>Email:</strong> maria@gmail.com</p>      
-            </div>
-            <div style="padding: 2px 10px;">
-                <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
-            </div>
-        </div>
-
-
-        <div class="section-title-orcamento">
-                Orçamento
-            </div>
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Qtd.</th>
-                    <th>Descrição</th>
-                    <th class="text-right">Valor Unit.</th>
-                    <th class="text-right">Valor Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {$itensHTML}
-            </tbody>
-        </table>
-        
-        <div class="total-section">
-            <div class="total-line">
-                <div class="total-label">Total:</div>
-                <div class="total-value grand-total">R$ {$totalFormatado}</div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>{$validade}</p>
-            <p>{$anotacoes}</p>
-            <p>Obrigado por solicitar um orçamento conosco! Para dúvidas, entre em contato.</p>
-        </div>
-    </div>
-</body>
-</html>
-HTML;
+        </body>
+        </html>
+        HTML;
 
         return $html;
     }

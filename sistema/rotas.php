@@ -96,7 +96,7 @@ try {
         SimpleRouter::get(URL. 'meus-orcamentos', 'Orcamento@listar');
 
         //Ver orcamento
-        SimpleRouter::get(URL. 'ver-orcamento/{id_orcamento}', 'VerOrcamento@gerar');
+        SimpleRouter::get(URL. 'ver-orcamento/{id_orcamento}', 'GerarOrcamento_1@gerar');
 
     });
 

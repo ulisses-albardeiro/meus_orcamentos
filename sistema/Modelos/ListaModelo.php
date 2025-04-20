@@ -11,9 +11,9 @@ class ListaModelo extends Modelo
         parent::__construct("listas");
     } 
 
-    public function getListas() : array
+    public function getListas(int $id_usuario) : array
     {
-        $listas = $this->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];   
+        $listas = $this->busca("id_usuario = {$id_usuario}")->resultado(true) ?? [];   
         return $listas; 
     }
 
