@@ -30,7 +30,7 @@ class VerOrcamento extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Orçamento_" . $dados['nome-cliente'] . ".pdf");
+        $pdf->baixar("Orçamento_" . $dados['nome-cliente'] . ".pdf");
     }
     
 
