@@ -64,7 +64,7 @@ class GerarOrcamento_1 extends PainelControlador
                 </div>
         HTML;
         }
-        
+
         $css = Helpers::url('templates/assets/css/orcamento.css');
         $total = 0;
         $itensHTML = '';
@@ -151,9 +151,6 @@ class GerarOrcamento_1 extends PainelControlador
             <div class="cabecalho-container">
                 <div class="logo-dados">
                     {$img_logo}
-                    <!-- <div class="logo-container">
-                        <img src="{$url}" alt="Logo" class="logo">
-                    </div> -->
                     <div class="dados-prestador">
                         <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
                         <p class="info-contato">
