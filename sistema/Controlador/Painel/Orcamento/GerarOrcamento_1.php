@@ -50,7 +50,7 @@ class GerarOrcamento_1 extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->baixar("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
+        $pdf->exibir("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
     }
 
     private function html(array $dados): string
