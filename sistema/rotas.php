@@ -26,6 +26,8 @@ try {
         //Listagem e Edição de perfil
         SimpleRouter::get(URL. 'perfil', 'Perfil@listar');
         SimpleRouter::post(URL. 'perfil-editar', 'Perfil@editar');
+        SimpleRouter::get(URL. 'remover-logo', 'Perfil@removerLogo');
+
     });  
 
     //Grupo de Rotas Recuperação de senha

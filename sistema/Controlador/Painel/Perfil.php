@@ -46,4 +46,19 @@ class Perfil extends PainelControlador
             Helpers::redirecionar('perfil');
         }
     }
+
+    public function removerLogo() : void
+    {
+        unlink('templates/site/assets/img/logos/' . $this->usuario->img_logo);
+        $usuario = (new UsuarioModelo);
+        $usuario->id = $this->usuario->id;
+        $usuario->img_logo = null;
+        if ($usuario->salvar()) {  
+            $this->mensagem->mensagemSucesso('Logo removida com sucesso!')->flash();
+            Helpers::redirecionar('perfil');
+        }else{
+            $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();
+            Helpers::redirecionar('perfil');
+        }
+    }
 }

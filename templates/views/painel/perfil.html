@@ -43,12 +43,19 @@
         <div class="d-flex justify-content-center">
             <div>
             <img id="preview" src="{% if usuario().img_logo %}{{ url('templates/assets/img/logos/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/default.png') }}{% endif %}" class="profile-img">
+            
             <input type="file" name="imagem" id="imagem" hidden>
             <label for="imagem" class="upload-icon">
                     <i class="bi bi-camera"></i>
                 </label>
             </div>
+            
         </div>
+        {% if usuario().img_logo %}
+        <div class="text-center mt-1">
+            <a href="{{ url('remover-logo')}}" class="btn btn-outline-danger btn-sm">Remover Logo</a>
+        </div>
+        {% endif %}
         <div class="row my-3">
             <div class="col-md-5 mb-3">
                 <label class="form-label"> Seu Nome</label>
