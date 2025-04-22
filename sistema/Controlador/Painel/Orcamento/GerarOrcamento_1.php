@@ -57,7 +57,7 @@ class GerarOrcamento_1 extends PainelControlador
     {
         $url = Helpers::url('templates/assets/img/logos/'.$this->usuario->img_logo);
         $img_logo = '';
-        if (!empty($url)) {
+        if (!empty($this->usuario->img_logo)) {
             $img_logo = <<<HTML
                 <div class="logo-container">
                     <img src="{$url}"class="logo">
