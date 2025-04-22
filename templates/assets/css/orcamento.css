@@ -20,37 +20,41 @@ body {
     overflow: hidden;
 }   
 
-/* Cabeçalho PDF */
+ /* Cabeçalho PDF */
 .cabecalho-orcamento {
-width: 100%;
-border-bottom: 2px solid var(--accent);
-padding: 10px;
-/* margin-bottom: 5px; */
-background-color: var(--light);
+    width: 100%;
+    border-bottom: 2px solid var(--accent);
+    padding: 10px;
+    background-color: var(--light);
 }
 
 .cabecalho-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: table;
+    width: 100%;
 }
 
 .logo-dados {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+    display: table-row;
 }
 
-/* .logo {
+.logo-container {
+    display: table-cell;
+    vertical-align: top;
     width: 120px;
+    padding-right: 5px;
+}
+
+.logo {
+    width: 100%;
     height: auto;
-    border: 1px solid #e0e0e0;
-    padding: 5px;
-} */
+    max-width: 120px;
+    min-width: 120px;
+}
 
 .dados-prestador {
-    display: flex;
-    flex-direction: column;
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 20px;
 }
 
 .nome-prestador {
@@ -71,14 +75,6 @@ background-color: var(--light);
     font-size: 16px;
 }
 
-.redes-sociais {
-    margin-top: -10px;
-    display: flex;
-    /* flex-direction: column; */
-    /* gap: 8px; */
-    /* margin-top: 10px; */
-}
-
 .social-link {
     display: flex;
     align-items: center;
@@ -87,10 +83,6 @@ background-color: var(--light);
     color: #333;
     font-size: 14px;
     transition: color 0.3s;
-}
-
-.social-link:hover {
-    color: #166088;
 }
 
 .social-icon {

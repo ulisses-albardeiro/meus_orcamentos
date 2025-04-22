@@ -55,7 +55,16 @@ class GerarOrcamento_1 extends PainelControlador
 
     private function html(array $dados): string
     {
-        $url = Helpers::url('templates/assets/img/gerais/img.png');
+        $url = Helpers::url('templates/assets/img/logos/'.$this->usuario->img_logo);
+        $img_logo = '';
+        if (!empty($url)) {
+            $img_logo = <<<HTML
+                <div class="logo-container">
+                    <img src="{$url}"class="logo">
+                </div>
+        HTML;
+        }
+        
         $css = Helpers::url('templates/assets/css/orcamento.css');
         $total = 0;
         $itensHTML = '';
@@ -137,33 +146,39 @@ class GerarOrcamento_1 extends PainelControlador
         </head>
         <body>
             <div class="container">
-                    <!-- Cabeçalho do PDF -->
-                <div class="cabecalho-orcamento">
-                    <div class="cabecalho-container">
-                        <div class="logo-dados">
-                            <!-- <img src="{$url}" alt="Logo" class="logo"> -->
-                            
-                            <div class="dados-prestador">
-                                <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
-                                <p class="info-contato">
-                                    <span class="icone"></span>{$dados['tel-empresa']}
-                                </p>
-                                {$doc_empresa}
-                                <p class="info-contato">
-                                    <span class="icone"></span>{$dados['email-empresa']}
-                                </p>
-                                {$end_empresa}
-                            </div>
-                        </div>
-                        
-                        <div class="redes-sociais">
-                            <p class="social-link">
-                                {$facebook}
-                                {$instagram}
-                             </p>
-                        </div>
+                 <!-- Cabeçalho do PDF -->
+        <div class="cabecalho-orcamento">
+            <div class="cabecalho-container">
+                <div class="logo-dados">
+                    {$img_logo}
+                    <!-- <div class="logo-container">
+                        <img src="{$url}" alt="Logo" class="logo">
+                    </div> -->
+                    <div class="dados-prestador">
+                        <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
+                        <p class="info-contato">
+                            <span class="icone"></span>{$dados['tel-empresa']}
+                        </p>
+                        {$doc_empresa}
+                        <p class="info-contato">
+                            <span class="icone"></span>{$dados['email-empresa']}
+                        </p>
+                        {$end_empresa}
+                        <p class="social-link">
+                            {$facebook}
+                            {$instagram}
+                        </p>
                     </div>
                 </div>
+                
+               <!--  <div class="redes-sociais">
+                    <p class="social-link">
+                        {$facebook}
+                        {$instagram}
+                    </p>
+                </div> -->
+            </div>
+        </div>
                     <!-- End Cabeçalho PDF -->
                      
                 <div style="background-color: var(--dark); margin-bottom: -20px">

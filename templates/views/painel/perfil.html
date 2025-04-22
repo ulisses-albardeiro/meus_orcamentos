@@ -6,7 +6,7 @@
     .profile-img {
         width: 150px;
         height: 150px;
-        border-radius: 50%;
+        
         object-fit: cover;
         transition: transform 0.3s;
         cursor: pointer;
@@ -26,14 +26,11 @@
     }
 
     .upload-icon {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
         background: white;
-        border-radius: 50%;
-        padding: 5px;
         cursor: pointer;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        font-size: 40px;
+        position: absolute;
+        top: 120px;
     }
 </style>
 <div class="card px-4 pb-4 shadow-lg mb-4">
@@ -42,7 +39,16 @@
         {{ flash() }}
     </div>
 
-    <form action="{{ url('perfil-editar') }}" method="post">
+    <form action="{{ url('perfil-editar') }}" method="post" enctype="multipart/form-data">
+        <div class="d-flex justify-content-center">
+            <div>
+            <img id="preview" src="{% if usuario().img_logo %}{{ url('templates/assets/img/logos/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/default.png') }}{% endif %}" class="profile-img">
+            <input type="file" name="imagem" id="imagem" hidden>
+            <label for="imagem" class="upload-icon">
+                    <i class="bi bi-camera"></i>
+                </label>
+            </div>
+        </div>
         <div class="row my-3">
             <div class="col-md-5 mb-3">
                 <label class="form-label"> Seu Nome</label>
@@ -89,6 +95,17 @@
 </div>
 
 <script>
+    document.getElementById('imagem').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         mascaraCNPJ(document.getElementById('cnpj'));
     })

@@ -13,44 +13,47 @@
     }
 </style>
 
-<h3 class="text-center">Seus Dados</h3>
-<p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+<h3 class="text-center">Confira Seus Dados</h3>
+<p style="margin-top: -15px;" class="text-danger text-center">Para alterar seus dados vá para a aba <a href="{{ url('perfil') }}">Perfil</a></p>
 <form action="{{ url('gerar-orcamento') }}" method="get" target="_blank">
 
     <div class="card border-1 shadow-lg p-3">
+        <div class="text-center mb-3">
+            <img src="{{ url('templates/assets/img/logos/'~usuario().img_logo) }}" alt="Logo" class="img-fluid" style="max-height: 150px;">
+        </div>
         <div class="mb-3">
-            <label class="form-label">Seu nome*</label>
-            <input required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
+            <label class="form-label">Seu nome</label>
+            <input readonly required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
                 <label class="form-label"> Seu Facebook</label>
-                <input value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
+                <input readonly value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
             </div>
             <div class="col-6">
                 <label class="form-label"> Seu Instagram</label>
-                <input value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
+                <input readonly value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
             </div>
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
-                <label class="form-label"> Seu Telefone*</label>
-                <input required value="{{ usuario().telefone }}" type="text" class="form-control" name="tel-empresa">
+                <label class="form-label"> Seu Telefone</label>
+                <input readonly required value="{{ usuario().telefone }}" type="text" class="form-control" name="tel-empresa">
             </div>
             <div class="col-6">
                 <label class="form-label">Seu CNPJ</label>
-                <input value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa" id="cnpj-input"
+                <input readonly value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa" id="cnpj-input"
                     placeholder="00.000.000/0000-00" maxlength="18">
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Seu Email</label>
-            <input value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
+            <input readonly value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
         </div>
         <div class="mb-3">
             <label class="form-label">Seu Endereço</label>
-            <input value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
+            <input readonly value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
         </div>
     </div>
 

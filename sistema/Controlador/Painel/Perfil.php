@@ -3,6 +3,7 @@ namespace sistema\Controlador\Painel;
 
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
+use sistema\Biblioteca\Upload;
 
 class Perfil extends PainelControlador
 {
@@ -14,9 +15,22 @@ class Perfil extends PainelControlador
     public function editar() : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if (isset($_FILES['imagem'])) {
+            $upload = new Upload('templates/assets/img/');
+            $upload->arquivo($_FILES['imagem'], Helpers::slug($dados['nome']), 'logos');
+            if ($upload->getResultado()) {
+                unlink('templates/site/assets/img/logos/' . $this->usuario->img_logo);
+                $nome_arquivo = $upload->getResultado();
+            }else {
+                echo $upload->getErro();
+                die;
+            }
+        }
         
         $usuario = (new UsuarioModelo);
         $usuario->id = $this->usuario->id;
+        $usuario->img_logo = $nome_arquivo ?? $this->usuario->img_logo;
         $usuario->cnpj = $dados['cnpj'];
         $usuario->nome = $dados['nome'];
         $usuario->email = $dados['email'];
