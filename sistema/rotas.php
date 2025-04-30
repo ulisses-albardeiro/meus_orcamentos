@@ -92,8 +92,11 @@ try {
         SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
 
         //Criar orçamento
-        SimpleRouter::get(URL. 'novo-orcamento', 'Orcamento@cadastrar');
+        SimpleRouter::get(URL. 'modelos-de-orcamentos', 'Orcamento@modelos');
+        SimpleRouter::get(URL. 'novo-orcamento-detalhado', 'Orcamento@formDetalhado');
+        SimpleRouter::get(URL. 'novo-orcamento-simples', 'Orcamento@formSimples');
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento_1@gerar');
+        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento-simples', 'GerarOrcamento_2@gerar');
 
         //Excluir Orçamento
         SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'Orcamento@excluir');

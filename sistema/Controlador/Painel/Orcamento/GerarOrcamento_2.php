@@ -1,0 +1,214 @@
+<?php
+
+namespace sistema\Controlador\Painel\Orcamento;
+
+use sistema\Controlador\Painel\PainelControlador;
+use sistema\Modelos\OrcamentoModelo;
+use sistema\Nucleo\Helpers;
+use sistema\Suporte\Pdf;
+use DateTime;
+
+class GerarOrcamento_2 extends PainelControlador
+{
+    public function gerar(?int $id_orcamento = null): void
+    {
+        if ($id_orcamento) {
+            $modelo = new OrcamentoModelo();
+            $orcamento_array = (array) $modelo->buscaPorId($id_orcamento);
+
+            $obj_dados = $orcamento_array["\0*\0dados"] ?? null;
+
+            if (!$obj_dados || !isset($obj_dados->orcamento_completo)) {
+                echo "Orçamento não encontrado ou dados inválidos.";
+                return;
+            }
+            $dados = json_decode($obj_dados->orcamento_completo, true);
+        } else {
+            $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+        }
+
+        $html = $this->html($dados);
+
+        // Processa o valor total do orçamento
+        $valor_total = str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor-orcamento']);
+        $valor_total = $valor_total / 100;
+        $valor_total_formatado = number_format($valor_total, 2, ',', '.');
+
+        $cadastrar = (new OrcamentoModelo);
+        if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $valor_total_formatado, $dados, $this->usuario->id)) {
+            echo "falhou";
+            die;
+        }
+
+        $pdf = new Pdf();
+        $pdf->carregarHTML($html);
+        $pdf->configurarPapel('A4');
+        $pdf->renderizar();
+        $pdf->baixar("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
+    }
+
+    private function html(array $dados): string
+    {
+        $url = Helpers::url('templates/assets/img/logos/'.$this->usuario->img_logo);
+        $img_logo = '';
+        if (!empty($this->usuario->img_logo)) {
+            $img_logo = <<<HTML
+                <div class="logo-container">
+                    <img src="{$url}"class="logo">
+                </div>
+        HTML;
+        }
+
+        $css = Helpers::url('templates/assets/css/orcamento.css');
+
+        $doc_empresa = '';
+        if (!empty($dados['doc-empresa'])) {
+            $doc_empresa = <<<HTML
+            <p class="info-contato">
+                <span class="icone"></span>{$dados['doc-empresa']}
+            </p>
+        HTML;
+        }
+
+        $end_empresa = '';
+        if (!empty($dados['end-empresa'])) {
+            $doc_empresa = <<<HTML
+            <p class="info-contato">
+                <span class="icone"></span>{$dados['end-empresa']}
+            </p>
+        HTML;
+        }
+
+        $doc_cliente = $dados['doc-cliente'];
+        if (empty($dados['doc-cliente'])) {
+            $doc_cliente = 'Não se aplica ';
+        }
+
+        $facebook = "";
+        if ($dados['facebook']) {
+            $facebook = '<img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="social-icon"> ' . $dados['facebook'];
+        }
+
+        $instagram = "";
+        if ($dados['instagram']) {
+            $instagram = '<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon"> ' . $dados['instagram'];
+        }
+
+        // Processa os itens do orçamento (sem valores individuais)
+        $itensHTML = '';
+        foreach ($dados['itens'] as $item) {
+            $itensHTML .= <<<HTML
+            <tr>
+                <td class="td">{$item['qtd-item']}</td>
+                <td class="td">{$item['nome-item']}<br><small style="font-size: 13px; font-style: italic">{$item['descricao-item']}</small></td>
+            </tr>
+        HTML;
+        }
+
+        if (!empty($dados['validade-orcamento'])) {
+            $validade_orcamento = $dados['validade-orcamento'];
+            $data = new DateTime($validade_orcamento);
+            $data_formatada = $data->format('d/m/Y');
+            $validade = isset($dados['validade-orcamento']) ? "*Validade do orçamento: " . $data_formatada : null;
+        }
+
+        $anotacoes = !empty($dados['anotacoes']) ? "*" . $dados['anotacoes'] : null;
+        
+        // Processa o valor total do orçamento
+        $valor_total = str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor-orcamento']);
+        $valor_total = $valor_total / 100;
+        $valor_total_formatado = number_format($valor_total, 2, ',', '.');
+
+        $html = <<<HTML
+        <!DOCTYPE html>
+        <html lang="pt_BR">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+            <link rel="stylesheet" href="{$css}">
+            <title>Orçamento - {$dados['nome-cliente']}</title>
+        </head>
+        <body>
+            <div class="container">
+                 <!-- Cabeçalho do PDF -->
+        <div class="cabecalho-orcamento">
+            <div class="cabecalho-container">
+                <div class="logo-dados">
+                    {$img_logo}
+                    <div class="dados-prestador">
+                        <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
+                        <p class="info-contato">
+                            <span class="icone"></span>{$dados['tel-empresa']}
+                        </p>
+                        {$doc_empresa}
+                        <p class="info-contato">
+                            <span class="icone"></span>{$dados['email-empresa']}
+                        </p>
+                        {$end_empresa}
+                        <p class="social-link">
+                            {$facebook}
+                            {$instagram}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!-- End Cabeçalho PDF -->
+                     
+                <div style="background-color: var(--dark); margin-bottom: -20px">
+                    <h3 style="color: white; text-align: center; padding: 8px 0;">Dados do Cliente</h3>
+                </div>
+                <div style="border: 1px solid #e9ecef">
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Nome:</strong> {$dados['nome-cliente']}</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Endereço:</strong> {$dados['end-cliente']}</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Telefone:</strong> {$dados['tel-cliente']} / {$dados['cel-cliente']}  |  
+                        <strong>Email:</strong> {$dados['email-cliente']}</p>      
+                    </div>
+                    <div style="padding: 2px 10px;">
+                        <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
+                    </div>
+                </div>
+        
+        
+                <div class="section-title-orcamento">
+                        Orçamento
+                    </div>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:20px;">Qtd.</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {$itensHTML}
+                    </tbody>
+                </table>
+                
+                <div class="total-section">
+                    <div class="total-line">
+                        <div class="total-label">Total:</div>
+                        <div class="total-value grand-total">R$ {$valor_total_formatado}</div>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <p>{$validade}</p>
+                    <p>{$anotacoes}</p>
+                    <p>Obrigado por solicitar um orçamento conosco! Para dúvidas, entre em contato.</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        HTML;
+
+        return $html;
+    }
+}

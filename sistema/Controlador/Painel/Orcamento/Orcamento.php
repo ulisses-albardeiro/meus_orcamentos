@@ -20,9 +20,19 @@ class Orcamento extends PainelControlador
         );
     }
 
-    public function cadastrar(): void
+    public function formDetalhado(): void
     {
-        echo $this->template->rendenizar("orcamentos/criar-orcamento.html", []);
+        echo $this->template->rendenizar("orcamentos/form-detalhado.html", []);
+    }
+
+    public function formSimples(): void
+    {
+        echo $this->template->rendenizar("orcamentos/form-simples.html", []);
+    }
+
+    public function modelos(): void
+    {
+        echo $this->template->rendenizar("orcamentos/modelos.html", []);
     }
 
     public function excluir(int $id_orcamento): void
