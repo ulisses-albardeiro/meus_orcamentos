@@ -17,13 +17,14 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario) : bool
+    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo) : bool
     {
         $this->cliente = $cliente;
         $this->vl_total = $vl_total;
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->orcamento_completo = json_encode($dados);
         $this->id_usuario = $id_usuario;
+        $this->modelo = $modelo;
         if ($this->salvar()) {
             return true;
         }

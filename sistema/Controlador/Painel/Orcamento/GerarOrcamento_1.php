@@ -40,11 +40,14 @@ class GerarOrcamento_1 extends PainelControlador
             $total = number_format($total, 2, ',', '.');
         }
 
-        $cadastrar = (new OrcamentoModelo);
-        if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $total, $dados, $this->usuario->id)) {
-            echo "falhou";
-            die;
+        if ($id_orcamento == null) {
+            $cadastrar = (new OrcamentoModelo);
+            if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $total, $dados, $this->usuario->id, "detalhado")) {
+                echo "falhou";
+                die;
+            }
         }
+
 
         $pdf = new Pdf();
         $pdf->carregarHTML($html);
@@ -55,7 +58,7 @@ class GerarOrcamento_1 extends PainelControlador
 
     private function html(array $dados): string
     {
-        $url = Helpers::url('templates/assets/img/logos/'.$this->usuario->img_logo);
+        $url = Helpers::url('templates/assets/img/logos/' . $this->usuario->img_logo);
         $img_logo = '';
         if (!empty($this->usuario->img_logo)) {
             $img_logo = <<<HTML

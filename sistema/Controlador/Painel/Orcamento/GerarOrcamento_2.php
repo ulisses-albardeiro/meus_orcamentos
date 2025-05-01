@@ -34,10 +34,12 @@ class GerarOrcamento_2 extends PainelControlador
         $valor_total = $valor_total / 100;
         $valor_total_formatado = number_format($valor_total, 2, ',', '.');
 
-        $cadastrar = (new OrcamentoModelo);
-        if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $valor_total_formatado, $dados, $this->usuario->id)) {
-            echo "falhou";
-            die;
+        if ($id_orcamento == null) {
+            $cadastrar = (new OrcamentoModelo);
+            if (!$cadastrar->cadastrarOrcamento($dados['nome-cliente'], $valor_total_formatado, $dados, $this->usuario->id, "simples")) {
+                echo "falhou";
+                die;
+            }
         }
 
         $pdf = new Pdf();
@@ -49,7 +51,7 @@ class GerarOrcamento_2 extends PainelControlador
 
     private function html(array $dados): string
     {
-        $url = Helpers::url('templates/assets/img/logos/'.$this->usuario->img_logo);
+        $url = Helpers::url('templates/assets/img/logos/' . $this->usuario->img_logo);
         $img_logo = '';
         if (!empty($this->usuario->img_logo)) {
             $img_logo = <<<HTML
@@ -113,7 +115,7 @@ class GerarOrcamento_2 extends PainelControlador
         }
 
         $anotacoes = !empty($dados['anotacoes']) ? "*" . $dados['anotacoes'] : null;
-        
+
         // Processa o valor total do orçamento
         $valor_total = str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor-orcamento']);
         $valor_total = $valor_total / 100;
