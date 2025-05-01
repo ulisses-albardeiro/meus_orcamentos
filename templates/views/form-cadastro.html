@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{url('templates/assets/img/gerais/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{url('templates/views/site/assets/icone.png')}}" type="image/x-icon">
     <title>Cadastro - Meus Orçamentos</title>
     <!-- Link do CSS do Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +17,39 @@
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input required type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome">
+            </div>
+            <div class="mb-3">
+                <label for="profissao" class="form-label">Profissão</label>
+                <select required class="form-select" id="profissao" name="profissao">
+                    <option value="" disabled selected>Selecione sua profissão</option>
+                    <option value="Advogado">Advogado</option>
+                    <option value="Arquiteto">Arquiteto</option>
+                    <option value="Azulejista">Azulejista</option>
+                    <option value="Carpinteiro">Carpinteiro</option>
+                    <option value="Consultor Financeiro">Consultor Financeiro</option>
+                    <option value="Contador">Contador</option>
+                    <option value="Dentista">Dentista</option>
+                    <option value="Designer Gráfico">Designer Gráfico</option>
+                    <option value="Eletricista">Eletricista</option>
+                    <option value="Encanador">Encanador</option>
+                    <option value="Engenheiro">Engenheiro</option>
+                    <option value="Fisioterapeuta">Fisioterapeuta</option>
+                    <option value="Fotógrafo">Fotógrafo</option>
+                    <option value="Gesseiro">Gesseiro</option>
+                    <option value="Marceneiro">Marceneiro</option>
+                    <option value="Médico">Médico</option>
+                    <option value="Mestre de Obras">Mestre de Obras</option>
+                    <option value="Nutricionista">Nutricionista</option>
+                    <option value="Pedreiro">Pedreiro</option>
+                    <option value="Personal Trainer">Personal Trainer</option>
+                    <option value="Pintor">Pintor</option>
+                    <option value="Programador">Programador</option>
+                    <option value="Psicólogo">Psicólogo</option>
+                    <option value="Redator">Redator</option>
+                    <option value="Serralheiro">Serralheiro</option>
+                    <option value="Vidraceiro">Vidraceiro</option>
+                    <option value="Nenhum">Nenhum dessa Lista</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>

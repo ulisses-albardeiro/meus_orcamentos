@@ -28,6 +28,7 @@ class CadastroUsuario extends Controlador
         $novo_usuario->email = $dados['email'];
         $novo_usuario->cadastrado_em = date('Y-m-d H:i:s');
         $novo_usuario->senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
+        $novo_usuario->profissao = $dados['profissao'];
 
         if ($novo_usuario->salvar()) {
             $this->mensagem->mensagemSucesso("Cadastro feito com sucesso!")->flash();
