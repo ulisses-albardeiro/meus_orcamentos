@@ -39,9 +39,9 @@ class CategoriaModelo extends Modelo
         return false;
     }
 
-    public function categoriaExiste(array $dados) : bool
+    public function categoriaExiste(array $dados, int $id_usuario) : bool
     {
-        $resultado = $this->busca("nome = :n AND tipo = :t", ":n={$dados['nome']}&:t={$dados['tipo']}")->resultado();
+        $resultado = $this->busca("nome = :n AND tipo = :t AND id_usuario = :id", ":n={$dados['nome']}&:t={$dados['tipo']}&:id={$id_usuario}")->resultado();
         if (!empty($resultado)) {
             return true;
         }

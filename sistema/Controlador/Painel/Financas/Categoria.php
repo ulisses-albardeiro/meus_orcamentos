@@ -13,7 +13,7 @@ class Categoria extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
 
-        if ($salvar->categoriaExiste($dados)) {
+        if ($salvar->categoriaExiste($dados, $this->usuario->id)) {
             $this->mensagem->mensagemAtencao("A categoria {$dados['nome']} do tipo {$dados['tipo']} já está cadastrada!")->flash();
             Helpers::voltar();
         }
