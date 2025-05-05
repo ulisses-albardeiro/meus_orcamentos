@@ -16,7 +16,7 @@ class Perfil extends PainelControlador
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (isset($_FILES['imagem'])) {
+        if (isset($_FILES['imagem']) && $_FILES['imagem']['name'] != '') {
             $upload = new Upload('templates/assets/img/');
             $upload->arquivo($_FILES['imagem'], Helpers::slug($dados['nome']), 'logos');
             if ($upload->getResultado()) {
