@@ -26,6 +26,19 @@ final class Email
     private array $anexo;
 
     /**
+     * Lista pega os erros
+     *
+     * @var string
+     * @access private
+     */
+    private string $erro;
+
+    public function getErro(): string
+    {
+        return $this->erro;
+    }
+
+    /**
      * Construtor da classe. Configura o PHPMailer com valores padrão.
      * 
      * Configura os parâmetros de conexão SMTP.
@@ -103,7 +116,7 @@ final class Email
             $this->email->send();
             return true;
         } catch (\Throwable $th) {
-            echo "Erro:" . $this->email->ErrorInfo;
+            $this->erro =  "Erro do email: ".$this->email->ErrorInfo."<br>". "Exception: ".$th->getMessage();
             return false;
         }
     }

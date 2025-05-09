@@ -78,6 +78,11 @@ class EmaiRecuperacao extends Controlador
     {
         $enviar = (new Email(HOST_EMAIL, USUARIO_EMAIL, SENHA_EMAIL, PORTA_EMAIL));
         $enviar->criar('Recuperação de senha', $this->corpoEmail(), $email, $nome);
-        $enviar->enviar(USUARIO_EMAIL, 'Recuperação de senha - Meus Orçamentos (Não responda)');
+
+        if (!$enviar->enviar(USUARIO_EMAIL, 'Recuperação de senha - Meus Orçamentos (Não responda)')) {
+            $this->mensagem->mensagemErro("Não foi possivel recuperar sua senha, tente novamente. Caso o erro persista, entre em contato com o suporte")->flash();
+            Helpers::redirecionar('login');
+        }
+        
     }
 }
