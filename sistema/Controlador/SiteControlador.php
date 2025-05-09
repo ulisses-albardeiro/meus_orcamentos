@@ -3,6 +3,8 @@
 namespace sistema\Controlador;
 
 use sistema\Nucleo\Controlador;
+use sistema\Nucleo\Helpers;
+use sistema\Nucleo\Sessao;
 
 class SiteControlador extends Controlador
 {
@@ -13,6 +15,11 @@ class SiteControlador extends Controlador
 
     public function index(): void
     {
+        $sessao = (new Sessao)->checarSessao("usuarioId");
+        if ($sessao) {
+            Helpers::redirecionar("home");
+        }
+
         echo $this->template->rendenizar(
             "index.html",
             [
