@@ -1,0 +1,107 @@
+:root {
+    --primary: #4a6fa5;
+    --secondary: #166088;
+    --accent: #4fc3f7;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --success: #28a745;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eee;
+    margin: 0;
+    padding: 20px;
+}
+
+.recibo-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+.cabecalho {
+    display: flex;
+    border-bottom: 2px solid var(--accent);
+}
+
+.logo-container {
+    width: 120px;
+    flex-shrink: 0;
+    background-color: var(--light);
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+.dados-prestador {
+    flex-grow: 1;
+    background-color: var(--light);
+    padding: 15px 15px;
+}
+
+.dados-prestador h2 {
+    margin: 5px 0 5px 0;
+    font-size: 22px;
+    color: var(--dark);
+}
+
+.info-contato,
+.redes-sociais {
+    font-size: 14px;
+    color: #333;
+    margin: 2px 0;
+}
+
+.recibo-header {
+    text-align: center;
+    margin-bottom: 2px;
+    background-color: var(--dark);
+    padding: 4px;
+}
+
+.recibo-header h1 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--light);
+}
+
+.texto-recibo {
+    padding: 25px;
+}
+
+.corpo-recibo {
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+.recibo-info {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.recibo-info strong {
+    color: var(--primary);
+}
+
+.recibo-valor {
+    text-align: right;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--success);
+}
+
+.recibo-footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #6c757d;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    text-align: center;
+}
