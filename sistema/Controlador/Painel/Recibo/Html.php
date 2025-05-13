@@ -6,15 +6,19 @@ use sistema\Nucleo\Helpers;
 
 class Html
 {
-    protected ?string $img_logo = null;
-    protected string $nome;
-    protected string $documento;
-    protected string $telefone;
-    protected string $endereco;
-    protected string $email;
-    protected string $nome_cliente;
-    protected string $documento_cliente;
-    protected string $valor_recibo;
+    private ?string $img_logo = null;
+    private string $nome;
+    private string $documento;
+    private string $telefone;
+    private string $endereco;
+    private string $email;
+    private string $nome_cliente;
+    private string $documento_cliente;
+    private string $valor_recibo;
+    private ?string $descricao = null;
+    private ?string $facebook = null;
+    private ?string $instagram = null;
+    
 
     public function html(): string
     {
@@ -40,6 +44,10 @@ class Html
                         <div class="info-contato">' . $this->telefone . '</div>
                         <div class="info-contato">' . $this->endereco . '</div>
                         <div class="info-contato">' . $this->email . '</div>
+                        <div class ="redes-sociais">
+                        '.$this->facebook.'
+                        '.$this->instagram.'
+                        </div>
                     </div>
                 </div>
 
@@ -53,8 +61,9 @@ class Html
                         <!-- Informações principais -->
                         <div class="recibo-info">
                             <p>Eu, <strong>' . $this->nome . '</strong>, portador do CPF <strong>' . $this->documento . '</strong>,</p>
-                            <p>residente à <strong>' . $this->endereco . '</strong>,</p>
-                            <p>DECLARO ter recebido de <strong>' . $this->nome_cliente . '</strong>, portador do CPF/CNPJ <strong>' . $this->documento_cliente . '</strong>,</p>
+                            <p>residente no endereço <strong>' . $this->endereco . '</strong>,</p>
+                            <p>Declaro ter recebido de <strong>' . $this->nome_cliente . '</strong>, portador do CPF/CNPJ <strong>' . $this->documento_cliente . '</strong>,</p>
+                            '.$this->descricao.'
                             <p>a importância de:</p>
                         </div>
 
@@ -88,6 +97,16 @@ class Html
         $this->email = $email;
     }
 
+    public function redesSociais(?string $facebook = null, ?string $instagram = null) : void
+    {
+        if (!empty($facebook)) {
+            $this->facebook = '<img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="social-icon"> '.$facebook;
+        }
+        if(!empty($instagram)) {
+            $this->instagram = '<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon"> ' . $instagram;
+        }
+    }
+
     public function img(?string $caminho = null): void
     {
         if ($caminho != null) {
@@ -98,6 +117,13 @@ class Html
 
             $this->img_logo = $img_logo;
         }
+    }
+
+    public function descricaoServico(?string $descricao = null) : void
+    {
+        if ($descricao != null) {
+            $this->descricao = "<p>referente a <strong>$descricao</strong>,</p>";
+        }  
     }
 
     public function dadosCliente(string $nome_cliente, string $documento_cliente, string $valor_recibo): void
