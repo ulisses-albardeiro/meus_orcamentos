@@ -113,8 +113,9 @@ try {
     //Grupo de Rotas Recibo
     SimpleRouter::group(['namespace' => 'Painel\Recibo'], function () {
 
-        SimpleRouter::get(URL. 'recibo/gerar', 'GerarRecibo@gerar');
-        SimpleRouter::get(URL . 'recibo/novo-recibo', 'GerarRecibo@formRecibo');
+        SimpleRouter::get(URL. 'recibo/gerar', 'Recibo@gerar');
+        SimpleRouter::get(URL . 'recibo/criar', 'Recibo@criar');
+        SimpleRouter::get(URL . 'recibo/listar', 'Recibo@listar');
     });
 
     SimpleRouter::start();
