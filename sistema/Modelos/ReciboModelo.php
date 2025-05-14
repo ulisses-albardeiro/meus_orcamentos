@@ -24,4 +24,9 @@ class ReciboModelo extends Modelo
         }
         return false;
     }
+
+    public function getRecibos(int $id_usuario) : array
+    {
+        return $this->busca("id_usuario = {$id_usuario}")->resultado(true) ?? [];
+    }
 }

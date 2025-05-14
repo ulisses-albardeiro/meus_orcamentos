@@ -11,7 +11,10 @@ class Recibo extends PainelControlador
 {
     public function listar(): void
     {
-        echo $this->template->rendenizar("recibos/listar.html", []);
+        echo $this->template->rendenizar("recibos/listar.html", 
+        [
+            'recibos' => (new ReciboModelo)->getRecibos($this->usuario->id)
+        ]);
     }
 
     public function gerar(): void
