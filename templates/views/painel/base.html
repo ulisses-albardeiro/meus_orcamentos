@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Orçamentos</title>
 
-     <!-- Custom Google font-->
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <!-- Custom Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{{ url("templates/views/site/assets/icone.png")}}" />
+    <link rel="icon" type="image/x-icon" href="{{ url(" templates/views/site/assets/icone.png")}}" />
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -27,9 +29,10 @@
 
 
     <style>
-        .font{
+        .font {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
         .app-header {
             background: #373643;
             color: white;
@@ -55,23 +58,54 @@
         }
 
         @media (max-width: 425px) {
-            .mobile{
+            .mobile {
                 font-size: 13px !important;
             }
         }
 
         @media (max-width: 365px) {
-            .mobile{
+            .mobile {
                 font-size: 10px !important;
             }
+        }
+
+        /* whatsapp */
+        #whatsapp-button {
+            position: fixed;
+            bottom: 30px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #25D366;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            gap: 8px;
+        }
+
+        #whatsapp-button img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .label-suporte {
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
 
 <body>
     <div class="app-header d-flex justify-content-between px-5 pt-1">
-        <div class="pt-2 pb-3 font"><a class="text-decoration-none text-white" href="{{ url('home') }}">Meus Orçamentos</a><img style="width: 15px; padding-bottom: 20px;" src="{{ url("templates/views/site/assets/icone.png") }}" alt=""></div>
-        <a href="{{ url("sair") }}">
+        <div class="pt-2 pb-3 font"><a class="text-decoration-none text-white" href="{{ url('home') }}">Meus
+                Orçamentos</a><img style="width: 15px; padding-bottom: 20px;" src="{{ url("
+                templates/views/site/assets/icone.png") }}" alt=""></div>
+        <a href="{{ url(" sair") }}">
             <div class="px-2 align-items-center text-white"><i class="bi bi-box-arrow-left fs-1"></i></div>
         </a>
     </div>
@@ -94,9 +128,18 @@
         </div>
     </div>
 
+    <div id="whatsapp-button" title="Fale conosco no WhatsApp">
+        <a href="https://wa.me/5519971553715?text=Gostaria%20de%20tirar%20d%C3%BAvida%20sobre%20o%20sistema%20Meus%20Or%C3%A7amentos.">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+            <span class="label-suporte">Suporte</span>
+        </a>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
 </body>
 
 
