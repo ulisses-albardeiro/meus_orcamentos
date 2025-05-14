@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class="container my-5">
+
+    <!-- Usuários -->
+    <div class="card mb-5 shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Usuários</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cadastrado em</th>
+                            <th>Profissão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in usuarios %}
+                            <tr>
+                                <td>{{ usuario.nome }}</td>
+                                <td>{{ usuario.cadastrado_em|date('d/m/Y H:i') }}</td>
+                                <td>{{ usuario.profissao }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orçamentos -->
+    <div class="card mb-5 shadow">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Orçamentos</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data</th>
+                            <th>Modelo</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for orcamento in orcamentos %}
+                            {% set usuario = usuarios|filter(u => u.id == orcamento.id_usuario)|first %}
+                            <tr>
+                                <td>{{ usuario.nome }}</td>
+                                <td>{{ orcamento.dt_hr_criacao|date('d/m/Y H:i') }}</td>
+                                <td>{{ orcamento.modelo }}</td>
+                                <td>{{ orcamento.cliente }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listas -->
+    <div class="card mb-5 shadow">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">Listas</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lista in listas %}
+                            {% set usuario = usuarios|filter(u => u.id == lista.id_usuario)|first %}
+                            <tr>
+                                <td>{{ usuario.nome }}</td>
+                                <td>{{ lista.dt_hr_criacao|date('d/m/Y H:i') }}</td>
+                                <td>{{ lista.cliente }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recibos -->
+    <div class="card mb-5 shadow">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Recibos</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recibo in recibos %}
+                            {% set usuario = usuarios|filter(u => u.id == recibo.id_usuario)|first %}
+                            <tr>
+                                <td>{{ usuario.nome }}</td>
+                                <td>{{ recibo.dt_hr_criacao|date('d/m/Y H:i') }}</td>
+                                <td>{{ recibo.cliente }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

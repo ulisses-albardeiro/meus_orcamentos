@@ -120,6 +120,12 @@ try {
         SimpleRouter::get(URL . 'recibo/excluir/{id_recibo}', 'Recibo@excluir');
     });
 
+    //Grupo de Rotas Dashboard
+    SimpleRouter::group(['namespace' => 'Painel\Admin'], function () {
+
+        SimpleRouter::get(URL . 'admin/listar', 'Admin@listar');
+    });
+
     SimpleRouter::start();
 } catch (Exception $e) {
 
