@@ -11,18 +11,25 @@ class Recibo extends PainelControlador
 {
     public function listar(): void
     {
-        echo $this->template->rendenizar("recibos/listar.html", 
-        [
-            'recibos' => (new ReciboModelo)->getRecibos($this->usuario->id)
-        ]);
+        echo $this->template->rendenizar(
+            "recibos/listar.html",
+            [
+                'recibos' => (new ReciboModelo)->getRecibos($this->usuario->id)
+            ]
+        );
     }
 
-    public function gerar(): void
+    public function gerar(?int $id_recibo = null): void
     {
-        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+        if (empty($id_recibo)) {
+            $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+            $salvar = new ReciboModelo;
+            $salvar->cadastrarRecibo($dados, $this->usuario->id);
 
-        $salvar = new ReciboModelo;
-        $salvar->cadastrarRecibo($dados, $this->usuario->id);
+        } else {
+            $dados = (new ReciboModelo)->buscaPorId($id_recibo);
+            $dados = json_decode($dados->recibo_completo, true);
+        }
 
         $html = new Html;
         $html->dadosUsuario($dados['nome-empresa'], $dados['doc-empresa'], $dados['tel-empresa'], $dados['end-empresa'], $dados['email-empresa']);
@@ -31,20 +38,27 @@ class Recibo extends PainelControlador
         $html->redesSociais($dados['facebook'], $dados['instagram']);
         $html->descricaoServico($dados['descricao']);
 
-        $this->pdf($html->html(), $dados['nome-cliente']);
-    }
-
-    private function pdf(string $html, string $nome_cliente): void
-    {
         $pdf = new Pdf;
-        $pdf->carregarHTML($html);
+        $pdf->carregarHTML($html->html());
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->baixar("recibo-" . Helpers::slug($nome_cliente) . ".pdf");
+        $pdf->baixar("recibo-" . Helpers::slug($dados['nome-cliente']) . ".pdf");
     }
 
     public function criar(): void
     {
         echo $this->template->rendenizar("recibos/form-recibos.html", []);
+    }
+
+    public function excluir(int $id_recibo): void
+    {
+        $excluir = new ReciboModelo;
+        if ($excluir->excluirRecibo($id_recibo)) {
+            $this->mensagem->mensagemSucesso("Recibo excluido com sucesso")->flash();
+            Helpers::redirecionar("recibo/listar");
+        } else {
+            $this->mensagem->mensagemErro("Houve um erro inesperado")->flash();
+            Helpers::redirecionar("recibo/listar");
+        }
     }
 }

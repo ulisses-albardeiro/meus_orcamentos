@@ -23,18 +23,18 @@
                     </thead>
                     <tbody>
                         {% for recibo in recibos %}
-                        <td>{{ recibo.id_cliente }}</td>
+                        <td>{{ recibo.cliente }}</td>
                         <td>{{ recibo.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
-                        <td>R$ {{ recibo.valor }}</td>
+                        <td>R$ {{ (recibo.valor / 100)|number_format(2, ',', '.') }}</td>
                         <td class="text-center">
                             <a title="Ver Orçamento" target="_blank"
-                            {% if orcamento.modelo == "detalhado" %} href="{{ url('ver-orcamento/'~recibo.id) }}" {% else %} href="{{ url('ver-orcamento-simples/'~recibo.id) }}" {% endif %}class="text-success text-decoration-none fs-4">
+                            {% if orcamento.modelo == "detalhado" %} href="{{ url('ver-orcamento/'~recibo.id) }}" {% else %} href="{{ url('recibo/gerar/'~recibo.id) }}" {% endif %}class="text-success text-decoration-none fs-4">
                                 <i class="bi bi-filetype-pdf"></i>
                             </a>
                             
                             
                             <a href="#" title="Excluir" class="text-danger text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ recibo.id }}"><i class="bi bi-trash fs-4"></i>
-                                {% include 'modais/excluir-meus-orcamentos.html' %}
+                                {% include 'recibos/modais/excluir-recibo.html' %}
                             
                         </td>
                         </tr>
@@ -51,7 +51,7 @@
     $(document).ready(function () {
         $('#data-table').DataTable({
             language: {
-                url: "templates/assets/DataTables/pt_br.json"
+                url: "../templates/assets/DataTables/pt_br.json"
             },
             pageLength: 10, // Define o número de linhas por página
             lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
