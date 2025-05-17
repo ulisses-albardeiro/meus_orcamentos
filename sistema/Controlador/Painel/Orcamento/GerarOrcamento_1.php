@@ -124,12 +124,12 @@ class GerarOrcamento_1 extends PainelControlador
 
         $cel_cliente = '';
         if (!empty($dados['cel-cliente'])) {
-            $cel_cliente =' / '.$dados['cel-cliente']; 
+            $cel_cliente ='<strong> Cel:</strong>'.$dados['cel-cliente']; 
         }
 
         $email_cliente = '';
-        if (!$dados['email-cliente']) {
-            $email_cliente = "<strong>Email:</strong>".$dados['email-cliente'];
+        if (!empty($dados['email-cliente'])) {
+            $email_cliente = "<strong> Email:</strong>".$dados['email-cliente'];
         }
 
         $contatos = '';
