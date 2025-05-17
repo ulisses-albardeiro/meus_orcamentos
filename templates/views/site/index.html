@@ -24,7 +24,7 @@
   <link href="{{url('templates/views/site/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="{{url('templates/views/site/assets/css/main.css')}}" rel="stylesheet">
 </head>
 
 <body class="index-page">
@@ -75,7 +75,7 @@
           </div>
           <div class="col-lg-6">
             <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/img_1.png" alt="Hero Image" class="img-fluid">
+              <img src="{{url('templates/views/site/assets/img/img_1.png')}}" alt="Hero Image" class="img-fluid">
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="display-4 mb-4">Faça um teste 100% grátis</h2>
             <p class="mb-4">Explore a Meus Orçamentos e veja como podemos agregar em seus negócios</p>
-            <a href="#" class="btn btn-cta">Iniciar Teste Grátis</a>
+            <a href="{{url('form-cadastro')}}" class="btn btn-cta">Iniciar Teste Grátis</a>
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@
                 <span class="period">/ mês</span>
               </div>
               <p class="description">Experimente todas as funcionalidades por 30 dias</p>
-              <a href="#" class="btn btn-primary">
+              <a href="{{url('form-cadastro')}}" class="btn btn-primary">
                 Acessar Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -228,7 +228,7 @@
                 <span class="period">/ mês</span>
               </div>
               <p class="description">Ideal para quem precisa de flexibilidade</p>
-              <a href="#" class="btn btn-light">
+              <a href="{{url('form-cadastro')}}" class="btn btn-light">
                 Acessar Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -244,7 +244,7 @@
                 <span class="period">/trimestre</span>
               </div>
               <p class="description">Melhor custo-benefício com Economia de 20%</p>
-              <a href="#" class="btn btn-primary">
+              <a href="{{url('form-cadastro')}}" class="btn btn-primary">
                 Acessar Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -330,7 +330,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="{{url('')}}" class="logo d-flex align-items-center">
             <span class="sitename">Meus Orçamentos</span>
           </a>
           <div class="footer-contact pt-3">
@@ -367,8 +367,8 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Links</h4>
           <ul>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Primeiro acesso</a></li>
+            <li><a href="{{url('login')}}">Login</a></li>
+            <li><a href="{{url('form-cadastro')}}">Primeiro acesso</a></li>
           </ul>
         </div>
       </div>
@@ -384,15 +384,15 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="{{url('templates/views/site/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url('templates/views/site/assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{url('templates/views/site/assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{url('templates/views/site/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{url('templates/views/site/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{url('templates/views/site/assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
 
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="{{url('templates/views/site/assets/js/main.js')}}"></script>
 
 </body>
 
