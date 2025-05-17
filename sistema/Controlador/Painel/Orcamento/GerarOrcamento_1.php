@@ -239,8 +239,8 @@ class GerarOrcamento_1 extends PainelControlador
                         <tr>
                             <th>Qtd.</th>
                             <th>Descrição</th>
-                            <th class="text-right">Valor Unit.</th>
-                            <th class="text-right">Valor Total</th>
+                            <th style="white-space: nowrap;" class="text-right">Valor Unit.</th>
+                            <th style="white-space: nowrap;" class="text-right">Valor Total</th>
                         </tr>
                     </thead>
                     <tbody>
