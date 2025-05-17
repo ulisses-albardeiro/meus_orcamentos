@@ -46,7 +46,7 @@ class GerarOrcamento_2 extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->baixar("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
+        $pdf->baixar("Orçamento_" . Helpers::slug($dados['nome-cliente']) . ".pdf");
     }
 
     private function html(array $dados): string
@@ -68,6 +68,24 @@ class GerarOrcamento_2 extends PainelControlador
             $doc_empresa = <<<HTML
             <p class="info-contato">
                 <span class="icone"></span>{$dados['doc-empresa']}
+            </p>
+        HTML;
+        }
+
+        $tel_empresa = '';
+        if(!empty($dados['tel-empresa'])){
+            $tel_empresa = <<<HTML
+            <p class="info-contato">
+                <span class="icone"></span>{$dados['tel-empresa']}
+            </p>
+        HTML;
+        }
+
+        $email_empresa = '';
+        if(!empty($dados['email-empresa'])){
+            $email_empresa = <<<HTML
+            <p class="info-contato">
+                <span class="icone"></span>{$dados['email-empresa']}
             </p>
         HTML;
         }
@@ -95,6 +113,51 @@ class GerarOrcamento_2 extends PainelControlador
         if ($dados['instagram']) {
             $instagram = '<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon"> ' . $dados['instagram'];
         }
+
+        /* Dados cliente */
+        $doc_cliente = '';
+        if (!empty($dados['doc-cliente'])) {
+            $doc_cliente = <<<HTML
+            <div style="padding: 2px 10px;">
+                <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
+            </div>
+        HTML;
+        }
+
+        $end_cliente = '';
+        if (!empty($dados['end-cliente'])) {
+            $end_cliente = <<<HTML
+            <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
+                <p style="margin: 2px 0; line-height: 1.2;"><strong>Endereço:</strong> {$dados['end-cliente']}</p>
+            </div>
+        HTML;
+        }
+
+        $tel_cliente = '';
+        if (!empty($dados['tel-cliente'])) {
+            $tel_cliente = "<strong>Telefone: </strong>".$dados['tel-cliente'];
+        }
+
+        $cel_cliente = '';
+        if (!empty($dados['cel-cliente'])) {
+            $cel_cliente ='<strong> Celular: </strong>'.$dados['cel-cliente']; 
+        }
+
+        $email_cliente = '';
+        if (!empty($dados['email-cliente'])) {
+            $email_cliente = "<strong> Email: </strong>".$dados['email-cliente'];
+        }
+
+        $contatos = '';
+        if(!empty($dados['tel-cliente']) || !empty($dados['cel-cliente']) || !empty($dados['email-cliente'])){
+            $contatos = <<<HTML
+            <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
+                <p style="margin: 2px 0; line-height: 1.2;"> {$tel_cliente}{$cel_cliente} 
+                {$email_cliente}</p>      
+            </div>
+        HTML;
+        }
+        /* Final dados cliente */
 
         // Processa os itens do orçamento (sem valores individuais)
         $itensHTML = '';
@@ -134,28 +197,24 @@ class GerarOrcamento_2 extends PainelControlador
         <body>
             <div class="container">
                  <!-- Cabeçalho do PDF -->
-        <div class="cabecalho-orcamento">
-            <div class="cabecalho-container">
-                <div class="logo-dados">
-                    {$img_logo}
-                    <div class="dados-prestador">
-                        <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
-                        <p class="info-contato">
-                            <span class="icone"></span>{$dados['tel-empresa']}
-                        </p>
-                        {$doc_empresa}
-                        <p class="info-contato">
-                            <span class="icone"></span>{$dados['email-empresa']}
-                        </p>
-                        {$end_empresa}
-                        <p class="social-link">
-                            {$facebook}
-                            {$instagram}
-                        </p>
+                <div class="cabecalho-orcamento">
+                    <div class="cabecalho-container">
+                        <div class="logo-dados">
+                            {$img_logo}
+                            <div class="dados-prestador">
+                                <h2 class="nome-prestador">{$dados['nome-empresa']}</h2>
+                                {$tel_empresa}
+                                {$doc_empresa}
+                                {$email_empresa}
+                                {$end_empresa}
+                                <p class="social-link">
+                                    {$facebook}
+                                    {$instagram}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
                     <!-- End Cabeçalho PDF -->
                      
                 <div style="background-color: var(--dark); margin-bottom: -20px">
@@ -165,18 +224,10 @@ class GerarOrcamento_2 extends PainelControlador
                     <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
                         <p style="margin: 2px 0; line-height: 1.2;"><strong>Nome:</strong> {$dados['nome-cliente']}</p>
                     </div>
-                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px;">
-                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Endereço:</strong> {$dados['end-cliente']}</p>
-                    </div>
-                    <div style="border-bottom: 1px solid #e9ecef; padding: 2px 10px; display: flex;">
-                        <p style="margin: 2px 0; line-height: 1.2;"><strong>Telefone:</strong> {$dados['tel-cliente']} / {$dados['cel-cliente']}  |  
-                        <strong>Email:</strong> {$dados['email-cliente']}</p>      
-                    </div>
-                    <div style="padding: 2px 10px;">
-                        <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
-                    </div>
-                </div>
-        
+                    {$end_cliente}
+                    {$contatos}                    
+                    {$doc_cliente}
+                </div>       
         
                 <div class="section-title-orcamento">
                         Orçamento

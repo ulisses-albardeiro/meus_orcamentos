@@ -53,7 +53,7 @@ class GerarOrcamento_1 extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->baixar("Orçamento_" . trim($dados['nome-cliente']) . ".pdf");
+        $pdf->baixar("Orçamento_" . Helpers::slug($dados['nome-cliente']) . ".pdf");
     }
 
     private function html(array $dados): string
@@ -196,7 +196,7 @@ class GerarOrcamento_1 extends PainelControlador
         </head>
         <body>
             <div class="container">
-                 <!-- Cabeçalho do PDF -->
+                <!-- Cabeçalho do PDF -->
                 <div class="cabecalho-orcamento">
                     <div class="cabecalho-container">
                         <div class="logo-dados">
@@ -217,7 +217,7 @@ class GerarOrcamento_1 extends PainelControlador
                         </div>
                     </div>
                 </div>
-                    <!-- End Cabeçalho PDF -->
+                <!-- End Cabeçalho PDF -->
                      
                 <div style="background-color: var(--dark); margin-bottom: -20px">
                     <h3 style="color: white; text-align: center; padding: 8px 0;">Dados do Cliente</h3>
