@@ -2,517 +2,398 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Meus Orçamentos</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{{ url(" templates/views/site/assets/icone.png")}}" />
-    <!-- Custom Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Meus Orçamentos</title>
 
-    <link href="{{ url('templates/views/site/css/styles.css?v=1.0.1') }}" rel="stylesheet" />
+  <!-- Favicons -->
+  <link href="{{url('templates/views/site/assets/img/icone.png')}}" rel="icon">
+ 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{url('templates/views/site/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url('templates/views/site/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{url('templates/views/site/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{url('templates/views/site/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{url('templates/views/site/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
 </head>
 
-<body class="d-flex flex-column h-100">
-    <main class="flex-shrink-0">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-            <div class="container px-5">
-                <a class="navbar-brand" href="{{ url() }}"><span class="fw-bolder" style="color: #373643;">Meus
-                        Orçamentos</span><img style="width: 15px; padding-bottom: 20px;" src="{{ url("templates/views/site/assets/icone.png") }}" alt=""></a>
-                <div>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                        <a class="btn btn-lg px-3 py-2 me-sm-3 fs-6 fw-bolder" href="{{ url('login') }}"
-                            style="background-color: #373643; color: white;">Acessar</a>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div
+      class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="{{url('')}}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Meus Orçamentos <img src="{{url('templates/views/site/assets/img/icone.png')}}"></h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Início</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#pricing">Planos</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-getstarted" href="{{url('login')}}">Acessar</a>
+    </div>
+  </header>
 
-        <!-- Header-->
-        <header class="py-5">
-            <div class="text-center text-xxl-start destaque-orcamento">
-                <div class="d-inline-block badge bg-gradient-primary-to-secondary text-white mb-4">
-                    <div class="text-uppercase">Crie Orçamentos &middot; Administre &middot; Envie para seus Clientes
-                    </div>
-                </div>
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+              <h1 class="mb-4">
+                Profissionalize seu Trabalho
+                com Orçamentos que<br>
+                <span class="accent-text">Geram Valor</span>
+              </h1>
+              <p class="mb-4 mb-md-5">
+                Abandone os orçamentos por mensagens de Whatsapp e crie documentos <br>
+                profissionais que vão impressionar seus clientes!
+              </p>
+              <div class="hero-buttons">
+                <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1">Primeiro Acesso</a>
+                <a href="https://www.youtube.com/watch?v=Wr_S4wiDi9M" class="btn btn-link mt-2 mt-sm-0 glightbox">
+                  <i class="bi bi-play-circle me-1"></i>
+                  Assistir Vídeo
+                </a>
+              </div>
             </div>
-            <div class="container px-5 pb-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-xxl-5">
-                        <!-- Header text content-->
-                        <div class="text-center text-xxl-start">
-                            <div class="fs-3 fw-light text-muted">Profissionalize Seu Trabalho</div>
-                            <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Orçamentos que
-                                    Geram Valor</span></h1>
-                            <div
-                                class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                <a class="btn btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}"
-                                    style="background-color: #373643; color: white;">Primeiro Acesso</a>
-                                <a class="btn btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('login') }}"
-                                    style="border: 1px solid #373643;">Gerar Orçamento</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-7">
-                        <!-- Header profile picture-->
-                        <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                            <div class="profile bg-gradient-primary-to-secondary">
-                                <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
-                                <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                                <img class="profile-img" src="{{ url('templates/views/site/assets/profile.png') }}"
-                                    alt="..." />
-                                <div class="dots-1">
-                                    <!-- SVG Dots-->
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                        viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4"
-                                        xml:space="preserve">
-                                        <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                            <path
-                                                d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <!-- END of SVG dots-->
-                                </div>
-                                <div class="dots-2">
-                                    <!-- SVG Dots-->
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                        viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4"
-                                        xml:space="preserve">
-                                        <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                            <path
-                                                d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <!-- END of SVG dots-->
-                                </div>
-                                <div class="dots-3">
-                                    <!-- SVG Dots-->
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                        viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4"
-                                        xml:space="preserve">
-                                        <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                            <path
-                                                d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <!-- END of SVG dots-->
-                                </div>
-                                <div class="dots-4">
-                                    <!-- SVG Dots-->
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                        viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4"
-                                        xml:space="preserve">
-                                        <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                            <path
-                                                d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z">
-                                            </path>
-                                            <path
-                                                d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z">
-                                            </path>
-                                            <path
-                                                d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <!-- END of SVG dots-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+              <img src="assets/img/img_1.png" alt="Hero Image" class="img-fluid">
             </div>
-        </header>
-        <!-- About Section-->
-        <section class="bg-light py-5">
-            <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-xxl-8">
-                        <div class="text-center my-5">
-                            <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Sobre</span></h2>
-                            <p class="lead fw-light mb-4">Somos a "Meus Orçamentos", plataforma com foco em gerar valor
-                                para empreendedores através de orçamentos profissionais e da gestão
-                                desses orçamentos
-                            </p>
-                            <p class="text-muted">Pintor &middot; Pedreiro &middot; Mestre de Obras &middot; Carpinteiro
-                                &middot; Eletricista &middot; Encanador &middot; Gesseiro &middot; Azulejista &middot;
-                                Serralheiro &middot; Marceneiro &middot; Vidraceiro &middot; Advogado &middot; Arquiteto
-                                &middot; Contador &middot; Dentista &middot; Engenheiro &middot; Médico &middot;
-                                Psicólogo &middot; Designer Gráfico &middot; Programador &middot; Redator &middot;
-                                Fotógrafo &middot; Personal Trainer &middot; Consultor Financeiro &middot;
-                                Fisioterapeuta &middot; Nutricionista &middot; E muitos Outros... </p>
+          </div>
+        </div>
+    </section><!-- /Hero Section -->
 
-                            <div class="d-flex justify-content-center fs-1 gap-4">
-                                <a class="text-gradient" target="_blank"
-                                    href="https://www.youtube.com/@meusorcamentos"><i class="bi bi-youtube"></i></i></a>
-                                <!--  <a class="text-gradient" href="#!"><i class="bi bi-instagram"></i></a> -->
-                            </div>
-                        </div>
-                    </div>
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 align-items-center justify-content-between">
+          <div class="col-xl-12 text-center" data-aos=" fade-up" data-aos-delay="200">
+            <h2 class="about-title fs-1">Veja em que a Meus Orçamentos<br> ajuda você</h2>
+            <div class="row g-4 mt-2">
+              <div class="col-lg-3 col-md-6 d-flex">
+                <div class="feature-box w-100">
+                  <div class="feature-icon"><i class="bi bi-person-badge"></i></div>
+                  <p class="feature-text">Profissionalize sua imagem frente ao cliente</p>
                 </div>
+              </div>
+              <div class="col-lg-3 col-md-6 d-flex">
+                <div class="feature-box w-100">
+                  <div class="feature-icon"><i class="bi bi-bar-chart-line"></i></div>
+                  <p class="feature-text">Aumente sua taxa de contratação</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 d-flex">
+                <div class="feature-box w-100">
+                  <div class="feature-icon"><i class="bi bi-currency-dollar"></i></div>
+                  <p class="feature-text">Cobre mais caro por seus serviços</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 d-flex">
+                <div class="feature-box w-100">
+                  <div class="feature-icon"><i class="bi bi-kanban"></i></div>
+                  <p class="feature-text">Faça uma gestão eficiente de seu negócio</p>
+                </div>
+              </div>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
+    </section><!-- /About Section -->
+
+    <!-- Services Section -->
+    <section id="features" class="services section light-background">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 class="fs-1">Principais Recursos</h2>
+      </div><!-- End Section Title -->
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-file-earmark-text"></i>
+              </div>
+              <div>
+                <h3>Gerador de Orçamentos</h3>
+                <p>Crie, edite e envie orçamentos profissionais em poucos minutos. Escolha entre modelos prontos,
+                  personalize com sua marca e tenha acesso rápido sempre que precisar.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-list-check"></i>
+              </div>
+              <div>
+                <h3>Gerador de Listas</h3>
+                <p>Monte listas personalizadas com a sua identidade visual. Escolha entre modelos variados, defina o
+                  tamanho e envie para seus clientes com praticidade.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-receipt"></i>
+              </div>
+              <div>
+                <h3>Emissão de Recibos</h3>
+                <p>Emita recibos personalizados para seus serviços. Imprima ou envie digitalmente, com agilidade e
+                  apresentação profissional.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div>
+                <h3>Gestão Financeira</h3>
+                <p>Controle suas entradas e saídas com facilidade. Visualize gráficos de desempenho diário e mensal e
+                  tome
+                  decisões financeiras com base em dados reais.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+        </div>
+      </div>
+    </section><!-- /Services Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row content justify-content-center align-items-center position-relative">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="display-4 mb-4">Faça um teste 100% grátis</h2>
+            <p class="mb-4">Explore a Meus Orçamentos e veja como podemos agregar em seus negócios</p>
+            <a href="#" class="btn btn-cta">Iniciar Teste Grátis</a>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Call To Action Section -->
 
     <!-- Pricing Section -->
-    <section class="py-5">
-        <div class="container px-5">
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center mb-5">
-                        <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Nossos Planos</span></h2>
-                        <p class="lead fw-light mb-0">Escolha o plano que melhor atende às suas necessidades</p>
-                    </div>
-                </div>
+    <section id="pricing" class="pricing section light-background">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Planos</h2>
+      </div><!-- End Section Title -->
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-4 justify-content-center">
+          <!-- Basic Plan -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-card">
+              <h3>Teste Grátis</h3>
+              <div class="price">
+                <span class="currency">R$</span>
+                <span class="amount">00</span>
+                <span class="period">/ mês</span>
+              </div>
+              <p class="description">Experimente todas as funcionalidades por 30 dias</p>
+              <a href="#" class="btn btn-primary">
+                Acessar Agora
+                <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
-            <div class="row gx-5 justify-content-center">
-                <!-- Free Tier Card -->
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100">
-                        <div class="card-body p-5">
-                            <div class="text-center">
-                                <div class="badge bg-light text-dark rounded-pill mb-4">Teste Grátis</div>
-                                <h4 class="card-title">1 Mês Grátis</h4>
-                                <div class="display-5 fw-bold mb-4">R$0,00</div>
-                                <p class="text-muted mb-4">Experimente todas as funcionalidades por 30 dias</p>
-                                <ul class="list-unstyled mb-4">
-                                    <!-- <li class="mb-2"><i class="bi bi-check text-primary"></i> Orçamentos Ilimitados</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Envio para Clientes</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Acesso Completo</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Suporte Básico</li> -->
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0 pb-5 pt-0">
-                            <div class="d-grid">
-                                <a class="btn btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}"
-                                    style="background-color: #373643; color: white;">Experimentar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Monthly Tier Card -->
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100">
-                        <div class="card-body p-5">
-                            <div class="text-center">
-                                <div class="badge bg-primary rounded-pill mb-4">Popular</div>
-                                <h4 class="card-title">Plano Mensal</h4>
-                                <div class="display-5 fw-bold mb-4">R$49,90<span
-                                        class="text-muted fs-6 fw-light">/mês</span></div>
-                                <p class="text-muted mb-4">Ideal para quem precisa de flexibilidade</p>
-                                <ul class="list-unstyled mb-4">
-                                    <!-- <li class="mb-2"><i class="bi bi-check text-primary"></i> Todos os benefícios do
-                                        teste</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i>Backup de todos os Orçamentos e Listas geradas
-                                    </li>
-                                    
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Suporte prioritário</li> -->
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0 pb-5 pt-0">
-                            <div class="d-grid">
-                                <a class="btn btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}"
-                                    style="background-color: #373643; color: white;">Assinar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quarterly Tier Card -->
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100">
-                        <div class="card-body p-5">
-                            <div class="text-center">
-                                <div class="badge bg-light text-dark rounded-pill mb-4">Economize</div>
-                                <h4 class="card-title">Plano Trimestral</h4>
-                                <div class="display-5 fw-bold mb-4">R$119,90<span
-                                        class="text-muted fs-6 fw-light">/trimestre</span></div>
-                                <p class="text-muted mb-4">Melhor custo-benefício com Economia de 20%</p>
-                                <ul class="list-unstyled mb-4">
-                                    <!-- <li class="mb-2"><i class="bi bi-check text-primary"></i> Todos os benefícios do
-                                        teste</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Todos os benefícios do
-                                        mensal</li>
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Economia de 20%</li>
-                                
-                                    <li class="mb-2"><i class="bi bi-check text-primary"></i> Suporte premium</li> -->
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0 pb-5 pt-0">
-                            <div class="d-grid">
-                                <a class="btn btn-lg px-5 py-3 fs-6 fw-bolder" href="{{ url('form-cadastro') }}"
-                                    style="background-color: #373643; color: white;">Assinar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <!-- Standard Plan -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-card popular">
+              <div class="popular-badge">Mais Popular</div>
+              <h3>Plano Mensal</h3>
+              <div class="price">
+                <span class="currency">R$</span>
+                <span class="amount">49,90</span>
+                <span class="period">/ mês</span>
+              </div>
+              <p class="description">Ideal para quem precisa de flexibilidade</p>
+              <a href="#" class="btn btn-light">
+                Acessar Agora
+                <i class="bi bi-arrow-right"></i>
+              </a>
             </div>
+          </div>
+          <!-- Premium Plan -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-card">
+              <h3>Plano Trimestral</h3>
+              <div class="price">
+                <span class="currency">R$</span>
+                <span class="amount">119,90</span>
+                <span class="period">/trimestre</span>
+              </div>
+              <p class="description">Melhor custo-benefício com Economia de 20%</p>
+              <a href="#" class="btn btn-primary">
+                Acessar Agora
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
         </div>
-    </section>
-    <!-- Footer-->
-    <footer class="bg-white py-4 mt-auto">
-        <div class="container px-5">
-            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                <div class="col-auto">
-                    <div class="small m-0">Copyright &copy; Meus Orçamentos</div>
-                </div>
-                <div class="col-auto">
-                    <!-- <a class="small" href="#!">Privacy</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Terms</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Contact</a> -->
-                </div>
-            </div>
-        </div>
-    </footer>
+      </div>
+    </section><!-- /Pricing Section -->
 
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="{{ url('templates/views/site/js/scripts.js') }}"></script>
+    <!-- Faq Section -->
+    <section class="faq-9 faq section light-background" id="faq">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5" data-aos="fade-up">
+            <h2 class="faq-title">Tem alguma dúvida? Confira no nosso FAQ</h2>
+            <div class="faq-arrow d-none d-lg-block" data-aos="fade-up" data-aos-delay="200">
+              <svg class="faq-arrow" width="200" height="211" viewBox="0 0 200 211" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M198.804 194.488C189.279 189.596 179.529 185.52 169.407 182.07L169.384 182.049C169.227 181.994 169.07 181.939 168.912 181.884C166.669 181.139 165.906 184.546 167.669 185.615C174.053 189.473 182.761 191.837 189.146 195.695C156.603 195.912 119.781 196.591 91.266 179.049C62.5221 161.368 48.1094 130.695 56.934 98.891C84.5539 98.7247 112.556 84.0176 129.508 62.667C136.396 53.9724 146.193 35.1448 129.773 30.2717C114.292 25.6624 93.7109 41.8875 83.1971 51.3147C70.1109 63.039 59.63 78.433 54.2039 95.0087C52.1221 94.9842 50.0776 94.8683 48.0703 94.6608C30.1803 92.8027 11.2197 83.6338 5.44902 65.1074C-1.88449 41.5699 14.4994 19.0183 27.9202 1.56641C28.6411 0.625793 27.2862 -0.561638 26.5419 0.358501C13.4588 16.4098 -0.221091 34.5242 0.896608 56.5659C1.8218 74.6941 14.221 87.9401 30.4121 94.2058C37.7076 97.0203 45.3454 98.5003 53.0334 98.8449C47.8679 117.532 49.2961 137.487 60.7729 155.283C87.7615 197.081 139.616 201.147 184.786 201.155L174.332 206.827C172.119 208.033 174.345 211.287 176.537 210.105C182.06 207.125 187.582 204.122 193.084 201.144C193.346 201.147 195.161 199.887 195.423 199.868C197.08 198.548 193.084 201.144 195.528 199.81C196.688 199.192 197.846 198.552 199.006 197.935C200.397 197.167 200.007 195.087 198.804 194.488ZM60.8213 88.0427C67.6894 72.648 78.8538 59.1566 92.1207 49.0388C98.8475 43.9065 106.334 39.2953 114.188 36.1439C117.295 34.8947 120.798 33.6609 124.168 33.635C134.365 33.5511 136.354 42.9911 132.638 51.031C120.47 77.4222 86.8639 93.9837 58.0983 94.9666C58.8971 92.6666 59.783 90.3603 60.8213 88.0427Z"
+                  fill="currentColor"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
+            <div class="faq-container">
+              <div class="faq-item faq-active">
+                <h3>O sistema é fácil de usar, mesmo para quem não tem experiência?</h3>
+                <div class="faq-content">
+                  <p>Sim. A plataforma foi desenvolvida para ser simples e intuitiva. Mesmo usuários iniciantes
+                    conseguem criar orçamentos, listas e recibos em poucos minutos.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+              <div class="faq-item">
+                <h3>Posso personalizar os modelos com a minha marca?</h3>
+                <div class="faq-content">
+                  <p>Sim. Todos os modelos disponíveis (orçamentos, listas e recibos) podem ser personalizados com seu
+                    logotipo, cores e informações da sua empresa.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+              <div class="faq-item">
+                <h3>Os documentos gerados ficam salvos na plataforma?</h3>
+                <div class="faq-content">
+                  <p>Sim. Todos os documentos criados ficam armazenados em seu painel, podendo ser acessados, editados
+                    ou reenviados sempre que necessário.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+              <div class="faq-item">
+                <h3>Consigo enviar os documentos direto para meus clientes?</h3>
+                <div class="faq-content">
+                  <p>Sim. Você pode enviar orçamentos, listas ou recibos diretamente por e-mail ou gerar um link para
+                    compartilhar com seus clientes.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+              <div class="faq-item">
+                <h3>Como funciona a parte de gestão financeira?</h3>
+                <div class="faq-content">
+                  <p>Você pode registrar todas as entradas e saídas do seu negócio, visualizar gráficos comparativos por
+                    dia ou mês e acompanhar a evolução da sua receita.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+              <div class="faq-item">
+                <h3>Preciso instalar alguma coisa no meu computador ou celular?</h3>
+                <div class="faq-content">
+                  <p>Não. O sistema é 100% online e funciona em qualquer dispositivo com acesso à internet, seja
+                    computador, tablet ou celular.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Faq Section -->
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Meus Orçamentos</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Pirassununga-SP</p>
+            <p class="mt-3"><strong>Telefone:</strong> <span>19 9 7155-3715</span></p>
+            <p><strong>Email:</strong> <span>contato@meusorcamentos.com.br</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-youtube"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 footer-links">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#features">Recursos</a></li>
+            <li><a href="#pricing">Planos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#">Politica de privacidade</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-3 footer-links">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#features">Gerador de Orçamentos</a></li>
+            <li><a href="#features">Gerador de Listas</a></li>
+            <li><a href="#features">Emissão de Recibos</a></li>
+            <li><a href="#features">Gestão Financeira</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Links</h4>
+          <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Primeiro acesso</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Meus orçamentos</strong> <span>Todos os direitos
+          reservados</span></p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>
