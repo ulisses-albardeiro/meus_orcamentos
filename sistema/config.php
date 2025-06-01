@@ -8,7 +8,7 @@ if (Helpers::localhost()) {
     define('DB_NOME', 'meus_orcamentos');
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
-    define('DB_SENHA', '');
+    define('DB_SENHA', '123');
 
     define('SITE_NAME', 'Meus Orçamentos');
     define('SITE_DESC', '');
@@ -18,8 +18,8 @@ if (Helpers::localhost()) {
     define('SENHA_EMAIL', 'Uo*Us*071417');
     define('PORTA_EMAIL', 465);
 
-    define('DEVELOPMENT_URL', 'http://localhost/pessoal/meus_orcamentos');
-    define('URL', '/pessoal/meus_orcamentos/');
+    define('DEVELOPMENT_URL', 'http://localhost/meus_orcamentos');
+    define('URL', '/meus_orcamentos/');
 } else {
     define('DB_NOME', 'u997346094_blog');
     define('DB_HOST', 'localhost');
