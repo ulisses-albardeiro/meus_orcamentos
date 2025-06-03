@@ -8,7 +8,7 @@
 
   <!-- Favicons -->
   <link href="{{url('templates/views/site/assets/img/icone.png')}}" rel="icon">
- 
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -65,7 +65,7 @@
                 profissionais que vão impressionar seus clientes!
               </p>
               <div class="hero-buttons">
-                <a href="{{url('form-cadastro')}}" class="btn btn-primary me-0 me-sm-2 mx-1">Primeiro Acesso</a>
+                <a href="{{url('form-cadastro')}}" class="btn btn-primary me-0 me-sm-2 mx-1">Testar Gratuitamente</a>
                 <!-- <a href="https://www.youtube.com/watch?v=Wr_S4wiDi9M" class="btn btn-link mt-2 mt-sm-0 glightbox">
                   <i class="bi bi-play-circle me-1"></i>
                   Assistir Vídeo
@@ -212,7 +212,7 @@
               </div>
               <p class="description">Acesse todas as funcionalidades por 24 horas</p>
               <a href="{{url('form-cadastro')}}" class="btn btn-primary">
-                Acessar Agora
+                Fazer Teste Grátis Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -229,7 +229,7 @@
               </div>
               <p class="description">Ideal para quem precisa de flexibilidade</p>
               <a href="{{url('form-cadastro')}}" class="btn btn-light">
-                Acessar Agora
+                Fazer Teste Grátis Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -245,7 +245,7 @@
               </div>
               <p class="description">Melhor custo-benefício com Economia de 20%</p>
               <a href="{{url('form-cadastro')}}" class="btn btn-primary">
-                Acessar Agora
+                Fazer Teste Grátis Agora
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -379,9 +379,19 @@
     </div>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+  <!-- Scroll Top (escondido, pois se for removido quebra o layout) -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center d-none"><i
       class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Botão de Dúvidas via WhatsApp -->
+  <a href="https://wa.me/5519971553715?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20algumas%20d%C3%BAvidas%20sobre%20a%20plataforma%20Meus%20Or%C3%A7amentos" target="_blank" id="duvida-btn"
+    class="d-flex align-items-center justify-content-center"
+    style="background-color: #25D366; color: white; border-radius: 50px; padding: 12px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: fixed; bottom: 20px; right: 20px; z-index: 9999; text-decoration: none;">
+
+    <i class="bi bi-whatsapp" style="font-size: 1.5rem; margin-right: 8px;"></i>
+    <span style="font-weight: bold;">Dúvidas? Fale conosco</span>
+  </a>
+
 
   <!-- Vendor JS Files -->
   <script src="{{url('templates/views/site/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
