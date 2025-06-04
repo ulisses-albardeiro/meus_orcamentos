@@ -14,8 +14,8 @@ if (Helpers::localhost()) {
     define('SITE_DESC', '');
 
     define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', 'contato@ulissesalbardeiro.com.br');
-    define('SENHA_EMAIL', 'Uo*Us*071417');
+    define('USUARIO_EMAIL', 'contato@meusorcamentos.com.br');
+    define('SENHA_EMAIL', 'y2Z#B&b2');
     define('PORTA_EMAIL', 465);
 
     define('DEVELOPMENT_URL', 'http://localhost/meus_orcamentos');
@@ -30,8 +30,8 @@ if (Helpers::localhost()) {
     define('SITE_DESC', '');
 
     define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', 'contato@ulissesalbardeiro.com.br');
-    define('SENHA_EMAIL', 'Uo*Us*071417');
+    define('USUARIO_EMAIL', 'contato@meusorcamentos.com.br');
+    define('SENHA_EMAIL', 'y2Z#B&b2');
     define('PORTA_EMAIL', 465);
 
     define('PRODUCTION_URL', 'https://meusorcamentos.com.br');
