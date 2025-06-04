@@ -7,13 +7,11 @@ try {
     SimpleRouter::setDefaultNamespace('sistema\Controlador');
     SimpleRouter::get(URL, 'SiteControlador@index');
     SimpleRouter::get(URL . '404', 'SiteControlador@erro404');
+    SimpleRouter::get(URL . 'politica-de-privacidade', 'SiteControlador@politicaPrivacidade');
 
     SimpleRouter::group(['namespace' => 'Login'], function () {
 
-        //Rota para a página de login do painel
         SimpleRouter::match(['get', 'post'], URL . 'login', 'Login@login');
-
-        //Logout
         SimpleRouter::get(URL . 'sair', 'Login@sair');
     }); 
 
@@ -40,6 +38,7 @@ try {
 
      //Grupo de Rotas Home
      SimpleRouter::group(['namespace' => 'Painel\Home'], function () {
+        
         //Home
         SimpleRouter::get(URL. 'home', 'Home@listar');
      });

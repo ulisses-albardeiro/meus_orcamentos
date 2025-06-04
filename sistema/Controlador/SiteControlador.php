@@ -28,6 +28,16 @@ class SiteControlador extends Controlador
         );
     }
 
+    public function politicaPrivacidade(): void
+    {
+        echo $this->template->rendenizar(
+            "politica-de-privacidade.html",
+            [
+                'titulo' => 'Política de Privacidade'
+            ]
+        );
+    }
+
     public function erro404(): void
     {
         echo $this->template->rendenizar("404.html", []);
