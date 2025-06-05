@@ -132,7 +132,7 @@ class GerarOrcamento_2 extends PainelControlador
             </div>
         HTML;
         }
-
+ 
         $tel_cliente = '';
         if (!empty($dados['tel-cliente'])) {
             $tel_cliente = "<strong>Tel: </strong>".$dados['tel-cliente'];
