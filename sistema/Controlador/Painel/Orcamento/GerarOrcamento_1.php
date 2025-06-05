@@ -103,7 +103,7 @@ class GerarOrcamento_1 extends PainelControlador
         if (!empty($dados['doc-cliente'])) {
             $doc_cliente = <<<HTML
             <div style="padding: 2px 10px;">
-                <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$doc_cliente}</p>       
+                <p style="margin: 2px 0; line-height: 1.2;"><strong>CNPJ:</strong> {$dados['doc-cliente']}</p>       
             </div>
         HTML;
         }
@@ -119,12 +119,12 @@ class GerarOrcamento_1 extends PainelControlador
 
         $tel_cliente = '';
         if (!empty($dados['tel-cliente'])) {
-            $tel_cliente = "<strong>Telefone: </strong>".$dados['tel-cliente'];
+            $tel_cliente = "<strong>Tel: </strong>".$dados['tel-cliente'];
         }
 
         $cel_cliente = '';
         if (!empty($dados['cel-cliente'])) {
-            $cel_cliente ='<strong> Celular: </strong>'.$dados['cel-cliente']; 
+            $cel_cliente ='<strong> Cel: </strong>'.$dados['cel-cliente']; 
         }
 
         $email_cliente = '';
