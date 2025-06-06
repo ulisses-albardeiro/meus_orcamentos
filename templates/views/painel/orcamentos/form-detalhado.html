@@ -25,37 +25,37 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Seu nome</label>
-            <input readonly required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
+            <input readonly required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm" name="nome-empresa">
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
                 <label class="form-label"> Seu Facebook</label>
-                <input readonly value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
+                <input readonly value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm" name="facebook">
             </div>
             <div class="col-6">
                 <label class="form-label"> Seu Instagram</label>
-                <input readonly value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
+                <input readonly value="{{ usuario().instagram }}" type="text" class="form-control form-control-sm" name="instagram">
             </div>
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
                 <label class="form-label"> Seu Telefone</label>
-                <input readonly required value="{{ usuario().telefone }}" type="text" class="form-control" name="tel-empresa">
+                <input readonly required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm" name="tel-empresa">
             </div>
             <div class="col-6">
                 <label class="form-label">Seu CNPJ</label>
-                <input readonly value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa" id="cnpj-input"
+                <input readonly value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa" id="cnpj-input"
                     placeholder="00.000.000/0000-00" maxlength="18">
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Seu Email</label>
-            <input readonly value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
+            <input readonly value="{{ usuario().email }}" type="email" class="form-control form-control-sm" name="email-empresa">
         </div>
         <div class="mb-3">
             <label class="form-label">Seu Endereço</label>
-            <input readonly value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
+            <input readonly value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="end-empresa">
         </div>
     </div>
 
@@ -65,32 +65,32 @@
     <div class="card border-1 shadow-lg p-3">
         <div class="mb-3">
             <label class="form-label">Nome*</label>
-            <input required type="text" class="form-control" name="nome-cliente">
+            <input required type="text" class="form-control form-control-sm" name="nome-cliente">
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
                 <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control" name="tel-cliente">
+                <input type="text" class="form-control form-control-sm" name="tel-cliente">
             </div>
             <div class="col-6">
                 <label class="form-label">Celular</label>
-                <input type="text" class="form-control" name="cel-cliente">
+                <input type="text" class="form-control form-control-sm" name="cel-cliente">
             </div>
         </div>
         <div class="row g-2 mb-3">
             <div class="col-6">
                 <label class="form-label">CNPJ</label>
-                <input type="text" class="form-control" name="doc-cliente"
+                <input type="text" class="form-control form-control-sm" name="doc-cliente"
                     id="cnpj-input-cliente" placeholder="00.000.000/0000-00" maxlength="18">
             </div>
             <div class="col-6">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email-cliente">
+                <input type="email" class="form-control form-control-sm" name="email-cliente">
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Endereço</label>
-            <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control" name="end-cliente">
+            <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm" name="end-cliente">
         </div>
     </div>
 
@@ -100,14 +100,14 @@
         <div id="itens-container" class="mb-3">
             <div class="row g-2 item">
                 <div class="col-7">
-                    <input required type="text" class="form-control" placeholder="Nome do Serviço*"
+                    <input required type="text" class="form-control form-control-sm" placeholder="Nome do Serviço*"
                         name="itens[0][nome-item]">
                 </div>
                 <div class="col-2">
-                    <input required type="number" class="form-control" placeholder="Qtd*" name="itens[0][qtd-item]">
+                    <input required type="number" class="form-control form-control-sm" placeholder="Qtd*" name="itens[0][qtd-item]">
                 </div>
                 <div class="col-3">
-                    <input required type="text" class="form-control valor-unitario" placeholder="Valor unitário*"
+                    <input required type="text" class="form-control form-control-sm valor-unitario" placeholder="Valor unitário*"
                         name="itens[0][valor-item]" id="valor-unitario">
                 </div>
 
@@ -125,13 +125,13 @@
         <div class="mb-3 d-flex justify-content-center">
             <div class="col-md-2">
                 <label class="form-label">Validade do orçamento</label>
-                <input type="date" class="form-control" name="validade-orcamento">
+                <input type="date" class="form-control form-control-sm" name="validade-orcamento">
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Anotações sobre o Orçamento</label>
-            <textarea class="form-control" placeholder="Anotações" name="anotacoes"></textarea>
+            <textarea class="form-control form-control-sm" placeholder="Anotações" name="anotacoes"></textarea>
         </div>
     </div>
 
@@ -150,13 +150,13 @@
         item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
         item.innerHTML = `
             <div class="col-6">
-                <input required type="text" class="form-control" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
+                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
             </div>
             <div class="col-2">
                 <input required type="number" class="form-control" name="itens[${index}][qtd-item]" placeholder="Qtd*">
             </div>
             <div class="col-3">
-                <input required type="text" class="form-control valor-unitario" name="itens[${index}][valor-item]" placeholder="Valor unitário">
+                <input required type="text" class="form-control form-control-sm valor-unitario" name="itens[${index}][valor-item]" placeholder="Valor unitário">
             </div>
             <div class="col-1 d-flex align-items-center">
                 <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
