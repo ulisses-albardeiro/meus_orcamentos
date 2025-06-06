@@ -112,7 +112,7 @@ class Html
         if ($caminho != null) {
             $img_logo = '
                 <div class="logo-container">
-                    <img src="' . $caminho . '" alt="Logo da empresa">
+                    <img src="' . $caminho . '">
                 </div>';
 
             $this->img_logo = $img_logo;
