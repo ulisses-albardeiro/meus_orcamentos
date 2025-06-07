@@ -108,14 +108,14 @@
         <div id="itens-container" class="mb-3">
             <div class="row g-2 item">
                 <div class="col-10">
-                    <input required type="text" class="form-control" placeholder="Nome do Serviço*"
+                    <input required type="text" class="form-control form-control-sm" placeholder="Nome do Serviço*"
                         name="itens[0][nome-item]">
                 </div>
                 <div class="col-2">
-                    <input required type="number" class="form-control" placeholder="Qtd*" name="itens[0][qtd-item]">
+                    <input required type="number" class="form-control form-control-sm" placeholder="Qtd*" name="itens[0][qtd-item]">
                 </div>
                 <div class="col-12">
-                    <textarea class="form-control" placeholder="Descrição" name="itens[0][descricao-item]"></textarea>
+                    <textarea class="form-control form-control-sm" placeholder="Descrição" name="itens[0][descricao-item]"></textarea>
                 </div>
             </div>
         </div>
@@ -166,10 +166,10 @@
         item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
         item.innerHTML = `
             <div class="col-9">
-                <input required type="text" class="form-control" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
+                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
             </div>
             <div class="col-2">
-                <input required type="number" class="form-control" name="itens[${index}][qtd-item]" placeholder="Qtd*">
+                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd-item]" placeholder="Qtd*">
             </div>
             <div class="col-1 d-flex align-items-center">
                 <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
