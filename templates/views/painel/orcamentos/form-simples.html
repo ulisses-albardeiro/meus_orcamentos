@@ -14,7 +14,7 @@
 </style>
 
 <h3 class="text-center">Confira Seus Dados</h3>
-<p style="margin-top: -15px;" class="text-danger text-center">Para alterar seus dados vá para a aba <a
+<p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para adicionar logo ao seu orçamento, vá para <a
         href="{{ url('perfil') }}">Perfil</a></p>
 <form action="{{ url('gerar-orcamento-simples') }}" method="get" target="_blank">
 
@@ -25,40 +25,43 @@
                 style="max-height: 150px;">
             {% endif %}
         </div>
-        <div class="mb-3">
-            <label class="form-label">Seu nome</label>
-            <input readonly required value="{{ usuario().nome }}" type="text" class="form-control" name="nome-empresa">
-        </div>
         <div class="row g-2 mb-3">
-            <div class="col-6">
-                <label class="form-label"> Seu Facebook</label>
-                <input readonly value="{{ usuario().facebook }}" type="text" class="form-control" name="facebook">
+            <div class="col-4">
+                <label class="form-label">Seu nome</label>
+                <input required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm"
+                    name="nome-empresa">
             </div>
-            <div class="col-6">
-                <label class="form-label"> Seu Instagram</label>
-                <input readonly value="{{ usuario().instagram }}" type="text" class="form-control" name="instagram">
+            <div class="col-4">
+                <label class="form-label"> Seu Email</label>
+                <input value="{{ usuario().email }}" type="email" class="form-control form-control-sm"
+                    name="email-empresa">
             </div>
-        </div>
-        <div class="row g-2 mb-3">
-            <div class="col-6">
+            <div class="col-4">
                 <label class="form-label"> Seu Telefone</label>
-                <input readonly required value="{{ usuario().telefone }}" type="text" class="form-control"
+                <input required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm"
                     name="tel-empresa">
             </div>
-            <div class="col-6">
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-4">
                 <label class="form-label">Seu CNPJ</label>
-                <input readonly value="{{ usuario().cnpj }}" type="text" class="form-control" name="doc-empresa"
+                <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa"
                     id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
             </div>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Seu Email</label>
-            <input readonly value="{{ usuario().email }}" type="email" class="form-control" name="email-empresa">
+            <div class="col-4">
+                <label class="form-label"> Seu Facebook</label>
+                <input value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm"
+                    name="facebook">
+            </div>
+            <div class="col-4">
+                <label class="form-label"> Seu Instagram</label>
+                <input value="{{ usuario().instagram }}" type="text" class="form-control form-control-sm"
+                    name="instagram">
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Seu Endereço</label>
-            <input readonly value="{{ usuario().endereco }}" type="text" class="form-control" name="end-empresa">
+            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="end-empresa">
         </div>
     </div>
 
@@ -66,34 +69,36 @@
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
 
     <div class="card border-1 shadow-lg p-3">
-        <div class="mb-3">
-            <label class="form-label">Nome*</label>
-            <input required type="text" class="form-control" name="nome-cliente">
-        </div>
         <div class="row g-2 mb-3">
-            <div class="col-6">
-                <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control" name="tel-cliente">
+            <div class="col-md-4">
+                <label class="form-label">Nome do cliente <span class="text-danger">*</span></label>
+                <input required type="text" class="form-control form-control-sm" name="nome-cliente">
             </div>
-            <div class="col-6">
-                <label class="form-label">Celular</label>
-                <input type="text" class="form-control" name="cel-cliente">
+            <div class="col-md-4">
+                <label class="form-label">Telefone Fixo do cliente</label>
+                <input type="text" class="form-control form-control-sm" name="tel-cliente">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Celular do cliente</label>
+                <input type="text" class="form-control form-control-sm" name="cel-cliente">
             </div>
         </div>
+
         <div class="row g-2 mb-3">
-            <div class="col-6">
-                <label class="form-label">CNPJ</label>
-                <input type="text" class="form-control" name="doc-cliente" id="cnpj-input-cliente"
+            <div class="col-md-4">
+                <label class="form-label">CNPJ do cliente</label>
+                <input type="text" class="form-control form-control-sm" name="doc-cliente" id="cnpj-input-cliente"
                     placeholder="00.000.000/0000-00" maxlength="18">
             </div>
-            <div class="col-6">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email-cliente">
+            <div class="col-md-4">
+                <label class="form-label">Email do cliente</label>
+                <input type="email" class="form-control form-control-sm" name="email-cliente">
             </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Endereço</label>
-            <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control" name="end-cliente">
+            <div class="col-md-4">
+                <label class="form-label">Endereço do cliente</label>
+                <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
+                    name="end-cliente">
+            </div>
         </div>
     </div>
 
@@ -114,15 +119,17 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary mb-3" onclick="adicionarItem()">Adicionar Item</button>
+        <button type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItem()">Adicionar Item</button>
     </div>
 
     <h3 class="mt-4 text-center">Valor do Orçamento</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campo obrigatório</p>
 
     <div class="card border-1 shadow-lg p-3">
         <div class="mb-3 d-flex justify-content-center">
             <div class="col-md-2">
-                <input id="valor-orcamento" type="text" class="form-control" name="valor-orcamento" required onfocus="aplicarMascaraMonetaria(this)">
+                <input id="valor-orcamento" type="text" class="form-control form-control-sm" name="valor-orcamento" required
+                    onfocus="aplicarMascaraMonetaria(this)">
             </div>
         </div>
     </div>
@@ -133,18 +140,18 @@
         <div class="mb-3 d-flex justify-content-center">
             <div class="col-md-2">
                 <label class="form-label">Validade do orçamento</label>
-                <input type="date" class="form-control" name="validade-orcamento">
+                <input type="date" class="form-control form-control-sm" name="validade-orcamento">
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Anotações sobre o Orçamento</label>
-            <textarea class="form-control" placeholder="Anotações" name="anotacoes"></textarea>
+            <textarea class="form-control form-control-sm" placeholder="Anotações" name="anotacoes"></textarea>
         </div>
     </div>
 
     <div class="text-center my-4">
-        <button type="submit" class="btn botao text-white"><i style="color: #18cb96;" class="bi bi-plus-circle"></i>
+        <button type="submit" class="btn btn-sm botao text-white"><i style="color: #18cb96;" class="bi bi-plus-circle"></i>
             Gerar Orçamento</button>
         <!-- <button type="button" class="btn btn-danger">Gerar Orçamento em PDF</button> -->
     </div>
@@ -264,7 +271,7 @@
 
         // Aplica máscara monetária ao campo inicial
         aplicarMascaraMonetaria(document.getElementById('.valor-orcamento'));
-        
+
     });
 </script>
 
