@@ -966,6 +966,13 @@ section,
   z-index: 2;
 }
 
+.about .btn-cta-1 {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 12px 40px;
+  border-radius: 50px;
+}
+
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
