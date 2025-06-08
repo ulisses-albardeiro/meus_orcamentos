@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="container">
+    {% include '/admin/nav.html' %}
+    <!-- Orçamentos -->
+    <div class="card mb-5 shadow">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data</th>
+                            <th>Modelo</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for orcamento in orcamentos %}
+                        {% set usuario = usuarios|filter(u => u.id == orcamento.id_usuario)|first %}
+                        <tr>
+                            <td>{{ usuario.nome }}</td>
+                            <td>{{ orcamento.dt_hr_criacao|date('d/m/Y H:i') }}</td>
+                            <td>{{ orcamento.modelo }}</td>
+                            <td>{{ orcamento.cliente }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //DataTable
+        $(document).ready(function () {
+            $('#table').DataTable({
+                language: {
+                    url: "../templates/assets/DataTables/pt_br.json"
+                },
+                pageLength: 10, // Define o número de linhas por página
+                lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
+                ordering: false, // Habilita ordenação
+                responsive: true // Torna a tabela responsiva
+            });
+        });
+    </script>
+
+    {% endblock %}

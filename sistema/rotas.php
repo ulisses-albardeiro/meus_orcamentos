@@ -1,6 +1,7 @@
 <?php
 
 use Pecee\SimpleRouter\SimpleRouter;
+use sistema\Nucleo\Middleware;
 use sistema\Nucleo\Helpers;
 
 try {
@@ -120,9 +121,13 @@ try {
     });
 
     //Grupo de Rotas Dashboard
-    SimpleRouter::group(['namespace' => 'Painel\Admin'], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Admin', 'middleware' => Middleware::class], function () {
 
-        SimpleRouter::get(URL . 'admin/listar', 'Admin@listar');
+        SimpleRouter::get(URL . 'admin/usuarios', 'Admin@usuarios');
+        SimpleRouter::get(URL . 'admin/orcamentos', 'Admin@orcamentos');
+        SimpleRouter::get(URL . 'admin/listas', 'Admin@listas');
+        SimpleRouter::get(URL . 'admin/recibos', 'Admin@recibos');
+
     });
 
     SimpleRouter::start();

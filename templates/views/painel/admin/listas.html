@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="container">
+    {% include '/admin/nav.html' %}
+    <!-- Listas -->
+    <div class="card mb-5 shadow">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lista in listas %}
+                        {% set usuario = usuarios|filter(u => u.id == lista.id_usuario)|first %}
+                        <tr>
+                            <td>{{ usuario.nome }}</td>
+                            <td>{{ lista.dt_hr_criacao|date('d/m/Y H:i') }}</td>
+                            <td>{{ lista.cliente }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //DataTable
+        $(document).ready(function () {
+            $('#table').DataTable({
+                language: {
+                    url: "../templates/assets/DataTables/pt_br.json"
+                },
+                pageLength: 10, // Define o número de linhas por página
+                lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
+                ordering: false, // Habilita ordenação
+                responsive: true // Torna a tabela responsiva
+            });
+        });
+    </script>
+
+    {% endblock %}
