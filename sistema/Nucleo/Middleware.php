@@ -13,7 +13,7 @@ class Middleware implements IMiddleware
     public function handle(Request $request): void
     {
         $usuario = UsuarioControlador::usuario();
-        if ($usuario->nivel != 0) {
+        if ($usuario->nivel != 1) {
             $mensagem = (new Mensagem());
             $mensagem->mensagemErro('Acesso negado.')->flash();
             Helpers::redirecionar("login");
