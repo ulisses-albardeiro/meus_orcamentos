@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<style>
+      .botao {
+        background-color: #373643;
+    }
+
+    .botao:hover {
+        background-color: #373643e7 !important;
+
+    }
+</style>
+
+<h3 class="text-center">Gerar Orçamento Modelo Slim</h3>
+<p class="text-danger text-center" style="margin-top: -15px;">
+    Para salvar seus dados de forma persistente, acesse <a href="{{ url('perfil') }}">Perfil</a>.
+</p>
+
+<form class="mb-5" action="{{ url('gerar-orcamento-slim') }}" method="get" target="_blank">
+    <div class="card border-1 shadow-lg p-3">
+        <div class="text-center mb-3">
+            {% if usuario().img_logo %}
+            <img src="{{ url('templates/assets/img/logos/'~usuario().img_logo) }}" class="img-fluid"
+                style="max-height: 150px;">
+            {% endif %}
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-4">
+                <label class="form-label">Seu nome</label>
+                <input required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm"
+                    name="nome-empresa">
+            </div>
+
+            <div class="col-4">
+                <label class="form-label"> Seu Email</label>
+                <input value="{{ usuario().email }}" type="email" class="form-control form-control-sm"
+                    name="email-empresa">
+            </div>
+
+            <div class="col-4">
+                <label class="form-label"> Seu Telefone</label>
+                <input required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm"
+                    name="tel-empresa">
+            </div>
+        </div>
+
+        <div class="row g-2 mb-3">
+            <div class="col-4">
+                <label class="form-label">Seu CNPJ</label>
+                <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa"
+                    id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+            <div class="col-4">
+                <label class="form-label"> Seu Facebook</label>
+                <input value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm"
+                    name="facebook">
+            </div>
+            <div class="col-4">
+                <label class="form-label"> Seu Instagram</label>
+                <input value="{{ usuario().instagram }}" type="text" class="form-control form-control-sm"
+                    name="instagram">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Seu Endereço</label>
+            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="end-empresa">
+        </div>
+    </div>
+
+    <!-- Dados do cliente -->
+    <h3 class="mt-4 text-center">Dados do cliente</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+    <div class="card shadow-lg p-3 mb-4">
+        <div class="row g-2 mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Nome do Cliente*</label>
+                <input type="text" name="cliente_nome" class="form-control form-control-sm" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">CNPJ / CPF</label>
+                <input type="text" name="cliente_documento" class="form-control form-control-sm" id="cliente-doc">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label class="form-label">Telefone</label>
+                <input type="text" name="cliente_telefone" class="form-control form-control-sm">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="cliente_email" class="form-control form-control-sm">
+            </div>
+        </div>
+    </div>
+
+    <!-- Produtos/Serviços -->
+    <h3 class="mt-4 text-center">Itens do Orçamento</h3>
+    <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
+    <div class="card shadow-lg p-3 mb-4">
+        <div id="itens-container">
+            <div class="row g-2 item mb-3">
+                <div class="col-md-8">
+                    <input required name="itens[0][nome]" class="form-control form-control-sm"
+                        placeholder="Nome do item*">
+                </div>
+                <div class="col-md-2">
+                    <input required name="itens[0][qtd]" type="number" class="form-control form-control-sm"
+                        placeholder="Qtd*">
+                </div>
+                <div class="col-md-2">
+                    <input required name="itens[0][valor]" class="form-control form-control-sm valor-unitario"
+                        placeholder="Valor Unit.*">
+                </div>
+                
+                <div class="col-12">
+                    <textarea name="itens[0][descricao]" class="form-control form-control-sm"
+                        placeholder="Descrição"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="adicionarItem()">+ Adicionar Item</button>
+    </div>
+
+    <!-- Detalhes Finais -->
+    <h3 class="mt-4 text-center">Detalhes finais</h3>
+
+    <div class="card border-1 shadow-lg p-3">
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="col-md-2">
+                <label class="form-label">Validade do orçamento</label>
+                <input type="date" class="form-control form-control-sm" name="validade-orcamento">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Anotações sobre o Orçamento</label>
+            <textarea class="form-control form-control-sm" placeholder="Anotações" name="anotacoes"></textarea>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-sm botao text-white"><i style="color: #18cb96;"
+                class="bi bi-plus-circle"></i> Gerar Orçamento</button>
+    </div>
+
+</form>
+
+<script>
+    function adicionarItem() {
+        const container = document.getElementById('itens-container');
+        const index = container.querySelectorAll('.item').length;
+        const item = document.createElement('div');
+        item.className = 'row g-2 item mb-3';
+        item.innerHTML = `
+            <div class="col-md-6">
+                <input required name="itens[${index}][nome]" class="form-control form-control-sm" placeholder="Nome do item*">
+            </div>
+            <div class="col-md-2">
+                <input required name="itens[${index}][qtd]" type="number" class="form-control form-control-sm" placeholder="Qtd*">
+            </div>
+            <div class="col-md-3">
+                <input required name="itens[${index}][valor]" class="form-control form-control-sm valor-unitario" placeholder="Valor Unit.*">
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+            </div>
+            <div class="col-12">
+                <textarea name="itens[${index}][descricao]" class="form-control form-control-sm" placeholder="Descrição"></textarea>
+            </div>
+        `;
+        container.appendChild(item);
+        aplicarMascaraMonetaria(item.querySelector('.valor-unitario'));
+    }
+
+    function removerItem(btn) {
+        btn.closest('.item').remove();
+    }
+
+    function aplicarMascaraMonetaria(campo) {
+        if (!campo) return;
+        campo.addEventListener('input', function () {
+            let valor = this.value.replace(/[^\d]/g, '');
+            if (valor === '') return this.value = '';
+            valor = (parseInt(valor, 10) / 100).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).replace('.', '~').replace(',', '.').replace('~', ',');
+            this.value = valor;
+        });
+        campo.addEventListener('blur', function () {
+            let valor = this.value.replace(/[^\d]/g, '');
+            if (!valor) return this.value = '';
+            this.value = (parseInt(valor, 10) / 100).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.valor-unitario').forEach(campo => aplicarMascaraMonetaria(campo));
+    });
+</script>
+
+{% endblock %}

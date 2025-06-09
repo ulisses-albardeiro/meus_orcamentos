@@ -30,6 +30,11 @@ class Orcamento extends PainelControlador
         echo $this->template->rendenizar("orcamentos/form-simples.html", []);
     }
 
+    public function formSlim(): void
+    {
+        echo $this->template->rendenizar("orcamentos/form-slim.html", []);
+    }
+
     public function modelos(): void
     {
         echo $this->template->rendenizar("orcamentos/modelos.html", []);

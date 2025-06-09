@@ -9,7 +9,7 @@
             <h3 class="mt-2">Modelo-1 Detalhado</h3>
             <p class="text-muted">Orçamento com preço unitário detalhado e soma total automática.</p>
             <a href="{{ url('novo-orcamento-detalhado') }}" class="text-decoration-none">
-                <img src="{{ url("templates/assets/img/gerais/orc-detalhado.png") }}" alt="Modelo Detalhado" class="img-fluid rounded border">     
+                <img src="{{ url('templates/assets/img/gerais/orc-detalhado.png') }}" alt="Modelo Detalhado" class="img-fluid rounded border">     
             </a>
             
         </div>
@@ -17,10 +17,23 @@
             <h3 class="mt-2">Modelo-2 Simples</h3>
             <p class="text-muted">Orçamento sem preço unitário, apenas com preço total.</p>
             <a href="{{ url('novo-orcamento-simples') }}" class="text-decoration-none">
-                <img src="{{ url("templates/assets/img/gerais/orc-simples.png") }}" alt="Modelo Simples" class="img-fluid rounded border">    
+                <img src="{{ url('templates/assets/img/gerais/orc-simples.png') }}" alt="Modelo Simples" class="img-fluid rounded border">    
             </a>
             
         </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <h1 class="text-center text-primary mb-5">Escolha um modelo para seu orçamento</h1>
+        <div class="col-md-6 text-center mb-5">
+            <h3 class="mt-2">Modelo Slim Detalhado</h3>
+            <p class="text-muted">Orçamento com preço unitário detalhado e soma total automática.</p>
+            <a href="{{ url('novo-orcamento-slim') }}" class="text-decoration-none">
+                <img src="{{ url('templates/assets/img/gerais/orc-detalhado.png') }}" alt="Modelo Detalhado" class="img-fluid rounded border">     
+            </a>
+            
+        </div>        
     </div>
 </div>
 

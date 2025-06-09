@@ -95,6 +95,8 @@ try {
         SimpleRouter::get(URL. 'modelos-de-orcamentos', 'Orcamento@modelos');
         SimpleRouter::get(URL. 'novo-orcamento-detalhado', 'Orcamento@formDetalhado');
         SimpleRouter::get(URL. 'novo-orcamento-simples', 'Orcamento@formSimples');
+        SimpleRouter::get(URL. 'novo-orcamento-slim', 'Orcamento@formSlim');
+
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento_1@gerar');
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento-simples', 'GerarOrcamento_2@gerar');
 

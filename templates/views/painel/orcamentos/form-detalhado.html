@@ -14,7 +14,8 @@
 </style>
 
 <h3 class="text-center">Confira Seus Dados</h3>
-<p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para adicionar logo ao seu orçamento, vá para
+<p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para
+    adicionar logo ao seu orçamento, vá para
     <a href="{{ url('perfil') }}">Perfil</a>
 </p>
 <form action="{{ url('gerar-orcamento') }}" method="get" target="_blank">
@@ -52,7 +53,7 @@
                 <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa"
                     id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
             </div>
-             <div class="col-4">
+            <div class="col-4">
                 <label class="form-label"> Seu Facebook</label>
                 <input value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm"
                     name="facebook">
@@ -74,38 +75,38 @@
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
 
     <div class="card border-1 shadow-lg p-3">
-    <div class="row g-2 mb-3">
-        <div class="col-md-4">
-            <label class="form-label">Nome*</label>
-            <input required type="text" class="form-control form-control-sm" name="nome-cliente">
+        <div class="row g-2 mb-3">
+            <div class="col-md-4">
+                <label class="form-label">Nome*</label>
+                <input required type="text" class="form-control form-control-sm" name="nome-cliente">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Telefone Fixo</label>
+                <input type="text" class="form-control form-control-sm" name="tel-cliente">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Celular</label>
+                <input type="text" class="form-control form-control-sm" name="cel-cliente">
+            </div>
         </div>
-        <div class="col-md-4">
-            <label class="form-label">Telefone Fixo</label>
-            <input type="text" class="form-control form-control-sm" name="tel-cliente">
-        </div>
-        <div class="col-md-4">
-            <label class="form-label">Celular</label>
-            <input type="text" class="form-control form-control-sm" name="cel-cliente">
+
+        <div class="row g-2 mb-3">
+            <div class="col-md-4">
+                <label class="form-label">CNPJ</label>
+                <input type="text" class="form-control form-control-sm" name="doc-cliente" id="cnpj-input-cliente"
+                    placeholder="00.000.000/0000-00" maxlength="18">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control form-control-sm" name="email-cliente">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Endereço</label>
+                <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
+                    name="end-cliente">
+            </div>
         </div>
     </div>
-    
-    <div class="row g-2 mb-3">
-        <div class="col-md-4">
-            <label class="form-label">CNPJ</label>
-            <input type="text" class="form-control form-control-sm" name="doc-cliente" id="cnpj-input-cliente"
-                placeholder="00.000.000/0000-00" maxlength="18">
-        </div>
-        <div class="col-md-4">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control form-control-sm" name="email-cliente">
-        </div>
-        <div class="col-md-4">
-            <label class="form-label">Endereço</label>
-            <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
-                name="end-cliente">
-        </div>
-    </div>
-</div>
 
     <h3 class="mt-4 text-center">Itens do Orçamento</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
