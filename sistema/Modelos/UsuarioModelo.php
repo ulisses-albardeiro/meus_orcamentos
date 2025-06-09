@@ -33,7 +33,7 @@ class UsuarioModelo extends Modelo
             $this->mensagem->mensagemErro("Dados incorretos!")->flash();
             Helpers::redirecionar('login');
         } elseif ($usuario->status == '0') {
-            $this->mensagem->mensagemErro("Este usuário foi desativado! Se necessário, contacte um administrador.")->flash();
+            $this->mensagem->mensagemErro("Este usuário foi desativado! Se necessário, contacte o suporte.")->flash();
             Helpers::redirecionar('login');
         } else {
             (new Sessao)->criarSessao('usuarioId', $usuario->id);
@@ -41,8 +41,6 @@ class UsuarioModelo extends Modelo
             $usuario->id = $usuario->id;
             $usuario->ultimo_login = date('Y-m-d H:i:s');
             $usuario->salvar();
-
-            $this->mensagem->mensagemSucesso("Bem vindo, {$usuario->nome}")->flash();
 
             return true;
         }
