@@ -99,6 +99,7 @@ try {
 
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento_1@gerar');
         SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento-simples', 'GerarOrcamento_2@gerar');
+        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento-slim', 'OrcamentoSlim@gerarPDF');
 
         //Excluir Orçamento
         SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'Orcamento@excluir');
