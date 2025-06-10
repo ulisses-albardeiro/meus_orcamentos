@@ -1,0 +1,29 @@
+<?php
+
+namespace sistema\Controlador\Painel\Orcamento;
+
+use sistema\Controlador\Painel\Lista\Suporte\Suporte;
+use sistema\Suporte\Template;
+
+class OrcamentoControlador extends Suporte
+{
+    public function slim(): void
+    {
+        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+
+        $dados_usuario = $this->separarDadosUsuario($dados);
+        $dados_cliente = $this->separarDadosCliente($dados);
+        $total_orcamento = $this->calcularTotalOrcamento($dados['itens']);
+
+        $template = (new Template('templates/pdf-templates/'));
+        echo $template->rendenizar(
+            'slim.html',
+            [
+                'dados_usuario' => $dados_usuario,
+                'dados_cliente' => $dados_cliente,
+                'itens' => $dados['itens'],
+                'total_orcamento' => $total_orcamento
+            ]
+        );
+    }
+}
