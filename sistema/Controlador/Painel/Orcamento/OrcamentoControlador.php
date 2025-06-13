@@ -2,7 +2,7 @@
 
 namespace sistema\Controlador\Painel\Orcamento;
 
-use sistema\Controlador\Painel\Lista\Suporte\Suporte;
+use sistema\Controlador\Painel\Orcamento\Suporte\Suporte;
 use sistema\Suporte\Template;
 
 class OrcamentoControlador extends Suporte

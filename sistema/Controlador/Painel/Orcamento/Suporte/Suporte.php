@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\Painel\Lista\Suporte;
+namespace sistema\Controlador\Painel\Orcamento\Suporte;
 
 class Suporte
 {

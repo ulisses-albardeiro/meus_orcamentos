@@ -103,7 +103,7 @@
         <div id="itens-container">
             <div class="row g-2 item mb-3">
                 <div class="col-md-8">
-                    <input required name="itens[0][nome]" class="form-control form-control-sm"
+                    <input maxlength="100" required name="itens[0][nome]" class="form-control form-control-sm"
                         placeholder="Nome do item*">
                 </div>
                 <div class="col-md-2">
@@ -156,7 +156,7 @@
         item.className = 'row g-2 item mb-3';
         item.innerHTML = `
             <div class="col-md-6">
-                <input required name="itens[${index}][nome]" class="form-control form-control-sm" placeholder="Nome do item*">
+                <input maxlength="100" required name="itens[${index}][nome]" class="form-control form-control-sm" placeholder="Nome do item*">
             </div>
             <div class="col-md-2">
                 <input required name="itens[${index}][qtd]" type="number" class="form-control form-control-sm" placeholder="Qtd*">

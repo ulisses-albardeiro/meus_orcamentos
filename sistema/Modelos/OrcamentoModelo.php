@@ -29,8 +29,7 @@ class OrcamentoModelo extends Modelo
             return true;
         }
 
-        return false;
-        
+        return false;      
     }
 
     public function excluirOrcamento(int $id_orcamento) : bool
@@ -38,7 +37,6 @@ class OrcamentoModelo extends Modelo
         if ($this->apagar("id = '{$id_orcamento}'")) {
             return true;
         }
-        return false;
-            
+        return false;         
     }
 }
