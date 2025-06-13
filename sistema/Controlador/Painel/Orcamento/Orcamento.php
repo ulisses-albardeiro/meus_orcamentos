@@ -32,7 +32,10 @@ class Orcamento extends PainelControlador
 
     public function formSlim(): void
     {
-        echo $this->template->rendenizar("orcamentos/form-slim.html", []);
+        echo $this->template->rendenizar("orcamentos/form-slim.html", 
+        [
+            'id_orcamento' => uniqid(),
+        ]);
     }
 
     public function modelos(): void

@@ -7,9 +7,11 @@ use sistema\Suporte\Template;
 
 class OrcamentoControlador extends Suporte
 {
-    public function slim(): void
+    public function slim( string $id_orcamento): void
     {
-        $dados = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+
+
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         $dados_usuario = $this->separarDadosUsuario($dados);
         $dados_cliente = $this->separarDadosCliente($dados);
@@ -22,7 +24,7 @@ class OrcamentoControlador extends Suporte
                 'dados_usuario' => $dados_usuario,
                 'dados_cliente' => $dados_cliente,
                 'itens' => $dados['itens'],
-                'total_orcamento' => $total_orcamento
+                'total_orcamento' => $total_orcamento,
             ]
         );
     }
