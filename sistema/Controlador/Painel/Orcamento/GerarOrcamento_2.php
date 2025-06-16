@@ -92,7 +92,7 @@ class GerarOrcamento_2 extends PainelControlador
 
         $end_empresa = '';
         if (!empty($dados['end-empresa'])) {
-            $doc_empresa = <<<HTML
+            $end_empresa = <<<HTML
             <p class="info-contato">
                 <span class="icone"></span>{$dados['end-empresa']}
             </p>
