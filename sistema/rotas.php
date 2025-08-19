@@ -91,26 +91,26 @@ try {
         SimpleRouter::get(URL. 'form-cadastro', 'CadastroUsuario@form');
         SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
 
-        //Criar orçamento
-        SimpleRouter::get(URL. 'modelos-de-orcamentos', 'Orcamento@modelos');
-        SimpleRouter::get(URL. 'novo-orcamento-detalhado', 'Orcamento@formDetalhado');
-        SimpleRouter::get(URL. 'novo-orcamento-simples', 'Orcamento@formSimples');
-        SimpleRouter::get(URL. 'novo-orcamento-slim', 'Orcamento@formSlim');
+        //Modelos
+        SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
 
-        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento', 'GerarOrcamento_1@gerar');
-        SimpleRouter::match(['get', 'post'], URL . 'gerar-orcamento-simples', 'GerarOrcamento_2@gerar');
-        SimpleRouter::match(['get', 'post'], URL . 'slim/{id_orcamento}', 'OrcamentoControlador@slim');
+        //Criar Orçamento
+        SimpleRouter::get(URL. 'orcamento/criar/{modelo}', 'OrcamentoControlador@criar');
+
+         //PDF Orçamento
+        SimpleRouter::get(URL. 'orcamento/pdf/{modelo}/{id_orcamento}', 'OrcamentoControlador@pdf');
+
+        //Cadastrar Orcamento
+        SimpleRouter::post(URL. 'orcamento/cadastrar/{modelo}', 'OrcamentoControlador@cadastrar');
+
+        //Apresenta o Orçamento
+        SimpleRouter::match(['get', 'post'], URL . 'orcamento/{modelo}/{id_orcamento}', 'OrcamentoControlador@exibir');
 
         //Excluir Orçamento
-        SimpleRouter::match(['get', 'post'], URL . 'excluir-orcamento/{id_orcamento}', 'Orcamento@excluir');
+        SimpleRouter::match(['get', 'post'], URL . 'orcamento/excluir/{id_orcamento}', 'Orcamento@excluir');
 
         //Listar Meus orcamentos
-        SimpleRouter::get(URL. 'meus-orcamentos', 'Orcamento@listar');
-
-        //Ver orcamento
-        SimpleRouter::get(URL. 'ver-orcamento/{id_orcamento}', 'GerarOrcamento_1@gerar');
-        SimpleRouter::get(URL. 'ver-orcamento-simples/{id_orcamento}', 'GerarOrcamento_2@gerar');
-
+        SimpleRouter::get(URL. 'orcamento/listar', 'OrcamentoControlador@listar');
     });
 
     //Grupo de Rotas Recibo
@@ -134,6 +134,7 @@ try {
     });
 
     SimpleRouter::start();
+    
 } catch (Exception $e) {
 
     if (Helpers::localhost()) {

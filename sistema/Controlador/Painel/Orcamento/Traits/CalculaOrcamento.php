@@ -1,8 +1,8 @@
 <?php
 
-namespace sistema\Controlador\Painel\Orcamento\Suporte;
+namespace sistema\Controlador\Painel\Orcamento\Traits;
 
-class Suporte
+trait CalculaOrcamento
 {
     protected function calcularTotalOrcamento(array $itens): float
     {

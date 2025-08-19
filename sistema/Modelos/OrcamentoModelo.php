@@ -11,13 +11,19 @@ class OrcamentoModelo extends Modelo
         parent::__construct("orcamentos");
     }
 
-    public function getOrcamentos(int $id_usuario) : array
+    public function buscaOrcamentos(int $id_usuario) : array
     {
         $orcamentos = $this->busca("id_usuario = {$id_usuario}")->resultado(true) ?? [];
         return $orcamentos;    
     }
 
-    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo) : bool
+    public function buscaOrcamentosPorId($id_orcamento)
+    {
+        $orcamentos = $this->busca("id = {$id_orcamento}")->resultado(true) ?? [];
+        return $orcamentos;    
+    }
+
+    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo) : ?int
     {
         $this->cliente = $cliente;
         $this->vl_total = $vl_total;
@@ -26,10 +32,10 @@ class OrcamentoModelo extends Modelo
         $this->id_usuario = $id_usuario;
         $this->modelo = $modelo;
         if ($this->salvar()) {
-            return true;
+            return $this->getUltimoId();
         }
 
-        return false;      
+        return null;      
     }
 
     public function excluirOrcamento(int $id_orcamento) : bool

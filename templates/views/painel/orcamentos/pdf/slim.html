@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Orçamento {{ dados_cliente.cliente_nome }}</title>
@@ -12,13 +13,14 @@
       display: inline-block;
     }
 
-    .img_logo img{
+    .img_logo img {
       max-width: 150px;
     }
   </style>
 </head>
-<body class="bg-dark py-5">
-  <div class="container bg-white p-5 shadow-sm">
+
+<body>
+  <div class="bg-white p-2 shadow-sm">
     <div class="d-flex justify-content-between align-items-start">
       <div class="titulo-orcamento bg-dark">ORÇAMENTO</div>
       <div class="text-end small text-muted">
@@ -66,27 +68,20 @@
       <p class="fw-bold mb-1">{{ dados_usuario['nome-empresa'] }}</p>
       <p class="mb-3">{{ dados_usuario['end-empresa'] }}</p>
       <p class="mb-0">
-        {{ dados_usuario['tel-empresa'] }} | 
-        {{ dados_usuario['email-empresa'] }} | 
+        {{ dados_usuario['tel-empresa'] }} |
+        {{ dados_usuario['email-empresa'] }} |
         {{ dados_usuario['doc-empresa'] }}
       </p>
       <p class="mt-2">
         {% if dados_usuario.facebook %}
-          Facebook: {{ dados_usuario.facebook }}
+        Facebook: {{ dados_usuario.facebook }}
         {% endif %}
         {% if dados_usuario.instagram %}
-          | Instagram: {{ dados_usuario.instagram }}
+        | Instagram: {{ dados_usuario.instagram }}
         {% endif %}
       </p>
     </div>
   </div>
-
-  <div class="text-center mt-3">
-  <div class="d-inline-flex flex-wrap gap-2">
-    <a href="{{ url('slim/' ~ id_orcamento ~ '/' ~ usuario().id) }}" class="btn btn-primary">Compartilhar Link do Orçamento</a>
-    <a href="{{ url('pdf-slim/' ~ id_orcamento ~ '/' ~ usuario().id) }}"" class="btn btn-success">Gerar PDF do Orçamento</a>
-  </div>
-</div>
-
 </body>
+
 </html>
