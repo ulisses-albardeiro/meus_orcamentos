@@ -18,7 +18,7 @@
     adicionar logo ao seu orçamento, vá para
     <a href="{{ url('perfil') }}">Perfil</a>
 </p>
-<form action="{{ url('gerar-orcamento') }}" method="get" target="_blank">
+<form action="{{ url('orcamento/cadastrar/padrao')}}" method="post" target="_blank">
 
     <div class="card border-1 shadow-lg p-3">
         <div class="text-center mb-3">
@@ -78,32 +78,32 @@
         <div class="row g-2 mb-3">
             <div class="col-md-4">
                 <label class="form-label">Nome*</label>
-                <input required type="text" class="form-control form-control-sm" name="nome-cliente">
+                <input required type="text" class="form-control form-control-sm" name="cliente_nome">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control form-control-sm" name="tel-cliente">
+                <input type="text" class="form-control form-control-sm" name="cliente_telefone">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Celular</label>
-                <input type="text" class="form-control form-control-sm" name="cel-cliente">
+                <input type="text" class="form-control form-control-sm" name="cliente_celular">
             </div>
         </div>
 
         <div class="row g-2 mb-3">
             <div class="col-md-4">
                 <label class="form-label">CNPJ</label>
-                <input type="text" class="form-control form-control-sm" name="doc-cliente" id="cnpj-input-cliente"
+                <input type="text" class="form-control form-control-sm" name="cliente_documento" id="cnpj-input-cliente"
                     placeholder="00.000.000/0000-00" maxlength="18">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control form-control-sm" name="email-cliente">
+                <input type="email" class="form-control form-control-sm" name="cliente_email">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Endereço</label>
                 <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
-                    name="end-cliente">
+                    name="cliente_endereco">
             </div>
         </div>
     </div>
@@ -115,20 +115,20 @@
             <div class="row g-2 item">
                 <div class="col-7">
                     <input required type="text" class="form-control form-control-sm" placeholder="Nome do Serviço*"
-                        name="itens[0][nome-item]">
+                        name="itens[0][nome]">
                 </div>
                 <div class="col-2">
                     <input required type="number" class="form-control form-control-sm" placeholder="Qtd*"
-                        name="itens[0][qtd-item]">
+                        name="itens[0][qtd]">
                 </div>
                 <div class="col-3">
                     <input required type="text" class="form-control form-control-sm valor-unitario"
-                        placeholder="Valor unitário*" name="itens[0][valor-item]" id="valor-unitario">
+                        placeholder="Valor unitário*" name="itens[0][valor]" id="valor-unitario">
                 </div>
 
                 <div class="col-12">
                     <textarea class="form-control form-control-sm" placeholder="Descrição"
-                        name="itens[0][descricao-item]"></textarea>
+                        name="itens[0][descricao]"></textarea>
                 </div>
             </div>
         </div>
@@ -154,8 +154,7 @@
     <div class="text-center my-4">
         <button type="submit" class="btn btn-sm botao text-white"><i style="color: #18cb96;"
                 class="bi bi-plus-circle"></i> Gerar Orçamento</button>
-        <!-- <button type="button" class="btn btn-danger">Gerar Orçamento em PDF</button> -->
-    </div>
+        </div>
 </form>
 
 <script>
@@ -167,19 +166,19 @@
         item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
         item.innerHTML = `
             <div class="col-6">
-                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
+                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome]" placeholder="Nome do Serviço">
             </div>
             <div class="col-2">
-                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd-item]" placeholder="Qtd*">
+                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd]" placeholder="Qtd*">
             </div>
             <div class="col-3">
-                <input required type="text" class="form-control form-control-sm valor-unitario" name="itens[${index}][valor-item]" placeholder="Valor unitário">
+                <input required type="text" class="form-control form-control-sm valor-unitario" name="itens[${index}][valor]" placeholder="Valor unitário">
             </div>
             <div class="col-1 d-flex align-items-center">
                 <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
             </div>
             <div class="col-12">
-                <textarea class="form-control" name="itens[${index}][descricao-item]" placeholder="Descrição"></textarea>
+                <textarea class="form-control" name="itens[${index}][descricao]" placeholder="Descrição"></textarea>
             </div>
         `;
         container.appendChild(item);

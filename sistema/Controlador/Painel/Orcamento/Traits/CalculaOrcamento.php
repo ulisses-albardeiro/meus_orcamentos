@@ -59,4 +59,45 @@ trait CalculaOrcamento
 
         return $dadosCliente;
     }
+
+    protected function processarItensParaView(array $itens): array
+    {
+        $itensProcessados = [];
+
+        foreach ($itens as $item) {
+            // Converte o valor para um formato numérico inteiro (centavos)
+            $valorLimpo = (int) round($this->converterValorParaFloat($item['valor']) * 100);
+
+            // Mantém os dados originais mas adiciona o valor processado
+            $itemProcessado = $item;
+            $itemProcessado['valor_limpo'] = $valorLimpo;
+            $itemProcessado['valor_float'] = $valorLimpo / 100;
+
+            $itensProcessados[] = $itemProcessado;
+        }
+
+        return $itensProcessados;
+    }
+
+    protected function converterValorParaFloat(string $valorFormatado): float
+    {
+        // Remove "R$", espaços e caracteres não numéricos exceto vírgula e ponto
+        $valorLimpo = preg_replace('/[^\d,\.]/', '', $valorFormatado);
+
+        // Se tiver ponto como separador de milhar e vírgula como decimal
+        if (preg_match('/^\d{1,3}(?:\.\d{3})*,\d{2}$/', $valorLimpo)) {
+            $valorLimpo = str_replace('.', '', $valorLimpo);
+            $valorLimpo = str_replace(',', '.', $valorLimpo);
+        }
+        // Se tiver vírgula como separador de milhar e ponto como decimal
+        elseif (preg_match('/^\d{1,3}(?:,\d{3})*\.\d{2}$/', $valorLimpo)) {
+            $valorLimpo = str_replace(',', '', $valorLimpo);
+        }
+        // Se tiver apenas vírgula como decimal
+        elseif (preg_match('/^\d+,\d{2}$/', $valorLimpo)) {
+            $valorLimpo = str_replace(',', '.', $valorLimpo);
+        }
+
+        return (float) $valorLimpo;
+    }
 }

@@ -54,15 +54,36 @@ class OrcamentoControlador extends PainelControlador
         $dados_usuario = $this->separarDadosUsuario($dados_completos);
         $dados_cliente = $this->separarDadosCliente($dados_completos);
 
-        echo $this->template->rendenizar(
-            "orcamentos/templates/$modelo.html",
+        // Processa os itens para ter valores numéricos limpos
+        $itens_processados = $this->processarItensParaView($dados_completos['itens']);
+
+        $html = $this->template->rendenizar(
+            "orcamentos/pdf/$modelo.html",
             [
                 'dados_usuario' => $dados_usuario,
                 'dados_cliente' => $dados_cliente,
-                'itens' => $dados_completos['itens'],
+                'itens' => $itens_processados,
                 'total_orcamento' => $dados_completos['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
-                'id_orcamento' => $id_orcamento,
+                'dados_completos' => $dados_completos,
+            ]
+        );
+
+        $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
+
+        $pdf = new Pdf;
+        $pdf->carregarHTML($html);
+        $pdf->configurarPapel('A4');
+        $pdf->renderizar();
+        $pdf->salvarPDF($caminho_local, 'orcamento_' . $dados_cliente['cliente_nome'] . '.pdf');
+
+        $orcamento_url = Helpers::url('templates/assets/arquivos/orcamentos/' . 'orcamento_' . $dados_cliente['cliente_nome'] . '.pdf');
+
+        echo $this->template->rendenizar(
+            "orcamentos/pre-view.html",
+            [
+                "orcamento" => $orcamento_url,
+                "id_orcamento" => $id_orcamento,
             ]
         );
     }
@@ -80,23 +101,29 @@ class OrcamentoControlador extends PainelControlador
         }
     }
 
-    public function pdf(string $modelo, int $id_orcamento) : void
+    public function pdf(string $modelo, int $id_orcamento): void
     {
         $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorId($id_orcamento)[0];
         $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
         $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
 
+
         $dados_usuario = $this->separarDadosUsuario($dados_completos);
         $dados_cliente = $this->separarDadosCliente($dados_completos);
+
+
+        // Processa os itens para ter valores numéricos limpos
+        $itens_processados = $this->processarItensParaView($dados_completos['itens']);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
             [
                 'dados_usuario' => $dados_usuario,
                 'dados_cliente' => $dados_cliente,
-                'itens' => $dados_completos['itens'],
+                'itens' => $itens_processados,
                 'total_orcamento' => $dados_completos['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
+                'dados_completos' => $dados_completos,
             ]
         );
 
@@ -104,6 +131,8 @@ class OrcamentoControlador extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->exibir("Orçamento-" . Helpers::slug($dados_cliente['cliente_nome']) . ".pdf");
+        $pdf->baixar("Orçamento-" . Helpers::slug($dados_cliente['cliente_nome']) . ".pdf");
     }
+
+    public function excluir(): void {}
 }

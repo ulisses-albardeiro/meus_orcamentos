@@ -107,10 +107,18 @@ final class Pdf
      * @param string $caminho Caminho onde o arquivo será salvo.
      * @return bool Retorna true em caso de sucesso ou false em caso de falha.
      */
-    public function salvarPDF(string $caminho): bool
-    {
-        return file_put_contents($caminho, $this->obterSaida()) !== false;
+    public function salvarPDF(string $caminho_diretorio, string $nome_arquivo): bool
+{
+    // Concatena o caminho do diretório com o nome do arquivo
+    $caminho_completo = rtrim($caminho_diretorio, '/') . '/' . $nome_arquivo;
+
+    // Garante que o diretório exista antes de tentar salvar o arquivo
+    if (!is_dir($caminho_diretorio)) {
+        mkdir($caminho_diretorio, 0755, true);
     }
+
+    return file_put_contents($caminho_completo, $this->obterSaida()) !== false;
+}
 
     /**
      * Faz o download do PDF.
