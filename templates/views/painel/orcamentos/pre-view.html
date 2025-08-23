@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt_br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orçamento</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf_viewer.min.css">
-    
+
     <link rel="icon" type="image/png" href="{{ url('templates/assets/img/gerais/icone.png') }}" />
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <style>
-    body {
-        background-color: #212529;
-    }
-    
-    #pdf-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 900px;
-        margin: 0 auto;
-    }
+        body {
+            background-color: #212529;
+        }
 
-    #pdf-container canvas {
-        width: 100%;  
-        height: auto; 
-    }
-</style>
+        #pdf-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #pdf-container canvas {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
     <main class="d-flex flex-column align-items-center justify-content-center p-3">
-    <div id="pdf-container" class="mt-4 mb-3"></div>
+        <div id="pdf-container" class="mt-4 mb-3"></div>
 
-    <div class="text-center pb-4">
-        <div class="d-inline-flex flex-column flex-md-row gap-2">
-            <a href="#" class="btn btn-primary copiar-link">Compartilhar Link do Orçamento</a>
-            <a href="{{ url('orcamento/pdf/padrao/' ~ id_orcamento) }}" class="btn btn-success">baixar PDF do Orçamento</a>
+        <div class="text-center pb-4">
+            <div class="d-inline-flex flex-column flex-md-row gap-2">
+                <a href="#" class="btn btn-primary copiar-link">Compartilhar Link do Orçamento</a>
+                <a href="{{ url('orcamento/pdf/padrao/' ~ id_orcamento) }}" class="btn btn-secondary">baixar PDF do
+                    Orçamento</a>
+                <a href="#" class="btn btn-success btn-whatsapp"><i class="bi bi-whatsapp"></i> Compartilhar no
+                    WhatsApp</a>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
     <div id="notificacoes" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
 
@@ -62,7 +66,7 @@
             pdfjsLib.getDocument(pdfUrl).promise.then(function (pdfDoc) {
                 const container = document.getElementById('pdf-container');
                 container.innerHTML = '';
-                
+
                 const renderPromises = [];
                 for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
                     renderPromises.push(pdfDoc.getPage(pageNum).then(function (page) {
@@ -77,26 +81,45 @@
                             canvasContext: context,
                             viewport: viewport
                         };
-                        
-                        return page.render(renderContext).promise.then(function() {
+
+                        return page.render(renderContext).promise.then(function () {
                             container.appendChild(canvas);
                         });
                     }));
                 }
-                
+
                 // Aguarda todas as páginas serem renderizadas para ajustar o container
                 Promise.all(renderPromises).then(() => {
                     // Opcional: ajustar a escala dinamicamente se necessário
                 });
 
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.error("Erro ao carregar o PDF:", error);
                 const container = document.getElementById('pdf-container');
                 container.innerHTML = `<p class="text-danger">Não foi possível carregar o documento PDF.</p>`;
+            });
+
+
+            /* Botão de compartilhar do Whatsapp */
+
+            // Obtenha a URL do link de download do PDF
+            const downloadPdfUrl = document.querySelector('.btn-success').href;
+
+            // Adicione um evento de clique no botão do WhatsApp
+            const whatsappButton = document.querySelector('.btn-whatsapp');
+            whatsappButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Impede o comportamento padrão do link
+
+                const message = `Olá! Segue o link do orçamento que geramos para você: ${downloadPdfUrl}`;
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+
+                // Abre o link em uma nova janela ou aba
+                window.open(whatsappUrl, '_blank');
             });
 
             copiarLinkDaPagina('.copiar-link');
         });
     </script>
 </body>
+
 </html>
