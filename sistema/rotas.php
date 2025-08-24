@@ -84,15 +84,11 @@ try {
     //Grupo de Rotas Orçamento
     SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
 
-        //Home
-        SimpleRouter::get(URL. 'home', 'Home@listar');
-
-        //Cadastro novos usuários
-        SimpleRouter::get(URL. 'form-cadastro', 'CadastroUsuario@form');
-        SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
-
         //Modelos
         SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
+
+        //Excluir Orçamento
+        SimpleRouter::get(URL . 'orcamento/excluir/{id_orcamento}', 'OrcamentoControlador@excluir');
 
         //Criar Orçamento
         SimpleRouter::get(URL. 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');
@@ -104,10 +100,7 @@ try {
         SimpleRouter::post(URL. 'orcamento/cadastrar/{modelo}', 'OrcamentoControlador@cadastrar');
 
         //Apresenta o Orçamento
-        SimpleRouter::match(['get', 'post'], URL . 'orcamento/{modelo}/{id_orcamento}', 'OrcamentoControlador@exibir');
-
-        //Excluir Orçamento
-        SimpleRouter::match(['get', 'post'], URL . 'orcamento/excluir/{id_orcamento}', 'Orcamento@excluir');
+        SimpleRouter::get(URL . 'orcamento/{modelo}/{id_orcamento}', 'OrcamentoPublicoControlador@exibir');
 
         //Listar Meus orcamentos
         SimpleRouter::get(URL. 'orcamento/listar', 'OrcamentoControlador@listar');

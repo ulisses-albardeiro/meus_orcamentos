@@ -23,9 +23,16 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo) : ?int
+    public function buscaOrcamentosPorHash($hash)
+    {
+        $orcamentos = $this->busca("hash = {$hash}")->resultado(true) ?? [];
+        return $orcamentos;    
+    }
+
+    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo, $hash) : ?int
     {
         $this->cliente = $cliente;
+        $this->hash = $hash;
         $this->vl_total = $vl_total;
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->orcamento_completo = json_encode($dados);

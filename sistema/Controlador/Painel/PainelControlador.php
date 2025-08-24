@@ -26,7 +26,5 @@ class PainelControlador extends Controlador
             Helpers::redirecionar('login');
         }
 
-    }
-
-   
+    }   
 }

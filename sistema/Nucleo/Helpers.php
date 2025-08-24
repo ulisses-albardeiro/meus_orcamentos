@@ -160,7 +160,7 @@ class Helpers
      * @return string URL completa do ambiente atual.
      */
 
-    public static function url(string $url = null): string
+    public static function url(?string $url = null): string
     {
         $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $ambiente = ($servidor == 'localhost' ? DEVELOPMENT_URL : PRODUCTION_URL);
@@ -238,5 +238,25 @@ class Helpers
         }
 
         return null;
+    }
+
+    /**
+     * Gera uma hash aleatória de tamanho fixo.
+     * * @param int $tamanho O número de dígitos da hash.
+     * @return string A hash gerada.
+     */
+    public static function gerarHash(int $tamanho = 6): string
+    {
+        if ($tamanho <= 0) {
+            return '';
+        }
+
+        $min = pow(36, $tamanho - 1);
+        $max = pow(36, $tamanho) - 1;
+
+        $numero_randomico = random_int($min, $max);
+        $hash = base_convert($numero_randomico, 10, 36);
+
+        return $hash;
     }
 }
