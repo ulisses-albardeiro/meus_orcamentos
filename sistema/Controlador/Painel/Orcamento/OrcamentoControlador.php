@@ -35,12 +35,13 @@ class OrcamentoControlador extends PainelControlador
         );
     }
 
-    public function criar(string $modelo): void
+    public function criar(string $form, string $modelo): void
     {
         echo $this->template->rendenizar(
-            "orcamentos/forms/$modelo.html",
+            "orcamentos/forms/$form.html",
             [
-                "titulo" => "Criar"
+                "titulo" => "Criar Orçamento",
+                "modelo" =>$modelo,
             ]
         );
     }
@@ -55,7 +56,7 @@ class OrcamentoControlador extends PainelControlador
         $dados_cliente = $this->separarDadosCliente($dados_completos);
 
         // Processa os itens para ter valores numéricos limpos
-        $itens_processados = $this->processarItensParaView($dados_completos['itens']);
+        $itens_processados = $this->processarItensParaView($dados_completos);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -70,14 +71,15 @@ class OrcamentoControlador extends PainelControlador
         );
 
         $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
+        $nome_arquivo = Helpers::slug($dados_cliente['cliente_nome']);
 
         $pdf = new Pdf;
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->salvarPDF($caminho_local, 'orcamento_' . $dados_cliente['cliente_nome'] . '.pdf');
+        $pdf->salvarPDF($caminho_local, $nome_arquivo . '.pdf');
 
-        $orcamento_url = Helpers::url('templates/assets/arquivos/orcamentos/' . 'orcamento_' . $dados_cliente['cliente_nome'] . '.pdf');
+        $orcamento_url = Helpers::url('templates/assets/arquivos/orcamentos/' . $nome_arquivo . '.pdf');
 
         echo $this->template->rendenizar(
             "orcamentos/pre-view.html",
@@ -91,12 +93,13 @@ class OrcamentoControlador extends PainelControlador
     public function cadastrar(string $modelo): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        $total_orcamento = $this->calcularTotalOrcamento($dados['itens']);
-
+      
+        $total_orcamento = $this->calcularTotalOrcamento($dados);
+        
         $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($dados['cliente_nome'], $total_orcamento, $dados, $this->usuario->id, $modelo);
 
         if (!empty($id_orcamento)) {
+            //redireciona para o método 'exibir'
             Helpers::redirecionar("orcamento/$modelo/$id_orcamento");
         }
     }

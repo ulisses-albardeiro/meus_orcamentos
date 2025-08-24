@@ -95,7 +95,7 @@ try {
         SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
 
         //Criar Orçamento
-        SimpleRouter::get(URL. 'orcamento/criar/{modelo}', 'OrcamentoControlador@criar');
+        SimpleRouter::get(URL. 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');
 
          //PDF Orçamento
         SimpleRouter::get(URL. 'orcamento/pdf/{modelo}/{id_orcamento}', 'OrcamentoControlador@pdf');

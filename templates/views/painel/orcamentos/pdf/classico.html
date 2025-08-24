@@ -135,8 +135,8 @@
                 <tr>
                     <th>Qtd.</th>
                     <th>Descrição</th>
-                    <th class="text-start">Valor Unit.</th>
-                    <th class="text-end">Valor Total</th>
+                    <!-- <th class="text-start">Valor Unit.</th>
+                    <th class="text-end">Valor Total</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -147,8 +147,8 @@
                         {{ item.nome }}<br>
                         <small style="font-size: 13px; font-style: italic">{{ item.descricao }}</small>
                     </td>
-                    <td class="text-start">{{ item.valor }}</td>
-                    <td class="text-end">R$ {{ (item.qtd * item.valor_float)|number_format(2, ',', '.') }}</td>
+                    <!-- <td class="text-start">{{ item.valor }}</td>
+                    <td class="text-end">R$ {{ (item.qtd * item.valor_float)|number_format(2, ',', '.') }}</td> -->
                 </tr>
                 {% endfor %}
             </tbody>

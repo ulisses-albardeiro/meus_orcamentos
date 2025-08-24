@@ -4,11 +4,14 @@ namespace sistema\Controlador\Painel\Orcamento\Traits;
 
 trait CalculaOrcamento
 {
-    protected function calcularTotalOrcamento(array $itens): float
+    protected function calcularTotalOrcamento(array $dados): float
     {
-        $total = 0;
+        if (isset($dados['valor_orcamento'])) {
+            return (float) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
+        }
 
-        foreach ($itens as $item) {
+        $total = 0;
+        foreach ($dados['itens'] as $item) {
             $valor = (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $item['valor']);
             $valor = str_replace(',', '.', $valor);
             $total += (float)$valor * (int)$item['qtd'];
@@ -42,41 +45,48 @@ trait CalculaOrcamento
 
     protected function separarDadosCliente(array $dados): array
     {
-        $camposDesejados = [
+        $campos_desejados = [
             'cliente_nome',
             'cliente_documento',
             'cliente_telefone',
-            'cliente_email'
+            'cliente_email',
+            'cliente_endereco',
+            'cliente_celular',
         ];
 
-        $dadosCliente = [];
+        $dados_cliente = [];
 
         foreach ($dados as $key => $valor) {
-            if (in_array($key, $camposDesejados)) {
-                $dadosCliente[$key] = $valor;
+            if (in_array($key, $campos_desejados)) {
+                $dados_cliente[$key] = $valor;
             }
         }
 
-        return $dadosCliente;
+        return $dados_cliente;
     }
 
-    protected function processarItensParaView(array $itens): array
+    protected function processarItensParaView(array $dados): array
     {
-        $itensProcessados = [];
+        $itens_processados = [];
+        foreach ($dados['itens'] as $item) {
 
-        foreach ($itens as $item) {
+            //Se or tipo for simples o valor unitário dos itens será '0'.
+            if (!isset($item['valor'])) {
+                $item['valor'] = 0;
+            }
+            
             // Converte o valor para um formato numérico inteiro (centavos)
             $valorLimpo = (int) round($this->converterValorParaFloat($item['valor']) * 100);
 
             // Mantém os dados originais mas adiciona o valor processado
-            $itemProcessado = $item;
-            $itemProcessado['valor_limpo'] = $valorLimpo;
-            $itemProcessado['valor_float'] = $valorLimpo / 100;
+            $item_processado = $item;
+            $item_processado['valor_limpo'] = $valorLimpo;
+            $item_processado['valor_float'] = $valorLimpo / 100;
 
-            $itensProcessados[] = $itemProcessado;
+            $itens_processados[] = $item_processado;
         }
 
-        return $itensProcessados;
+        return $itens_processados;
     }
 
     protected function converterValorParaFloat(string $valorFormatado): float
