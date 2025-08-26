@@ -1,8 +1,6 @@
 <?php
 
 use DI\ContainerBuilder;
-use App\Services\Empresas\EmpresasInterface;
-use App\Services\Empresas\EmpresasServico;
 use App\Services\Listas\ListaInterface;
 use App\Services\Listas\ListaServicos;
 use App\Services\Orcamentos\OrcamentosInterface;
@@ -28,7 +26,7 @@ $builder->addDefinitions([
 
     //Clients
     App\Services\Clients\ClientsInterface::class => autowire(App\Services\Clients\ClientsService::class),
-    EmpresasInterface::class => autowire(EmpresasServico::class),
+    App\Services\Company\CompanyInterface::class => autowire(App\Services\Company\CompanyService::class),
     
     //Adapter
     App\Adapters\PdfAdapter\PdfInterface::class => autowire(App\Adapters\PdfAdapter\PdfGenerator::class),

@@ -4,13 +4,13 @@ namespace App\Controllers\Panel\Empresa;
 
 use App\Controllers\Panel\PanelController;
 use App\Core\Helpers;
-use App\Services\Empresas\EmpresasInterface;
+use App\Services\Company\CompanyInterface;
 
 class EmpresaControlador extends PanelController
 {
-    protected EmpresasInterface $empresaServico;
+    protected CompanyInterface $empresaServico;
 
-    public function __construct(EmpresasInterface $empresaServico)
+    public function __construct(CompanyInterface $empresaServico)
     {
         parent::__construct();
         $this->empresaServico = $empresaServico;
@@ -24,7 +24,7 @@ class EmpresaControlador extends PanelController
             [
                 "title" => "Configure os dados da sua Empresa",
                 "subTitle" => "",
-                'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->session->userId),
+                'empresa' => $this->empresaServico->findCompanyByUserId($this->session->userId),
             ]
         );
     }
@@ -33,7 +33,7 @@ class EmpresaControlador extends PanelController
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
-            $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->session->userId, $_FILES['logo']);
+            $cadastro = $this->empresaServico->registerCompany($dados, $this->session->userId, $_FILES['logo']);
 
             if ($cadastro) {
                 $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
@@ -54,7 +54,7 @@ class EmpresaControlador extends PanelController
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        $cadastro = $this->empresaServico->editarEmpresaServico($dados, $id, $_FILES['logo']);
+        $cadastro = $this->empresaServico->updateCompany($dados, $id, $_FILES['logo']);
 
         if ($cadastro) {
             $this->mensagem->mensagemSucesso('Empresa editada com sucesso.')->flash();
@@ -65,11 +65,11 @@ class EmpresaControlador extends PanelController
 
     public function excluirLogo(): void
     {
-        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->session->userId);
+        $empresa = $this->empresaServico->findCompanyByUserId($this->session->userId);
 
         unlink($_SERVER['DOCUMENT_ROOT'] . BASE_PATH . 'templates/assets/img/logos/' . $empresa->logo);
 
-        $exclusao = $this->empresaServico->excluirLogoServico($empresa->id);
+        $exclusao = $this->empresaServico->destroyLogo($empresa->id);
 
         if ($exclusao) {
             $this->mensagem->mensagemSucesso('Logo excluida com sucesso.')->flash();

@@ -5,7 +5,7 @@ namespace App\Controllers\Panel\Quotes;
 use App\Controllers\Panel\PanelController;
 use App\Models\OrcamentoModelo;
 use App\Core\Helpers;
-use App\Services\Empresas\EmpresasInterface;
+use App\Services\Company\CompanyInterface;
 use App\Services\Orcamentos\OrcamentosInterface;
 use App\Services\User\UserInterface;
 use App\Adapters\PdfAdapter\PdfInterface;
@@ -18,7 +18,7 @@ class QuotesController extends PanelController
         private OrcamentosInterface $quoteService,
         private ClientsInterface $clientService,
         private UserInterface $userService,
-        private EmpresasInterface $companyService,
+        private CompanyInterface $companyService,
         private PdfInterface $pdfGenerator,
         private FileManagerInterface $fileManager,
     ) {
@@ -92,7 +92,7 @@ class QuotesController extends PanelController
         $dataClient = $this->quoteService->separarDadosCliente($data);
 
         $items = $this->quoteService->processarItensParaView($data);
-        $company = $this->companyService->buscaEmpresaPorIdUsuarioServico($data['id_usuario']);
+        $company = $this->companyService->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(
             "quotes/pdf/$template.html",
@@ -133,7 +133,7 @@ class QuotesController extends PanelController
         $dataClient = $this->quoteService->separarDadosCliente($data);
 
         $items = $this->quoteService->processarItensParaView($data);
-        $company = $this->companyService->buscaEmpresaPorIdUsuarioServico($data['id_usuario']);
+        $company = $this->companyService->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(
             "quotes/pdf/$template.html",

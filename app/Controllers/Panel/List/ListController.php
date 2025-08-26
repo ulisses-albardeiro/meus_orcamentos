@@ -4,7 +4,7 @@ namespace App\Controllers\Panel\List;
 
 use App\Controllers\Panel\PanelController;
 use App\Core\Helpers;
-use App\Services\Empresas\EmpresasInterface;
+use App\Services\Company\CompanyInterface;
 use App\Services\Listas\ListaInterface;
 use App\Services\Orcamentos\OrcamentosInterface;
 use App\Services\User\UserInterface;
@@ -17,14 +17,14 @@ class ListController extends PanelController
     protected ClientsInterface $clientesServico;
     protected OrcamentosInterface $orcamentoInterface;
     protected UserInterface $usuarioServico;
-    protected EmpresasInterface $empresaServico;
+    protected CompanyInterface $empresaServico;
 
     public function __construct(
         ListaInterface $listaServico,
         ClientsInterface $clientesServico,
         OrcamentosInterface $orcamentoInterface,
         UserInterface $usuarioServico,
-        EmpresasInterface $empresaServico
+        CompanyInterface $empresaServico
     ) {
         parent::__construct();
         $this->listaServico = $listaServico;
@@ -101,7 +101,7 @@ class ListController extends PanelController
     public function export(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
-        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
+        $empresa = $this->empresaServico->findCompanyByUserId($dados['id_usuario']);
 
         $html = $this->template->render(
             "listas/pdf/$template.html",
@@ -137,7 +137,7 @@ class ListController extends PanelController
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
 
-        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
+        $empresa = $this->empresaServico->findCompanyByUserId($dados['id_usuario']);
 
         $html = $this->template->render(
             "listas/pdf/$template.html",
