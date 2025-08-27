@@ -4,17 +4,17 @@ namespace sistema\Controlador\Painel\Orcamento\Traits;
 
 trait CalculaOrcamento
 {
-    protected function calcularTotalOrcamento(array $dados): float
+    protected function calcularTotalOrcamento(array $dados): int
     {
         if (isset($dados['valor_orcamento'])) {
-            return (float) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
+            return (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
         }
 
         $total = 0;
         foreach ($dados['itens'] as $item) {
             $valor = (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $item['valor']);
             $valor = str_replace(',', '.', $valor);
-            $total += (float)$valor * (int)$item['qtd'];
+            $total += (int)$valor * (int)$item['qtd'];
         }
 
         return $total / 100;

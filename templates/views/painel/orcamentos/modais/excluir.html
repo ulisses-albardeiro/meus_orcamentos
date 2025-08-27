@@ -1,5 +1,5 @@
 <!-- Modal Excluir -->
-<div class="modal fade" id="modalConfirmDelete{{ orcamento.id }}" tabindex="-1" aria-labelledby="modalLabel{{ post.id }}" aria-hidden="true">
+<div class="modal fade" id="modalConfirmDelete{{ orcamento.hash }}" tabindex="-1" aria-labelledby="modalLabel{{ post.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -16,7 +16,7 @@
                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle me-1"></i> Cancelar
                 </button>
-                <a href="{{ url('orcamento/excluir/'~orcamento.id) }}" class="btn-sm btn btn-danger">
+                <a href="{{ url('orcamento/excluir/'~orcamento.hash) }}" class="btn-sm btn btn-danger">
                     <i class="bi bi-trash-fill me-1"></i> Excluir
                 </a>
             </div>

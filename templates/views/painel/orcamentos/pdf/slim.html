@@ -41,9 +41,10 @@
     <table class="table table-borderless mt-4">
       <thead class="border-bottom text-red">
         <tr>
-          <th scope="col">ITEM</th>
+          <th class="w-50" scope="col">ITEM</th>
           <th scope="col">QT</th>
-          <th scope="col">TOTAL</th>
+          <th scope="col">Valor Unit.</th>
+          <th scope="col">Valor Total</th>
         </tr>
       </thead>
       <tbody>
@@ -55,13 +56,14 @@
           </td>
           <td>{{ item.qtd }}</td>
           <td>{{ item.valor }}</td>
+          <td>R$ {{ (item.qtd * item.valor_float)|number_format(2, ',', '.') }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
 
-    <div class="text-end fs-5 fw-bold text-success mt-2">
-      TOTAL GERAL: R$ {{ total_orcamento|number_format(2, ',', '.') }}
+    <div class="text-end fs-5 fw-bold mt-2">
+      TOTAL GERAL<p class="text-success">R$ {{ (total_orcamento * 100)|number_format(2, ',', '.') }}</p>
     </div>
 
     <div class="text-center mt-5 small">

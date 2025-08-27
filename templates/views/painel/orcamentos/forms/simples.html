@@ -169,16 +169,16 @@
         item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
         item.innerHTML = `
             <div class="col-9">
-                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome-item]" placeholder="Nome do Serviço">
+                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome]" placeholder="Nome do Serviço">
             </div>
             <div class="col-2">
-                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd-item]" placeholder="Qtd*">
+                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd]" placeholder="Qtd*">
             </div>
             <div class="col-1 d-flex align-items-center">
                 <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
             </div>
             <div class="col-12">
-                <textarea class="form-control" name="itens[${index}][descricao-item]" placeholder="Descrição"></textarea>
+                <textarea class="form-control" name="itens[${index}][descricao]" placeholder="Descrição"></textarea>
             </div>
         `;
         container.appendChild(item);

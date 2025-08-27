@@ -51,12 +51,13 @@ class OrcamentoControlador extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         $total_orcamento = $this->calcularTotalOrcamento($dados);
+        $hash = Helpers::gerarHash();
 
-        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($dados['cliente_nome'], $total_orcamento, $dados, $this->usuario->id, $modelo, Helpers::gerarHash());
+        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($dados['cliente_nome'], $total_orcamento, $dados, $this->usuario->id, $modelo, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'
-            Helpers::redirecionar("orcamento/$modelo/$id_orcamento");
+            Helpers::redirecionar("orcamento/$modelo/$hash");
         }
     }
 
@@ -93,9 +94,14 @@ class OrcamentoControlador extends PainelControlador
         $pdf->baixar("orçamento-" . Helpers::slug($dados_cliente['cliente_nome']) . ".pdf");
     }
 
-    public function excluir($id_orcamento): void 
+    public function excluir(string $hash): void 
     {
-        if ((new OrcamentoModelo)->excluirOrcamento($id_orcamento)) {
+        $arquivo = "templates/assets/arquivos/orcamentos/$hash.pdf";
+        if ((new OrcamentoModelo)->excluirOrcamento($hash)) {
+            if (file_exists($arquivo)) {
+                unlink($arquivo);
+            }
+            
             $this->mensagem->mensagemSucesso("Orçamento excluido com sucesso.")->flash();
         }
 

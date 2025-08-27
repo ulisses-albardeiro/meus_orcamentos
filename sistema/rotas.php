@@ -88,7 +88,7 @@ try {
         SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
 
         //Excluir Orçamento
-        SimpleRouter::get(URL . 'orcamento/excluir/{id_orcamento}', 'OrcamentoControlador@excluir');
+        SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'OrcamentoControlador@excluir');
 
         //Criar Orçamento
         SimpleRouter::get(URL. 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');

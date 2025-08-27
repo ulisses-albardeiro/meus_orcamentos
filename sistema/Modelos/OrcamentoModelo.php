@@ -23,9 +23,9 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function buscaOrcamentosPorHash($hash)
+    public function buscaOrcamentosPorHash(string $hash): array
     {
-        $orcamentos = $this->busca("hash = {$hash}")->resultado(true) ?? [];
+        $orcamentos = $this->busca("hash = '{$hash}'")->resultado(true);
         return $orcamentos;    
     }
 
@@ -33,7 +33,7 @@ class OrcamentoModelo extends Modelo
     {
         $this->cliente = $cliente;
         $this->hash = $hash;
-        $this->vl_total = $vl_total;
+        $this->vl_total = $vl_total/100;
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->orcamento_completo = json_encode($dados);
         $this->id_usuario = $id_usuario;
@@ -45,9 +45,9 @@ class OrcamentoModelo extends Modelo
         return null;      
     }
 
-    public function excluirOrcamento(int $id_orcamento) : bool
+    public function excluirOrcamento(string $hash) : bool
     {
-        if ($this->apagar("id = '{$id_orcamento}'")) {
+        if ($this->apagar("hash = '{$hash}'")) {
             return true;
         }
         return false;         

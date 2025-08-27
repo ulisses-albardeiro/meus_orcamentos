@@ -17,9 +17,10 @@ class OrcamentoPublicoControlador extends Controlador
         parent::__construct('templates/views/painel');
     }
 
-    public function exibir(string $modelo, int $hash): void
+    public function exibir(string $modelo, string $hash): void
     {
         $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorHash($hash)[0];
+        
         $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
         $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
 
