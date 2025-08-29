@@ -13,6 +13,7 @@ return array(
     '662a729f963d39afe703c9d9b7ab4a8c' => $vendorDir . '/symfony/polyfill-php83/bootstrap.php',
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
+    'b33e3d135e5d9e47d845c576147bda89' => $vendorDir . '/php-di/php-di/src/functions.php',
     '89efb1254ef2d1c5d80096acd12c4098' => $vendorDir . '/twig/twig/src/Resources/core.php',
     'ffecb95d45175fd40f75be8a23b34f90' => $vendorDir . '/twig/twig/src/Resources/debug.php',
     'c7baa00073ee9c61edf148c51917cfb4' => $vendorDir . '/twig/twig/src/Resources/escaper.php',

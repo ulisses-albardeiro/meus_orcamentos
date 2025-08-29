@@ -1,49 +1,27 @@
-//Menu hanburger Sidebar
-const hamBurger = document.querySelector(".toggle-btn");
-
-hamBurger.addEventListener("click", function () {
-  document.querySelector("#sidebar").classList.toggle("expand");
-});
-
-
-//Seta do menu usuário
-document.addEventListener("DOMContentLoaded", function () {
-  const dropdownToggles = document.querySelectorAll('.nav-item.dropdown .nav-link');
-
-  dropdownToggles.forEach(toggle => {
-      toggle.addEventListener('click', function () {
-          const icon = this.querySelector('i');
-          icon.classList.toggle('bi-chevron-down');
-          icon.classList.toggle('bi-chevron-up');
-      });
-  });
-});
-
-//DataTable
-/* $(document).ready(function () {
-  $('#myTable').DataTable({
-      language: {
-          url: 'cdn.datatables.net/plug-ins/1.13.6/i18n/Portuguese-Brasil.json'
-      },
-      pageLength: 10, // Define o número de linhas por página
-      lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
-      ordering: true, // Habilita ordenação
-      responsive: true // Torna a tabela responsiva
-  });
-}); */
-
-//Preview de imagem no input file
-function mostarImagem() {
-
-  if (this.files && this.files[0]) {
-    var file = new FileReader();
-    file.onload = function (e) {
-      document.getElementById("preview").src = e.target.result;
-    };
-    file.readAsDataURL(this.files[0]);
-  }
+/**
+ * Exibe um preview da imagem selecionada em um input file
+ * 
+ * @param {string} id_thumb - ID do elemento input file de imagem
+ * 
+ * @example
+ * // HTML necessário:
+ * // <input type="file" id="imagem-input">
+ * // <img id="preview" src="placeholder.jpg">
+ * 
+ * // Uso:
+ * previewImagem('imagem-input');
+ */
+function previewImagem(id_thumb) {
+  document.getElementById(id_thumb).addEventListener("change", function () {
+    if (this.files && this.files[0]) {
+      var file = new FileReader();
+      file.onload = function (e) {
+        document.getElementById("preview").src = e.target.result;
+      };
+      file.readAsDataURL(this.files[0]);
+    }
+  }, false);
 }
-document.getElementById("thumb").addEventListener("change", mostarImagem, false);
 
 /**
  * Exibe uma notificação toast na tela
@@ -82,30 +60,114 @@ if ($('#notificacoes').length === 0) {
 
 
 
-function copiarLinkDaPagina(classe){
+function copiarLinkDaPagina(classe) {
   // Encontra o botão de compartilhamento pelo texto ou classe
-    const shareButton = document.querySelector(classe);
+  const shareButton = document.querySelector(classe);
 
-    // Verifica se o botão existe antes de adicionar o evento
-    if (shareButton) {
-      shareButton.addEventListener('click', function (event) {
-        // Previne a ação padrão do link (que é recarregar a página ou ir para o #)
-        event.preventDefault();
+  // Verifica se o botão existe antes de adicionar o evento
+  if (shareButton) {
+    shareButton.addEventListener('click', function (event) {
+      // Previne a ação padrão do link (que é recarregar a página ou ir para o #)
+      event.preventDefault();
 
-        // Pega o URL da página atual
-        const url = window.location.href;
+      // Pega o URL da página atual
+      const url = window.location.href;
 
-        // Usa a API Clipboard para copiar o URL para a área de transferência
-        navigator.clipboard.writeText(url)
-          .then(() => {
-            // Mensagem de sucesso (opcional)
-            mostrarNotificacao("Link copiado com sucesso!");
-          })
-          .catch(err => {
-            // Mensagem de erro, caso a cópia falhe
-            console.error('Erro ao copiar o link: ', err);
-            mostrarNotificacao("Hove um erro ao copiar o link", "danger");
-          });
-      });
+      // Usa a API Clipboard para copiar o URL para a área de transferência
+      navigator.clipboard.writeText(url)
+        .then(() => {
+          // Mensagem de sucesso (opcional)
+          mostrarNotificacao("Link copiado com sucesso!");
+        })
+        .catch(err => {
+          // Mensagem de erro, caso a cópia falhe
+          console.error('Erro ao copiar o link: ', err);
+          mostrarNotificacao("Hove um erro ao copiar o link", "danger");
+        });
+    });
+  }
+}
+
+// -------------------- CELULAR --------------------
+function mascaraCelularInput(celular) {
+    function formatar(valor) {
+        let v = valor.replace(/\D/g, "").substring(0, 11);
+        let a = v.split(""); 
+        let f = "";
+        if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
+        if (a.length > 2) f += `${a.slice(2, 7).join("")}`;
+        if (a.length > 7) f += `-${a.slice(7, 11).join("")}`;
+        return f;
     }
+
+    // Aplica máscara no valor já preenchido
+    celular.value = formatar(celular.value);
+
+    // Aplica máscara enquanto digita
+    celular.addEventListener("input", function () {
+        celular.value = formatar(celular.value);
+    });
+}
+
+// -------------------- TELEFONE --------------------
+function mascaraTelefoneInput(tel) {
+    function formatar(valor) {
+        let v = valor.replace(/\D/g, "").substring(0, 10);
+        let a = v.split("");
+        let f = "";
+        if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
+        if (a.length > 2) f += `${a.slice(2, 6).join("")}`;
+        if (a.length > 6) f += `-${a.slice(6, 10).join("")}`;
+        return f;
+    }
+
+    tel.value = formatar(tel.value);
+
+    tel.addEventListener("input", function () {
+        tel.value = formatar(tel.value);
+    });
+}
+
+// -------------------- CPF/CNPJ --------------------
+function mascaraCpfCnpjInput(doc) {
+    function formatar(valor) {
+        let v = valor.replace(/\D/g, "").substring(0, 14);
+        let a = v.split(""); 
+        let f = "";
+
+        if (a.length <= 11) { // CPF
+            if (a.length > 0) f += `${a.slice(0, 3).join("")}`;
+            if (a.length > 3) f += `.${a.slice(3, 6).join("")}`;
+            if (a.length > 6) f += `.${a.slice(6, 9).join("")}`;
+            if (a.length > 9) f += `-${a.slice(9, 11).join("")}`;
+        } else { // CNPJ
+            f += `${a.slice(0, 2).join("")}.${a.slice(2, 5).join("")}.${a.slice(5, 8).join("")}/${a.slice(8, 12).join("")}-${a.slice(12, 14).join("")}`;
+        }
+
+        return f;
+    }
+
+    doc.value = formatar(doc.value);
+
+    doc.addEventListener("input", function () {
+        doc.value = formatar(doc.value);
+    });
+}
+
+// -------------------- CEP --------------------
+function mascaraCepInput(cep) {
+    function formatar(valor) {
+        let v = valor.replace(/\D/g, "").substring(0, 8);
+        let a = v.split("");
+        let f = "";
+        if (a.length > 0) f += `${a.slice(0, 5).join("")}`;
+        if (a.length > 5) f += `-${a.slice(5, 8).join("")}`;
+        return f;
+    }
+
+    cep.value = formatar(cep.value);
+
+    cep.addEventListener("input", function () {
+        cep.value = formatar(cep.value);
+    });
 }

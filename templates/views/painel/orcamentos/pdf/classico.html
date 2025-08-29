@@ -56,10 +56,10 @@
         <table class="bg-light border-bottom border-primary border-2" style="width: 100%;">
             <tbody>
                 <tr>
-                    {% if usuario().img_logo %}
+                    {% if usuario.img_logo %}
                     <td style="width: 30%; vertical-align: middle; padding: 20px;">
 
-                        <img src="{{ url('templates/assets/img/logos/'~usuario().img_logo) }}" class="img-fluid"
+                        <img src="{{ url('templates/assets/img/logos/'~usuario.img_logo) }}" class="img-fluid"
                             style="max-height: 220px;">
 
                     </td>
@@ -118,22 +118,36 @@
             Dados do Cliente
         </div>
         <div class="mb-3 border p-2">
-            <p class="mb-0 border-bottom"><strong>Nome:</strong> {{ dados_cliente.cliente_nome }}</p>
-            {% if dados_cliente.cliente_documento %}
-            <p class="mb-0 border-bottom"><strong>CNPJ:</strong> {{ dados_cliente.cliente_documento }}</p>
+            <p class="mb-0 border-bottom"><strong>Nome:</strong> {{ dados_cliente.nome_cliente }}</p>
+
+            {% if dados_cliente.cpf_cnpj_cliente %}
+            <p class="mb-0 border-bottom"><strong>CPF/CNPJ:</strong> {{ dados_cliente.cpf_cnpj_cliente }}</p>
             {% endif %}
-            {% if dados_cliente.cliente_endereco %}
-            <p class="mb-0 border-bottom"><strong>Endereço:</strong> {{ dados_cliente.cliente_endereco }}</p>
-            {% endif %}
-            {% if dados_cliente.cliente_telefone %}
-            <p class="mb-0 border-bottom"><strong>Telefone:</strong> {{ dados_cliente.cliente_telefone }}
-                {% if dados_cliente.cliente_celular %}
-                / {{dados_cliente.cliente_celular }}
-                {% endif %}
+
+            {% if dados_cliente.cep_cliente or dados_cliente.rua_cliente or dados_cliente.n_casa_cliente or
+            dados_cliente.bairro_cliente or dados_cliente.cidade_cliente or dados_cliente.uf_cliente %}
+            <p class="mb-0 border-bottom">
+                <strong>Endereço:</strong>
+                {% if dados_cliente.rua_cliente %}{{ dados_cliente.rua_cliente }}{% endif %}
+                {% if dados_cliente.n_casa_cliente %}, {{ dados_cliente.n_casa_cliente }}{% endif %}
+                {% if dados_cliente.bairro_cliente %} - {{ dados_cliente.bairro_cliente }}{% endif %}
+                {% if dados_cliente.cidade_cliente %} - {{ dados_cliente.cidade_cliente }}{% endif %}
+                {% if dados_cliente.uf_cliente %}/{{ dados_cliente.uf_cliente }}{% endif %}
+                {% if dados_cliente.cep_cliente %} - CEP: {{ dados_cliente.cep_cliente }}{% endif %}
             </p>
             {% endif %}
-            {% if dados_cliente.cliente_email %}
-            <p class="mb-0"><strong>Email:</strong> {{ dados_cliente.cliente_email }}</p>
+
+            {% if dados_cliente.telefone_cliente or dados_cliente.celular_cliente %}
+            <p class="mb-0 border-bottom">
+                <strong>Contato:</strong>
+                {% if dados_cliente.telefone_cliente %}Tel: {{ dados_cliente.telefone_cliente }}{% endif %}
+                {% if dados_cliente.telefone_cliente and dados_cliente.celular_cliente %} / {% endif %}
+                {% if dados_cliente.celular_cliente %}Cel: {{ dados_cliente.celular_cliente }}{% endif %}
+            </p>
+            {% endif %}
+
+            {% if dados_cliente.email_cliente %}
+            <p class="mb-0"><strong>Email:</strong> {{ dados_cliente.email_cliente }}</p>
             {% endif %}
         </div>
 
@@ -177,4 +191,5 @@
         </div>
     </div>
 </body>
+
 </html>

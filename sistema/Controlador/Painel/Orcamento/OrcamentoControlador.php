@@ -2,19 +2,30 @@
 
 namespace sistema\Controlador\Painel\Orcamento;
 
-use sistema\Controlador\Painel\Orcamento\Traits\CalculaOrcamento;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
+use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
+use sistema\Servicos\Clientes\ClientesInterface;
+use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Suporte\Pdf;
 
 class OrcamentoControlador extends PainelControlador
 {
-    use CalculaOrcamento;
+    protected OrcamentosInterface $orcamentosServicos;
+    protected ClientesInterface $clientesServico;
+
+    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico)
+    {
+        parent::__construct(
+        $this->orcamentosServicos = $orcamentosServicos,
+        $this->clientesServico = $clientesServico
+);
+    }
 
     public function listar(): void
     {
-        $orcamentos = (new OrcamentoModelo)->buscaOrcamentos($this->usuario->id);
+        $orcamentos = (new OrcamentoModelo)->buscaOrcamentos($this->usuario->usuarioId);
 
         echo $this->template->rendenizar(
             "orcamentos/listar.html",
@@ -49,11 +60,12 @@ class OrcamentoControlador extends PainelControlador
     public function cadastrar(string $modelo): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        $total_orcamento = $this->calcularTotalOrcamento($dados);
+         $id_cliente = $this->clientesServico->cadastraClientesServico($dados);
+       
+        $total_orcamento = $this->orcamentosServicos->calcularTotalOrcamento($dados);
         $hash = Helpers::gerarHash();
 
-        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($dados['cliente_nome'], $total_orcamento, $dados, $this->usuario->id, $modelo, $hash);
+        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($id_cliente, $total_orcamento, $dados, $this->usuario->usuarioId, $modelo, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'
@@ -68,12 +80,12 @@ class OrcamentoControlador extends PainelControlador
         $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
 
 
-        $dados_usuario = $this->separarDadosUsuario($dados_completos);
-        $dados_cliente = $this->separarDadosCliente($dados_completos);
+        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
+        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
 
 
         // Processa os itens para ter valores numéricos limpos
-        $itens_processados = $this->processarItensParaView($dados_completos['itens']);
+        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos['itens']);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -106,5 +118,52 @@ class OrcamentoControlador extends PainelControlador
         }
 
         Helpers::redirecionar("orcamento/listar");
+    }
+
+    public function exibir(string $modelo, string $hash): void
+    {
+        $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorHash($hash)[0];
+        
+        $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
+        $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
+
+        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
+        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
+
+        // Processa os itens para ter valores numéricos limpos
+        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos);
+
+        $usuario = (new UsuarioModelo)->buscaPorId($dados_completos['id_usuario']);
+
+        $html = $this->template->rendenizar(
+            "orcamentos/pdf/$modelo.html",
+            [
+                'dados_usuario' => $dados_usuario,
+                'dados_cliente' => $dados_cliente,
+                'itens' => $itens_processados,
+                'total_orcamento' => $dados_completos['vl_total'],
+                'titulo' => $dados_usuario['nome-empresa'],
+                'dados_completos' => $dados_completos,
+                'usuario' => $usuario,
+            ]
+        );
+
+        $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
+
+        $pdf = new Pdf;
+        $pdf->carregarHTML($html);
+        $pdf->configurarPapel('A4');
+        $pdf->renderizar();
+        $pdf->salvarPDF($caminho_local, $hash . '.pdf');
+
+        $orcamento_url = Helpers::url('templates/assets/arquivos/orcamentos/' . $hash . '.pdf');
+
+        echo $this->template->rendenizar(
+            "orcamentos/pre-view.html",
+            [
+                "orcamento" => $orcamento_url,
+                "id_orcamento" => $dados_objeto->id,
+            ]
+        );
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace sistema\Controlador\Painel\Orcamento\Traits;
+namespace sistema\Servicos\Orcamentos;
 
-trait CalculaOrcamento
+class OrcamentosServicos implements OrcamentosInterface
 {
-    protected function calcularTotalOrcamento(array $dados): int
+    public function calcularTotalOrcamento(array $dados): int
     {
         if (isset($dados['valor_orcamento'])) {
             return (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
@@ -20,7 +20,7 @@ trait CalculaOrcamento
         return $total / 100;
     }
 
-    protected function separarDadosUsuario(array $dados): array
+    public function separarDadosUsuario(array $dados): array
     {
         $campos_desejados = [
             'nome-empresa',
@@ -43,15 +43,21 @@ trait CalculaOrcamento
         return $dados_usuario;
     }
 
-    protected function separarDadosCliente(array $dados): array
+    public function separarDadosCliente(array $dados): array
     {
         $campos_desejados = [
-            'cliente_nome',
-            'cliente_documento',
-            'cliente_telefone',
-            'cliente_email',
-            'cliente_endereco',
-            'cliente_celular',
+            'nome_cliente',
+            'documento_cliente',
+            'telefone_cliente',
+            'email_cliente',
+            'endereco_cliente',
+            'celular_cliente',
+            'cep_cliente',
+            'rua_cliente',
+            'n_casa_cliente',
+            'bairro_cliente',
+            'cidade_cliente',
+            'uf_cliente',
         ];
 
         $dados_cliente = [];
@@ -65,7 +71,7 @@ trait CalculaOrcamento
         return $dados_cliente;
     }
 
-    protected function processarItensParaView(array $dados): array
+    public function processarItensParaView(array $dados): array
     {
         $itens_processados = [];
         foreach ($dados['itens'] as $item) {
@@ -74,7 +80,7 @@ trait CalculaOrcamento
             if (!isset($item['valor'])) {
                 $item['valor'] = 0;
             }
-            
+
             // Converte o valor para um formato numérico inteiro (centavos)
             $valorLimpo = (int) round($this->converterValorParaFloat($item['valor']) * 100);
 
@@ -89,7 +95,7 @@ trait CalculaOrcamento
         return $itens_processados;
     }
 
-    protected function converterValorParaFloat(string $valorFormatado): float
+    public function converterValorParaFloat(string $valorFormatado): float
     {
         // Remove "R$", espaços e caracteres não numéricos exceto vírgula e ponto
         $valorLimpo = preg_replace('/[^\d,\.]/', '', $valorFormatado);

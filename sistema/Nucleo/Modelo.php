@@ -116,7 +116,7 @@ abstract class Modelo
         }
     }
 
-    protected function cadastrar(array $dados)
+    protected function cadastrar(array $dados): ?int
     {
         try {
             $colunas = implode(",",  array_keys($dados));
@@ -129,6 +129,7 @@ abstract class Modelo
             $this->ultimo_id = Conexao::getInstancia()->lastInsertId();
             return $this->ultimo_id;
         } catch (\Throwable $th) {
+            $this->ultimo_id = null;
             echo $this->erro = $th;
             return null;
         }
@@ -166,7 +167,7 @@ abstract class Modelo
         } catch (\Throwable $th) {
             $this->erro = $th->getMessage();
 
-            return null;
+            return false;
         }
     }
 

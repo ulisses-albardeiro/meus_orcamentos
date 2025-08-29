@@ -24,18 +24,44 @@
     <div class="d-flex justify-content-between align-items-start">
       <div class="titulo-orcamento bg-dark">ORÇAMENTO</div>
       <div class="text-end small text-muted">
-        {% if usuario().img_logo %}
-        <div class="img_logo"><img src="{{ url('templates/assets/img/logos/'~usuario().img_logo) }}"></div>
+        {% if usuario.img_logo %}
+        <div class="img_logo"><img src="{{ url('templates/assets/img/logos/'~usuario.img_logo) }}"></div>
         {% endif %}
       </div>
     </div>
 
     <div class="mt-4 mb-3 border-bottom pb-2">
-      <p class="mb-0"><strong>Cliente: </strong>{{ dados_cliente.cliente_nome }}</p>
-      <p class="mb-0"><strong>Telefone: </strong>{{ dados_cliente.cliente_telefone }} / {{ dados_cliente.cliente_celular }}</p>
-      <p class="mb-0"><strong>Email: </strong>{{ dados_cliente.cliente_email }}</p>
-      <p class="mb-0"><strong>Documento: </strong>{{ dados_cliente.cliente_documento }}</p>
-      <p class="mb-0"><strong>Endereço: </strong>{{ dados_cliente.cliente_endereco }}</p>
+      <p class="mb-0"><strong>Cliente: </strong>{{ dados_cliente.nome_cliente }}</p>
+
+      {% if dados_cliente.telefone_cliente or dados_cliente.celular_cliente %}
+      <p class="mb-0">
+        <strong>Telefone: </strong>
+        {% if dados_cliente.telefone_cliente %}{{ dados_cliente.telefone_cliente }}{% endif %}
+        {% if dados_cliente.telefone_cliente and dados_cliente.celular_cliente %} / {% endif %}
+        {% if dados_cliente.celular_cliente %}{{ dados_cliente.celular_cliente }}{% endif %}
+      </p>
+      {% endif %}
+
+      {% if dados_cliente.email_cliente %}
+      <p class="mb-0"><strong>Email: </strong>{{ dados_cliente.email_cliente }}</p>
+      {% endif %}
+
+      {% if dados_cliente.cpf_cnpj_cliente %}
+      <p class="mb-0"><strong>Documento: </strong>{{ dados_cliente.cpf_cnpj_cliente }}</p>
+      {% endif %}
+
+      {% if dados_cliente.rua_cliente or dados_cliente.n_casa_cliente or dados_cliente.bairro_cliente or
+      dados_cliente.cidade_cliente or dados_cliente.uf_cliente or dados_cliente.cep_cliente %}
+      <p class="mb-0 w-75" >
+        <strong>Endereço: </strong>
+        {% if dados_cliente.rua_cliente %}{{ dados_cliente.rua_cliente }}{% endif %}
+        {% if dados_cliente.n_casa_cliente %}, {{ dados_cliente.n_casa_cliente }}{% endif %}
+        {% if dados_cliente.bairro_cliente %} - {{ dados_cliente.bairro_cliente }}{% endif %}
+        {% if dados_cliente.cidade_cliente %} - {{ dados_cliente.cidade_cliente }}{% endif %}
+        {% if dados_cliente.uf_cliente %}/{{ dados_cliente.uf_cliente }}{% endif %}
+        {% if dados_cliente.cep_cliente %} - CEP: {{ dados_cliente.cep_cliente }}{% endif %}
+      </p>
+      {% endif %}
     </div>
 
     <table class="table table-borderless mt-4">

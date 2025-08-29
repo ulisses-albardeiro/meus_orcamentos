@@ -78,32 +78,59 @@
         <div class="row g-2 mb-3">
             <div class="col-md-4">
                 <label class="form-label">Nome*</label>
-                <input required type="text" class="form-control form-control-sm" name="cliente_nome">
+                <input required type="text" class="form-control form-control-sm" name="nome_cliente">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control form-control-sm" name="cliente_telefone">
+                <input type="text" class="form-control form-control-sm" name="telefone_cliente">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Celular</label>
-                <input type="text" class="form-control form-control-sm" name="cliente_celular">
+                <input type="text" class="form-control form-control-sm" name="celular_cliente">
             </div>
         </div>
 
         <div class="row g-2 mb-3">
             <div class="col-md-4">
-                <label class="form-label">CNPJ</label>
-                <input type="text" class="form-control form-control-sm" name="cliente_documento" id="cnpj-input-cliente"
-                    placeholder="00.000.000/0000-00" maxlength="18">
+                <label class="form-label">CPF/CNPJ</label>
+                <input type="text" class="form-control form-control-sm" name="cpf_cnpj_cliente"
+                    placeholder="00.000.000/0000-00 ou 000.000.000-00" maxlength="18">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control form-control-sm" name="cliente_email">
+                <input type="email" class="form-control form-control-sm" name="email_cliente">
             </div>
             <div class="col-md-4">
-                <label class="form-label">Endereço</label>
-                <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
-                    name="cliente_endereco">
+                <label class="form-label">CEP</label>
+                <input type="text" class="form-control form-control-sm" name="cep_cliente" placeholder="00000-000"
+                    maxlength="9">
+            </div>
+        </div>
+
+        <div class="row g-2 mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Rua</label>
+                <input type="text" class="form-control form-control-sm" name="rua_cliente">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Número</label>
+                <input type="text" class="form-control form-control-sm" name="n_casa_cliente">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Bairro</label>
+                <input type="text" class="form-control form-control-sm" name="bairro_cliente">
+            </div>
+        </div>
+
+        <div class="row g-2 mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Cidade</label>
+                <input type="text" class="form-control form-control-sm" name="cidade_cliente">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">UF</label>
+                <input type="text" class="form-control form-control-sm" name="uf_cliente" placeholder="SP"
+                    maxlength="2">
             </div>
         </div>
     </div>

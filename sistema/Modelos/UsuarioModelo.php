@@ -28,7 +28,8 @@ class UsuarioModelo extends Modelo
 
     public function login(array $dados, int $nivel = 1)
     {
-        $usuario = (new UsuarioModelo())->buscaPorUsuario($dados['usuario']);
+        $usuario = $this->buscaPorUsuario($dados['usuario']);
+        
         if (!$usuario or !password_verify($dados['senha'], $usuario->senha)) {
             $this->mensagem->mensagemErro("Dados incorretos!")->flash();
             Helpers::redirecionar('login');

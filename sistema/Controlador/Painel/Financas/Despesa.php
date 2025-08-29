@@ -20,8 +20,8 @@ class Despesa extends PainelControlador
 
     public function listar(): void
     {
-        $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->id}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->id} AND tipo = 'Despesas'")->resultado(true) ?? [];
+        $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->usuarioId}")->resultado(true) ?? [];
+        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->usuarioId} AND tipo = 'Despesas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/despesas.html",
             [
@@ -37,7 +37,7 @@ class Despesa extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new DespesaModelo);
 
-        if ($salvar->cadastrarDespesa($dados, $this->usuario->id)) {
+        if ($salvar->cadastrarDespesa($dados, $this->usuario->usuarioId)) {
             $this->mensagem->mensagemSucesso("Despesa Cadastrada com Sucesso!")->flash();
             Helpers::voltar();
         }else {

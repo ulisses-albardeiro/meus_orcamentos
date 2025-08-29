@@ -29,9 +29,9 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function cadastrarOrcamento(string $cliente, string $vl_total, array $dados, int $id_usuario, string $modelo, $hash) : ?int
+    public function cadastrarOrcamento(int $id_cliente, string $vl_total, array $dados, int $id_usuario, string $modelo, $hash) : ?int
     {
-        $this->cliente = $cliente;
+        $this->id_cliente = $id_cliente;
         $this->hash = $hash;
         $this->vl_total = $vl_total/100;
         $this->dt_hr_criacao = date('Y-m-d H:i:s');

@@ -176,6 +176,20 @@
                 </div>
             </a>
         </div>
+
+         <div class="col">
+            <a href="{{ url('clientes/listar') }}" class="text-decoration-none">
+                <div class="card bg-card border-0 h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <i class="bi bi-people fs-1 text-white"></i>
+                        <div>
+                            <h6 class="mb-1 text-dark">Ver Clientes</h6>
+                            <span class="badge bg-dark text-white small">Veja Seus Clientes</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 
     {% if usuario().nivel == 1 %}
