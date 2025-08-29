@@ -11,9 +11,9 @@ class OrcamentoModelo extends Modelo
         parent::__construct("orcamentos");
     }
 
-    public function buscaOrcamentos(int $id_usuario) : array
+    public function buscaOrcamentos(int $id_usuario) : ?array
     {
-        $orcamentos = $this->busca("id_usuario = {$id_usuario}")->resultado(true) ?? [];
+        $orcamentos = $this->busca("id_usuario = {$id_usuario}")->resultado(true);
         return $orcamentos;    
     }
 

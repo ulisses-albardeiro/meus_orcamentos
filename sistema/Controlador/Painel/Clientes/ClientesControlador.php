@@ -3,6 +3,7 @@
 namespace sistema\Controlador\Painel\Clientes;
 
 use sistema\Controlador\Painel\PainelControlador;
+use sistema\Modelos\OrcamentoModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clientes\ClientesInterface;
 
@@ -21,7 +22,7 @@ class ClientesControlador extends PainelControlador
             'clientes/listar.html',
             [
                 'titulo' => 'Clientes',
-                'clientes' => $this->clientesServico->buscaClientesServico()
+                'clientes' => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId)
             ]
         );
     }
@@ -30,7 +31,7 @@ class ClientesControlador extends PainelControlador
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->clientesServico->cadastraClientesServico($dados)) {
+        if ($this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId)) {
             $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso.')->flash();
         }
 

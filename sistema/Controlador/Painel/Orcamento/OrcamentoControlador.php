@@ -17,20 +17,20 @@ class OrcamentoControlador extends PainelControlador
 
     public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico)
     {
-        parent::__construct(
-        $this->orcamentosServicos = $orcamentosServicos,
-        $this->clientesServico = $clientesServico
-);
+        parent::__construct();
+        $this->orcamentosServicos = $orcamentosServicos;
+        $this->clientesServico = $clientesServico;
     }
 
     public function listar(): void
     {
-        $orcamentos = (new OrcamentoModelo)->buscaOrcamentos($this->usuario->usuarioId);
+        $orcamentos = $this->orcamentosServicos->buscaOrcamentosServico($this->usuario->usuarioId);
+        $clientes = $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId);
 
         echo $this->template->rendenizar(
             "orcamentos/listar.html",
             [
-                'orcamentos' => $orcamentos,
+                'orcamentos' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
                 "titulo" => "Orçamentos"
             ]
         );
@@ -53,6 +53,7 @@ class OrcamentoControlador extends PainelControlador
             [
                 "titulo" => "Criar Orçamento",
                 "modelo" => $modelo,
+                "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId)?? [],
             ]
         );
     }
@@ -60,8 +61,8 @@ class OrcamentoControlador extends PainelControlador
     public function cadastrar(string $modelo): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-         $id_cliente = $this->clientesServico->cadastraClientesServico($dados);
-       
+        $id_cliente = $this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId);
+
         $total_orcamento = $this->orcamentosServicos->calcularTotalOrcamento($dados);
         $hash = Helpers::gerarHash();
 
@@ -106,14 +107,14 @@ class OrcamentoControlador extends PainelControlador
         $pdf->baixar("orçamento-" . Helpers::slug($dados_cliente['cliente_nome']) . ".pdf");
     }
 
-    public function excluir(string $hash): void 
+    public function excluir(string $hash): void
     {
         $arquivo = "templates/assets/arquivos/orcamentos/$hash.pdf";
         if ((new OrcamentoModelo)->excluirOrcamento($hash)) {
             if (file_exists($arquivo)) {
                 unlink($arquivo);
             }
-            
+
             $this->mensagem->mensagemSucesso("Orçamento excluido com sucesso.")->flash();
         }
 
@@ -123,7 +124,7 @@ class OrcamentoControlador extends PainelControlador
     public function exibir(string $modelo, string $hash): void
     {
         $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorHash($hash)[0];
-        
+
         $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
         $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
 

@@ -9,4 +9,5 @@ interface OrcamentosInterface
     public function separarDadosCliente(array $dados): array;
     public function processarItensParaView(array $dados): array;
     public function converterValorParaFloat(string $valorFormatado): float;
+    public function buscaOrcamentosServico(int $id_usuario): ?array;
 }

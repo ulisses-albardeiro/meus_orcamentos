@@ -2,8 +2,17 @@
 
 namespace sistema\Servicos\Orcamentos;
 
+use sistema\Modelos\OrcamentoModelo;
+
 class OrcamentosServicos implements OrcamentosInterface
 {
+    protected OrcamentoModelo $orcamentoModelo;
+
+    public function __construct(OrcamentoModelo $orcamentoModelo)
+    {
+        $this->orcamentoModelo = $orcamentoModelo;
+    }
+
     public function calcularTotalOrcamento(array $dados): int
     {
         if (isset($dados['valor_orcamento'])) {
@@ -115,5 +124,10 @@ class OrcamentosServicos implements OrcamentosInterface
         }
 
         return (float) $valorLimpo;
+    }
+
+    public function buscaOrcamentosServico(int $id_usuario): ?array
+    {
+        return $this->orcamentoModelo->buscaOrcamentos($id_usuario);
     }
 }

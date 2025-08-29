@@ -11,11 +11,61 @@
         background-color: #373643e7 !important;
 
     }
+
+    /* Estilo para o dropdown de autocomplete */
+    #autocomplete-dropdown {
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 0 0 .25rem .25rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: none;
+        /* Inicia escondido */
+    }
+
+    /* Estilo para o dropdown-menu que o JavaScript mostra/esconde */
+    #autocomplete-dropdown.show {
+        display: block;
+    }
+
+    /* Estilo para os itens do dropdown */
+    #autocomplete-dropdown .dropdown-item {
+        font-weight: bold;
+        /* Deixa a escrita em negrito */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: .5rem 1rem;
+        cursor: pointer;
+        background-color: #fff;
+        color: #212529;
+    }
+
+    /* Estilo quando o item é hover */
+    #autocomplete-dropdown .dropdown-item:hover,
+    #autocomplete-dropdown .dropdown-item:focus {
+        background-color: #e9ecef;
+        color: #16181b;
+    }
+
+    /* Estilo para o item de 'nenhum resultado' */
+    #autocomplete-dropdown .dropdown-item.disabled {
+        font-style: italic;
+        font-weight: normal;
+        /* Sobrescreve o negrito */
+        color: #6c757d;
+        cursor: default;
+    }
 </style>
 
 <h3 class="text-center">Confira Seus Dados</h3>
 <p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para
-    adicionar logo ao seu orçamento, vá para <a href="{{ url('perfil') }}">Perfil</a></p>
+    adicionar logo ao seu orçamento, vá para
+    <a href="{{ url('perfil') }}">Perfil</a>
+</p>
 <form action="{{ url('orcamento/cadastrar/' ~ modelo)}}" method="post" target="_blank">
 
     <div class="card border-1 shadow-lg p-3">
@@ -26,42 +76,47 @@
             {% endif %}
         </div>
         <div class="row g-2 mb-3">
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label">Seu nome</label>
                 <input required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm"
                     name="nome-empresa">
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label"> Seu Email</label>
                 <input value="{{ usuario().email }}" type="email" class="form-control form-control-sm"
                     name="email-empresa">
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label"> Seu Telefone</label>
                 <input required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm"
                     name="tel-empresa">
             </div>
         </div>
+
         <div class="row g-2 mb-3">
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label">Seu CNPJ</label>
                 <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa"
                     id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label"> Seu Facebook</label>
                 <input value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm"
                     name="facebook">
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <label class="form-label"> Seu Instagram</label>
                 <input value="{{ usuario().instagram }}" type="text" class="form-control form-control-sm"
                     name="instagram">
             </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Seu Endereço</label>
-            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="end-empresa">
+
+        <div class="row g-2 mb-3">
+            <div class="col-12">
+                <label class="form-label">Seu Endereço</label>
+                <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm"
+                    name="end-empresa">
+            </div>
         </div>
     </div>
 
@@ -70,61 +125,63 @@
 
     <div class="card border-1 shadow-lg p-3">
         <div class="row g-2 mb-3">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <label class="form-label">Nome*</label>
-                <input required type="text" class="form-control form-control-sm" name="nome_cliente">
+                <input required type="text" class="form-control form-control-sm" name="nome_cliente" id="nome_cliente"
+                    autocomplete="off">
+                <div id="autocomplete-dropdown" class="dropdown-menu w-25"></div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-1">
                 <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control form-control-sm" name="telefone_cliente">
+                <input type="text" class="form-control form-control-sm" id="telefone_cliente" name="telefone_cliente">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-1">
                 <label class="form-label">Celular</label>
-                <input type="text" class="form-control form-control-sm" name="celular_cliente">
+                <input type="text" class="form-control form-control-sm" id="celular_cliente" name="celular_cliente">
             </div>
-        </div>
-
-        <div class="row g-2 mb-3">
-            <div class="col-md-4">
-                <label class="form-label">CPF/CNPJ</label>
-                <input type="text" class="form-control form-control-sm" name="cpf_cnpj_cliente"
-                    placeholder="00.000.000/0000-00 ou 000.000.000-00" maxlength="18">
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control form-control-sm" name="email_cliente">
             </div>
-            <div class="col-md-4">
-                <label class="form-label">CEP</label>
-                <input type="text" class="form-control form-control-sm" name="cep_cliente" placeholder="00000-000"
-                    maxlength="9">
+            <div class="col-md-2">
+                <label class="form-label">CPF/CNPJ</label>
+                <input type="text" class="form-control form-control-sm" id="cpf_cnpj_cliente" name="cpf_cnpj_cliente"
+                    placeholder="00.000.000/0000-00 ou 000.000.000-00" maxlength="18">
             </div>
         </div>
 
         <div class="row g-2 mb-3">
-            <div class="col-md-6">
+            <div class="col-md-1">
+                <label class="form-label">CEP</label>
+                <input type="text" class="form-control form-control-sm" id="cep_cliente" name="cep_cliente"
+                    placeholder="00000-000" maxlength="9">
+            </div>
+            <div class="col-md-4">
                 <label class="form-label">Rua</label>
                 <input type="text" class="form-control form-control-sm" name="rua_cliente">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <label class="form-label">Número</label>
                 <input type="text" class="form-control form-control-sm" name="n_casa_cliente">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label class="form-label">Bairro</label>
                 <input type="text" class="form-control form-control-sm" name="bairro_cliente">
             </div>
-        </div>
-
-        <div class="row g-2 mb-3">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label class="form-label">Cidade</label>
                 <input type="text" class="form-control form-control-sm" name="cidade_cliente">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <label class="form-label">UF</label>
-                <input type="text" class="form-control form-control-sm" name="uf_cliente" placeholder="SP"
-                    maxlength="2">
+                <select id="uf" name="uf_cliente" class="form-select form-select-sm">
+                    <option value="" selected disabled>UF</option>
+                    {% for estado in
+                    ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+                    %}
+                    <option value="{{ estado }}">{{ estado }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
     </div>
@@ -142,25 +199,15 @@
                     <input required type="number" class="form-control form-control-sm" placeholder="Qtd*"
                         name="itens[0][qtd]">
                 </div>
+
                 <div class="col-12">
                     <textarea class="form-control form-control-sm" placeholder="Descrição"
                         name="itens[0][descricao]"></textarea>
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItem()">Adicionar Item</button>
-    </div>
-
-    <h3 class="mt-4 text-center">Valor do Orçamento</h3>
-    <p style="margin-top: -15px;" class="text-danger text-center">Campo obrigatório</p>
-
-    <div class="card border-1 shadow-lg p-3">
-        <div class="mb-3 d-flex justify-content-center">
-            <div class="col-md-2">
-                <input id="valor-orcamento" type="text" class="form-control form-control-sm" name="valor_orcamento"
-                    required onfocus="aplicarMascaraMonetaria(this)">
-            </div>
-        </div>
+        <button type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItemSimples()">Adicionar
+            Item</button>
     </div>
 
     <h3 class="mt-4 text-center">Detalhes finais</h3>
@@ -181,128 +228,32 @@
 
     <div class="text-center my-4">
         <button type="submit" class="btn btn-sm botao text-white"><i style="color: #18cb96;"
-                class="bi bi-plus-circle"></i>
-            Gerar Orçamento</button>
-        <!-- <button type="button" class="btn btn-danger">Gerar Orçamento em PDF</button> -->
+                class="bi bi-plus-circle"></i> Gerar Orçamento</button>
     </div>
 </form>
+<script></script>
+<script src="{{url('templates/assets/js/orcamentos.js')}}"></script>
 
 <script>
-    // Função para adicionar novos itens ao orçamento
-    function adicionarItem() {
-        let container = document.getElementById('itens-container');
-        let index = document.querySelectorAll('.item').length;
-        let item = document.createElement('div');
-        item.classList.add('row', 'g-2', 'mb-2', 'item', 'mt-2');
-        item.innerHTML = `
-            <div class="col-9">
-                <input required type="text" class="form-control form-control-sm" name="itens[${index}][nome]" placeholder="Nome do Serviço">
-            </div>
-            <div class="col-2">
-                <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd]" placeholder="Qtd*">
-            </div>
-            <div class="col-1 d-flex align-items-center">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
-            </div>
-            <div class="col-12">
-                <textarea class="form-control" name="itens[${index}][descricao]" placeholder="Descrição"></textarea>
-            </div>
-        `;
-        container.appendChild(item);
-
-    }
-
-    // Função para remover itens do orçamento
-    function removerItem(button) {
-        button.closest('.item').remove();
-    }
-
-    // Função para aplicar máscara monetária a um campo específico
-    function aplicarMascaraMonetaria(campo) {
-        if (!campo) return;
-
-        campo.addEventListener('input', function (e) {
-            // Remove todos os caracteres não numéricos
-            let valor = this.value.replace(/[^\d]/g, '');
-
-            // Se estiver vazio, define como vazio
-            if (valor === '') {
-                this.value = '';
-                return;
-            }
-
-            // Converte para número com centavos
-            valor = (parseInt(valor, 10) / 100);
-
-            // Formata com 2 casas decimais e vírgula
-            this.value = valor.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).replace('.', '~').replace(',', '.').replace('~', ',');
-        });
-
-        campo.addEventListener('blur', function () {
-            let valor = this.value.replace(/[^\d]/g, '');
-
-            if (!valor) {
-                this.value = '';
-                return;
-            }
-
-            valor = parseInt(valor, 10) / 100;
-
-            // Formata como moeda brasileira completa
-            this.value = valor.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-        });
-
-        // Formata inicialmente se houver valor
-        if (campo.value) {
-            campo.dispatchEvent(new Event('blur'));
-        }
-    }
-
-    // Função para aplicar máscara de CNPJ a um campo específico
-    function aplicarMascaraCNPJ(campo) {
-        if (!campo) return;
-
-        campo.addEventListener('input', function (e) {
-            // Remove todos os caracteres não numéricos
-            let value = this.value.replace(/\D/g, '');
-
-            // Aplica a máscara conforme o usuário digita
-            if (value.length > 2) {
-                value = value.substring(0, 2) + '.' + value.substring(2);
-            }
-            if (value.length > 6) {
-                value = value.substring(0, 6) + '.' + value.substring(6);
-            }
-            if (value.length > 10) {
-                value = value.substring(0, 10) + '/' + value.substring(10);
-            }
-            if (value.length > 15) {
-                value = value.substring(0, 15) + '-' + value.substring(15);
-            }
-
-            // Limita o tamanho máximo
-            this.value = value.substring(0, 18);
-        });
-    }
-
-    // Quando o DOM estiver completamente carregado
     document.addEventListener('DOMContentLoaded', function () {
-        // Aplica máscara CNPJ aos campos existentes
-        aplicarMascaraCNPJ(document.getElementById('cnpj-input'));
-        aplicarMascaraCNPJ(document.getElementById('cnpj-input-cliente'));
+        // Função para adicionar novos itens ao orçamento
+        adicionarItemSimples();
+        mascaraCpfCnpjInput(document.getElementById('cpf_cnpj_cliente'));
+        mascaraCepInput(document.getElementById('cep_cliente'));
+        mascaraTelefoneInput(document.getElementById('telefone_cliente'));
+        mascaraCelularInput(document.getElementById('celular_cliente'));
 
         // Aplica máscara monetária ao campo inicial
-        aplicarMascaraMonetaria(document.getElementById('.valor-orcamento'));
-
+        const camposValor = document.querySelectorAll('.valor-unitario');
+        camposValor.forEach(campo => {
+            aplicarMascaraMonetaria(campo);
+        });
+        // Obtenha os dados dos clientes do Twig e parse o JSON
+        const clientes = JSON.parse('{{ clientes | json_encode() | raw }}');
+        dropdownClientes(clientes)
     });
+
+
 </script>
 
 {% endblock %}

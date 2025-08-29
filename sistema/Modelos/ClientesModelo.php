@@ -11,14 +11,15 @@ class ClientesModelo extends Modelo
         parent::__construct("clientes");
     }
 
-    public function buscaClientes(): ?array
+    public function buscaClientesPorIdUsuario(int $id_usuario): ?array
     {
-        return $this->busca()->resultado(true);
+        return $this->busca("id_usuario = {$id_usuario}")->resultado(true);
     }
 
-    public function cadastraClientes(array $dados): ?int
+    public function cadastraClientes(array $dados, int $id_usuario): ?int
     {
         $this->nome = $dados['nome_cliente'];
+        $this->id_usuario = $id_usuario;
         $this->cpf_cnpj = str_replace(['.', '/', '-'], '', $dados['cpf_cnpj_cliente']);
         $this->email = $dados['email_cliente'];
         $this->telefone = str_replace(['(', ')', '-'], '', $dados['telefone_cliente']);

@@ -13,14 +13,14 @@ class ClientesServico implements ClientesInterface
         $this->clienteModelo = $clienteModelo;
     }
 
-    public function buscaClientesServico(): ?array
+    public function buscaClientesPorIdUsuarioServico(int $id_usuario): ?array
     {
-        return $this->clienteModelo->buscaClientes();
+        return $this->clienteModelo->buscaClientesPorIdUsuario($id_usuario);
     }
 
-    public function cadastraClientesServico(array $dados): ?int
+    public function cadastraClientesServico(array $dados, int $id_usuario): ?int
     {
-        return $this->clienteModelo->cadastraClientes($dados);
+        return $this->clienteModelo->cadastraClientes($dados, $id_usuario);
     }
 
     public function excluirClientesServico(int $id_cliente): bool
