@@ -152,7 +152,7 @@ class OrcamentoControlador extends PainelControlador
         if (Helpers::localhost()) {
             $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
         }else {
-            $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/templates/assets/arquivos/orcamentos/';
+            $caminho_local = Helpers::url('templates/assets/arquivos/orcamentos/');
         }
 
         
