@@ -156,7 +156,9 @@ function dropdownClientes(clientes) {
     // Seletores do DOM
     const nomeInput = document.getElementById('nome_cliente');
     const dropdown = document.getElementById('autocomplete-dropdown');
+    const clearBtnId = "clear-cliente-btn"; // ID do botão de limpar
     const formFields = {
+        id: document.querySelector('[name="id_cliente"]'),
         nome: document.querySelector('[name="nome_cliente"]'),
         telefone: document.querySelector('[name="telefone_cliente"]'),
         celular: document.querySelector('[name="celular_cliente"]'),
@@ -167,7 +169,7 @@ function dropdownClientes(clientes) {
         n_casa: document.querySelector('[name="n_casa_cliente"]'),
         bairro: document.querySelector('[name="bairro_cliente"]'),
         cidade: document.querySelector('[name="cidade_cliente"]'),
-        uf: document.querySelector('[name="uf_cliente"]')
+        uf: document.querySelector('[name="uf_cliente"]'),
     };
 
     // Função para renderizar as opções no dropdown
@@ -182,6 +184,7 @@ function dropdownClientes(clientes) {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
                     fillForm(cliente);
+                    showClearButton();
                     dropdown.classList.remove('show');
                 });
                 dropdown.appendChild(item);
@@ -198,6 +201,7 @@ function dropdownClientes(clientes) {
 
     // Função para preencher todos os campos do formulário
     function fillForm(cliente) {
+        formFields.id.value = cliente.id || '';
         formFields.nome.value = cliente.nome || '';
         formFields.telefone.value = cliente.telefone || '';
         formFields.celular.value = cliente.celular || '';
@@ -209,6 +213,35 @@ function dropdownClientes(clientes) {
         formFields.bairro.value = cliente.bairro || '';
         formFields.cidade.value = cliente.cidade || '';
         formFields.uf.value = (cliente.uf || '').toUpperCase();
+    }
+
+    // Função para limpar os campos
+    function clearForm() {
+        for (let key in formFields) {
+            formFields[key].value = '';
+        }
+        hideClearButton();
+    }
+
+    // Mostrar botão de limpar
+    function showClearButton() {
+        if (!document.getElementById(clearBtnId)) {
+            const btn = document.createElement('button');
+            btn.id = clearBtnId;
+            btn.type = "button";
+            btn.className = "btn btn-sm btn-outline-danger mt-2";
+            btn.textContent = "Limpar dados";
+            btn.addEventListener('click', clearForm);
+
+            // insere logo abaixo do campo nome_cliente
+            nomeInput.insertAdjacentElement('afterend', btn);
+        }
+    }
+
+    // Esconder/remover botão de limpar
+    function hideClearButton() {
+        const btn = document.getElementById(clearBtnId);
+        if (btn) btn.remove();
     }
 
     // Evento de 'input' para o campo de nome

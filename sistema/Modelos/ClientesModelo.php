@@ -59,4 +59,9 @@ class ClientesModelo extends Modelo
     {
         return $this->apagar("id = {$id_cliente}");
     }
+
+    public function VerificaNomeIdExiste(int $id_cliente, string $nome_cliente) : ?array
+    {
+        return $this->busca("id = {$id_cliente} AND nome = '{$nome_cliente}'")->resultado();
+    }
 }

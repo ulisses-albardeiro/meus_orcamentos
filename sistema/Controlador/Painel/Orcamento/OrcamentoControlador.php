@@ -53,7 +53,7 @@ class OrcamentoControlador extends PainelControlador
             [
                 "titulo" => "Criar Orçamento",
                 "modelo" => $modelo,
-                "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId)?? [],
+                "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId) ?? [],
             ]
         );
     }
@@ -61,7 +61,12 @@ class OrcamentoControlador extends PainelControlador
     public function cadastrar(string $modelo): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $id_cliente = $this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId);
+
+        if (empty($dados['id_cliente'])) {
+            $id_cliente = $this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId);
+        } else {
+            $id_cliente = $dados['id_cliente'];
+        }
 
         $total_orcamento = $this->orcamentosServicos->calcularTotalOrcamento($dados);
         $hash = Helpers::gerarHash();
@@ -83,10 +88,6 @@ class OrcamentoControlador extends PainelControlador
 
         $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
-
-        /* echo "<pre>";
-        var_dump($dados_completos);
-        die; */
 
 
         // Processa os itens para ter valores numéricos limpos
@@ -155,10 +156,10 @@ class OrcamentoControlador extends PainelControlador
 
         if (Helpers::localhost()) {
             $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
-        }else {
+        } else {
             $caminho_local = 'templates/assets/arquivos/orcamentos/';
         }
-       
+
 
         $pdf = new Pdf;
         $pdf->carregarHTML($html);
