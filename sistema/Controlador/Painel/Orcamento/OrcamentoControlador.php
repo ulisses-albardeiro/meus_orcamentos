@@ -152,13 +152,9 @@ class OrcamentoControlador extends PainelControlador
         if (Helpers::localhost()) {
             $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/orcamentos/';
         }else {
-            $caminho_local = $_SERVER['DOCUMENT_ROOT'] .'/templates/assets/arquivos/orcamentos/';
+            $caminho_local = 'templates/assets/arquivos/orcamentos/';
         }
-
-        echo $caminho_local;
-        die;
-
-        
+       
 
         $pdf = new Pdf;
         $pdf->carregarHTML($html);
