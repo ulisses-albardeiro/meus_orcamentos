@@ -113,7 +113,7 @@
             whatsappButton.addEventListener('click', function (event) {
                 event.preventDefault(); // Impede o comportamento padrão do link
 
-                const message = `Olá! Segue o link do orçamento que geramos para você: ${downloadPdfUrl}`;
+                const message = `${downloadPdfUrl}`;
                 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
 
                 // Abre o link em uma nova janela ou aba
