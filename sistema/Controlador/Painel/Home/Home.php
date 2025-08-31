@@ -7,6 +7,9 @@ class Home extends PainelControlador
 {
     public function listar() : void
     {
-        echo $this->template->rendenizar("home.html", []);    
+        echo $this->template->rendenizar("home.html", 
+        [
+            'titulo' => 'Home',
+        ]);    
     }
 }

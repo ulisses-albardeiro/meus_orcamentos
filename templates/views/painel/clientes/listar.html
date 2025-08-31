@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div>
+
+    <h3 class="text-center">Seus Orçamentos Gerados</h3>
+    {{ flash() }}
+
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+            <div class="text-end">
+                <button data-bs-toggle="modal" data-bs-target="#modalClientes" class="btn btn-dark btn-sm">Novo
+                    Cliente</button>
+            </div>
+            {% include 'clientes/modais/form.html' %}
+            <small>
+                <table id="data-table" class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Telefone</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cliente in clientes %}
+                        <tr>
+                            <td>{{ cliente.nome }}</td>
+
+                            {# Formata Telefone Fixo: (XX) XXXX-XXXX #}
+                            {% set telefone = cliente.telefone|replace({'/\\D/':''}) %}
+                            {% if telefone|length == 10 %}
+                            {% set telefone_formatado = '(' ~ telefone[0:2] ~ ') ' ~ telefone[2:4] ~ '-' ~ telefone[6:4]
+                            %}
+                            <td>{{ telefone_formatado }}</td>
+                            {% else %}
+                            {# Caso o número não tenha 10 dígitos, exibe o valor original #}
+                            <td>{{ cliente.telefone }}</td>
+                            {% endif %}
+
+                            {# Formata Celular: (XX) XXXXX-XXXX #}
+                            {% set celular = cliente.celular|replace({'/\\D/':''}) %}
+                            {% if celular|length == 11 %}
+                            {% set celular_formatado = '(' ~ celular[0:2] ~ ') ' ~ celular[2:5] ~ '-' ~ celular[7:4] %}
+                            <td>{{ celular_formatado }}</td>
+                            {% else %}
+                            {# Caso o número não tenha 11 dígitos, exibe o valor original #}
+                            <td>{{ cliente.celular }}</td>
+                            {% endif %}
+
+                            <td>{{ cliente.email }}</td>
+                            <td>
+                                <a title="Ver Cliente" data-bs-toggle="modal"
+                                    data-bs-target="#modalClientes{{ cliente.id }}" href="#"
+                                    class="text-primary text-decoration-none fs-4">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                {% include 'clientes/modais/form.html' %}
+                                <a href="#" title="Excluir" class="text-danger text-decoration-none"
+                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ cliente.id }}"><i
+                                        class="bi bi-trash fs-4"></i></a>
+                                {% include 'clientes/modais/excluir.html' %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </small>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block codigo_js %}
+<script>
+    //DataTable
+    $(document).ready(function () {
+        $('#data-table').DataTable({
+            language: {
+                url: "../templates/assets/DataTables/pt_br.json"
+            },
+            pageLength: 10, // Define o número de linhas por página
+            lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
+            ordering: false, // Habilita ordenação
+            responsive: true // Torna a tabela responsiva
+        });
+    });
+
+    function aplicarMascaras(modal) {
+        modal.querySelectorAll('.mascara-celular').forEach(mascaraCelularInput);
+        modal.querySelectorAll('.mascara-telefone').forEach(mascaraTelefoneInput);
+        modal.querySelectorAll('.mascara-doc').forEach(mascaraCpfCnpjInput);
+        modal.querySelectorAll('.mascara-cep').forEach(mascaraCepInput);
+    }
+    document.querySelectorAll("[id^='modalClientes']").forEach(modal => {
+        modal.addEventListener('show.bs.modal', function () {
+            aplicarMascaras(modal);
+        });
+    });
+</script>
+{% endblock %}

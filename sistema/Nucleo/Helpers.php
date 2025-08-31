@@ -160,7 +160,7 @@ class Helpers
      * @return string URL completa do ambiente atual.
      */
 
-    public static function url(string $url = null): string
+    public static function url(?string $url = null): string
     {
         $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $ambiente = ($servidor == 'localhost' ? DEVELOPMENT_URL : PRODUCTION_URL);
@@ -238,5 +238,69 @@ class Helpers
         }
 
         return null;
+    }
+
+    /**
+     * Gera uma hash aleatória de tamanho fixo.
+     * * @param int $tamanho O número de dígitos da hash.
+     * @return string A hash gerada.
+     */
+    public static function gerarHash(int $tamanho = 6): string
+    {
+        if ($tamanho <= 0) {
+            return '';
+        }
+
+        $min = pow(36, $tamanho - 1);
+        $max = pow(36, $tamanho) - 1;
+
+        $numero_randomico = random_int($min, $max);
+        $hash = base_convert($numero_randomico, 10, 36);
+
+        return $hash;
+    }
+
+    /**
+     * Adiciona o nome de todos os clientes a uma coleção de orçamentos,
+     * ou a qualquer array de objetos com 'id_cliente' e que pode receber 'nome_cliente'.
+     *
+     * @param array $clientes Uma lista de objetos cliente (ou arrays associativos com 'id' e 'nome').
+     * @param array $itens Uma lista de objetos (e.g., orçamentos) que contêm 'id_cliente'.
+     * @return array Os itens com os nomes dos clientes adicionados.
+     */
+    public static function colocarTodosNomesClientesPeloId(array $clientes, array $itens): array
+    {
+        // Para maior flexibilidade, podemos indexar os clientes por ID primeiro
+        $clientes_map = [];
+        foreach ($clientes as $cliente) {
+            $clientes_map[$cliente->id ?? null] = $cliente->nome ?? null;
+        }
+
+        return array_map(function ($item) use ($clientes_map) {
+            $id_cliente = $item->id_cliente ?? null;
+            if ($id_cliente !== null && isset($clientes_map[$id_cliente])) {
+                $item->nome_cliente = $clientes_map[$id_cliente];
+            } else {
+                $item->nome_cliente = 'Nome não encontrado';
+            }
+            return $item;
+        }, $itens);
+    }
+
+    /**
+     * Retorna o nome de um cliente com base no seu ID a partir de uma lista de clientes.
+     *
+     * @param array $clientes Uma lista de objetos cliente (ou arrays associativos com 'id' e 'nome').
+     * @param mixed $id_cliente O ID do cliente a ser procurado.
+     * @return string O nome do cliente ou uma string vazia se não encontrado.
+     */
+    public static function colocarNomeClientePeloId(array $clientes, $id_cliente): string
+    {
+        foreach ($clientes as $cliente) {
+            if (($cliente->id ?? null) == $id_cliente) {
+                return $cliente->nome ?? 'Nome não encontrado';
+            }
+        }
+        return '';
     }
 }
