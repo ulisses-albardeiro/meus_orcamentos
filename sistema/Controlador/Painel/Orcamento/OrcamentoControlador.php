@@ -108,7 +108,7 @@ class OrcamentoControlador extends PainelControlador
         $pdf->carregarHTML($html);
         $pdf->configurarPapel('A4');
         $pdf->renderizar();
-        $pdf->baixar("orçamento-" . Helpers::slug($dados_cliente['cliente_nome']) . ".pdf");
+        $pdf->baixar("orçamento-" . Helpers::slug($dados_cliente['nome_cliente']) . ".pdf");
     }
 
     public function excluir(string $hash): void
