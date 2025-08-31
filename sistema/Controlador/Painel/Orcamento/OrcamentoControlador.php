@@ -84,6 +84,9 @@ class OrcamentoControlador extends PainelControlador
         $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
 
+        var_dump($dados_completos['itens']);
+        die;
+
 
         // Processa os itens para ter valores numéricos limpos
         $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos['itens']);
