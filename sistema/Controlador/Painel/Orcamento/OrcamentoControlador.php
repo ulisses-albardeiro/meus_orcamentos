@@ -155,6 +155,9 @@ class OrcamentoControlador extends PainelControlador
             $caminho_local = Helpers::url('/templates/assets/arquivos/orcamentos/');
         }
 
+        echo $caminho_local;
+        die;
+
         
 
         $pdf = new Pdf;
