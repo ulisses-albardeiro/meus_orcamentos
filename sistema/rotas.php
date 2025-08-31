@@ -86,14 +86,14 @@ try {
         SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
         SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'OrcamentoControlador@excluir');
         SimpleRouter::get(URL . 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');
-        SimpleRouter::get(URL . 'orcamento/pdf/{modelo}/{id_orcamento}', 'OrcamentoControlador@pdf');
         SimpleRouter::post(URL . 'orcamento/cadastrar/{modelo}', 'OrcamentoControlador@cadastrar');
         SimpleRouter::get(URL . 'orcamento/listar', 'OrcamentoControlador@listar');
     });
 
     //Grupo de rotas que não precisa de autenticação
-    SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function(){
+    SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
         SimpleRouter::get(URL . 'orcamento/{modelo}/{hash}', 'OrcamentoControlador@exibir');
+        SimpleRouter::get(URL . 'orcamento/pdf/{modelo}/{id_orcamento}', 'OrcamentoControlador@pdf');
     });
 
     //Grupo de Rotas Recibo
