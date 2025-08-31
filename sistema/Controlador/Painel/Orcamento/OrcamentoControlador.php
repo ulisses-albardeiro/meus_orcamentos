@@ -90,7 +90,7 @@ class OrcamentoControlador extends PainelControlador
 
 
         // Processa os itens para ter valores numéricos limpos
-        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos['itens']);
+        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
