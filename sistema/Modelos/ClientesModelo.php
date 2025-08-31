@@ -40,17 +40,17 @@ class ClientesModelo extends Modelo
     public function editarCliente(array $dados, int $id_cliente): bool
     {
         $this->id = $id_cliente;
-        $this->nome = $dados['nome'];
-        $this->cpf_cnpj = str_replace(['.', '/', '-'], '', $dados['cpf_cnpj']);
-        $this->email = $dados['email'];
-        $this->telefone = str_replace(['(', ')', '-'], '', $dados['telefone']);
-        $this->celular = str_replace(['(', ')', '-'], '', $dados['celular']);
-        $this->cep = str_replace('-', '', $dados['cep']);
-        $this->rua = $dados['rua'];
-        $this->n_casa = $dados['n_casa'];
-        $this->bairro = $dados['bairro'];
-        $this->cidade = $dados['cidade'];
-        $this->uf = $dados['uf'];
+        $this->nome = $dados['nome_cliente'];
+        $this->cpf_cnpj = str_replace(['.', '/', '-'], '', $dados['cpf_cnpj_cliente']);
+        $this->email = $dados['email_cliente'];
+        $this->telefone = str_replace(['(', ')', '-'], '', $dados['telefone_cliente']);
+        $this->celular = str_replace(['(', ')', '-'], '', $dados['celular_cliente']);
+        $this->cep = str_replace('-', '', $dados['cep_cliente']);
+        $this->rua = $dados['rua_cliente'];
+        $this->n_casa = $dados['n_casa_cliente'];
+        $this->bairro = $dados['bairro_cliente'];
+        $this->cidade = $dados['cidade_cliente'];
+        $this->uf = $dados['uf_cliente'];
         $this->dt_hr_atualizacao = date('Y-m-d H:i:s');
         return $this->salvar();
     }
