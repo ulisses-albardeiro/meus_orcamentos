@@ -10,7 +10,7 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    .container{
+    .container {
         margin-top: -30px;
     }
 
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="col-12 col-md-6">
             <h5 class="mb-3 mt-4 d-flex align-items-center gap-2">
                 <i class="bi bi-cash-coin"></i> Finanças
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <h5 class="mb-3 mt-3 d-flex align-items-center gap-2">
         <i class="bi bi-file-earmark-text"></i> Documentos
@@ -177,7 +177,7 @@
             </a>
         </div>
 
-         <div class="col">
+        <div class="col">
             <a href="{{ url('clientes/listar') }}" class="text-decoration-none">
                 <div class="card bg-card border-0 h-100">
                     <div class="card-body d-flex align-items-center gap-3">
@@ -213,5 +213,103 @@
     </div>
     {% endif %}
 </div>
+
+<!-- Janela flutuante (Pop-up) para o mobile -->
+<div id="installPrompt"
+    class="fixed inset-x-0 bottom-0 bg-white p-6 rounded-t-3xl shadow-2xl transition-transform transform translate-y-full duration-500 ease-in-out md:hidden z-50">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+            <img src="https://placehold.co/60x60/8B5CF6/FFFFFF?text=App" alt="Ícone do Aplicativo"
+                class="w-10 h-10 rounded-xl mr-4">
+            <div>
+                <h3 class="text-lg font-bold text-gray-800">Baixe nosso App</h3>
+                <p class="text-sm text-gray-500">Adicione à sua tela inicial para acesso rápido!</p>
+            </div>
+        </div>
+        <button id="closePrompt" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+    <button id="installButton"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300">
+        Instalar
+    </button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const installPromptElement = document.getElementById('installPrompt');
+        const installButton = document.getElementById('installButton');
+        const closePromptButton = document.getElementById('closePrompt');
+        const showPromptButton = document.getElementById('showPromptButton');
+        let deferredPrompt;
+
+        // O evento 'beforeinstallprompt' é disparado por navegadores que suportam a instalação PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Previne que o mini-infobar apareça automaticamente
+            e.preventDefault();
+            // Armazena o evento para ser usado mais tarde
+            deferredPrompt = e;
+
+            // Exibe o nosso pop-up customizado no mobile
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                installPromptElement.classList.remove('translate-y-full');
+                installPromptElement.classList.add('translate-y-0');
+            } else {
+                // Para o desktop, pode-se mostrar um botão diferente para testar
+                showPromptButton.classList.remove('hidden');
+            }
+        });
+
+        // Adiciona um evento de clique ao botão "Instalar" no nosso pop-up
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                // Oculta nosso pop-up customizado
+                installPromptElement.classList.remove('translate-y-0');
+                installPromptElement.classList.add('translate-y-full');
+
+                // Exibe o prompt de instalação do navegador
+                deferredPrompt.prompt();
+
+                // Aguarda a escolha do usuário
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    console.log('Escolha do usuário:', choiceResult.outcome);
+                    deferredPrompt = null;
+                });
+            }
+        });
+
+        // Adiciona um evento para fechar o pop-up
+        closePromptButton.addEventListener('click', () => {
+            installPromptElement.classList.remove('translate-y-0');
+            installPromptElement.classList.add('translate-y-full');
+        });
+
+        // Adiciona um evento de clique ao botão de demonstração (desktop)
+        showPromptButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                // Exibe o prompt de instalação do navegador
+                deferredPrompt.prompt();
+
+                // Aguarda a escolha do usuário
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    console.log('Escolha do usuário:', choiceResult.outcome);
+                    deferredPrompt = null;
+                });
+            }
+        });
+
+        // Opcional: Adiciona um listener para o evento de 'appinstalled'
+        window.addEventListener('appinstalled', () => {
+            console.log('O aplicativo foi instalado com sucesso!');
+            // Pode-se esconder o pop-up ou mostrar uma mensagem de sucesso
+            installPromptElement.classList.remove('translate-y-0');
+            installPromptElement.classList.add('translate-y-full');
+        });
+    });
+</script>
 
 {% endblock %}
