@@ -84,6 +84,7 @@ class OrcamentoControlador extends PainelControlador
         $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
 
+        echo "<pre>";
         var_dump($dados_completos);
         die;
 
