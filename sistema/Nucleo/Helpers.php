@@ -268,8 +268,12 @@ class Helpers
      * @param array $itens Uma lista de objetos (e.g., orçamentos) que contêm 'id_cliente'.
      * @return array Os itens com os nomes dos clientes adicionados.
      */
-    public static function colocarTodosNomesClientesPeloId(array $clientes, array $itens): array
+    public static function colocarTodosNomesClientesPeloId(?array $clientes, ?array $itens): ?array
     {
+        if (empty($clientes) || empty($itens)) {
+            return null;
+        }
+
         // Para maior flexibilidade, podemos indexar os clientes por ID primeiro
         $clientes_map = [];
         foreach ($clientes as $cliente) {
@@ -294,8 +298,12 @@ class Helpers
      * @param mixed $id_cliente O ID do cliente a ser procurado.
      * @return string O nome do cliente ou uma string vazia se não encontrado.
      */
-    public static function colocarNomeClientePeloId(array $clientes, $id_cliente): string
+    public static function colocarNomeClientePeloId(?array $clientes, ?int $id_cliente): ?string
     {
+        if (empty($clientes) || empty($itens)) {
+            return null;
+        }
+
         foreach ($clientes as $cliente) {
             if (($cliente->id ?? null) == $id_cliente) {
                 return $cliente->nome ?? 'Nome não encontrado';

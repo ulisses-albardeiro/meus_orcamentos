@@ -1,11 +1,14 @@
 <?php
 
 use DI\ContainerBuilder;
-use sistema\Modelos\ClientesModelo;
 use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Clientes\ClientesServico;
+use sistema\Servicos\Listas\ListaInterface;
+use sistema\Servicos\Listas\ListaServicos;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Orcamentos\OrcamentosServicos;
+use sistema\Servicos\Usuarios\UsuariosInterface;
+use sistema\Servicos\Usuarios\UsuariosServico;
 
 use function DI\autowire;
 
@@ -14,6 +17,8 @@ $builder = new ContainerBuilder();
 $builder->addDefinitions([
 
     OrcamentosInterface::class => autowire(OrcamentosServicos::class),
+    ListaInterface::class => autowire(ListaServicos::class),
+    UsuariosInterface::class => autowire(UsuariosServico::class),
 
     //Clientes
     ClientesInterface::class => autowire(ClientesServico::class),

@@ -46,4 +46,9 @@ class UsuarioModelo extends Modelo
             return true;
         }
     }
+
+    public function buscaUsuarioPorId(int $id_usuario)
+    {
+        return $this->busca("id = {$id_usuario}")->resultado(true);
+    }
 }

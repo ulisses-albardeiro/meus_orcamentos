@@ -130,4 +130,27 @@ class OrcamentosServicos implements OrcamentosInterface
     {
         return $this->orcamentoModelo->buscaOrcamentos($id_usuario);
     }
+
+    public function buscaOrcamentoPorHashServico(string $hash): ?array
+    {
+        $dados_objeto = $this->orcamentoModelo->buscaOrcamentosPorHash($hash)[0];
+
+        $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
+        $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
+        return $dados_completos;
+    }
+
+    public function excluirOrcamentoServico(string $hash): bool
+    {
+        return $this->orcamentoModelo->excluirOrcamento($hash);
+    }
+
+    public function buscaOrcamentoPorIdServico(int $id_orcamento): ?array
+    {
+        $dados = $this->orcamentoModelo->buscaOrcamentosPorId($id_orcamento)[0];
+        $dados_orcamento_json = json_decode($dados->orcamento_completo, true);
+        $dados_completos = array_merge((array) $dados, $dados_orcamento_json);
+
+        return $dados_completos;
+    }
 }

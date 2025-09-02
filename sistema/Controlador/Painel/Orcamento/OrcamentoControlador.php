@@ -4,22 +4,24 @@ namespace sistema\Controlador\Painel\Orcamento;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
-use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
+use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Suporte\Pdf;
 
 class OrcamentoControlador extends PainelControlador
 {
     protected OrcamentosInterface $orcamentosServicos;
     protected ClientesInterface $clientesServico;
+    protected UsuariosInterface $usuarioServico;
 
-    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico)
+    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico)
     {
         parent::__construct();
         $this->orcamentosServicos = $orcamentosServicos;
         $this->clientesServico = $clientesServico;
+        $this->usuarioServico = $usuarioServico;
     }
 
     public function listar(): void
@@ -81,17 +83,13 @@ class OrcamentoControlador extends PainelControlador
 
     public function pdf(string $modelo, int $id_orcamento): void
     {
-        $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorId($id_orcamento)[0];
-        $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
-        $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
+        $dados = $this->orcamentosServicos->buscaOrcamentoPorIdServico($id_orcamento);
 
-
-        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
-        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
-
+        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados);
+        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados);
 
         // Processa os itens para ter valores numéricos limpos
-        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos);
+        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -99,9 +97,9 @@ class OrcamentoControlador extends PainelControlador
                 'dados_usuario' => $dados_usuario,
                 'dados_cliente' => $dados_cliente,
                 'itens' => $itens_processados,
-                'total_orcamento' => $dados_completos['vl_total'],
+                'total_orcamento' => $dados['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
-                'dados_completos' => $dados_completos,
+                'dados_completos' => $dados,
             ]
         );
 
@@ -115,7 +113,7 @@ class OrcamentoControlador extends PainelControlador
     public function excluir(string $hash): void
     {
         $arquivo = "templates/assets/arquivos/orcamentos/$hash.pdf";
-        if ((new OrcamentoModelo)->excluirOrcamento($hash)) {
+        if ($this->orcamentosServicos->excluirOrcamentoServico($hash)) {
             if (file_exists($arquivo)) {
                 unlink($arquivo);
             }
@@ -128,18 +126,15 @@ class OrcamentoControlador extends PainelControlador
 
     public function exibir(string $modelo, string $hash): void
     {
-        $dados_objeto = (new OrcamentoModelo)->buscaOrcamentosPorHash($hash)[0];
+        $dados = $this->orcamentosServicos->buscaOrcamentoPorHashServico($hash);
 
-        $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
-        $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
-
-        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados_completos);
-        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados_completos);
+        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados);
+        $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados);
 
         // Processa os itens para ter valores numéricos limpos
-        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados_completos);
+        $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
 
-        $usuario = (new UsuarioModelo)->buscaPorId($dados_completos['id_usuario']);
+        $usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -147,9 +142,9 @@ class OrcamentoControlador extends PainelControlador
                 'dados_usuario' => $dados_usuario,
                 'dados_cliente' => $dados_cliente,
                 'itens' => $itens_processados,
-                'total_orcamento' => $dados_completos['vl_total'],
+                'total_orcamento' => $dados['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
-                'dados_completos' => $dados_completos,
+                'dados_completos' => $dados,
                 'usuario' => $usuario,
             ]
         );
@@ -173,7 +168,8 @@ class OrcamentoControlador extends PainelControlador
             "orcamentos/pre-view.html",
             [
                 "orcamento" => $orcamento_url,
-                "id_orcamento" => $dados_objeto->id,
+                "id_orcamento" => $dados['id'],
+                'modelo' => $modelo,
             ]
         );
     }

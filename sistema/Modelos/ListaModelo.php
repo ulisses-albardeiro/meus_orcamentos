@@ -11,26 +11,37 @@ class ListaModelo extends Modelo
         parent::__construct("listas");
     } 
 
-    public function getListas(int $id_usuario) : array
+    public function buscaListas(int $id_usuario) : ?array
     {
-        $listas = $this->busca("id_usuario = {$id_usuario}")->resultado(true) ?? [];   
+        $listas = $this->busca("id_usuario = {$id_usuario}")->resultado(true);   
         return $listas; 
     }
 
-    public function cadastrarLista(string $cliente, array $dados, int $id_usuario) : void
+    public function buscaListaPorHash(string $hash): array
     {
-        $this->cliente = $cliente;
+        $lista = $this->busca("hash = '{$hash}'", null, 'id_usuario, lista_completa')->resultado(true);
+        return $lista;
+    }
+
+     public function buscaListaPorId($id_lista): ?array
+    {
+        $orcamentos = $this->busca("id = {$id_lista}")->resultado(true);
+        return $orcamentos;    
+    }
+
+    public function cadastrarLista(int $id_cliente, array $dados, int $id_usuario, string $modelo, string $hash) : bool
+    {
+        $this->id_cliente = $id_cliente;
+        $this->hash = $hash;
+        $this->modelo = $modelo;
         $this->lista_completa = json_encode($dados);
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $id_usuario;
-        $this->salvar();
+        return $this->salvar();
     }
 
-    public function excluirLista(int $id_lista) : bool
+    public function excluirLista(string $hash) : bool
     {
-        if ($this->apagar("id = '{$id_lista}'")) {
-            return true;
-        }
-        return false;
+        return $this->apagar("hash = '{$hash}'");
     }
 }

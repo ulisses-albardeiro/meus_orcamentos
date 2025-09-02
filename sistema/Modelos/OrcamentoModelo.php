@@ -17,9 +17,9 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function buscaOrcamentosPorId($id_orcamento)
+    public function buscaOrcamentosPorId($id_orcamento): ?array
     {
-        $orcamentos = $this->busca("id = {$id_orcamento}")->resultado(true) ?? [];
+        $orcamentos = $this->busca("id = {$id_orcamento}")->resultado(true);
         return $orcamentos;    
     }
 
@@ -29,7 +29,7 @@ class OrcamentoModelo extends Modelo
         return $orcamentos;    
     }
 
-    public function cadastrarOrcamento(int $id_cliente, string $vl_total, array $dados, int $id_usuario, string $modelo, $hash) : ?int
+    public function cadastrarOrcamento(int $id_cliente, string $vl_total, array $dados, int $id_usuario, string $modelo, string $hash) : ?int
     {
         $this->id_cliente = $id_cliente;
         $this->hash = $hash;

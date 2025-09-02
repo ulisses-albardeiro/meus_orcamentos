@@ -11,54 +11,6 @@
         background-color: #373643e7 !important;
 
     }
-
-    /* Estilo para o dropdown de autocomplete */
-    #autocomplete-dropdown {
-        position: absolute;
-        z-index: 1000;
-        width: 100%;
-        max-height: 200px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        border-radius: 0 0 .25rem .25rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: none;
-        /* Inicia escondido */
-    }
-
-    /* Estilo para o dropdown-menu que o JavaScript mostra/esconde */
-    #autocomplete-dropdown.show {
-        display: block;
-    }
-
-    /* Estilo para os itens do dropdown */
-    #autocomplete-dropdown .dropdown-item {
-        font-weight: bold;
-        /* Deixa a escrita em negrito */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: .5rem 1rem;
-        cursor: pointer;
-        background-color: #fff;
-        color: #212529;
-    }
-
-    /* Estilo quando o item é hover */
-    #autocomplete-dropdown .dropdown-item:hover,
-    #autocomplete-dropdown .dropdown-item:focus {
-        background-color: #e9ecef;
-        color: #16181b;
-    }
-
-    /* Estilo para o item de 'nenhum resultado' */
-    #autocomplete-dropdown .dropdown-item.disabled {
-        font-style: italic;
-        font-weight: normal;
-        /* Sobrescreve o negrito */
-        color: #6c757d;
-        cursor: default;
-    }
 </style>
 
 <h3 class="text-center">Confira Seus Dados</h3>
@@ -123,70 +75,8 @@
     <h3 class="text-center mt-4">Dados do cliente</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
 
-    <div class="card border-1 shadow-lg p-3">
-        <div class="row g-2 mb-3">
-            <input type="text" hidden name="id_cliente" id="id_cliente">
-            <div class="col-md-5">
-                <label class="form-label">Nome*</label>
-                <input required type="text" class="form-control form-control-sm" name="nome_cliente" id="nome_cliente"
-                    autocomplete="off">
-                <div id="autocomplete-dropdown" class="dropdown-menu w-25"></div>
-            </div>
-            <div class="col-md-1">
-                <label class="form-label">Telefone Fixo</label>
-                <input type="text" class="form-control form-control-sm" id="telefone_cliente" name="telefone_cliente">
-            </div>
-            <div class="col-md-1">
-                <label class="form-label">Celular</label>
-                <input type="text" class="form-control form-control-sm" id="celular_cliente" name="celular_cliente">
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control form-control-sm" name="email_cliente">
-            </div>
-            <div class="col-md-2">
-                <label class="form-label">CPF/CNPJ</label>
-                <input type="text" class="form-control form-control-sm" id="cpf_cnpj_cliente" name="cpf_cnpj_cliente"
-                    placeholder="00.000.000/0000-00 ou 000.000.000-00" maxlength="18">
-            </div>
-        </div>
-
-        <div class="row g-2 mb-3">
-            <div class="col-md-1">
-                <label class="form-label">CEP</label>
-                <input type="text" class="form-control form-control-sm" id="cep_cliente" name="cep_cliente"
-                    placeholder="00000-000" maxlength="9">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Rua</label>
-                <input type="text" class="form-control form-control-sm" name="rua_cliente">
-            </div>
-            <div class="col-md-1">
-                <label class="form-label">Número</label>
-                <input type="text" class="form-control form-control-sm" name="n_casa_cliente">
-            </div>
-            <div class="col-md-2">
-                <label class="form-label">Bairro</label>
-                <input type="text" class="form-control form-control-sm" name="bairro_cliente">
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Cidade</label>
-                <input type="text" class="form-control form-control-sm" name="cidade_cliente">
-            </div>
-            <div class="col-md-1">
-                <label class="form-label">UF</label>
-                <select id="uf" name="uf_cliente" class="form-select form-select-sm">
-                    <option value="" selected disabled>UF</option>
-                    {% for estado in
-                    ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
-                    %}
-                    <option value="{{ estado }}">{{ estado }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-    </div>
-
+    {% include '/componentes/cabecalho-dados-cliente.html' %}
+    
     <h3 class="mt-4 text-center">Itens do Orçamento</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
     <div class="card border-1 shadow-lg p-3">
@@ -236,7 +126,7 @@
                 class="bi bi-plus-circle"></i> Gerar Orçamento</button>
     </div>
 </form>
-<script></script>
+
 <script src="{{url('templates/assets/js/orcamentos.js')}}?v=1.0.2"></script>
 
 <script>
@@ -253,12 +143,8 @@
         camposValor.forEach(campo => {
             aplicarMascaraMonetaria(campo);
         });
-        // Obtenha os dados dos clientes do Twig e parse o JSON
-        const clientes = JSON.parse('{{ clientes | json_encode() | raw }}');
-        dropdownClientes(clientes)
+       
     });
-
-
 </script>
 
 {% endblock %}

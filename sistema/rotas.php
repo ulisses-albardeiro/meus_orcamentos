@@ -74,11 +74,17 @@ try {
 
     //Grupo de Rotas Lista
     SimpleRouter::group(['namespace' => 'Painel\Lista', 'middleware' => AuthMiddleware::class], function () {
-        SimpleRouter::get(URL . 'criar-lista', 'Lista@cadastrar');
-        SimpleRouter::match(['get', 'post'], URL . 'gerar-lista', 'GerarLista@gerar');
-        SimpleRouter::get(URL . 'minhas-listas', 'Lista@listar');
-        SimpleRouter::get(URL . 'ver-lista/{id_lista}', 'GerarLista@gerar');
-        SimpleRouter::match(['get', 'post'], URL . 'excluir-lista/{id_lista}', 'Lista@excluir');
+        SimpleRouter::get(URL . 'listas/listar', 'ListaControlador@listar');
+        SimpleRouter::get(URL . 'listas/modelos', 'ListaControlador@modelos');
+        SimpleRouter::get(URL . 'listas/criar/{form}/{modelo}', 'ListaControlador@criar');
+        SimpleRouter::post(URL . 'listas/cadastrar/{modelo}', 'ListaControlador@cadastrar');
+        SimpleRouter::get(URL . 'listas/excluir/{hash}', 'ListaControlador@excluir');
+    });
+
+    //Grupo de rotas de LIsta que não precisa de autenticação
+    SimpleRouter::group(['namespace' => 'Painel\Lista'], function () {
+        SimpleRouter::get(URL . 'listas/{modelo}/{hash}', 'ListaControlador@exibir');
+        SimpleRouter::get(URL . 'listas/pdf/{modelo}/{hash}', 'ListaControlador@pdf');
     });
 
     //Grupo de Rotas Orçamento

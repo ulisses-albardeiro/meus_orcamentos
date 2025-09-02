@@ -90,84 +90,84 @@ function copiarLinkDaPagina(classe) {
 
 // -------------------- CELULAR --------------------
 function mascaraCelularInput(celular) {
-    function formatar(valor) {
-        let v = valor.replace(/\D/g, "").substring(0, 11);
-        let a = v.split(""); 
-        let f = "";
-        if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
-        if (a.length > 2) f += `${a.slice(2, 7).join("")}`;
-        if (a.length > 7) f += `-${a.slice(7, 11).join("")}`;
-        return f;
-    }
+  function formatar(valor) {
+    let v = valor.replace(/\D/g, "").substring(0, 11);
+    let a = v.split("");
+    let f = "";
+    if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
+    if (a.length > 2) f += `${a.slice(2, 7).join("")}`;
+    if (a.length > 7) f += `-${a.slice(7, 11).join("")}`;
+    return f;
+  }
 
-    // Aplica máscara no valor já preenchido
+  // Aplica máscara no valor já preenchido
+  celular.value = formatar(celular.value);
+
+  // Aplica máscara enquanto digita
+  celular.addEventListener("input", function () {
     celular.value = formatar(celular.value);
-
-    // Aplica máscara enquanto digita
-    celular.addEventListener("input", function () {
-        celular.value = formatar(celular.value);
-    });
+  });
 }
 
 // -------------------- TELEFONE --------------------
 function mascaraTelefoneInput(tel) {
-    function formatar(valor) {
-        let v = valor.replace(/\D/g, "").substring(0, 10);
-        let a = v.split("");
-        let f = "";
-        if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
-        if (a.length > 2) f += `${a.slice(2, 6).join("")}`;
-        if (a.length > 6) f += `-${a.slice(6, 10).join("")}`;
-        return f;
-    }
+  function formatar(valor) {
+    let v = valor.replace(/\D/g, "").substring(0, 10);
+    let a = v.split("");
+    let f = "";
+    if (a.length > 0) f += `(${a.slice(0, 2).join("")})`;
+    if (a.length > 2) f += `${a.slice(2, 6).join("")}`;
+    if (a.length > 6) f += `-${a.slice(6, 10).join("")}`;
+    return f;
+  }
 
+  tel.value = formatar(tel.value);
+
+  tel.addEventListener("input", function () {
     tel.value = formatar(tel.value);
-
-    tel.addEventListener("input", function () {
-        tel.value = formatar(tel.value);
-    });
+  });
 }
 
 // -------------------- CPF/CNPJ --------------------
 function mascaraCpfCnpjInput(doc) {
-    function formatar(valor) {
-        let v = valor.replace(/\D/g, "").substring(0, 14);
-        let a = v.split(""); 
-        let f = "";
+  function formatar(valor) {
+    let v = valor.replace(/\D/g, "").substring(0, 14);
+    let a = v.split("");
+    let f = "";
 
-        if (a.length <= 11) { // CPF
-            if (a.length > 0) f += `${a.slice(0, 3).join("")}`;
-            if (a.length > 3) f += `.${a.slice(3, 6).join("")}`;
-            if (a.length > 6) f += `.${a.slice(6, 9).join("")}`;
-            if (a.length > 9) f += `-${a.slice(9, 11).join("")}`;
-        } else { // CNPJ
-            f += `${a.slice(0, 2).join("")}.${a.slice(2, 5).join("")}.${a.slice(5, 8).join("")}/${a.slice(8, 12).join("")}-${a.slice(12, 14).join("")}`;
-        }
-
-        return f;
+    if (a.length <= 11) { // CPF
+      if (a.length > 0) f += `${a.slice(0, 3).join("")}`;
+      if (a.length > 3) f += `.${a.slice(3, 6).join("")}`;
+      if (a.length > 6) f += `.${a.slice(6, 9).join("")}`;
+      if (a.length > 9) f += `-${a.slice(9, 11).join("")}`;
+    } else { // CNPJ
+      f += `${a.slice(0, 2).join("")}.${a.slice(2, 5).join("")}.${a.slice(5, 8).join("")}/${a.slice(8, 12).join("")}-${a.slice(12, 14).join("")}`;
     }
 
-    doc.value = formatar(doc.value);
+    return f;
+  }
 
-    doc.addEventListener("input", function () {
-        doc.value = formatar(doc.value);
-    });
+  doc.value = formatar(doc.value);
+
+  doc.addEventListener("input", function () {
+    doc.value = formatar(doc.value);
+  });
 }
 
 // -------------------- CEP --------------------
 function mascaraCepInput(cep) {
-    function formatar(valor) {
-        let v = valor.replace(/\D/g, "").substring(0, 8);
-        let a = v.split("");
-        let f = "";
-        if (a.length > 0) f += `${a.slice(0, 5).join("")}`;
-        if (a.length > 5) f += `-${a.slice(5, 8).join("")}`;
-        return f;
-    }
+  function formatar(valor) {
+    let v = valor.replace(/\D/g, "").substring(0, 8);
+    let a = v.split("");
+    let f = "";
+    if (a.length > 0) f += `${a.slice(0, 5).join("")}`;
+    if (a.length > 5) f += `-${a.slice(5, 8).join("")}`;
+    return f;
+  }
 
+  cep.value = formatar(cep.value);
+
+  cep.addEventListener("input", function () {
     cep.value = formatar(cep.value);
-
-    cep.addEventListener("input", function () {
-        cep.value = formatar(cep.value);
-    });
+  });
 }

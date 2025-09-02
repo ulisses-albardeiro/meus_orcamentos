@@ -9,28 +9,30 @@
     <div class="card shadow-lg border-0 mb-3 mt-1">
         <div class="card-body">
             <div class="text-end">
-                <a class="btn btn-dark btn-sm" href="{{ url("criar-lista") }}">Criar lista</a>
+                <a class="btn btn-dark btn-sm" href="{{ url('listas/modelos') }}">Criar lista</a>
             </div>
             <small>
                 <table id="data-table" class="table table-hover">
                     <thead class="table-light">
                         <tr>
                             <th>Cliente</th>
+                            <th>Modelo</th>
                             <th>Data de criação</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for lista in listas %}
-                        <td>{{ lista.cliente }}</td>
+                        <td>{{ lista.nome_cliente }}</td>
+                        <td>{{ lista.modelo }}</td>
                         <td>{{ lista.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
                         <td class="text-center">
-                            <a title="Ver Lista" target="_blank" href="{{ url('ver-lista/'~lista.id) }}" class="text-success text-decoration-none fs-4">
+                            <a title="Ver Lista" target="_blank" href="{{ url('listas/'~lista.modelo~'/'~lista.hash) }}" class="text-success text-decoration-none fs-4">
                                 <i class="bi bi-filetype-pdf"></i>
                             </a>
                                       
                             <a href="#" title="Excluir" class="text-danger text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ lista.id }}"><i class="bi bi-trash fs-4"></i>
-                                {% include './modais/excluir-minhas-listas.html' %}
+                                {% include 'listas/modais/excluir.html' %}
                             
                         </td>
                         </tr>
@@ -47,7 +49,7 @@
     $(document).ready(function () {
         $('#data-table').DataTable({
             language: {
-                url: "templates/assets/DataTables/pt_br.json"
+                url: "../templates/assets/DataTables/pt_br.json"
             },
             pageLength: 10, // Define o número de linhas por página
             lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página

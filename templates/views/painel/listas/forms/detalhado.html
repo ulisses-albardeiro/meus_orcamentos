@@ -16,7 +16,7 @@
 <h3 class="text-center">Seus Dados</h3>
 <p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para
     adicionar logo ao seu orçamento, vá para <a href="{{ url('perfil') }}">Perfil</a></p>
-<form action="{{ url('gerar-lista') }}" method="get" target="_blank">
+<form action="{{ url('listas/cadastrar/' ~ modelo) }}" method="post" target="_blank">
 
     <div class="card border-1 shadow-lg p-3">
         <div class="text-center mb-3">
@@ -29,23 +29,23 @@
             <div class="col-4">
                 <label class="form-label">Seu nome</label>
                 <input required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm"
-                    name="nome-empresa">
+                    name="nome_usuario">
             </div>
             <div class="col-4">
                 <label class="form-label"> Seu Email</label>
                 <input value="{{ usuario().email }}" type="email" class="form-control form-control-sm"
-                    name="email-empresa">
+                    name="email_usuario">
             </div>
             <div class="col-4">
                 <label class="form-label"> Seu Telefone</label>
                 <input required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm"
-                    name="tel-empresa">
+                    name="telelefone_usuario">
             </div>
         </div>
         <div class="row g-2 mb-3">
             <div class="col-4">
                 <label class="form-label">Seu CNPJ</label>
-                <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="doc-empresa"
+                <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="cnpj_usuario"
                     id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
             </div>
             <div class="col-4">
@@ -61,51 +61,19 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Seu Endereço</label>
-            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="end-empresa">
+            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="endereco_usuario">
         </div>
     </div>
 
     <h3 class="text-center mt-4">Dados do cliente</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
 
-    <div class="card border-1 shadow-lg p-3">
-        <div class="row g-2 mb-3">
-            <div class="col-md-4">
-                <label class="form-label">Nome do cliente <span class="text-danger">*</span></label>
-                <input required type="text" class="form-control form-control-sm" name="nome-cliente">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Telefone Fixo do cliente</label>
-                <input type="text" class="form-control form-control-sm" name="tel-cliente">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Celular do cliente</label>
-                <input type="text" class="form-control form-control-sm" name="cel-cliente">
-            </div>
-        </div>
-
-        <div class="row g-2 mb-3">
-            <div class="col-md-4">
-                <label class="form-label">CNPJ do cliente</label>
-                <input type="text" class="form-control form-control-sm" name="doc-cliente" id="cnpj-input-cliente"
-                    placeholder="00.000.000/0000-00" maxlength="18">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Email do cliente</label>
-                <input type="email" class="form-control form-control-sm" name="email-cliente">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Endereço do cliente</label>
-                <input placeholder="Rua, número da casa, Cidade/estado" type="text" class="form-control form-control-sm"
-                    name="end-cliente">
-            </div>
-        </div>
-    </div>
+    {% include '/componentes/cabecalho-dados-cliente.html' %}
 
     <h3 class="mt-4 text-center">Itens da Lista de Materiais</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
     <div class="card border-1 shadow-lg p-3">
-        <div id="itens-container" class="mb-3">
+        <div id="itens-container" class="mb-3" spellcheck="true">
             <div class="row g-2 item">
                 <div class="col-8">
                     <input required type="text" class="form-control form-control-sm" placeholder="Nome do Material*"
@@ -126,7 +94,7 @@
 
     <h3 class="mt-4 text-center">Detalhes finais</h3>
 
-    <div class="card border-1 shadow-lg p-3">
+    <div class="card border-1 shadow-lg p-3" spellcheck="true">
         <div class="mb-3">
             <label class="form-label">Observações sobre os Materiais</label>
             <textarea class="form-control form-control-sm" placeholder="Observações" name="anotacoes"></textarea>
@@ -139,7 +107,9 @@
             Gerar Lista de Materiais</button>
     </div>
 </form>
+{% endblock %}
 
+{% block codigo_js %}
 <script>
     // Função para adicionar novos itens à lista de materiais
     function adicionarItem() {

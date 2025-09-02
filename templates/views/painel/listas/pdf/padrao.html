@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista {{ dados.nome_cliente }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .section-title-lista {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            margin-top: 2rem;
+        }
+
+        .titulo-lista {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-white">
+        <table class="bg-light border-bottom border-primary border-2" style="width: 100%;">
+            <tbody>
+                <tr>
+                    {% if img_usuario %}
+                    <td style="width: 30%; vertical-align: middle; padding: 20px;">
+                        <img src="{{ url('templates/assets/img/logos/'~img_usuario) }}" class="img-fluid" style="max-height: 220px;">
+                    </td>
+                    {% endif %}
+                    <td style="width: 70%; vertical-align: middle;">
+                        <h2 class="fw-bold mb-2">{{ dados['nome_usuario'] }}</h2>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p style="font-size: 15px;" class="mb-1">
+                                    <i class="fas fa-phone-alt text-muted me-1"></i>
+                                    {{ dados.telelefone_usuario }}
+                                </p>
+                                {% if dados['cnpj_usuario'] %}
+                                <p style="font-size: 15px;" class="mb-1">
+                                    <i class="fas fa-id-card text-muted me-1"></i>
+                                    {{ dados.cnpj_usuario }}
+                                </p>
+                                {% endif %}
+                                {% if dados.email_usuario %}
+                                <p style="font-size: 15px;" class="mb-1">
+                                    <i class="fas fa-envelope text-muted me-1"></i>
+                                    {{ dados['email_usuario'] }}
+                                </p>
+                                {% endif %}
+                                {% if dados.endereco_usuario %}
+                                <p style="font-size: 15px;" class="mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    {{ dados['endereco_usuario'] }}
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mt-1">
+                            {% if dados.facebook %}
+                            <span class="me-1">
+                                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="me-1" style="width: 15px; height: 15px;">
+                                {{ dados.facebook }}
+                            </span>
+                            {% endif %}
+                            {% if dados.instagram %}
+                            <span>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="me-1" style="width: 15px; height: 15px;">
+                                {{ dados.instagram }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title-lista">
+            Dados do Cliente
+        </div>
+        <div class="mb-3 border p-2">
+            <p class="mb-0 border-bottom"><strong>Nome:</strong> {{ dados.nome_cliente }}</p>
+
+            {% if dados.cpf_cnpj_cliente %}
+            <p class="mb-0 border-bottom"><strong>CPF/CNPJ:</strong> {{ dados.cpf_cnpj_cliente }}</p>
+            {% endif %}
+
+            {% if dados.cep_cliente or dados.rua_cliente or dados.n_casa_cliente or dados.bairro_cliente or dados.cidade_cliente or dados.uf_cliente %}
+            <p class="mb-0 border-bottom">
+                <strong>Endereço:</strong>
+                {% if dados.rua_cliente %}{{ dados.rua_cliente }}{% endif %}
+                {% if dados.n_casa_cliente %}, {{ dados.n_casa_cliente }}{% endif %}
+                {% if dados.bairro_cliente %} - {{ dados.bairro_cliente }}{% endif %}
+                {% if dados.cidade_cliente %} - {{ dados.cidade_cliente }}{% endif %}
+                {% if dados.uf_cliente %}/{{ dados.uf_cliente }}{% endif %}
+                {% if dados.cep_cliente %} - CEP: {{ dados.cep_cliente }}{% endif %}
+            </p>
+            {% endif %}
+
+            {% if dados.telefone_cliente or dados.celular_cliente %}
+            <p class="mb-0 border-bottom">
+                <strong>Contato:</strong>
+                {% if dados.telefone_cliente %}Tel: {{ dados.telefone_cliente }}{% endif %}
+                {% if dados.telefone_cliente and dados.celular_cliente %} / {% endif %}
+                {% if dados.celular_cliente %}Cel: {{ dados.celular_cliente }}{% endif %}
+            </p>
+            {% endif %}
+
+            {% if dados.email_cliente %}
+            <p class="mb-0"><strong>Email:</strong> {{ dados.email_cliente }}</p>
+            {% endif %}
+        </div>
+
+        <div class="titulo-lista">
+            <p>Lista de Itens</p>
+        </div>
+
+        <table class="table border-bottom">
+            <thead style="background-color: #343a40;">
+                <tr>
+                    <th style="max-width: 8px;" class="text-white text-center">Qtd.</th>
+                    <th class="text-white w-100">Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in dados.itens %}
+                <tr style="border-left: #dee2e6 solid 1px; border-right: #dee2e6 solid 1px;">
+                    <td class="text-center">{{ item['qtd-item'] }}</td>
+                    <td>
+                        {{ item['nome-item'] }}<br>
+                        <small style="font-size: 13px; font-style: italic">{{ item['descricao-item'] }}</small>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="footer">
+            {% if dados.anotacoes %}
+            <p>*{{ dados.anotacoes }}</p>
+            {% endif %}
+            <p>Obrigado por utilizar nosso serviço! Para dúvidas, entre em contato</p>
+        </div>
+    </div>
+</body>
+
+</html>
