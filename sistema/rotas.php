@@ -22,11 +22,13 @@ try {
         //Cadastro novos usuários
         SimpleRouter::get(URL . 'form-cadastro', 'CadastroUsuario@form');
         SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
+    });
 
-        //Listagem e Edição de perfil
-        SimpleRouter::get(URL . 'perfil', 'Perfil@listar');
-        SimpleRouter::post(URL . 'perfil-editar', 'Perfil@editar');
-        SimpleRouter::get(URL . 'remover-logo', 'Perfil@removerLogo');
+    //Grupo de rotas de Perfil
+    SimpleRouter::group(['namespace' => 'Painel\Perfil', 'middleware' => AuthMiddleware::class], function () {
+        SimpleRouter::get(URL . 'perfil', 'PerfilControlador@listar');
+        SimpleRouter::post(URL . 'perfil-editar', 'PerfilControlador@editar');
+        SimpleRouter::get(URL . 'remover-logo', 'PerfilControlador@removerLogo');
     });
 
     //Grupo de Rotas Recuperação de senha

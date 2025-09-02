@@ -1,18 +1,25 @@
 <?php
-namespace sistema\Controlador\Painel;
+
+namespace sistema\Controlador\Painel\Perfil;
 
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Biblioteca\Upload;
+use sistema\Controlador\Painel\PainelControlador;
 
-class Perfil extends PainelControlador
+class PerfilControlador extends PainelControlador
 {
-    public function listar() : void
+    public function listar(): void
     {
-        echo $this->template->rendenizar("perfil.html", []);
+        echo $this->template->rendenizar(
+            "perfil.html",
+            [
+                'titulo' => 'Perfil'
+            ]
+        );
     }
 
-    public function editar() : void
+    public function editar(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -22,14 +29,11 @@ class Perfil extends PainelControlador
             if ($upload->getResultado()) {
                 unlink('templates/site/assets/img/logos/' . $this->usuario->img_logo);
                 $nome_arquivo = $upload->getResultado();
-            }else {
-                echo $upload->getErro();
-                die;
             }
         }
-        
+
         $usuario = (new UsuarioModelo);
-        $usuario->id = $this->usuario->id;
+        $usuario->id = $this->usuario->usuarioId;
         $usuario->img_logo = $nome_arquivo ?? $this->usuario->img_logo;
         $usuario->cnpj = $dados['cnpj'];
         $usuario->nome = $dados['nome'];
@@ -40,23 +44,20 @@ class Perfil extends PainelControlador
         $usuario->endereco = $dados['endereco'];
         if ($usuario->salvar()) {
             $this->mensagem->mensagemSucesso('Perfil atualizado com sucesso!')->flash();
-            Helpers::redirecionar('perfil');
-        }else{
-            $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();
-            Helpers::redirecionar('perfil');
         }
+        Helpers::redirecionar('perfil');
     }
 
-    public function removerLogo() : void
+    public function removerLogo(): void
     {
         unlink('templates/site/assets/img/logos/' . $this->usuario->img_logo);
         $usuario = (new UsuarioModelo);
-        $usuario->id = $this->usuario->id;
+        $usuario->id = $this->usuario->usuarioId;
         $usuario->img_logo = null;
-        if ($usuario->salvar()) {  
+        if ($usuario->salvar()) {
             $this->mensagem->mensagemSucesso('Logo removida com sucesso!')->flash();
             Helpers::redirecionar('perfil');
-        }else{
+        } else {
             $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();
             Helpers::redirecionar('perfil');
         }
