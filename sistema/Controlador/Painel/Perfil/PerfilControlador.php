@@ -33,7 +33,7 @@ class PerfilControlador extends PainelControlador
         }
 
         $usuario = (new UsuarioModelo);
-        if (!isset($nome_arquivo)) {
+        if (isset($nome_arquivo)) {
             $usuario->img_logo = $nome_arquivo;
         }
         $usuario->id = $this->usuario->usuarioId;
