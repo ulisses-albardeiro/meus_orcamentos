@@ -149,6 +149,7 @@ class OrcamentoControlador extends PainelControlador
                 'titulo' => $dados_usuario['nome-empresa'],
                 'dados_completos' => $dados,
                 'usuario' => $usuario[0],
+                'titulo' => $dados_usuario['nome-empresa'],
             ]
         );
 
