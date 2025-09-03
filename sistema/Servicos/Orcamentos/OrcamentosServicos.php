@@ -16,7 +16,8 @@ class OrcamentosServicos implements OrcamentosInterface
     public function calcularTotalOrcamento(array $dados): int
     {
         if (isset($dados['valor_orcamento'])) {
-            return (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
+            $total =  (int) str_replace(['R$', '.', ',', "\xC2\xA0", ' '], ['', '', '', '', ''], $dados['valor_orcamento']);
+            return $total;
         }
 
         $total = 0;
@@ -26,7 +27,7 @@ class OrcamentosServicos implements OrcamentosInterface
             $total += (int)$valor * (int)$item['qtd'];
         }
 
-        return $total / 100;
+        return $total;
     }
 
     public function separarDadosUsuario(array $dados): array

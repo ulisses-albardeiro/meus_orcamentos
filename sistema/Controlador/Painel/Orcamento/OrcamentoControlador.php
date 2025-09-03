@@ -91,6 +91,8 @@ class OrcamentoControlador extends PainelControlador
         // Processa os itens para ter valores numéricos limpos
         $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
 
+         $usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
+
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
             [
@@ -100,6 +102,7 @@ class OrcamentoControlador extends PainelControlador
                 'total_orcamento' => $dados['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
                 'dados_completos' => $dados,
+                'usuario' => $usuario[0],
             ]
         );
 
@@ -145,7 +148,7 @@ class OrcamentoControlador extends PainelControlador
                 'total_orcamento' => $dados['vl_total'],
                 'titulo' => $dados_usuario['nome-empresa'],
                 'dados_completos' => $dados,
-                'usuario' => $usuario,
+                'usuario' => $usuario[0],
             ]
         );
 
@@ -170,6 +173,8 @@ class OrcamentoControlador extends PainelControlador
                 "orcamento" => $orcamento_url,
                 "id_orcamento" => $dados['id'],
                 'modelo' => $modelo,
+                'usuario' => $usuario[0],
+                'hash' => $hash,
             ]
         );
     }

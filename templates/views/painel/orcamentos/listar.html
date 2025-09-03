@@ -27,7 +27,7 @@
                         <td>{{ orcamento.nome_cliente }}</td>
                         <td>{{ orcamento.modelo }}</td>
                         <td>{{ orcamento.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
-                        <td>R$ {{ (orcamento.vl_total * 100) |number_format(2, ',', '.') }}</td>
+                        <td>R$ {{ orcamento.vl_total |number_format(2, ',', '.') }}</td>
                         <td class="text-center">
                             <a title="Ver Orçamento" target="_blank"
                             href="{{ url('orcamento/'~orcamento.modelo~'/'~orcamento.hash) }}" class="text-success text-decoration-none fs-4">

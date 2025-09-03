@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf_viewer.min.css">
 
-    {% if usuario().img_logo %}
-    <link rel="icon" href="{{ url('templates/assets/img/logos/'~usuario().img_logo)}}">
+    {% if usuario.img_logo %}
+    <link rel="icon" href="{{ url('templates/assets/img/logos/'~usuario.img_logo)}}">
     {% else %}
     <link rel="icon" href="{{ url('templates/assets/img/gerais/icone.png') }}" />
     {% endif %}
@@ -48,7 +48,7 @@
         <div class="text-center pb-4">
             <div class="d-inline-flex flex-column flex-md-row gap-2">
                 <a href="#" class="btn btn-primary copiar-link"><i class="bi bi-copy"></i> Copiar Link do Orçamento</a>
-                <a href="{{ url('orcamento/pdf/'~hash~'/' ~ id_orcamento) }}" class="btn btn-secondary"><i class="bi bi-filetype-pdf"></i> Baixar PDF do Orçamento</a>
+                <a href="{{ url('orcamento/pdf/'~modelo~'/' ~ id_orcamento) }}" class="btn btn-secondary"><i class="bi bi-filetype-pdf"></i> Baixar PDF do Orçamento</a>
                 <a href="#" class="btn btn-success btn-whatsapp"><i class="bi bi-whatsapp"></i> Compartilhar no WhatsApp</a>
             </div>
         </div>
