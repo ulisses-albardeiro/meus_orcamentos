@@ -1,198 +1,283 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17166589273"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17166589273"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+        gtag('config', 'AW-17166589273');
+    </script>
+    <link rel="shortcut icon" href="{{ url('templates/assets/img/gerais/icone.png') }}" type="image/x-icon">
+    <title>{{ constant('SITE_NAME')}} {{ constant('SITE_DESC')}} - {{titulo}}</title>
 
-    gtag('config', 'AW-17166589273');
-  </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meus Orçamentos - {{ titulo }}</title>
+    <script src="{{ url('templates/assets/js/jquery.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+    <link rel="stylesheet" href="{{url('templates/assets/Trumbowyg/dist/ui/trumbowyg.min.css')}}">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ url('templates/assets/img/gerais/icone.png') }}" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
-  <!-- Bootstrap e ícones -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- DataTables -->
-  <link rel="stylesheet" type="text/css" href="{{ url('templates/assets/DataTables/datatables.min.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-  <style>
-    body {
-      font-family: 'Inter', 'Roboto', 'Nunito', sans-serif;
-    }
+    <link rel="stylesheet" type="text/css" href="{{ url('templates/assets/DataTables/datatables.min.css') }}">
 
-    .app-header {
-      background-color: #373643;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    <link rel="stylesheet" href="{{url('templates/assets/css/style.css')}}">
 
-    .app-header a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.25rem;
-      font-weight: 600;
-      font-family: "Poppins", sans-serif;
-    }
+    <link rel="stylesheet" href="{{ url('templates/assets/Select2/dist/css/select2.css') }}">
 
-    .app-header img {
-      width: 24px;
-      margin-left: -8px;
-      margin-top: -25px;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #373643;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      padding: 0.5rem 0;
-      z-index: 10;
-    }
-
-    .bottom-nav a {
-      text-decoration: none;
-      color: #373643;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .menu-item {
-      text-align: center;
-      border-radius: 10px;
-      padding: 6px 8px;
-      background-color: #ffffff;
-    }
-
-    @media (max-width: 425px) {
-      .mobile {
-        font-size: 13px !important;
+    <style>
+      #whatsapp-button {
+          position: fixed;
+          bottom: 40px;
+          right: 40px;
+          z-index: 1000;
+          background-color: #25D366;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          padding: 6px 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+          transition: background-color 0.3s ease;
       }
-    }
-
-    @media (max-width: 365px) {
-      .mobile {
-        font-size: 11px !important;
+  
+      #whatsapp-button img {
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
       }
-    }
+  
+      .label-suporte {
+          color: white;
+          font-weight: 600;
+          font-size: 14px;
+      }
+    </style>
 
-    #whatsapp-button {
-      position: fixed;
-      bottom: 40px;
-      left: 10px;
-      z-index: 1000;
-      background-color: #25D366;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      padding: 6px 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease;
-    }
-
-    #whatsapp-button img {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-    }
-
-    .label-suporte {
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    
-    .cor-fundo{
-        background-color: #e1e4e780;
-    }
-
-  </style>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body class="cor-fundo">
-  <header class="app-header">
-    <a href="{{ url('home') }}">
-      Meus Orçamentos
-      <img src="{{ url('templates/views/site/assets/img/icone.png') }}" alt="Ícone" />
-    </a>
-    <a href="{{ url('sair') }}" title="Sair">
-      <i class="bi bi-box-arrow-right fs-3"></i>
-    </a>
-  </header>
+<body>
 
-  <main class="px-5 pt-4 pb-5">
-    {% block conteudo %}
+    <div class="wrapper">
+
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="{{ url('home') }}">Meus Orçamentos</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-item" title="Home">
+                    <a href="{{ url('home') }}" class="sidebar-link">
+                        <i class="bi bi-house"></i>
+                        <span>Início</span>
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{{ url('perfil') }}" class="sidebar-link">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ url('dashboard-financas') }}" class="sidebar-link">
+                        <i class="bi bi-cash-coin"></i>
+                        <span>Finanças</span>
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#menu-orcamentos" aria-expanded="false" aria-controls="menu-orcamentos">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>Orçamentos</span>
+                    </a>
+                    <ul id="menu-orcamentos" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="{{ url('orcamento/listar') }}" class="sidebar-link">Ver Orçamentos</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url('orcamento/modelos') }}" class="sidebar-link">Criar Orçamento</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#menu-listas" aria-expanded="false" aria-controls="menu-listas">
+                        <i class="bi bi-card-checklist"></i>
+                        <span>Listas</span>
+                    </a>
+                    <ul id="menu-listas" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="{{ url('listas/listar') }}" class="sidebar-link">Ver Listas</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url('listas/modelos') }}" class="sidebar-link">Criar Lista</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#menu-recibos" aria-expanded="false" aria-controls="menu-recibos">
+                        <i class="bi bi-receipt"></i>
+                        <span>Recibos</span>
+                    </a>
+                    <ul id="menu-recibos" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="{{ url('recibo/listar') }}" class="sidebar-link">Ver Recibos</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url('recibo/criar') }}" class="sidebar-link">Criar Recibo</a>
+                        </li>
+                    </ul>
+                </li> -->
+
+                <li class="sidebar-item">
+                    <a href="{{ url('clientes/listar') }}" class="sidebar-link">
+                        <i class="bi bi-people"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+
+                {% if usuario().nivel == 1 %}
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#menu-admin" aria-expanded="false" aria-controls="menu-admin">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Administração</span>
+                    </a>
+                    <ul id="menu-admin" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="{{ url('admin/usuarios') }}" class="sidebar-link">Dashboard Admin</a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+
+            </ul>
+            <div class="sidebar-footer">
+                <a title="Sair" href="{{url('sair')}}" class="sidebar-link">
+                    <i class="bi bi-box-arrow-left text-danger"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="main bg-light">
+            <nav style="position: fixed; width: 100%; z-index: 100; padding-right: 80px;"
+                class="navbar navbar-expand bg-white">
+                <form action="#" class="d-none d-sm-inline-block">
+                </form>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-link d-flex align-items-center">
+
+                                <img src="{% if usuario().img_logo != null %}{{ url('templates/assets/img/logos/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/logo-default.png') }}{% endif %}"
+                                    class="avatar img-fluid me-2 rounded-circle" alt="">
+
+                                <span>{{usuario().nome}}</span>
+                                <i class="bi bi-chevron-down ms-2"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end rounded">
+                                <li><a href="{{ url('perfil') }}" class="dropdown-item">Perfil</a></li>
+                                <li><a href="{{url('sair')}}" class="dropdown-item">Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="px-5 py-5 bg-light mt-5">
+                {% block conteudo %}
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div id="whatsapp-button" title="Fale conosco no WhatsApp">
+        <a class="text-decoration-none d-flex align-items-center"
+            href="https://wa.me/5519971553715?text=Gostaria%20de%20tirar%20d%C3%BAvida%20sobre%20o%20sistema%20Meus%20Or%C3%A7amentos."
+            target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+            <span class="label-suporte">Suporte</span>
+        </a>
+    </div>
+    <div id="notificacoes" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <script src="{{url('templates/assets/js/script.js')}}"></script>
+
+    <script src="{{url('templates/assets/Trumbowyg/dist/trumbowyg.js')}}"></script>
+    <script src="{{url('templates/assets/Trumbowyg/dist/langs/pt_br.min.js')}}"></script>
+    <script src="{{url('templates/assets/Trumbowyg/dist/plugins/upload/trumbowyg.upload.js')}}"></script>
+    <script src="{{url('templates/assets/Trumbowyg/dist/plugins/noembed/trumbowyg.noembed.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="{{ url('templates/assets/DataTables/datatables.min.js') }}"></script>
+
+    <script src="{{ url('templates/assets/Select2/dist/js/select2.full.js')}} "></script>
     
+    <script src="{{ url('templates/assets/js/script.js') }}"></script>
+
+    {% block arquivo_javascript %}
     {% endblock %}
-  </main>
 
-  <!-- Menu inferior -->
-  <nav class="bottom-nav">
-    <a href="{{ url('home') }}" title="Início">
-      <div class="menu-item">
-        <i class="bi bi-house fs-5"></i>
-        <small class="mobile font">Menu</small>
-      </div>
-    </a>
-  </nav>
+    {% block codigo_javascript %}
+    {% endblock %}
 
-  <!-- Botão WhatsApp -->
-  <div id="whatsapp-button" title="Fale conosco no WhatsApp">
-    <a class="text-decoration-none d-flex align-items-center"
-      href="https://wa.me/5519971553715?text=Gostaria%20de%20tirar%20d%C3%BAvida%20sobre%20o%20sistema%20Meus%20Or%C3%A7amentos."
-      target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
-      <span class="label-suporte">Suporte</span>
-    </a>
-  </div>
-  <div id="notificacoes" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    <script>
+        //Menu hanburger Sidebar
+        /* ============================================================= */
+        const hamBurger = document.querySelector(".toggle-btn");
+
+        hamBurger.addEventListener("click", function () {
+            document.querySelector("#sidebar").classList.toggle("expand");
+        });
 
 
-  <script src="{{ url('templates/assets/DataTables/datatables.min.js') }}"></script>
+        //Seta do menu usuário
+        /* ============================================================= */
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdownToggles = document.querySelectorAll('.nav-item.dropdown .nav-link');
 
-  <script src="{{ url('templates/assets/js/script.js') }}"></script>
-
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function () {
+                    const icon = this.querySelector('i');
+                    icon.classList.toggle('bi-chevron-down');
+                    icon.classList.toggle('bi-chevron-up');
+                });
+            });
+        });
+    </script>
 </body>
-
-{% block codigo_js %}
-
-{% endblock %}
 
 </html>
