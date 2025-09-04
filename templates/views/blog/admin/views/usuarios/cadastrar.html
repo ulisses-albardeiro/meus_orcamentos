@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="d-flex justify-content-center">{% if usuario.id%}Editar Usuário{% else %}Cadastrar Usuário{% endif %}</h1>
+{{ flash() }}
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="pl-3 pr-3">
+            <form
+                action="{% if usuario.id%}{{url('admin/usuario/editar/'~usuario.id)}}{% else %}{{url('admin/usuario/cadastrar')}}{% endif %}"
+                method="post">
+                <div class="mb-3">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="{{usuario.nome}}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" value="{{usuario.email}}">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" value="{{usuario.cpf}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Senha</label>
+                            <input type="text" class="form-control" id="senha" name="senha" value="{{usuario.senha}}">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary"
+                    value="{% if usuario.id%}Atualizar{% else %}Cadastrar{% endif %}">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

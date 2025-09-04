@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="d-flex justify-content-center">{% if categoria.id%}Editar Categoria{% else %}Cadastrar Categoria{% endif %}</h1>
+
+<div class="card shadow-sm border-0" >
+<div class="card-body">
+    <div class="pl-3 pr-3">
+        <form action="{% if categoria.id%}{{url('admin/categorias/editar/'~categoria.id)}}{% else %}{{url('admin/categorias/cadastrar')}}{% endif %}" method="post">
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-10">
+                        <label class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" value="{{categoria.titulo}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option disabled value="Selecione" {% if categoria.status == ''%} selected{%endif%}>Selecione</option>
+                            <option value="1" {% if categoria.status == '1'%}selected{%endif%}>Publicado</option>
+                            <option value="0" {% if categoria.status == '0' %}selected{%endif%}>Rascunho</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao" rows="5"> {{categoria.descricao}}</textarea>
+              </div>
+
+              <input type="submit" class="btn btn-primary" value="{% if categoria.id%}Atualizar{% else %}Cadastrar{% endif %}">
+        </form>
+    </div>
+</div>
+</div>
+
+{% endblock %}

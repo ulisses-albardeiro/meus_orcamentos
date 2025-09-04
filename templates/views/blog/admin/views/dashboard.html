@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ flash() }}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main content -->
+        <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+            <!-- Cards Row -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Total de Visualizações</h5>
+                            <p class="card-text fs-3">{{ visualizacoes }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">Posts Ativos</h5>
+                            <p class="card-text fs-3">{{ posts_ativos }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title">Posts Inativos</h5>
+                            <p class="card-text fs-3">{{ posts_inativos}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title">Categorias</h5>
+                            <p class="card-text fs-3">{{ total_categorias }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if posts_mais_vistos %}
+            <!-- Posts Mais Vistos -->
+            <div class="mb-4">
+                <h2 class="h4">Posts Mais Vistos</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Título</th>
+                            <th>Visualizações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post_mais_visto in posts_mais_vistos %}
+                        <tr>
+                            <td>{{ post_mais_visto.id }}</td>
+                            <td>{{ post_mais_visto.titulo }}</td>
+                            <td>{{ post_mais_visto.visitas }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            <!-- Gráficos -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="h4">Tempo Médio no Site</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">3 min 24 s</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="h4">Comentários</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">120</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{% endblock %}
