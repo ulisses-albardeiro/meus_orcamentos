@@ -31,7 +31,8 @@ class Dashboard extends PainelControlador
                 "despesas_total" => $this->servico->somarDespesa($data, date('Y-m-t', strtotime($data)), $this->usuario->usuarioId),
                 "data" => substr($data, 0, 7),
                 "despesas_categoria" => $this->servico->despesasPorCategoria($data, date('Y-m-t', strtotime($data)), $this->usuario->usuarioId),
-                "dados_grafico_trimestral" => $this->servico->getDadosGraficoTrimestral($data, $this->usuario->usuarioId)
+                "dados_grafico_trimestral" => $this->servico->getDadosGraficoTrimestral($data, $this->usuario->usuarioId),
+                "titulo" => "Finanças"
             ]
         );
     }

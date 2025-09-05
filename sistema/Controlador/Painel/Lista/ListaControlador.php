@@ -41,7 +41,7 @@ class ListaControlador extends PainelControlador
             "listas/listar.html",
             [
                 'listas' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
-                "titulo" => "Orçamentos"
+                "titulo" => "Listas"
             ]
         );
     }

@@ -19,7 +19,7 @@ class Admin extends PainelControlador
                 "orcamentos" => (new OrcamentoModelo)->busca()->resultado(true),
                 "listas" => (new ListaModelo)->busca()->resultado(true),
                 "recibos" => (new ReciboModelo)->busca()->resultado(true),
-                'link_usuarios' => 'active'
+                'titulo' => 'Admin Usuários'
             ]
         );
     }
