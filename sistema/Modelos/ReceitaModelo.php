@@ -48,4 +48,14 @@ class ReceitaModelo extends Modelo
 
         return $receita_trimestral;
     }
+
+
+
+
+
+    public function buscaReceitasPorData(string $data, string $data_final, int $id_usuario) : array
+    {
+        $receitas = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$data}&:fim={$data_final}&:id={$id_usuario}")->resultado(true) ?? [];
+        return $receitas;    
+    }
 }

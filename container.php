@@ -3,6 +3,8 @@
 use DI\ContainerBuilder;
 use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Clientes\ClientesServico;
+use sistema\Servicos\Financas\FinancasInterface;
+use sistema\Servicos\Financas\FinancasServico;
 use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Listas\ListaServicos;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
@@ -19,6 +21,7 @@ $builder->addDefinitions([
     OrcamentosInterface::class => autowire(OrcamentosServicos::class),
     ListaInterface::class => autowire(ListaServicos::class),
     UsuariosInterface::class => autowire(UsuariosServico::class),
+    FinancasInterface::class => autowire(FinancasServico::class),
 
     //Clientes
     ClientesInterface::class => autowire(ClientesServico::class),

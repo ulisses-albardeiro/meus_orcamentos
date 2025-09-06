@@ -2009,7 +2009,7 @@ h6 {
 }
 
 .from-purple-700 {
-  --tw-gradient-from: #7928ca;
+  --tw-gradient-from: #18CA96;
   --tw-gradient-to: rgb(121 40 202 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -2071,7 +2071,7 @@ h6 {
 }
 
 .to-pink-500 {
-  --tw-gradient-to: #ff0080;
+  --tw-gradient-to: #18ca958e;
 }
 
 .to-slate-300 {
@@ -3280,7 +3280,7 @@ h6 {
 
 .after\:from-purple-700::after {
   content: var(--tw-content);
-  --tw-gradient-from: #7928ca;
+  --tw-gradient-from: #18CA96;
   --tw-gradient-to: rgb(121 40 202 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
@@ -4236,13 +4236,13 @@ h6 {
   }
 
   .xl-max\:from-purple-700 {
-    --tw-gradient-from: #7928ca;
+    --tw-gradient-from: #18CA96;
     --tw-gradient-to: rgb(121 40 202 / 0);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
   }
 
   .xl-max\:to-pink-500 {
-    --tw-gradient-to: #ff0080;
+    --tw-gradient-to: #18ca958e;
   }
 
   .xl-max\:text-white {
