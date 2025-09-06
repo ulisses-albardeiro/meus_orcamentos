@@ -1,0 +1,26 @@
+/* Força o footer a ficar na parte de baixo */
+html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1; /* ocupa todo o espaço disponível */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main > .w-full {
+    flex: 1; /* garante que o conteúdo cresça empurrando o footer */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  footer {
+    margin-top: auto; /* cola o footer no final */
+  }
+  

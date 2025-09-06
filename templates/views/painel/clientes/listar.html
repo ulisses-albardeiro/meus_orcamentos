@@ -36,7 +36,7 @@
                             %}
                             <td>{{ telefone_formatado }}</td>
                             {% else %}
-                            {# Caso o número não tenha 10 dígitos, exibe o valor original #}
+                           
                             <td>{{ cliente.telefone }}</td>
                             {% endif %}
 
@@ -46,7 +46,7 @@
                             {% set celular_formatado = '(' ~ celular[0:2] ~ ') ' ~ celular[2:5] ~ '-' ~ celular[7:4] %}
                             <td>{{ celular_formatado }}</td>
                             {% else %}
-                            {# Caso o número não tenha 11 dígitos, exibe o valor original #}
+
                             <td>{{ cliente.celular }}</td>
                             {% endif %}
 

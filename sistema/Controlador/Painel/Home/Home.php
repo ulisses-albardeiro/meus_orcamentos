@@ -22,7 +22,6 @@ class Home extends PainelControlador
         $totalDespesasMesAtual = $this->financasServico->somaPeriodoDespesasUsuarioServico(date('Y-m-01'), date('Y-m-d'), $this->usuario->usuarioId);
         $margemMes = $this->financasServico->calculaMargem($totalCaixaMesAtual, $totalReceitaMesAtual);
 
-
         echo $this->template->rendenizar("home.html", 
         [
             'titulo' => 'Home',

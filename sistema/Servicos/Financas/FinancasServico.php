@@ -25,7 +25,7 @@ class FinancasServico implements FinancasInterface
         }
 
         $totalReceitas = array_sum(array_column($receitasDoMes, 'valor'));
-        return $totalReceitas;
+        return $totalReceitas/100;
     }
 
     public function somaPeriodoDespesasUsuarioServico(string $dataInicial, string $dataFinal, int $idUsuario): int
@@ -38,7 +38,7 @@ class FinancasServico implements FinancasInterface
 
         $totalDespesas = array_sum(array_column($despesasDoMes, 'valor'));
 
-        return $totalDespesas;
+        return $totalDespesas/100;
     }
 
     public function totalPeriodoCaixa(string $dataInicial, string $dataFinal, int $idUsuario): int
@@ -46,7 +46,7 @@ class FinancasServico implements FinancasInterface
         $totalDespesas = $this->somaPeriodoDespesasUsuarioServico($dataInicial, $dataFinal, $idUsuario);
         $totalReceitas = $this->somaPeriodoReceitasUsuarioServico($dataInicial, $dataFinal, $idUsuario);
 
-        $caixa = $totalDespesas - $totalReceitas;
+        $caixa = $totalReceitas - $totalDespesas;
 
         return $caixa;
     }

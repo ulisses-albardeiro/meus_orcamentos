@@ -81,7 +81,7 @@ class ServicosDashboard
         $data_inicio = date('Y-m-01', strtotime('first day of -2 months', strtotime($data_fim)));
         $despesa_trimestral = (new DespesaModelo)->getDespesaTrimestral($data_inicio, $data_fim, $id_usuario);
 
-        return $despesa_trimestral;
+        return $despesa_trimestral ?? [];
     }
 
     public function getDadosGraficoTrimestral(string $data_fim, int $id_usuario): array

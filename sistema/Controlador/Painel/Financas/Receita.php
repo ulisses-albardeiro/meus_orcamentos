@@ -27,7 +27,8 @@ class Receita extends PainelControlador
             [
                 "receitas" => $this->servico->getNomeCategoria($receitas, $categorias),
                 "categorias" => $categorias,
-                "tipo" => "Receitas"   
+                "tipo" => "Receitas",
+                'titulo' => 'Receitas'
             ]
         );
     }

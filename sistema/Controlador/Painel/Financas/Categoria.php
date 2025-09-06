@@ -32,7 +32,8 @@ class Categoria extends PainelControlador
         echo $this->template->rendenizar("financas/categorias.html", 
         [
             "categorias" => (new CategoriaModelo)->getCategorias($this->usuario->usuarioId),
-            "tipos" => ["Despesas", "Receitas"]
+            "tipos" => ["Despesas", "Receitas"],
+            'titulo' => 'Categoria'
         ]);    
     }
 
