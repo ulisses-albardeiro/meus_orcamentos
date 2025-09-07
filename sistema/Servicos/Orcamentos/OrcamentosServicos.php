@@ -32,7 +32,7 @@ class OrcamentosServicos implements OrcamentosInterface
 
     public function separarDadosUsuario(array $dados): array
     {
-        $campos_desejados = [
+        $camposDesejados = [
             'nome-empresa',
             'email-empresa',
             'tel-empresa',
@@ -42,20 +42,20 @@ class OrcamentosServicos implements OrcamentosInterface
             'end-empresa'
         ];
 
-        $dados_usuario = [];
+        $dadosUsuario = [];
 
         foreach ($dados as $key => $valor) {
-            if (in_array($key, $campos_desejados)) {
-                $dados_usuario[$key] = $valor;
+            if (in_array($key, $camposDesejados)) {
+                $dadosUsuario[$key] = $valor;
             }
         }
 
-        return $dados_usuario;
+        return $dadosUsuario;
     }
 
     public function separarDadosCliente(array $dados): array
     {
-        $campos_desejados = [
+        $camposDesejados = [
             'nome_cliente',
             'documento_cliente',
             'telefone_cliente',
@@ -70,20 +70,20 @@ class OrcamentosServicos implements OrcamentosInterface
             'uf_cliente',
         ];
 
-        $dados_cliente = [];
+        $dadosCliente = [];
 
         foreach ($dados as $key => $valor) {
-            if (in_array($key, $campos_desejados)) {
-                $dados_cliente[$key] = $valor;
+            if (in_array($key, $camposDesejados)) {
+                $dadosCliente[$key] = $valor;
             }
         }
 
-        return $dados_cliente;
+        return $dadosCliente;
     }
 
     public function processarItensParaView(array $dados): array
     {
-        $itens_processados = [];
+        $itensProcessados = [];
         foreach ($dados['itens'] as $item) {
 
             //Se or tipo for simples o valor unitário dos itens será '0'.
@@ -95,14 +95,14 @@ class OrcamentosServicos implements OrcamentosInterface
             $valorLimpo = (int) round($this->converterValorParaFloat($item['valor']) * 100);
 
             // Mantém os dados originais mas adiciona o valor processado
-            $item_processado = $item;
-            $item_processado['valor_limpo'] = $valorLimpo;
-            $item_processado['valor_float'] = $valorLimpo / 100;
+            $itemProcessado = $item;
+            $itemProcessado['valor_limpo'] = $valorLimpo;
+            $itemProcessado['valor_float'] = $valorLimpo / 100;
 
-            $itens_processados[] = $item_processado;
+            $itensProcessados[] = $itemProcessado;
         }
 
-        return $itens_processados;
+        return $itensProcessados;
     }
 
     public function converterValorParaFloat(string $valorFormatado): float
@@ -127,18 +127,18 @@ class OrcamentosServicos implements OrcamentosInterface
         return (float) $valorLimpo;
     }
 
-    public function buscaOrcamentosServico(int $id_usuario): ?array
+    public function buscaOrcamentosServico(int $idUsuario): ?array
     {
-        return $this->orcamentoModelo->buscaOrcamentos($id_usuario);
+        return $this->orcamentoModelo->buscaOrcamentos($idUsuario);
     }
 
     public function buscaOrcamentoPorHashServico(string $hash): ?array
     {
-        $dados_objeto = $this->orcamentoModelo->buscaOrcamentosPorHash($hash)[0];
+        $dadosObjeto = $this->orcamentoModelo->buscaOrcamentosPorHash($hash)[0];
 
-        $dados_orcamento_json = json_decode($dados_objeto->orcamento_completo, true);
-        $dados_completos = array_merge((array) $dados_objeto, $dados_orcamento_json);
-        return $dados_completos;
+        $dadosOrcamentoJson = json_decode($dadosObjeto->orcamento_completo, true);
+        $dadosCompletos = array_merge((array) $dadosObjeto, $dadosOrcamentoJson);
+        return $dadosCompletos;
     }
 
     public function excluirOrcamentoServico(string $hash): bool
@@ -146,12 +146,12 @@ class OrcamentosServicos implements OrcamentosInterface
         return $this->orcamentoModelo->excluirOrcamento($hash);
     }
 
-    public function buscaOrcamentoPorIdServico(int $id_orcamento): ?array
+    public function buscaOrcamentoPorIdServico(int $idOrcamento): ?array
     {
-        $dados = $this->orcamentoModelo->buscaOrcamentosPorId($id_orcamento)[0];
-        $dados_orcamento_json = json_decode($dados->orcamento_completo, true);
-        $dados_completos = array_merge((array) $dados, $dados_orcamento_json);
+        $dados = $this->orcamentoModelo->buscaOrcamentosPorId($idOrcamento)[0];
+        $dadosOrcamentoJson = json_decode($dados->orcamento_completo, true);
+        $dadosCompletos = array_merge((array) $dados, $dadosOrcamentoJson);
 
-        return $dados_completos;
+        return $dadosCompletos;
     }
 }

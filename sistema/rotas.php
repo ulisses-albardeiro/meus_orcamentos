@@ -40,7 +40,7 @@ try {
 
     //Grupo de Rotas Home
     SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => AuthMiddleware::class], function () {
-        SimpleRouter::get(URL . 'home', 'Home@listar');
+        SimpleRouter::get(URL . 'home', 'HomeControlador@listar');
     });
 
     //Grupo de Rotas Clientes
