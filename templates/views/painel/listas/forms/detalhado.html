@@ -107,9 +107,8 @@
             Gerar Lista de Materiais</button>
     </div>
 </form>
-{% endblock %}
 
-{% block codigo_js %}
+
 <script>
     // Função para adicionar novos itens à lista de materiais
     function adicionarItem() {
@@ -125,7 +124,7 @@
                 <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd-item]" placeholder="Quantidade*">
             </div>
             <div class="col-1 d-flex align-items-center">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+                <button style="background-color: #dc3545;" type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
             </div>
             <div class="col-12">
                 <textarea class="form-control form-control-sm" name="itens[${index}][descricao-item]" placeholder="Descrição ou especificações"></textarea>
@@ -173,5 +172,4 @@
         aplicarMascaraCNPJ(document.getElementById('cnpj-input-cliente'));
     });
 </script>
-
 {% endblock %}
