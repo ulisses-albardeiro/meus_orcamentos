@@ -38,7 +38,7 @@ class Mensagem
     {
         return "<div class='{$this->css} alert alert-dismissible fade show d-flex justify-content-between align-items-center' role='alert'>
                 <span>{$this->texto}</span>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Fechar'></button>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Fechar'>X</button>
             </div>";
     }
 
