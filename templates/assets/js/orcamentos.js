@@ -15,7 +15,7 @@ function adicionarItemDetalhado() {
                 <input required type="text" class="form-control form-control-sm valor-unitario" name="itens[${index}][valor]" placeholder="Valor unitário">
             </div>
             <div class="col-1 d-flex align-items-center">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+                <button style="background-color: #dc3545;" type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
             </div>
             <div class="col-12">
                 <textarea class="form-control" name="itens[${index}][descricao]" placeholder="Descrição"></textarea>
@@ -41,7 +41,7 @@ function adicionarItemSimples() {
                 <input required type="number" class="form-control form-control-sm" name="itens[${index}][qtd]" placeholder="Qtd*">
             </div>
             <div class="col-1 d-flex align-items-center">
-                <button type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
+                <button style="background-color: #dc3545;" type="button" class="btn btn-danger btn-sm" onclick="removerItem(this)">X</button>
             </div>
             <div class="col-12">
                 <textarea class="form-control" name="itens[${index}][descricao]" placeholder="Descrição"></textarea>
