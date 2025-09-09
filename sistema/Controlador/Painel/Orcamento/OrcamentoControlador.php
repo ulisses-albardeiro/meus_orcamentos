@@ -33,7 +33,8 @@ class OrcamentoControlador extends PainelControlador
             "orcamentos/listar.html",
             [
                 'orcamentos' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
-                "titulo" => "Orçamentos"
+                "titulo" => "Orçamentos",
+                'subTitulo' => 'Seus Orçamentos Gerados',
             ]
         );
     }
