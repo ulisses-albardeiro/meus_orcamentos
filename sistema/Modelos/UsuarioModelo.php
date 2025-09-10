@@ -29,7 +29,7 @@ class UsuarioModelo extends Modelo
     public function login(array $dados, int $nivel = 1)
     {
         $usuario = $this->buscaPorUsuario($dados['usuario']);
-        
+
         if (!$usuario or !password_verify($dados['senha'], $usuario->senha)) {
             $this->mensagem->mensagemErro("Dados incorretos!")->flash();
             Helpers::redirecionar('login');
@@ -51,4 +51,42 @@ class UsuarioModelo extends Modelo
     {
         return $this->busca("id = {$id_usuario}")->resultado(true);
     }
+
+    public function apagarRegistrosPorUsuario(int $id_usuario)
+    {
+        $sucesso = true;
+
+        // Tabela de usuários:
+        // Primeiro, excluímos o próprio usuário da tabela 'usuarios'.
+        $tabelaUsuario = new self();
+        if (!$tabelaUsuario->apagar("id = {$id_usuario}")) {
+            $sucesso = false;
+        }
+
+        // Tabela de posts:
+        // Excluímos todos os posts associados a esse id_usuario.
+        $tabelaPosts = new Modelo('posts');
+        if (!$tabelaPosts->apagar("id_usuario = {$id_usuario}")) {
+            $sucesso = false;
+        }
+
+        // Tabela de comentários:
+        // Excluímos todos os comentários associados a esse id_usuario.
+        $tabelaComentarios = new Modelo('comentarios');
+        if (!$tabelaComentarios->apagar("id_usuario = {$id_usuario}")) {
+            $sucesso = false;
+        }
+
+        // Adicione outras tabelas que você precise excluir aqui.
+        // A lógica é a mesma para cada tabela: instancie a classe Modelo com o nome da tabela
+        // e chame o método apagar() com o termo de busca.
+
+        return $sucesso;
+    }
+
+    public function apagarUsuario(int $idUsuario) : bool
+    {
+        return $this->apagar("id = {$idUsuario}");    
+    }
+
 }

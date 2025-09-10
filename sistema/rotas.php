@@ -17,7 +17,7 @@ try {
         SimpleRouter::get(URL . 'sair', 'Login@sair');
     });
 
-    SimpleRouter::group(['namespace' => 'Painel', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel',], function () {
 
         //Cadastro novos usuários
         SimpleRouter::get(URL . 'form-cadastro', 'CadastroUsuario@form');
@@ -116,6 +116,7 @@ try {
     //Grupo de Rotas Lista
     SimpleRouter::group(['namespace' => 'Painel\Config', 'middleware' => AuthMiddleware::class], function () {
         SimpleRouter::get(URL . 'config', 'ConfigControlador@listar');
+        SimpleRouter::get(URL . 'config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
     });
 
     //Grupo de Rotas Dashboard
