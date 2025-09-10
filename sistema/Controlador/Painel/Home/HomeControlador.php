@@ -41,6 +41,7 @@ class HomeControlador extends PainelControlador
             'totalDespesasMesAtual' => $totalDespesasMesAtual,
             'margemDoMes' => $margemMes,
             'orcamentos' => $orcamentos,
+            'linkAtivo' => 'active',
         ]);    
     }
 }

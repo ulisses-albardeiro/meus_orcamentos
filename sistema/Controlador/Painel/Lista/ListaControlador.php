@@ -41,7 +41,8 @@ class ListaControlador extends PainelControlador
             "listas/listar.html",
             [
                 'listas' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
-                "titulo" => "Listas"
+                "titulo" => "Listas",
+                'linkAtivo' => 'active',
             ]
         );
     }

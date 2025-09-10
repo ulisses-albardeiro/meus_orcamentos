@@ -38,8 +38,8 @@
           <p class="mb-1 fw-semibold small">Saldo do mês</p>
           <h5 class="mb-0 fw-bold">R$ {{ totalCaixaMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
-        <div class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="ni ni-money-coins fs-5 text-dark"></i>
+        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center p-3 rounded">
+          <i class="bi bi-currency-dollar"></i>
         </div>
       </div>
     </div>
@@ -53,8 +53,8 @@
           <p class="mb-1 fw-semibold small">Receitas do Mês</p>
           <h5 class="mb-0 fw-bold">R$ {{ totalReceitaMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
-        <div class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="fa-solid fa-chart-line fs-5 text-dark"></i>
+        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i class="bi bi-graph-up-arrow"></i>
         </div>
       </div>
     </div>
@@ -68,8 +68,8 @@
           <p class="mb-1 fw-semibold small">Despesas do Mês</p>
           <h5 class="mb-0 fw-bold">R$ {{ totalDespesasMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
-        <div class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="ni ni-chart-bar-32 fs-5 text-dark"></i>
+        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i class="bi bi-graph-down-arrow"></i>
         </div>
       </div>
     </div>
@@ -83,8 +83,8 @@
           <p class="mb-1 fw-semibold small">Margem</p>
           <h5 class="mb-0 fw-bold">{{ margemDoMes }} %</h5>
         </div>
-        <div class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="ni ni-chart-pie-35 fs-5 text-dark"></i>
+        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i class="bi bi-percent"></i>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@
     <div class="card shadow-sm rounded-3 h-100">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h6 class="mb-0">Informações do Perfil</h6>
-        <a href="{{url('perfil')}}"><i class="fas fa-user-edit text-secondary"></i></a>
+        <a href="{{url('perfil')}}" class="botao">Editar Perfil</a>
       </div>
       <div class="card-body">
         <img src="{{url('templates/assets/img/logos/'~usuario().img_logo)}}" alt="" class="mb-3" style="max-width:120px;">
@@ -108,16 +108,16 @@
           <li class="list-group-item"><strong>CNPJ:</strong> {{usuario().cnpj}}</li>
           <li class="list-group-item"><strong>Endereço:</strong> {{usuario().endereco}}</li>
           <li class="list-group-item">
-            <strong>Instagram:</strong> 
-            <a href="#" class="ms-1 fw-bold text-decoration-none text-primary">
-              <i class="fab fa-instagram"></i> {{usuario().instagram}}
-            </a>
+            <strong>Instagram: </strong> 
+            
+              <i class="bi bi-instagram"></i> {{usuario().instagram}}
+            
           </li>
           <li class="list-group-item">
-            <strong>Facebook:</strong>
-            <a href="#" class="ms-1 fw-bold text-decoration-none text-primary">
-              <i class="fab fa-facebook"></i> {{usuario().facebook}}
-            </a>
+            <strong>Facebook: </strong>
+            
+              <i class="bi bi-facebook"></i> {{usuario().facebook}}
+            
           </li>
         </ul>
       </div>
@@ -129,7 +129,7 @@
     <div class="card shadow-sm rounded-3 h-100">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h6 class="mb-0">Orçamentos</h6>
-        <a href="{{url('orcamento/listar')}}" class="btn btn-sm btn-outline-dark">Ver Todos</a>
+        <a href="{{url('orcamento/listar')}}" class="botao">Ver Todos</a>
       </div>
       <div class="card-body">
         <ul class="list-group lista-orcamentos">
@@ -141,7 +141,7 @@
             </div>
             <div class="d-flex align-items-center">
               <span class="me-3">R$ {{ orcamento.vl_total | number_format(2, ',', '.') }}</span>
-              <a href="{{url('orcamento/'~orcamento.modelo~'/'~orcamento.hash)}}" target="_blank" class="btn btn-sm btn-link">
+              <a href="{{url('orcamento/'~orcamento.modelo~'/'~orcamento.hash)}}" target="_blank" class="btn btn-sm">
                 <i class="fas fa-eye"></i> Ver
               </a>
             </div>

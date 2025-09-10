@@ -4,9 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Astro v5.13.2">
+  <link rel="shortcut icon" href="{{url('templates/assets/img/gerais/icone.png')}}" type="image/x-icon">
   <title>Meus Orçamentos</title>
 
   <script>
@@ -115,12 +113,16 @@
     }
 
     .sidebar .nav-link {
-      font-size: .875rem;
-      font-weight: 500;
+      font-size: 18px;
+      margin-left: 20px;
     }
 
-    .sidebar .nav-link.active {
-      color: #2470dc;
+    .botao {
+      padding: 10px 20px;
+      background-color: #29CA9B;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
     }
 
     .sidebar-heading {
@@ -195,19 +197,18 @@
     }
 
     .btn-bd-primary {
-      --bd-violet-bg: black;
+      --bd-violet-bg: #29CA9B;
       --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
       --bs-btn-font-weight: 600;
       --bs-btn-color: var(--bs-white);
       --bs-btn-bg: var(--bd-violet-bg);
       --bs-btn-border-color: var(--bd-violet-bg);
-      --bs-btn-hover-color: var(--bs-white);
-      --bs-btn-hover-bg: rgb(53, 53, 53);
-      --bs-btn-hover-border-color: black
-      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-hover-color: white;
+      --bs-btn-hover-bg: #29CA9B;
+      --bs-btn-hover-border-color: black --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
       --bs-btn-active-color: var(--bs-btn-hover-color);
-      --bs-btn-active-bg: black;
-      --bs-btn-active-border-color: #5a23c8
+      --bs-btn-active-bg: #29CA9B;
+      --bs-btn-active-border-color: white;
     }
 
     .bd-mode-toggle {
@@ -225,7 +226,7 @@
   </style>
 </head>
 
-<body> 
+<body>
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
       <path
@@ -249,12 +250,10 @@
       </path>
     </symbol>
   </svg>
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"> 
-    <button
-      class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)"> 
-      <svg
-        class="bi my-1 theme-icon-active" aria-hidden="true">
+  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+      <svg class="bi my-1 theme-icon-active" aria-hidden="true">
         <use href="#circle-half">
         </use>
       </svg> <span class="visually-hidden" id="bd-theme-text">Toggle theme</span> </button>
@@ -363,7 +362,9 @@
     </symbol>
   </svg>
   <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark"> <a
-      class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Meus Orçamentos</a>
+      class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{url('home')}}">Meus Orçamentos
+      <img style="width: 20px; padding-bottom: 20px;" src="{{url('templates/assets/img/gerais/icone.png')}}"
+        alt="logo"></a>
     <ul class="navbar-nav flex-row d-md-none">
       <li class="nav-item text-nowrap"> <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
@@ -391,90 +392,77 @@
           <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 
             <ul class="nav flex-column">
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body" aria-current="page"
                   href="{{url('home')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#house-fill"></use>
                   </svg>
                   Home
                 </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2"
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
                   href="{{url('orcamento/listar')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#file-earmark"></use>
                   </svg>
                   Orçamentos
                 </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="{{url('listas/listar')}}"> 
-                <i class="bi bi-list-task"></i>
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('listas/listar')}}">
+                  <i class="bi bi-list-task"></i>
                   Listas
                 </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="{{url('clientes/listar')}}"> <svg class="bi"
-                    aria-hidden="true">
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('clientes/listar')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#people"></use>
                   </svg>
                   Clientes
                 </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="{{url('dashboard-financas')}}"> <svg class="bi"
-                    aria-hidden="true">
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('dashboard-financas')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#graph-up"></use>
                   </svg>
                   Finanças
                 </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="{{url('perfil')}}">
-                <i class="bi bi-person-circle"></i>
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('perfil')}}">
+                  <i class="bi bi-person-circle"></i>
                   Perfil
                 </a>
               </li>
             </ul>
-            {% if usuario().nivel == 4 %}
+            {% if usuario().nivel == 1 %}
             <h6
               class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-              <span>Admin</span> <a class="link-secondary" href="#" aria-label="Add a new report"> <svg
-                  class="bi" aria-hidden="true">
+              <span>Admin</span> <a class="link-secondary" href="#" aria-label="Add a new report"> <svg class="bi"
+                  aria-hidden="true">
                   <use xlink:href="#plus-circle"></use>
                 </svg> </a>
             </h6>
             <ul class="nav flex-column mb-auto">
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body" href="{{url('admin/usuarios')}}"> <svg
+                    class="bi" aria-hidden="true">
                     <use xlink:href="#file-earmark-text"></use>
                   </svg>
-                  Current month
-                </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
-                    <use xlink:href="#file-earmark-text"></use>
-                  </svg>
-                  Last quarter
-                </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
-                    <use xlink:href="#file-earmark-text"></use>
-                  </svg>
-                  Social engagement
-                </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
-                    <use xlink:href="#file-earmark-text"></use>
-                  </svg>
-                  Year-end sale
-                </a> </li>
+                  Usuários
+                </a>
+              </li>
+
             </ul>
+            {% endif %}
             <hr class="my-3">
             <ul class="nav flex-column mb-auto">
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
+              <!-- <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('config')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#gear-wide-connected"></use>
                   </svg>
                   Settings
-                </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi"
-                    aria-hidden="true">
+                </a>
+              </li> -->
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('sair')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#door-closed"></use>
                   </svg>
-                  Sign out
+                  Sair
                 </a> </li>
             </ul>
-            {% endif %}
           </div>
         </div>
       </div>
