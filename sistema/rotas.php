@@ -113,6 +113,11 @@ try {
         SimpleRouter::get(URL . 'recibo/excluir/{id_recibo}', 'Recibo@excluir');
     });
 
+    //Grupo de Rotas Lista
+    SimpleRouter::group(['namespace' => 'Painel\Config', 'middleware' => AuthMiddleware::class], function () {
+        SimpleRouter::get(URL . 'config', 'ConfigControlador@listar');
+    });
+
     //Grupo de Rotas Dashboard
     SimpleRouter::group([
         'namespace' => 'Painel\Admin',
