@@ -10,11 +10,12 @@
     </div>
 
     <div class="card shadow-lg border-0 mb-3">
-        
+
         <div class="card-body">
             <div class="d-flex justify-content-end">
                 <div class="col-auto">
-                    <button data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa" class="btn btn-danger btn-sm">Nova
+                    <button data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa"
+                        class="btn btn-danger btn-sm">Nova
                         Despesa</button>
                     {% include 'financas/modais/add-despesa.html' %}
                 </div>
@@ -39,21 +40,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for despesa in despesas %}
-                        <td class="text-start">R$ {{ (despesa.valor / 100) | number_format(2, ',', '.') }}</td>
-                        <td class="text-center">{{ despesa.categoria }}</td>
-                        <td class="text-center">{{ despesa.dt_despesa | date("d/m/Y")}}</td>
-                        <td class="text-center">
+                        <tr>
+                            {% for despesa in despesas %}
+                            <td class="text-start">R$ {{ (despesa.valor / 100) | number_format(2, ',', '.') }}</td>
+                            <td class="text-center">{{ despesa.categoria }}</td>
+                            <td class="text-center">{{ despesa.dt_despesa | date("d/m/Y")}}</td>
+                            <td class="text-center">
 
-                            <a href title="Editar" class="text-primary text-decoration-none"
-                            data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa{{ despesa.id }}"><i class="bi bi-pencil-square fs-4"></i></a>
+                                <a href title="Editar" class="text-primary text-decoration-none me-3" data-bs-toggle="modal"
+                                    data-bs-target="#modalAdicionarDespesa{{ despesa.id }}"><i
+                                        class="bi bi-pencil-square fs-4"></i></a>
 
-                            {% include 'financas/modais/add-despesa.html' %}
+                                {% include 'financas/modais/add-despesa.html' %}
 
-                            <a href="#" title="Excluir" class="text-danger text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#modalConfirmDelete{{ despesa.id }}"><i class="bi bi-trash fs-4"></i></a>
+                                <a href="#" title="Excluir" class="text-danger text-decoration-none"
+                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ despesa.id }}"><i
+                                        class="bi bi-trash fs-4"></i></a>
                                 {% include 'financas/modais/excluir-despesa.html' %}
-                        </td>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
