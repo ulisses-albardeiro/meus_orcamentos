@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{titulo}}</title>
+    <meta name="description" content="Dicas, modelos e templates para criar orçamentos profissionais rapidamente.">
+    <link rel="shortcut icon" href="{{url('templates/assets/img/gerais/icone.png')}}" type="image/x-icon">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --brand: #29CA9B;
+            --dark: #373643;
+            --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --heading-font: "Nunito", sans-serif;
+            --nav-font: "Inter", sans-serif;
+        }
+
+        body {
+            font-family: var(--default-font);
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .navbar-brand h1 {
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--dark) !important;
+        }
+
+        .navbar-brand img {
+            margin-top: -28px;
+        }
+
+        .badge-brand {
+            background: var(--brand);
+            color: #052017;
+        }
+
+        .post-card .card-img-top {
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .hero {
+            background: var(--brand);
+            border-radius: 12px;
+        }
+
+        footer {
+            background: #0b1220;
+            color: #cbd5e1;
+        }
+
+        .category-badge {
+            background: rgba(82, 216, 176, 0.12);
+            color: var(--brand);
+            border-radius: 8px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{url('blog')}}">
+                <h1>Meus Orçamentos</h1>
+                <img src="{{url('templates/assets/img/gerais/icone.png')}}" alt="Meus Orçamentos" width="25" height="25"
+                    class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{url('home')}}">Entrar</a></li>
+                    <li class="mt-2 nav-item"><a
+                            style="padding: 8px 20px; background-color: #29CA9B; color: white; border-radius: 5px; text-decoration: none;"
+                            href="{{url('form-cadastro')}}">Fazer Teste Grátis</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="container my-5">
+        <div class="hero p-4 p-md-5 d-flex flex-column flex-md-row align-items-center gap-4">
+            <div class="flex-grow-1">
+                <h1 class="h3 mb-2 text-white">Empreendedorismo, finanças, vendas e muitos mais!</h1>
+                <p class="mb-0 text-white">Tutoriais práticos, boas práticas e ferramentas para você alavancar seus
+                    negócios e conquistar mais clientes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <main class="container mb-5">
+        <div class="row g-4">
+
+            {% block conteudo %}
+
+            {% endblock %}
+            <!-- SIDEBAR -->
+            <aside class="col-lg-4">
+                <div class="sticky-top" style="top:80px;">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Pesquisar artigos"
+                                    aria-label="Search">
+                                <button style="background-color: var(--dark); color: white; border-radius: 5px;"
+                                    type="submit">Pesquisar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="mb-3">Categorias</h6>
+                            <ul class="list-unstyled mb-0">
+                                {% for categoria in categorias %}
+                                <li class="mb-2"><a href="#" class="text-decoration-none">{{categoria.nome}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card mb-3">
+                        <div class="card-body">
+                            <h6 class="mb-2">Posts recentes</h6>
+                            <ol class="list-unstyled mb-0 small">
+                                <li class="mb-2"><a href="#">Checklist antes de enviar um orçamento</a></li>
+                                <li class="mb-2"><a href="#">Como usar nosso gerador de orçamentos</a></li>
+                                <li class="mb-2"><a href="#">Exemplos de orçamentos por nicho</a></li>
+                            </ol>
+                        </div>
+                    </div> -->
+
+                    <div class="card mb-3 text-center">
+                        <div class="card-body">
+                            <h6>Assine nosso conteúdo</h6>
+                            <p class="small text-muted">Receba posts e novidades por e-mail.</p>
+                            <form action="{{url('newsletter/assinar')}}">
+                                <div class="mb-2">
+                                    <input type="email" class="form-control" placeholder="seu@exemplo.com">
+                                </div>
+                                <button
+                                    style="background-color: var(--dark); color: white; border-radius: 5px; width: 100%;">Assinar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pt-5 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>MeusOrçamentos</h5>
+                    <p class="small text-muted">Templates e ferramentas para criar orçamentos profissionais rapidamente.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="/modelos" class="text-decoration-none">Modelos</a></li>
+                        <li><a href="/precos" class="text-decoration-none">Planos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Contato</h6>
+                    <p class="small mb-1">contato@meusorcamentos.com.br</p>
+                    <p class="small">© 2025 MeusOrçamentos</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
