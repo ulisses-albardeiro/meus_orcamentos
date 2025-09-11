@@ -134,6 +134,17 @@ try {
         SimpleRouter::get(URL . 'admin/recibos', 'Admin@recibos');
     });
 
+    //Grupo de Rotas Dashboard
+    SimpleRouter::group([
+        'namespace' => 'Painel\Blog',
+        'middleware' => [
+            AdminMiddleware::class,
+            AuthMiddleware::class
+        ]
+    ], function () {
+        SimpleRouter::get(URL . 'admin/categorias', 'BlogControlador@listar');
+    });
+
     SimpleRouter::start();
 } catch (Exception $e) {
 
