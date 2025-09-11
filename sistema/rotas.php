@@ -10,6 +10,7 @@ try {
     SimpleRouter::get(URL, 'SiteControlador@index');
     SimpleRouter::get(URL . '404', 'SiteControlador@erro404');
     SimpleRouter::get(URL . 'politica-de-privacidade', 'SiteControlador@politicaPrivacidade');
+    SimpleRouter::get(URL . 'blog', 'BlogControlador@index');
 
     SimpleRouter::group(['namespace' => 'Login'], function () {
 
