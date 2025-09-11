@@ -8,8 +8,8 @@
 
     <div class="card shadow-lg border-0 mb-3 mt-1">
         <div class="card-body">
-            <div class="text-end">
-                <a class="btn btn-dark btn-sm" href="{{ url('listas/modelos') }}">Criar lista</a>
+            <div class="text-end mb-3">
+                <a class="botao" href="{{ url('listas/modelos') }}">Criar lista</a>
             </div>
             <small>
                 <table id="data-table" class="table table-hover">
@@ -22,8 +22,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for lista in listas %}
                         <tr>
-                            {% for lista in listas %}
                             <td>{{ lista.nome_cliente }}</td>
                             <td>{{ lista.modelo }}</td>
                             <td>{{ lista.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
@@ -33,12 +33,11 @@
                                     class="text-success text-decoration-none fs-4">
                                     <i class="bi bi-filetype-pdf"></i>
                                 </a>
-
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
-                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ lista.id }}"><i
-                                        class="bi bi-trash fs-4"></i>
-                                    {% include 'listas/modais/excluir.html' %}
-
+                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ lista.id }}">
+                                    <i class="bi bi-trash fs-4"></i>
+                                </a>
+                                {% include 'listas/modais/excluir.html' %}
                             </td>
                         </tr>
                         {% endfor %}
