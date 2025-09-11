@@ -35,9 +35,8 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita do mês {{ data|date("m/Y") }}
                         </h6>
-                        <h4 style="color: white;" >R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
-                            Mais</i>
+                        <h4 class="text-white">R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
+                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"></i>
                         <span class="stretched-link"></span>
                     </div>
                 </div>
@@ -52,9 +51,8 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas do mês {{ data|date("m/Y")
                             }}</h6>
-                        <h4 style="color: white;" >R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes">
-                            Mais</i>
+                        <h4 class="text-white" >R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
+                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"></i>
                         <span class="stretched-link"></span>
                     </div>
                 </div>
@@ -69,7 +67,7 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}
                         </h6>
-                        <h4 style="color: white;" >R$ <span {% if (receita_total - despesas_total) < 0 %} class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</span></h4>
+                        <h4 class="text-white">R$ <span {% if (receita_total - despesas_total) < 0 %} class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</span></h4>
 
                         <span class="stretched-link"></span>
                     </div>
