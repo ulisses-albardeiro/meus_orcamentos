@@ -53,7 +53,7 @@
         <div class="d-flex justify-content-center">
             <div>
                 <img id="preview"
-                    src="{% if usuario().img_logo != null %}{{ url('templates/assets/img/logos/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/logo-default.png') }}{% endif %}"
+                    src="{% if usuario().img_logo != null %}{{ url('templates/assets/img/logos/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/logo-default.png?=1.1') }}{% endif %}"
                     class="profile-img">
 
                 <input type="file" name="imagem" id="imagem" hidden>
