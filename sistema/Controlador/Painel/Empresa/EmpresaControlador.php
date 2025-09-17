@@ -51,4 +51,19 @@ class EmpresaControlador extends PainelControlador
 
         Helpers::redirecionar('empresa');
     }
+
+    public function excluirLogo():void 
+    {
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId);
+
+        unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/logos/'.$empresa->logo);
+
+        $exclusao = $this->empresaServico->excluirLogoServico($empresa->id);
+
+        if ($exclusao) {
+            $this->mensagem->mensagemSucesso('Logo excluida com sucesso.')->flash();
+        }
+
+        Helpers::redirecionar('empresa');
+    }
 }

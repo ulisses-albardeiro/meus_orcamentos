@@ -54,6 +54,11 @@ class Template
                 })
             ),
             $this->twig->addFunction(
+                new \Twig\TwigFunction('empresa', function(){
+                    return UsuarioControlador::empresa();
+                })
+            ),
+            $this->twig->addFunction(
                 new \Twig\TwigFunction('decodeHtml', function (string $texto) {
                     return Helpers::decodeHtml($texto);
                 })

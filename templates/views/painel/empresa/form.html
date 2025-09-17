@@ -5,15 +5,22 @@
     {{ flash() }}
 </div>
 
-<form action="{% if empresa %}{{url('empresa/editar/'~empresa.id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}" method="post" enctype="multipart/form-data">
+<form action="{% if empresa %}{{url('empresa/editar/'~empresa.id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}"
+    method="post" enctype="multipart/form-data">
     <!-- Seção de Logo e Redes Sociais -->
     <div class="row">
         <!-- Logo -->
         <div class="col-md-6 mb-3">
             <div class="mt-2">
-                <img src="{{url('templates/assets/img/logos/'~empresa.logo)}}" id="logo-preview" class="img-thumbnail {% if empresa.logo == null %}d-none{% endif %}" style="max-height: 150px;">
-                
+                <img src="{{url('templates/assets/img/logos/'~empresa.logo)}}" id="logo-preview"
+                    class="img-thumbnail {% if empresa.logo == null %}d-none{% endif %}" style="max-height: 150px;">
             </div>
+            {% if empresa.logo %}
+                <div class="text-start mt-2">
+                    <a href="{{ url('empresa/excluir/logo')}}" class="btn btn-outline-danger btn-sm">Remover
+                        Logo</a>
+                </div>
+                {% endif %}
         </div>
     </div>
 
@@ -73,7 +80,7 @@
                 {% for estado in
                 ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
                 %}
-                <option {% if estado == empresa.uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
+                <option {% if estado==empresa.uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -86,19 +93,22 @@
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">Facebook</span>
-                <input name="facebook" type="url" class="form-control" id="facebook" placeholder="https://facebook.com/suaempresa" value="{{empresa.facebook}}">
+                <input name="facebook" type="url" class="form-control" id="facebook"
+                    placeholder="https://facebook.com/suaempresa" value="{{empresa.facebook}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">Instagram</span>
-                <input name="instagram" type="url" class="form-control" id="instagram" placeholder="https://instagram.com/suaempresa" value="{{empresa.instagram}}">
+                <input name="instagram" type="url" class="form-control" id="instagram"
+                    placeholder="https://instagram.com/suaempresa" value="{{empresa.instagram}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">YouTube</span>
-                <input name="youtube" type="url" class="form-control" id="youtube" placeholder="https://youtube.com/suaempresa" value="{{empresa.youtube}}">
+                <input name="youtube" type="url" class="form-control" id="youtube"
+                    placeholder="https://youtube.com/suaempresa" value="{{empresa.youtube}}">
             </div>
         </div>
     </div>
@@ -107,19 +117,22 @@
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">LinkedIn</span>
-                <input name="linkedin" type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/company/suaempresa" value="{{empresa.linkedin}}">
+                <input name="linkedin" type="url" class="form-control" id="linkedin"
+                    placeholder="https://linkedin.com/company/suaempresa" value="{{empresa.linkedin}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">X (Twitter)</span>
-                <input name="x" type="url" class="form-control" id="x" placeholder="https://x.com/suaempresa" value="{{empresa.x}}">
+                <input name="x" type="url" class="form-control" id="x" placeholder="https://x.com/suaempresa"
+                    value="{{empresa.x}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">TikTok</span>
-                <input name="tiktok" type="url" class="form-control" id="tiktok" placeholder="https://tiktok.com/suaempresa" value="{{empresa.tiktok}}">
+                <input name="tiktok" type="url" class="form-control" id="tiktok"
+                    placeholder="https://tiktok.com/suaempresa" value="{{empresa.tiktok}}">
             </div>
         </div>
     </div>
@@ -134,18 +147,18 @@
 
 <script>
     // Preview da logo
-        document.getElementById('logo').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const preview = document.getElementById('logo-preview');
-                    preview.src = event.target.result;
-                    preview.classList.remove('d-none');
-                }
-                reader.readAsDataURL(file);
+    document.getElementById('logo').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const preview = document.getElementById('logo-preview');
+                preview.src = event.target.result;
+                preview.classList.remove('d-none');
             }
-        });
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
 
 {% endblock %}

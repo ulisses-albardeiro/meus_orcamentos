@@ -47,4 +47,9 @@ class EmpresasServico implements EmpresasInterface
     {
         return $this->empresaModelo->buscaEmpresaPorIdUsuario($idUsuario);
     }
+
+    public function excluirLogoServico(int $idEmpresa): bool
+    {
+        return $this->empresaModelo->excluirLogo($idEmpresa);
+    }
 }

@@ -64,4 +64,11 @@ class EmpresasModelo extends Modelo
     {
         return $this->busca("id_usuario = {$idUsuario}")->resultado();
     }
+
+    public function excluirLogo(int $idEmpresa): bool
+    {
+        $this->id = $idEmpresa;
+        $this->logo = null;
+        return $this->salvar();
+    }
 }
