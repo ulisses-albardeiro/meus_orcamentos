@@ -40,8 +40,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for despesa in despesas %}
                         <tr>
-                            {% for despesa in despesas %}
                             <td class="text-start">R$ {{ (despesa.valor / 100) | number_format(2, ',', '.') }}</td>
                             <td class="text-center">{{ despesa.categoria }}</td>
                             <td class="text-center">{{ despesa.dt_despesa | date("d/m/Y")}}</td>

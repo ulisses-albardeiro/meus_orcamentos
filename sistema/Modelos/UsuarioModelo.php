@@ -47,9 +47,9 @@ class UsuarioModelo extends Modelo
         }
     }
 
-    public function buscaUsuarioPorId(int $id_usuario)
+    public function buscaUsuarioPorId(int $id_usuario): Modelo
     {
-        return $this->busca("id = {$id_usuario}")->resultado(true);
+        return $this->busca("id = {$id_usuario}")->resultado();
     }
 
     public function apagarRegistrosPorUsuario(int $id_usuario)

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div>
+    {{ flash() }}
+</div>
+
+<form action="{% if empresa %}{{url('empresa/editar/'~empresa.id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}" method="post" enctype="multipart/form-data">
+    <!-- Seção de Logo e Redes Sociais -->
+    <div class="row">
+        <!-- Logo -->
+        <div class="col-md-6 mb-3">
+            <div class="mt-2">
+                <img src="{{url('templates/assets/img/logos/'~empresa.logo)}}" id="logo-preview" class="img-thumbnail {% if empresa.logo == null %}d-none{% endif %}" style="max-height: 150px;">
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Dados Básicos -->
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="nome" class="form-label">Nome da Empresa *</label>
+            <input name="nome" type="text" class="form-control" id="nome" value="{{empresa.nome}}" required>
+            <div class="invalid-feedback">Por favor, informe o nome da empresa.</div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input name="telefone" type="tel" class="form-control" id="telefone" value="{{empresa.telefone}}">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="celular" class="form-label">Celular</label>
+            <input name="celular" type="tel" class="form-control" id="celular" value="{{empresa.celular}}">
+        </div>
+
+        <div class="col-md-4">
+            <label for="logo" class="form-label">Logo da Empresa</label>
+            <input name="logo" type="file" class="form-control" id="logo" accept="image/*">
+            <div class="form-text">Formatos aceitos: JPG, PNG, SVG. Tamanho máximo: 2MB</div>
+        </div>
+    </div>
+
+    <!-- Endereço -->
+    <h5 class="mt-4 mb-3">Endereço</h5>
+    <hr>
+    <div class="row">
+        <div class="col-md-1 mb-3">
+            <label for="rua" class="form-label">CEP</label>
+            <input name="cep" type="text" class="form-control" id="cep" value="{{empresa.cep}}">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input name="rua" type="text" class="form-control" id="rua" value="{{empresa.rua}}">
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="numero" class="form-label">Número</label>
+            <input name="n_casa" type="text" class="form-control" id="numero" value="{{empresa.n_casa}}">
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input name="bairro" type="text" class="form-control" id="bairro" value="{{empresa.bairro}}">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input name="cidade" type="text" class="form-control" id="cidade" value="{{empresa.cidade}}">
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <select name="uf" class="form-select" id="estado">
+                <option value="" selected disabled>UF</option>
+                {% for estado in
+                ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+                %}
+                <option {% if estado == empresa.uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <!-- Redes Sociais -->
+    <h5 class="mt-4 mb-3">Redes Sociais</h5>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Facebook</span>
+                <input name="facebook" type="url" class="form-control" id="facebook" placeholder="https://facebook.com/suaempresa" value="{{empresa.facebook}}">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Instagram</span>
+                <input name="instagram" type="url" class="form-control" id="instagram" placeholder="https://instagram.com/suaempresa" value="{{empresa.instagram}}">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">YouTube</span>
+                <input name="youtube" type="url" class="form-control" id="youtube" placeholder="https://youtube.com/suaempresa" value="{{empresa.youtube}}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">LinkedIn</span>
+                <input name="linkedin" type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/company/suaempresa" value="{{empresa.linkedin}}">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">X (Twitter)</span>
+                <input name="x" type="url" class="form-control" id="x" placeholder="https://x.com/suaempresa" value="{{empresa.x}}">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="input-group">
+                <span class="input-group-text">TikTok</span>
+                <input name="tiktok" type="url" class="form-control" id="tiktok" placeholder="https://tiktok.com/suaempresa" value="{{empresa.tiktok}}">
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="row my-4">
+        <div class="text-center">
+            <button type="submit" class="botao">Salvar Alterações</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    // Preview da logo
+        document.getElementById('logo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('logo-preview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('d-none');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+</script>
+
+{% endblock %}

@@ -132,10 +132,12 @@
     }
 
     .botao {
-      padding: 10px 20px;
+      padding: 6px 20px;
       background-color: #29CA9B;
-      color: white;
-      border-radius: 10px;
+      color: #34383D;
+      font-weight: 500;
+      border-radius: 6px;
+      border: none;
       text-decoration: none;
     }
 
@@ -380,7 +382,14 @@
                     <use xlink:href="#house-fill"></use>
                   </svg>
                   Home
-                </a> </li>
+                </a>
+              </li>
+              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
+                  href="{{url('empresa')}}">
+                  <i class="bi bi-building-fill-gear mb-2"></i>
+                  Sua Empresa
+                </a>
+              </li>
               <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
                   href="{{url('orcamento/listar')}}"> <svg class="bi" aria-hidden="true">
                     <use xlink:href="#file-earmark"></use>
@@ -403,12 +412,8 @@
                     <use xlink:href="#graph-up"></use>
                   </svg>
                   Finanças
-                </a> </li>
-              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 text-body"
-                  href="{{url('perfil')}}">
-                  <i class="bi bi-person-circle"></i>
-                  Perfil
-                </a>
+                </a> 
+              </li>
               </li>
             </ul>
             {% if usuario().nivel == 1 %}
@@ -461,9 +466,11 @@
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">{{titulo}}</h1>
           <!-- <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2"> <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <div class="btn-group me-2"> 
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
               <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div> <button type="button"
+            </div> 
+            <button type="button"
               class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
               <svg class="bi" aria-hidden="true">
                 <use xlink:href="#calendar3"></use>

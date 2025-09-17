@@ -120,6 +120,13 @@ try {
         SimpleRouter::get(URL . 'config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
     });
 
+    //Grupo de Rotas Empresa
+    SimpleRouter::group(['namespace' => 'Painel\Empresa', 'middleware' => AuthMiddleware::class], function () {
+        SimpleRouter::get(URL . 'empresa', 'EmpresaControlador@listar');
+        SimpleRouter::post(URL . 'empresa/editar/{id}', 'EmpresaControlador@editar');
+        SimpleRouter::post(URL . 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
+    });
+
     //Grupo de Rotas Dashboard
     SimpleRouter::group([
         'namespace' => 'Painel\Admin',

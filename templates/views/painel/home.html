@@ -10,14 +10,17 @@
   .lista-orcamentos::-webkit-scrollbar {
     width: 6px;
   }
+
   .lista-orcamentos::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
   }
+
   .lista-orcamentos::-webkit-scrollbar-thumb {
     background: #52D8B0;
     border-radius: 10px;
   }
+
   .lista-orcamentos::-webkit-scrollbar-thumb:hover {
     background: #52D8B0;
   }
@@ -25,6 +28,47 @@
   .lista-orcamentos {
     scrollbar-width: thin;
     scrollbar-color: #52D8B0 #f1f1f1;
+  }
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .quick-action-item {
+    background-color: var(--bd-violet-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #c7c7c7;
+    cursor: pointer;
+  }
+
+  .quick-action-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #52D8B0;
+  }
+
+  .quick-action-item:hover a {
+    color: #34383D !important;
+  }
+
+  .quick-action-item i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #52D8B0;
+  }
+
+  .quick-action-item:hover i {
+    color: white;
+  }
+
+  .quick-action-item h6 {
+    margin-bottom: 0;
+    font-weight: 600;
   }
 </style>
 
@@ -39,7 +83,7 @@
           <h5 class="mb-0 fw-bold">R$ {{ totalCaixaMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
         <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center p-3 rounded">
-          <i class="bi bi-currency-dollar"></i>
+          <i style="color: #34383D;" class="bi bi-currency-dollar"></i>
         </div>
       </div>
     </div>
@@ -53,8 +97,9 @@
           <p class="mb-1 fw-semibold small">Receitas do Mês</p>
           <h5 class="mb-0 fw-bold">R$ {{ totalReceitaMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
-        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="bi bi-graph-up-arrow"></i>
+        <div style="background-color: #52D8B0;"
+          class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i style="color: #34383D;" class="bi bi-graph-up-arrow"></i>
         </div>
       </div>
     </div>
@@ -68,8 +113,9 @@
           <p class="mb-1 fw-semibold small">Despesas do Mês</p>
           <h5 class="mb-0 fw-bold">R$ {{ totalDespesasMesAtual | number_format(2, ',', '.') }}</h5>
         </div>
-        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="bi bi-graph-down-arrow"></i>
+        <div style="background-color: #52D8B0;"
+          class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i style="color: #34383D;" class="bi bi-graph-down-arrow"></i>
         </div>
       </div>
     </div>
@@ -83,8 +129,9 @@
           <p class="mb-1 fw-semibold small">Margem</p>
           <h5 class="mb-0 fw-bold">{{ margemDoMes }} %</h5>
         </div>
-        <div style="background-color: #52D8B0;" class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
-          <i class="bi bi-percent"></i>
+        <div style="background-color: #52D8B0;"
+          class="d-flex align-items-center justify-content-center bg-gradient p-3 rounded">
+          <i style="color: #34383D;" class="bi bi-percent"></i>
         </div>
       </div>
     </div>
@@ -92,34 +139,69 @@
 </div>
 
 <div class="row mt-4">
-  <!-- Perfil -->
+  <!-- Ações Rápidas (substituindo o Perfil) -->
   <div class="col-lg-8 mb-3">
     <div class="card shadow-sm rounded-3 h-100">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h6 class="mb-0">Informações do Perfil</h6>
-        <a href="{{url('perfil')}}" class="botao">Editar Perfil</a>
+        <h6 class="mb-0">Ações Rápidas</h6>
       </div>
       <div class="card-body">
-        <img src="{{url('templates/assets/img/logos/'~usuario().img_logo)}}" alt="" class="mb-3" style="max-width:120px;">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>Nome:</strong> {{usuario().nome}}</li>
-          <li class="list-group-item"><strong>Celular:</strong> {{usuario().telefone}}</li>
-          <li class="list-group-item"><strong>Email:</strong> {{usuario().email}}</li>
-          <li class="list-group-item"><strong>CNPJ:</strong> {{usuario().cnpj}}</li>
-          <li class="list-group-item"><strong>Endereço:</strong> {{usuario().endereco}}</li>
-          <li class="list-group-item">
-            <strong>Instagram: </strong> 
-            
-              <i class="bi bi-instagram"></i> {{usuario().instagram}}
-            
-          </li>
-          <li class="list-group-item">
-            <strong>Facebook: </strong>
-            
-              <i class="bi bi-facebook"></i> {{usuario().facebook}}
-            
-          </li>
-        </ul>
+        <div class="quick-actions">
+          <div class="quick-action-item">
+            <a href="{{url('orcamento/modelos')}}" class="text-decoration-none text-body">
+              <i class="bi bi-file-earmark-plus"></i>
+              <h6>Novo Orçamento</h6>
+            </a>
+          </div>
+          <!-- <div class="quick-action-item">
+            <a href="{{url('recibo/novo')}}" class="text-decoration-none text-body">
+              <i class="bi bi-receipt"></i>
+              <h6>Emitir Recibo</h6>
+            </a>
+          </div> -->
+          <div class="quick-action-item">
+            <a href="{{url('clientes/listar')}}" class="text-decoration-none text-body">
+              <i class="bi bi-person-plus"></i>
+              <h6>Novo Cliente</h6>
+            </a>
+          </div>
+          <div class="quick-action-item">
+            <a href="{{url('receitas')}}" class="text-decoration-none text-body">
+              <i class="bi bi-cash-coin"></i>
+              <h6>Registrar Entrada</h6>
+            </a>
+          </div>
+          <div class="quick-action-item">
+            <a href="{{url('despesas')}}" class="text-decoration-none text-body">
+              <i class="bi bi-currency-exchange"></i>
+              <h6>Registrar Saída</h6>
+            </a>
+          </div>
+          <div class="quick-action-item">
+            <a href="{{url('listas/modelos')}}" class="text-decoration-none text-body">
+              <i class="bi bi-box-seam"></i>
+              <h6>Criar Lista</h6>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="mt-4 pt-3 border-top">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Acesso Rápido ao Perfil</h6>
+            <a href="{{url('perfil')}}" class="botao">
+              <i class="bi bi-person-circle me-1"></i> Ver Perfil Completo
+            </a>
+          </div>
+          <div class="d-flex mt-3">
+            <img src="{{url('templates/assets/img/logos/'~usuario().img_logo)}}" alt="Logo" class="rounded-circle me-3"
+              width="60" height="60">
+            <div>
+              <h6 class="mb-0">{{usuario().nome}}</h6>
+              <p class="text-muted small mb-0">{{usuario().email}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
