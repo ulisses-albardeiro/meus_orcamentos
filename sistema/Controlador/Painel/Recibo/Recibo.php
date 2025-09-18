@@ -32,7 +32,7 @@ class Recibo extends PainelControlador
         }
 
         $html = new Html;
-        $html->dadosUsuario($dados['nome-empresa'], $dados['doc-empresa'], $dados['tel-empresa'], $dados['end-empresa'], $dados['email-empresa']);
+        $html->dadosUsuario($dados['nome_empresa'], $dados['doc-empresa'], $dados['tel-empresa'], $dados['end-empresa'], $dados['email-empresa']);
         $html->img($this->usuario->img_logo);
         $html->dadosCliente($dados['nome-cliente'], $dados['doc-cliente'], $dados['valor-recibo']);
         $html->redesSociais($dados['facebook'], $dados['instagram']);

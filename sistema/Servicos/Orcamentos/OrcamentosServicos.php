@@ -33,13 +33,23 @@ class OrcamentosServicos implements OrcamentosInterface
     public function separarDadosUsuario(array $dados): array
     {
         $camposDesejados = [
-            'nome-empresa',
-            'email-empresa',
-            'tel-empresa',
-            'doc-empresa',
+            'nome_empresa',
+            'email_empresa',
+            'telefone_empresa',
+            'celular_empresa',
+            'cnpj_empresa',
             'facebook',
             'instagram',
-            'end-empresa'
+            'linkedin',
+            'x',
+            'youtube',
+            'tiktok',
+            'cep_empresa',
+            'rua_empresa',
+            'n_casa_empresa',
+            'bairro_empresa',
+            'cidade_empresa',
+            'uf_empresa'
         ];
 
         $dadosUsuario = [];

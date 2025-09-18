@@ -87,7 +87,7 @@ class OrcamentoControlador extends PainelControlador
     {
         $dados = $this->orcamentosServicos->buscaOrcamentoPorIdServico($id_orcamento);
 
-        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados);
+        $dados_empresa = $this->orcamentosServicos->separarDadosUsuario($dados);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados);
 
         // Processa os itens para ter valores numéricos limpos
@@ -98,11 +98,11 @@ class OrcamentoControlador extends PainelControlador
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
             [
-                'dados_usuario' => $dados_usuario,
+                'dados_empresa' => $dados_empresa,
                 'dados_cliente' => $dados_cliente,
                 'itens' => $itens_processados,
                 'total_orcamento' => $dados['vl_total'],
-                'titulo' => $dados_usuario['nome-empresa'],
+                'titulo' => $dados_empresa['nome_empresa'],
                 'dados_completos' => $dados,
                 'usuario' => $usuario[0],
             ]
@@ -133,25 +133,20 @@ class OrcamentoControlador extends PainelControlador
     {
         $dados = $this->orcamentosServicos->buscaOrcamentoPorHashServico($hash);
 
-        $dados_usuario = $this->orcamentosServicos->separarDadosUsuario($dados);
+        $dados_empresa = $this->orcamentosServicos->separarDadosUsuario($dados);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados);
 
         // Processa os itens para ter valores numéricos limpos
         $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
 
-        $usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
-
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
             [
-                'dados_usuario' => $dados_usuario,
+                'dados_empresa' => $dados_empresa,
                 'dados_cliente' => $dados_cliente,
                 'itens' => $itens_processados,
                 'total_orcamento' => $dados['vl_total'],
-                'titulo' => $dados_usuario['nome-empresa'],
                 'dados_completos' => $dados,
-                'usuario' => $usuario[0],
-                'titulo' => $dados_usuario['nome-empresa'],
             ]
         );
 
@@ -176,8 +171,8 @@ class OrcamentoControlador extends PainelControlador
                 "orcamento" => $orcamento_url,
                 "id_orcamento" => $dados['id'],
                 'modelo' => $modelo,
-                'usuario' => $usuario[0],
                 'hash' => $hash,
+                'titulo' => $dados_empresa['nome_empresa'],
             ]
         );
     }
