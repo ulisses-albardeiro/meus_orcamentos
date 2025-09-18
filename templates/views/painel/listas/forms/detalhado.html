@@ -18,52 +18,7 @@
     adicionar logo ao seu orçamento, vá para <a href="{{ url('perfil') }}">Perfil</a></p>
 <form action="{{ url('listas/cadastrar/' ~ modelo) }}" method="post" target="_blank">
 
-    <div class="card border-1 shadow-lg p-3">
-        <div class="text-center mb-3">
-            {% if usuario().img_logo %}
-            <img src="{{ url('templates/assets/img/logos/'~usuario().img_logo) }}" class="img-fluid"
-                style="max-height: 150px;">
-            {% endif %}
-        </div>
-        <div class="row g-2 mb-3">
-            <div class="col-4">
-                <label class="form-label">Seu nome</label>
-                <input required value="{{ usuario().nome }}" type="text" class="form-control form-control-sm"
-                    name="nome_usuario">
-            </div>
-            <div class="col-4">
-                <label class="form-label"> Seu Email</label>
-                <input value="{{ usuario().email }}" type="email" class="form-control form-control-sm"
-                    name="email_usuario">
-            </div>
-            <div class="col-4">
-                <label class="form-label"> Seu Telefone</label>
-                <input required value="{{ usuario().telefone }}" type="text" class="form-control form-control-sm"
-                    name="telelefone_usuario">
-            </div>
-        </div>
-        <div class="row g-2 mb-3">
-            <div class="col-4">
-                <label class="form-label">Seu CNPJ</label>
-                <input value="{{ usuario().cnpj }}" type="text" class="form-control form-control-sm" name="cnpj_usuario"
-                    id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
-            </div>
-            <div class="col-4">
-                <label class="form-label"> Seu Facebook</label>
-                <input value="{{ usuario().facebook }}" type="text" class="form-control form-control-sm"
-                    name="facebook">
-            </div>
-            <div class="col-4">
-                <label class="form-label"> Seu Instagram</label>
-                <input value="{{ usuario().instagram }}" type="text" class="form-control form-control-sm"
-                    name="instagram">
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Seu Endereço</label>
-            <input value="{{ usuario().endereco }}" type="text" class="form-control form-control-sm" name="endereco_usuario">
-        </div>
-    </div>
+    {% include '/componentes/cabecalho-dados-empresa.html' %}
 
     <h3 class="text-center mt-4">Dados do cliente</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
@@ -89,7 +44,8 @@
                 </div>
             </div>
         </div>
-        <button style="background-color: #0b5ed7;" type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItem()">Adicionar Item</button>
+        <button style="background-color: #0b5ed7;" type="button" class="btn btn-sm btn-primary mb-3"
+            onclick="adicionarItem()">Adicionar Item</button>
     </div>
 
     <h3 class="mt-4 text-center">Detalhes finais</h3>
@@ -102,8 +58,7 @@
     </div>
 
     <div class="text-center my-4">
-        <button type="submit" class="btn botao text-white"><i style="color: #18cb96;"
-                class="bi bi-plus-circle"></i>
+        <button type="submit" class="btn botao text-white"><i style="color: #18cb96;" class="bi bi-plus-circle"></i>
             Gerar Lista de Materiais</button>
     </div>
 </form>
