@@ -24,8 +24,8 @@
     <div class="d-flex justify-content-between align-items-start">
       <div class="titulo-orcamento bg-dark">ORÇAMENTO</div>
       <div class="text-end small text-muted">
-        {% if usuario.img_logo %}
-        <div class="img_logo"><img src="{{ url('templates/assets/img/logos/'~usuario.img_logo) }}"></div>
+        {% if empresa.logo %}
+        <div class="img_logo"><img src="{{ url('templates/assets/img/logos/'~empresa.logo) }}"></div>
         {% endif %}
       </div>
     </div>
@@ -94,19 +94,67 @@
 
     <div class="text-center mt-5 small">
       <p class="mb-1">Obrigado por solicitar um orçamento conosco! Para dúvidas, entre em contato.</p>
-      <p class="fw-bold mb-1">{{ dados_usuario['nome_empresa'] }}</p>
-      <p class="mb-3">{{ dados_usuario['end-empresa'] }}</p>
+      <p class="fw-bold mb-3">{{ dados_empresa.nome_empresa }}</p>
+      {% if dados_empresa.rua_empresa or dados_empresa.n_casa_empresa or
+      dados_empresa.bairro_empresa or dados_empresa.cep_empresa or
+      dados_empresa.cidade_empresa or dados_empresa.uf_empresa %}
+      <p style="font-size: 15px;" class="mb-1">
+        <i class="fas fa-map-marker-alt text-muted me-1"></i>
+        {{ dados_empresa.rua_empresa }}
+        {% if dados_empresa.n_casa_empresa %}, {{dados_empresa.n_casa_empresa }}{% endif %}
+        {% if dados_empresa.bairro_empresa %} - {{ dados_empresa.bairro_empresa }}{% endif
+        %}
+        {% if dados_empresa.cep_empresa %}. CEP: {{ dados_empresa.cep_empresa }}{% endif %}
+        {% if dados_empresa.cidade_empresa %}. {{ dados_empresa.cidade_empresa }}{% endif %}
+        {% if dados_empresa.uf_empresa %}/{{ dados_empresa.uf_empresa }}{% endif %}.
+      </p>
+      {% endif %}
       <p class="mb-0">
-        {{ dados_usuario['tel-empresa'] }} |
-        {{ dados_usuario['email-empresa'] }} |
-        {{ dados_usuario['doc-empresa'] }}
+        {{ dados_empresa.telefone_empresa }} |
+        {{ dados_empresa.celular_empresa }} |
+        {{ dados_empresa.email_empresa }} |
+        {{ dados_empresa.cnpj_empresa }}
       </p>
       <p class="mt-2">
-        {% if dados_usuario.facebook %}
-        Facebook: {{ dados_usuario.facebook }}
+        {% if dados_empresa.facebook %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dados_empresa.facebook }}
+        </span>
         {% endif %}
-        {% if dados_usuario.instagram %}
-        | Instagram: {{ dados_usuario.instagram }}
+        
+        {% if dados_empresa.instagram %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dados_empresa.instagram }}
+        </span>
+        {% endif %}
+        
+        {% if dados_empresa.x %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="X (Twitter)" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dados_empresa.x }}
+        </span>
+        {% endif %}
+        
+        {% if dados_empresa.tiktok %}
+        
+        <span class="me-1">
+          <img src="{{url('templates/assets/img/gerais/tiktok.png')}}" alt="LinkedIn" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dados_empresa.tiktok }}
+        </span>
+        {% endif %}
+        
+        {% if dados_empresa.linkedin %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dados_empresa.linkedin }}
+        </span>
         {% endif %}
       </p>
     </div>
