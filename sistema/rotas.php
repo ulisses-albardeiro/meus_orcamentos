@@ -3,6 +3,7 @@
 use Pecee\SimpleRouter\SimpleRouter;
 use sistema\Nucleo\AdminMiddleware;
 use sistema\Nucleo\AuthMiddleware;
+use sistema\Nucleo\EmpresaMiddleware;
 use sistema\Nucleo\Helpers;
 
 try {
@@ -26,7 +27,7 @@ try {
     });
 
     //Grupo de rotas de Perfil
-    SimpleRouter::group(['namespace' => 'Painel\Perfil', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Perfil', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'perfil', 'PerfilControlador@listar');
         SimpleRouter::post(URL . 'perfil-editar', 'PerfilControlador@editar');
         SimpleRouter::get(URL . 'remover-logo', 'PerfilControlador@removerLogo');
@@ -40,12 +41,12 @@ try {
     });
 
     //Grupo de Rotas Home
-    SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'home', 'HomeControlador@listar');
     });
 
     //Grupo de Rotas Clientes
-    SimpleRouter::group(['namespace' => 'Painel\Clientes', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Clientes', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'clientes/listar', 'ClientesControlador@listar');
         SimpleRouter::post(URL . 'clientes/cadastrar', 'ClientesControlador@cadastrar');
         SimpleRouter::get(URL . 'clientes/excluir/{id_cliente}', 'ClientesControlador@excluir');
@@ -53,7 +54,7 @@ try {
     });
 
     //Grupo de Rotas Finanças
-    SimpleRouter::group(['namespace' => 'Painel\Financas', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Financas', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         //dashboard
         SimpleRouter::match(["get", "post"], URL . 'dashboard-financas', 'Dashboard@listar');
         //Nova Categoria
@@ -76,7 +77,7 @@ try {
     });
 
     //Grupo de Rotas Lista
-    SimpleRouter::group(['namespace' => 'Painel\Lista', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Lista', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'listas/listar', 'ListaControlador@listar');
         SimpleRouter::get(URL . 'listas/modelos', 'ListaControlador@modelos');
         SimpleRouter::get(URL . 'listas/criar/{form}/{modelo}', 'ListaControlador@criar');
@@ -91,7 +92,7 @@ try {
     });
 
     //Grupo de Rotas Orçamento
-    SimpleRouter::group(['namespace' => 'Painel\Orcamento', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Orcamento', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
         SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'OrcamentoControlador@excluir');
         SimpleRouter::get(URL . 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');
@@ -106,7 +107,7 @@ try {
     });
 
     //Grupo de Rotas Recibo
-    SimpleRouter::group(['namespace' => 'Painel\Recibo', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Recibo', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'recibo/gerar', 'Recibo@gerar');
         SimpleRouter::get(URL . 'recibo/gerar/{id_recibo}', 'Recibo@gerar');
         SimpleRouter::get(URL . 'recibo/criar', 'Recibo@criar');
@@ -115,7 +116,7 @@ try {
     });
 
     //Grupo de Rotas Lista
-    SimpleRouter::group(['namespace' => 'Painel\Config', 'middleware' => AuthMiddleware::class], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Config', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'config', 'ConfigControlador@listar');
         SimpleRouter::get(URL . 'config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
     });
@@ -156,7 +157,7 @@ try {
     SimpleRouter::start();
 } catch (Exception $e) {
 
-    if (!Helpers::localhost()) {
+    if (Helpers::localhost()) {
         echo $e;
     } else {
         Helpers::redirecionar('404');
