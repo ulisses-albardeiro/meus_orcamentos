@@ -17,26 +17,37 @@ class EmpresaControlador extends PainelControlador
     }
 
 
-    public function listar() : void
+    public function listar(): void
     {
-        echo $this->template->rendenizar('empresa/form.html', 
-        [
-            "titulo" => "Configure os dados da sua Empresa",
-            "subTitulo" => "",
-            'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId),
-        ]);    
+        echo $this->template->rendenizar(
+            'empresa/form.html',
+            [
+                "titulo" => "Configure os dados da sua Empresa",
+                "subTitulo" => "",
+                'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId),
+            ]
+        );
     }
 
     public function cadastrar(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->usuario->usuarioId, $_FILES['logo']);
+        if (isset($dados)) {
+            $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->usuario->usuarioId, $_FILES['logo']);
 
-        if ($cadastro) {
-            $this->mensagem->mensagemSucesso('Empresa cadastrada com sucesso.')->flash();
+            if ($cadastro) {
+                $this->mensagem->mensagemSucesso('Empresa cadastrada com sucesso.')->flash();
+            }
+
+            Helpers::redirecionar('empresa');
         }
 
-        Helpers::redirecionar('empresa');
+        echo $this->template->rendenizar(
+            'empresa/cadastro.html',
+            [
+                "titulo" => "Configure os dados da sua Empresa",                
+            ]
+        );
     }
 
     public function editar(int $id): void
@@ -52,11 +63,11 @@ class EmpresaControlador extends PainelControlador
         Helpers::redirecionar('empresa');
     }
 
-    public function excluirLogo():void 
+    public function excluirLogo(): void
     {
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId);
 
-        unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/logos/'.$empresa->logo);
+        unlink($_SERVER['DOCUMENT_ROOT'] . URL . 'templates/assets/img/logos/' . $empresa->logo);
 
         $exclusao = $this->empresaServico->excluirLogoServico($empresa->id);
 

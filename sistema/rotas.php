@@ -124,7 +124,7 @@ try {
     SimpleRouter::group(['namespace' => 'Painel\Empresa', 'middleware' => AuthMiddleware::class], function () {
         SimpleRouter::get(URL . 'empresa', 'EmpresaControlador@listar');
         SimpleRouter::post(URL . 'empresa/editar/{id}', 'EmpresaControlador@editar');
-        SimpleRouter::post(URL . 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL . 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
         SimpleRouter::get(URL . 'empresa/excluir/logo', 'EmpresaControlador@excluirLogo');
     });
 

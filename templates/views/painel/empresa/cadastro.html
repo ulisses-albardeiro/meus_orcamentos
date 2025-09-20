@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ titulo }}</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+
+<body class="bg-light">
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow border-1 rounded-4 p-4" style="max-width: 1400px; width: 100%; background: rgba(255,255,255,0.95);">
+            <div class="card-body">
+    
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">🎉 Vamos começar a preparar seu ambiete de trabalho!</h4>
+                    <p>Agora, para continuar, cadastre sua <strong>empresa</strong> ou seus <strong>dados profissionais</strong>.</p>
+                    <hr>
+                    <p class="mb-0">Essas informações serão exibidas automaticamente nos seus orçamentos e você poderá editá-las sempre
+                        que precisar.</p>
+                </div>
+
+                <form action="{% if empresa() %}{{url('empresa/editar/'~empresa().id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}"
+    method="post" enctype="multipart/form-data">
+                    <!-- Logo -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="mt-2">
+                                <img src="{% if empresa() %}{{url('templates/assets/img/gerais/empresa().logo')}}{% else %}{{url('templates/assets/img/gerais/logo-default.png')}}{% endif %}" id="logo-preview" class="img-thumbnail" style="max-height: 150px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dados Básicos -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="logo" class="form-label">Logo da Empresa</label>
+                            <input name="logo" type="file" class="form-control" id="logo" accept="image/*">
+                            <div class="form-text">Formatos: JPG, PNG, SVG. Máx: 2MB</div>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="nome" class="form-label">Nome da Empresa *</label>
+                            <input name="nome" type="text" class="form-control" id="nome" value="{{empresa().nome}}" required>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="telefone" class="form-label">Telefone</label>
+                            <input name="telefone" type="tel" class="form-control" id="telefone" value="{{empresa().telefone}}">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="celular" class="form-label">Celular</label>
+                            <input name="celular" type="tel" class="form-control" id="celular" value="{{empresa().celular}}">
+                        </div>
+                        
+                    </div>
+
+                    <!-- Endereço -->
+                    <h5 class="mt-4 mb-3">Endereço</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2 mb-3">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input name="cep" type="text" class="form-control" id="cep" value="{{empresa().cep}}">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="rua" class="form-label">Rua</label>
+                            <input name="rua" type="text" class="form-control" id="rua" value="{{empresa().rua}}">
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <label for="numero" class="form-label">Número</label>
+                            <input name="n_casa" type="text" class="form-control" id="numero" value="{{empresa().n_casa}}">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input name="bairro" type="text" class="form-control" id="bairro" value="{{empresa().bairro}}">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input name="cidade" type="text" class="form-control" id="cidade" value="{{empresa().cidade}}">
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select name="uf" class="form-select" id="estado">
+                                <option value="" selected disabled>UF</option>
+                                {% for estado in
+                                ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+                                %}
+                                <option {% if estado==empresa().uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Redes Sociais -->
+                    <h5 class="mt-4 mb-3">Redes Sociais</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">Facebook</span>
+                                <input name="facebook" type="text" class="form-control" id="facebook" placeholder="@suaempresa" value="{{empresa().facebook}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">Instagram</span>
+                                <input name="instagram" type="text" class="form-control" id="instagram" placeholder="@suaempresa" value="{{empresa().instagram}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">YouTube</span>
+                                <input name="youtube" type="text" class="form-control" id="youtube" placeholder="@suaempresa" value="{{empresa().youtube}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">LinkedIn</span>
+                                <input name="linkedin" type="text" class="form-control" id="linkedin" placeholder="@suaempresa" value="{{empresa().linkedin}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">X (Twitter)</span>
+                                <input name="x" type="text" class="form-control" id="x" placeholder="@suaempresa" value="{{empresa().x}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">TikTok</span>
+                                <input name="tiktok" type="text" class="form-control" id="tiktok" placeholder="@suaempresa" value="{{empresa().tiktok}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão -->
+                    <div class="row my-4">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark px-4">Salvar Dados</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Preview da logo
+        document.getElementById('logo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('logo-preview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('d-none');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+
+</html>
