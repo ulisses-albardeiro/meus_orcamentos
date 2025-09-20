@@ -156,7 +156,7 @@ try {
     SimpleRouter::start();
 } catch (Exception $e) {
 
-    if (Helpers::localhost()) {
+    if (!Helpers::localhost()) {
         echo $e;
     } else {
         Helpers::redirecionar('404');
