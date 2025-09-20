@@ -7,7 +7,7 @@ use sistema\Nucleo\Sessao;
 
 class PainelControlador extends Controlador
 {
-    protected $usuario;
+    protected Sessao $usuario;
 
     public function __construct()
     {
