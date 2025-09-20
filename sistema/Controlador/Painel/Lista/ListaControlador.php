@@ -7,6 +7,7 @@ use sistema\Modelos\OrcamentoModelo;
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clientes\ClientesInterface;
+use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
@@ -18,18 +19,21 @@ class ListaControlador extends PainelControlador
     protected ClientesInterface $clientesServico;
     protected OrcamentosInterface $orcamentoInterface;
     protected UsuariosInterface $usuarioServico;
+    protected EmpresasInterface $empresaServico;
 
     public function __construct(
         ListaInterface $listaServico,
         ClientesInterface $clientesServico,
         OrcamentosInterface $orcamentoInterface,
-        UsuariosInterface $usuarioServico
+        UsuariosInterface $usuarioServico,
+        EmpresasInterface $empresaServico
     ) {
         parent::__construct();
         $this->listaServico = $listaServico;
         $this->clientesServico = $clientesServico;
         $this->orcamentoInterface = $orcamentoInterface;
         $this->usuarioServico = $usuarioServico;
+        $this->empresaServico = $empresaServico;
     }
 
     public function listar(): void
@@ -92,14 +96,13 @@ class ListaControlador extends PainelControlador
     public function pdf(string $modelo, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
-
-        $dados_usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
             "listas/pdf/$modelo.html",
             [
                 "dados" => $dados,
-                'img_usuario' => $dados_usuario[0]->img_logo,
+                'empresa' => $empresa,
             ]
         );
 
@@ -129,13 +132,13 @@ class ListaControlador extends PainelControlador
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
 
-        $dados_usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
             "listas/pdf/$modelo.html",
             [
                 "dados" => $dados,
-                'img_usuario' => $dados_usuario[0]->img_logo,
+                'empresa' => $empresa,
             ]
         );
 
@@ -160,6 +163,7 @@ class ListaControlador extends PainelControlador
                 "orcamento" => $lista_url,
                 'hash' => $hash,
                 'modelo' => $modelo,
+                'empresa' => $empresa,
             ]
         );
     }
