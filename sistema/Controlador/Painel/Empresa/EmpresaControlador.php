@@ -39,7 +39,7 @@ class EmpresaControlador extends PainelControlador
                 $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('orcamento/modelos'), 'Sim, criar agora')->flash();
             }
 
-            Helpers::redirecionar('empresa');
+            Helpers::redirecionar('home');
         }
 
         echo $this->template->rendenizar(
