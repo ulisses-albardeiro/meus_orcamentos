@@ -25,7 +25,7 @@ class UsuarioControlador extends Controlador
         return (new UsuarioModelo)->buscaPorId($sessao->usuarioId);
     }
 
-    public static function empresa(): Modelo
+    public static function empresa(): ?Modelo
     {
         $sessao = new Sessao();
         return (new EmpresasModelo)->buscaEmpresaPorIdUsuario($sessao->usuarioId);
