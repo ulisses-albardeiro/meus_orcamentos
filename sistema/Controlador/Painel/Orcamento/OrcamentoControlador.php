@@ -6,6 +6,7 @@ use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clientes\ClientesInterface;
+use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Suporte\Pdf;
@@ -15,13 +16,15 @@ class OrcamentoControlador extends PainelControlador
     protected OrcamentosInterface $orcamentosServicos;
     protected ClientesInterface $clientesServico;
     protected UsuariosInterface $usuarioServico;
+    protected EmpresasInterface $empresaServico;
 
-    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico)
+    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico)
     {
         parent::__construct();
         $this->orcamentosServicos = $orcamentosServicos;
         $this->clientesServico = $clientesServico;
         $this->usuarioServico = $usuarioServico;
+        $this->empresaServico = $empresaServico;
     }
 
     public function listar(): void
@@ -83,17 +86,16 @@ class OrcamentoControlador extends PainelControlador
         }
     }
 
-    public function pdf(string $modelo, int $id_orcamento): void
+    public function pdf(string $modelo, string $hash): void
     {
-        $dados = $this->orcamentosServicos->buscaOrcamentoPorIdServico($id_orcamento);
+        $dados = $this->orcamentosServicos->buscaOrcamentoPorHashServico($hash);
 
         $dados_empresa = $this->orcamentosServicos->separarDadosUsuario($dados);
         $dados_cliente = $this->orcamentosServicos->separarDadosCliente($dados);
 
         // Processa os itens para ter valores numéricos limpos
         $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
-
-         $usuario = $this->usuarioServico->buscaUsuariosPorIdServico($dados['id_usuario']);
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -102,9 +104,8 @@ class OrcamentoControlador extends PainelControlador
                 'dados_cliente' => $dados_cliente,
                 'itens' => $itens_processados,
                 'total_orcamento' => $dados['vl_total'],
-                'titulo' => $dados_empresa['nome_empresa'],
                 'dados_completos' => $dados,
-                'usuario' => $usuario[0],
+                'empresa' => $empresa,
             ]
         );
 
@@ -138,6 +139,7 @@ class OrcamentoControlador extends PainelControlador
 
         // Processa os itens para ter valores numéricos limpos
         $itens_processados = $this->orcamentosServicos->processarItensParaView($dados);
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
             "orcamentos/pdf/$modelo.html",
@@ -147,6 +149,7 @@ class OrcamentoControlador extends PainelControlador
                 'itens' => $itens_processados,
                 'total_orcamento' => $dados['vl_total'],
                 'dados_completos' => $dados,
+                'empresa' => $empresa,
             ]
         );
 
@@ -173,6 +176,7 @@ class OrcamentoControlador extends PainelControlador
                 'modelo' => $modelo,
                 'hash' => $hash,
                 'titulo' => $dados_empresa['nome_empresa'],
+                'empresa' => $empresa,
             ]
         );
     }

@@ -3,7 +3,7 @@
         'name' => 'note/sistema_consult',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2d54b6e8c7f95e50c13a05b4fbd531fd0afd0ff8',
+        'reference' => '481811641188d162fc87bed741160d37d63756a8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -139,7 +139,7 @@
         'note/sistema_consult' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2d54b6e8c7f95e50c13a05b4fbd531fd0afd0ff8',
+            'reference' => '481811641188d162fc87bed741160d37d63756a8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

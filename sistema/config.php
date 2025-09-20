@@ -8,7 +8,7 @@ if (Helpers::localhost()) {
     define('DB_NOME', 'meus_orcamentos');
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
-    define('DB_SENHA', '123');
+    define('DB_SENHA', '');
 
     define('SITE_NAME', 'Meus Orçamentos');
     define('SITE_DESC', '');

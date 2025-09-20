@@ -102,7 +102,7 @@ try {
     //Grupo de rotas que não precisa de autenticação
     SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
         SimpleRouter::get(URL . 'orcamento/{modelo}/{hash}', 'OrcamentoControlador@exibir');
-        SimpleRouter::get(URL . 'orcamento/pdf/{modelo}/{id_orcamento}', 'OrcamentoControlador@pdf');
+        SimpleRouter::get(URL . 'orcamento/pdf/{modelo}/{hash}', 'OrcamentoControlador@pdf');
     });
 
     //Grupo de Rotas Recibo
