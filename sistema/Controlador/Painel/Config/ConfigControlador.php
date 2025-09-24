@@ -28,8 +28,9 @@ class ConfigControlador extends PainelControlador
 
 
         if ($exclusaoDados->apagarRegistrosPorUsuarioGeral($idUsuario) && $exclusaoUsuario->apagarUsuario($idUsuario)) {
-            $this->mensagem->mensagemSucesso("Conta apagada com sucesso!")->flash();
-            Helpers::redirecionar('form-cadastro');
+            $sessao = new Sessao();
+            $sessao->deletarSessao();
+            Helpers::redirecionar('/');
         } else {
             $this->mensagem->mensagemErro("Erro ao apagar a conta. Tente novamente.")->flash();
             Helpers::redirecionar('config');
