@@ -36,13 +36,10 @@ class PerfilControlador extends PainelControlador
             $usuario->img_logo = $nome_arquivo;
         }
         $usuario->id = $this->usuario->usuarioId;
-        $usuario->cnpj = $dados['cnpj'];
         $usuario->nome = $dados['nome'];
         $usuario->email = $dados['email'];
-        $usuario->facebook = $dados['face'];
-        $usuario->instagram = $dados['insta'];
         $usuario->telefone = $dados['telefone'];
-        $usuario->endereco = $dados['endereco'];
+    
         if ($usuario->salvar()) {
             $this->mensagem->mensagemSucesso('Perfil atualizado com sucesso!')->flash();
         }
