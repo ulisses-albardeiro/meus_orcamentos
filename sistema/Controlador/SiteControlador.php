@@ -15,11 +15,6 @@ class SiteControlador extends Controlador
 
     public function index(): void
     {
-        $sessao = (new Sessao)->checarSessao("usuarioId");
-        if ($sessao) {
-            Helpers::redirecionar("home");
-        }
-
         echo $this->template->rendenizar(
             "index.html",
             [
