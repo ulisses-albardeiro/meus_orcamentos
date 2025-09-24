@@ -14,7 +14,7 @@
 <body class="bg-light">
 
     <div class="my-2">{{ flash() }}</div>
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow border-1 rounded-4 px-4" style="max-width: 1400px; width: 100%; background: rgba(255,255,255,0.95);">
             <div class="card-body">
     
@@ -39,21 +39,31 @@
 
                     <!-- Dados Básicos -->
                     <div class="row">
-                        <div class="col-md-3">
-                            <label for="logo" class="form-label">Logo da Empresa</label>
-                            <input name="logo" type="file" class="form-control" id="logo" accept="image/*">
-                            <div class="form-text">Formatos: JPG, PNG, SVG. Máx: 2MB</div>
+                        <div class="col-md-1">
+                            <label class="form-label">Logo</label>
+                            <!-- Ícone que aciona o input -->
+                            <label for="logo" class="btn btn-dark d-inline-flex align-items-center">
+                                <i class="bi bi-cloud-upload-fill me-1"></i> Upload
+                            </label>
+                            <!-- Input escondido -->
+                            <input name="logo" type="file" class="d-none" id="logo" accept="image/*">
                         </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="nome" class="form-label">Nome da Empresa *</label>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="nome" class="form-label">Nome</label>
                             <input name="nome" type="text" class="form-control" id="nome" value="{{empresa().nome}}" required>
                             <div class="form-text text-danger">*Obrigatório.</div>
                         </div>
-                        <div class="col-md-2 mb-3">
+
+                        <div class="col-md-3 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input name="email" type="email" class="form-control" id="email" value="{{empresa().email}}">
+                        </div>
+                        <div class="col-md-2 mb-2">
                             <label for="telefone" class="form-label">Telefone</label>
                             <input name="telefone" type="tel" class="form-control" id="telefone" value="{{empresa().telefone}}">
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-2 mb-2">
                             <label for="celular" class="form-label">Celular</label>
                             <input name="celular" type="tel" class="form-control" id="celular" value="{{empresa().celular}}">
                         </div>

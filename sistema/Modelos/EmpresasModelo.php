@@ -15,6 +15,7 @@ class EmpresasModelo extends Modelo
     {
         $this->id_usuario = $idUsuario;
         $this->nome = $dados['nome'];
+        $this->email = $dados['email'] ?? null;
         $this->telefone = $dados['telefone'] ?? null;
         $this->celular = $dados['celular'] ?? null;
         $this->logo = $logo ?? null;
@@ -38,6 +39,7 @@ class EmpresasModelo extends Modelo
     {
         $this->id = $idEmpresa;
         $this->nome = $dados['nome'];
+        $this->email = $dados['email'] ?? null;
         $this->telefone = $dados['telefone'] ?? null;
         $this->celular = $dados['celular'] ?? null;
         $this->cep = $dados['cep'] ?? null;

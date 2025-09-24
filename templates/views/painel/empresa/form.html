@@ -26,17 +26,24 @@
 
     <!-- Dados Básicos -->
     <div class="row">
-        <div class="col-md-4">
-            <label for="logo" class="form-label">Logo da Empresa</label>
-            <input name="logo" type="file" class="form-control" id="logo" accept="image/*">
-            <div class="form-text">Formatos aceitos: JPG, PNG, SVG. Tamanho máximo: 2MB</div>
+        <div class="col-md-1">
+            <label class="form-label">Logo</label>
+            <!-- Ícone que aciona o input -->
+            <label for="logo" class="btn btn-dark d-inline-flex align-items-center">
+                <i class="bi bi-cloud-upload-fill me-1"></i> Upload
+            </label>
+            <!-- Input escondido -->
+            <input name="logo" type="file" class="d-none" id="logo" accept="image/*">
         </div>
         <div class="col-md-4 mb-3">
             <label for="nome" class="form-label">Nome da Empresa *</label>
             <input name="nome" type="text" class="form-control" id="nome" value="{{empresa.nome}}" required>
             <div class="form-text text-danger">*Obrigatório.</div>
         </div>
-
+        <div class="col-md-3 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" id="email" value="{{empresa().email}}">
+        </div>
         <div class="col-md-2 mb-3">
             <label for="telefone" class="form-label">Telefone</label>
             <input name="telefone" type="tel" class="form-control" id="telefone" value="{{empresa.telefone}}">
