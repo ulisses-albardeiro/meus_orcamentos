@@ -1,6 +1,5 @@
 <?php
 
-use sistema\Nucleo\Helpers;
 use Symfony\Component\Dotenv\Dotenv;
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -22,5 +21,6 @@ define('USUARIO_EMAIL', $_ENV['USUARIO_EMAIL']);
 define('SENHA_EMAIL', $_ENV['SENHA_EMAIL']);
 define('PORTA_EMAIL', $_ENV['PORTA_EMAIL']);
 
+define('PRODUCTION_UR', $_ENV['PRODUCTION_UR']);
 define('DEVELOPMENT_URL', $_ENV['DEVELOPMENT_URL']);
 define('URL', $_ENV['URL']);

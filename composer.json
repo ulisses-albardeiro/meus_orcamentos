@@ -1,5 +1,5 @@
 {
-    "name": "note/sistema_consult",
+    "name": "note/meus_orcamentos",
     "autoload": {
         "psr-4": {
             "sistema\\": "sistema/"
@@ -10,8 +10,8 @@
     },
     "authors": [
         {
-            "name": "Ulisses Alba",
-            "email": "ualbardeiro@gmail.com"
+            "name": "Ulisses Albardeiro",
+            "email": "contato@ulissesalbardeiro.com.br"
         }
     ],
     "require": {
