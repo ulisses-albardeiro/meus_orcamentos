@@ -42,6 +42,7 @@ class ComposerStaticInit048adfb76e74e8bddf1796981256b79c
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Symfony\\Component\\Dotenv\\' => 25,
             'Svg\\' => 4,
             'Sabberworm\\CSS\\' => 15,
         ),
@@ -137,6 +138,10 @@ class ComposerStaticInit048adfb76e74e8bddf1796981256b79c
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Symfony\\Component\\Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
         'Svg\\' => 
         array (

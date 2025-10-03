@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 
-$container = require 'container.php';
+ $container = require 'container.php';
 
 use Pecee\SimpleRouter\SimpleRouter;
 use sistema\Nucleo\DIClassLoader;

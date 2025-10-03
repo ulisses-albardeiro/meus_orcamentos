@@ -1,39 +1,26 @@
 <?php
 
 use sistema\Nucleo\Helpers;
+use Symfony\Component\Dotenv\Dotenv;
 
 date_default_timezone_set('America/Sao_Paulo');
 
-if (Helpers::localhost()) {
-    define('DB_NOME', 'meus_orcamentos');
-    define('DB_HOST', 'localhost');
-    define('DB_USUARIO', 'root');
-    define('DB_SENHA', '');
+$dotEnv = new Dotenv();
+$dotEnv->load(__DIR__.'/../.env');
 
-    define('SITE_NAME', 'Meus Orçamentos');
-    define('SITE_DESC', '');
+// Define as constantes
+define('DB_NOME', $_ENV['DB_NOME']);
+define('DB_HOST', $_ENV['DB_HOST']);
+define('DB_USUARIO', $_ENV['DB_USUARIO']);
+define('DB_SENHA', $_ENV['DB_SENHA']);
 
-    define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', 'contato@meusorcamentos.com.br');
-    define('SENHA_EMAIL', 'y2Z#B&b2');
-    define('PORTA_EMAIL', 465);
+define('SITE_NAME', $_ENV['SITE_NAME']);
+define('SITE_DESC', $_ENV['SITE_DESC']);
 
-    define('DEVELOPMENT_URL', 'http://localhost/meus_orcamentos');
-    define('URL', '/meus_orcamentos/');
-} else {
-    define('DB_NOME', 'u997346094_blog');
-    define('DB_HOST', 'localhost');
-    define('DB_USUARIO', 'u997346094_blog');
-    define('DB_SENHA', 'hAtmMv+8');
+define('HOST_EMAIL', $_ENV['HOST_EMAIL']);
+define('USUARIO_EMAIL', $_ENV['USUARIO_EMAIL']);
+define('SENHA_EMAIL', $_ENV['SENHA_EMAIL']);
+define('PORTA_EMAIL', $_ENV['PORTA_EMAIL']);
 
-    define('SITE_NAME', 'Meus Orçamentos');
-    define('SITE_DESC', '');
-
-    define('HOST_EMAIL', 'smtp.hostinger.com');
-    define('USUARIO_EMAIL', 'contato@meusorcamentos.com.br');
-    define('SENHA_EMAIL', 'y2Z#B&b2');
-    define('PORTA_EMAIL', 465);
-
-    define('PRODUCTION_URL', 'https://meusorcamentos.com.br');
-    define('URL', '/');
-}
+define('DEVELOPMENT_URL', $_ENV['DEVELOPMENT_URL']);
+define('URL', $_ENV['URL']);
