@@ -49,8 +49,8 @@ try {
     SimpleRouter::group(['namespace' => 'Painel\Clientes', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'clientes/listar', 'ClientesControlador@listar');
         SimpleRouter::post(URL . 'clientes/cadastrar', 'ClientesControlador@cadastrar');
-        SimpleRouter::get(URL . 'clientes/excluir/{id_cliente}', 'ClientesControlador@excluir');
-        SimpleRouter::post(URL . 'clientes/editar/{id_cliente}', 'ClientesControlador@editar');
+        SimpleRouter::delete(URL . 'clientes/excluir/{id_cliente}', 'ClientesControlador@excluir');
+        SimpleRouter::patch(URL . 'clientes/editar/{id_cliente}', 'ClientesControlador@editar');
     });
 
     //Grupo de Rotas Finanças
@@ -162,4 +162,5 @@ try {
     } else {
         Helpers::redirecionar('404');
     }
+
 }
