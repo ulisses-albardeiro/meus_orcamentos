@@ -5,19 +5,19 @@ use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers;
 
-class CadastroUsuario extends Controlador
+class RegisterUserController extends Controlador
 {
     public function __construct()
     {
         parent::__construct('templates/views');
     }
 
-    function form() : void
+    function create() : void
     {
-        echo $this->template->rendenizar("form-cadastro.html", []);
+        echo $this->template->rendenizar("register.html", []);
     }
 
-    public function cadastrar() : void
+    public function store() : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 

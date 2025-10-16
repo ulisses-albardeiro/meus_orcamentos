@@ -20,10 +20,9 @@ try {
     });
 
     SimpleRouter::group(['namespace' => 'Painel',], function () {
-
-        //Cadastro novos usuários
-        SimpleRouter::get(URL . 'form-cadastro', 'CadastroUsuario@form');
-        SimpleRouter::post(URL . 'cadastrar-usuario', 'CadastroUsuario@cadastrar');
+        //Register new users
+        SimpleRouter::get(URL . 'register', 'RegisterUserController@create');
+        SimpleRouter::post(URL . 'register', 'RegisterUserController@store');
     });
 
     //Grupo de rotas de Perfil
