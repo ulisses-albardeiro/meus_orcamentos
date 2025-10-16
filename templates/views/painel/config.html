@@ -98,11 +98,12 @@
         display: inline-block;
         width: 100px;
     }
+    
 </style>
 {{ flash() }}
 <!-- Card de Informações do Perfil -->
 <div class="card pb-4 shadow-lg mb-4">
-    
+
     <div class="card-header">
         <h5 class="mb-0">Informações de Cadastro</h5>
     </div>
@@ -113,6 +114,14 @@
                     src="{% if usuario().img_logo != null %}{{ url('templates/assets/img/perfil/'~usuario().img_logo) }}{% else %}{{ url('templates/assets/img/gerais/sem-foto.png?=1.2') }}{% endif %}"
                     class="rounded-circle">
             </div>
+            {% if usuario().img_logo %}
+            <form action="{{ url('profile/image/'~usuario().id)}}" method="post">
+                <input type="hidden" name="_method" value="PATCH">
+                <div class="text-start">
+                    <button class="btn btn-outline-danger btn-sm">Remover Foto</button>
+                </div>
+            </form>
+            {% endif %}
             <div class="col-md-9">
                 <p class="profile-info"><strong>Nome:</strong> {{ usuario().nome }}</p>
                 <p class="profile-info"><strong>Email:</strong> {{ usuario().email }}</p>
@@ -137,7 +146,8 @@
                 <h5 class="modal-title" id="modalEditarPerfilLabel">Editar Perfil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('perfil-editar') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('profile') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="PUT">
                 <div class="modal-body">
                     <div class="d-flex justify-content-center mb-3">
                         <div>
@@ -149,12 +159,6 @@
                             <label for="imagem" class="upload-icon">
                                 <i class="bi bi-camera"></i>
                             </label>
-                            {% if usuario().img_logo %}
-                            <div class="text-center mt-2">
-                                <a href="{{ url('remover-logo')}}" class="btn btn-outline-danger btn-sm">Remover
-                                    Logo</a>
-                            </div>
-                            {% endif %}
                         </div>
                     </div>
 

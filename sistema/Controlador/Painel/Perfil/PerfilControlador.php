@@ -18,7 +18,7 @@ class PerfilControlador extends PainelControlador
         $this->usuarioServico = $usuarioServico;
     }
 
-    public function editar(): void
+    public function update(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($this->usuario->usuarioId);
@@ -46,16 +46,16 @@ class PerfilControlador extends PainelControlador
         Helpers::redirecionar('config');
     }
 
-    public function removerLogo(): void
+    public function destroyImage(int $id): void
     {
-        $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($this->usuario->usuarioId);
+        $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($id);
 
         unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
         $usuario = (new UsuarioModelo);
         $usuario->id = $this->usuario->usuarioId;
         $usuario->img_logo = null;
         if ($usuario->salvar()) {
-            $this->mensagem->mensagemSucesso('Logo removida com sucesso!')->flash();
+            $this->mensagem->mensagemSucesso('Foto removida com sucesso!')->flash();
             Helpers::redirecionar('config');
         } else {
             $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();

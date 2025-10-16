@@ -1,0 +1,16 @@
+[16-Oct-2025 20:27:37 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 29
+[16-Oct-2025 20:38:55 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/meus-ocamentos.jpeg): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 29
+[16-Oct-2025 20:44:12 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Unknown named parameter $id in /var/www/html/meus_orcamentos/sistema/Nucleo/DIClassLoader.php:38
+Stack trace:
+#0 /var/www/html/meus_orcamentos/sistema/Nucleo/DIClassLoader.php(38): call_user_func_array()
+#1 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Route/Route.php(117): sistema\Nucleo\DIClassLoader->loadClassMethod()
+#2 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(427): Pecee\SimpleRouter\Route\Route->renderRoute()
+#3 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(353): Pecee\SimpleRouter\Router->routeRequest()
+#4 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/SimpleRouter.php(69): Pecee\SimpleRouter\Router->start()
+#5 /var/www/html/meus_orcamentos/sistema/rotas.php(156): Pecee\SimpleRouter\SimpleRouter::start()
+#6 /var/www/html/meus_orcamentos/index.php(12): require('...')
+#7 {main}
+  thrown in /var/www/html/meus_orcamentos/sistema/Nucleo/DIClassLoader.php on line 38
+[16-Oct-2025 20:44:55 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/meus-ocamentos(1).jpeg): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 53
+[16-Oct-2025 20:45:44 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 29
+[16-Oct-2025 20:55:26 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/meus-ocamentos(2).jpeg): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 53

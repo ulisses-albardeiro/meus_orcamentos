@@ -23,14 +23,13 @@ try {
     SimpleRouter::group(['namespace' => 'Painel',], function () {
         //Register new users
         SimpleRouter::get(URL . 'register', 'RegisterUserController@create');
-        SimpleRouter::post(URL . 'register', 'RegisterUserController@store');
+        SimpleRouter::post(URL . 'register', 'RegisterUserController@store'); 
     });
 
     //Grupo de rotas de Perfil
     SimpleRouter::group(['namespace' => 'Painel\Perfil', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'perfil', 'PerfilControlador@listar');
-        SimpleRouter::post(URL . 'perfil-editar', 'PerfilControlador@editar');
-        SimpleRouter::get(URL . 'remover-logo', 'PerfilControlador@removerLogo');
+        SimpleRouter::put(URL . 'profile', 'PerfilControlador@update');
+        SimpleRouter::patch(URL . 'profile/image/{id}', 'PerfilControlador@destroyImage');
     });
 
     //Grupo de Rotas Recuperação de senha
