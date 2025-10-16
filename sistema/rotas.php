@@ -14,9 +14,10 @@ try {
     SimpleRouter::get(URL . 'blog', 'BlogControlador@index');
 
     SimpleRouter::group(['namespace' => 'Login'], function () {
-
-        SimpleRouter::match(['get', 'post'], URL . 'login', 'Login@login');
-        SimpleRouter::get(URL . 'sair', 'Login@sair');
+        //Login and Logout
+        SimpleRouter::get(URL . 'login', 'LoginController@create');
+        SimpleRouter::post(URL . 'login', 'LoginController@store');
+        SimpleRouter::get(URL . 'logout', 'LoginController@destroy');
     });
 
     SimpleRouter::group(['namespace' => 'Painel',], function () {

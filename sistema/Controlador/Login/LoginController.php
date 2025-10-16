@@ -7,19 +7,22 @@ use sistema\Nucleo\Helpers;
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Sessao;
 
-class Login extends Controlador
+class LoginController extends Controlador
 {
     public function __construct()
     {
         parent::__construct('templates/views');
     }
 
-    public function login(): void
+    public function create(): void
     {
         $this->checarSessao();
 
         echo $this->template->rendenizar('login.html', []);
+    }
 
+    public function store(): void
+    {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (isset($dados)) {
@@ -51,11 +54,11 @@ class Login extends Controlador
         }
     }
 
-    public function sair(): void
-   {
-      $sessao = new Sessao;
-      $sessao->deletarSessao('usuarioId');
+    public function destroy(): void
+    {
+        $sessao = new Sessao;
+        $sessao->deletarSessao('usuarioId');
 
-      Helpers::redirecionar('/');
-   }
+        Helpers::redirecionar('/');
+    }
 }
