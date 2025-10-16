@@ -8,18 +8,18 @@ $dotEnv = new Dotenv();
 $dotEnv->load(__DIR__.'/../.env');
 
 // Define as constantes
-define('DB_NOME', $_ENV['DB_NOME']);
+define('DB_NAME', $_ENV['DB_NAME']);
 define('DB_HOST', $_ENV['DB_HOST']);
-define('DB_USUARIO', $_ENV['DB_USUARIO']);
-define('DB_SENHA', $_ENV['DB_SENHA']);
+define('DB_USER', $_ENV['DB_USER']);
+define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
 
 define('SITE_NAME', $_ENV['SITE_NAME']);
 define('SITE_DESC', $_ENV['SITE_DESC']);
 
 define('HOST_EMAIL', $_ENV['HOST_EMAIL']);
-define('USUARIO_EMAIL', $_ENV['USUARIO_EMAIL']);
-define('SENHA_EMAIL', $_ENV['SENHA_EMAIL']);
-define('PORTA_EMAIL', $_ENV['PORTA_EMAIL']);
+define('EMAIL_USER', $_ENV['EMAIL_USER']);
+define('EMAIL_PASSWORD', $_ENV['EMAIL_PASSWORD']);
+define('EMAIL_PORT', $_ENV['EMAIL_PORT']);
 
 define('PRODUCTION_URL', $_ENV['PRODUCTION_URL']);
 define('DEVELOPMENT_URL', $_ENV['DEVELOPMENT_URL']);

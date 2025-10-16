@@ -14,9 +14,9 @@ class Conexao
         if (empty(self::$instancia)) {
             try {
                 self::$instancia = new PDO(
-                    'mysql:dbname=' . DB_NOME . ';host=' . DB_HOST . ';charset=utf8mb4',
-                    DB_USUARIO,
-                    DB_SENHA,
+                    'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=utf8mb4',
+                    DB_USER,
+                    DB_PASSWORD,
                     [
                         // Erros de PDO serão todos exceção
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
