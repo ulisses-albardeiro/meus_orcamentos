@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\ReculperarSenha;
+namespace sistema\Controlador\PasswordRecovery;
 
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Controlador;
@@ -16,7 +16,7 @@ class EmaiRecuperacao extends Controlador
     {
         parent::__construct('templates/views');
         $this->token = hash('sha256', random_bytes(64));
-        $this->url = Helpers::url('nova-senha');
+        $this->url = Helpers::url('password-recovery/create');
     }
 
     public function emaiRecuperacao(): void
@@ -80,7 +80,7 @@ class EmaiRecuperacao extends Controlador
         $enviar->criar('Recuperação de senha', $this->corpoEmail(), $email, $nome);
 
         if (!$enviar->enviar(EMAIL_USER, 'Recuperação de senha - Meus Orçamentos (Não responda)')) {
-            $this->mensagem->mensagemErro("Não foi possivel recuperar sua senha, tente novamente. Caso o erro persista, entre em contato com o suporte")->flash();
+            $this->mensagem->mensagemErro("Não foi possivel recuperar sua senha, tente novamente. Caso o erro persista, entre em contato com o suporte". $enviar->getErro())->flash();
             Helpers::redirecionar('login');
         }
         

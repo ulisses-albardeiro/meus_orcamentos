@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\ReculperarSenha;
+namespace sistema\Controlador\PasswordRecovery;
 
 use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Controlador;

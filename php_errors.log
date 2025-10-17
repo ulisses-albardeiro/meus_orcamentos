@@ -16,3 +16,17 @@ Stack trace:
 [16-Oct-2025 20:55:26 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/meus-ocamentos(2).jpeg): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/Perfil/PerfilControlador.php on line 53
 [16-Oct-2025 21:17:35 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/UserController.php on line 65
 [16-Oct-2025 21:17:42 America/Sao_Paulo] PHP Warning:  unlink(/var/www/htmlmeus_orcamentos/templates/assets/img/perfil/meus-ocamentos.jpeg): No such file or directory in /var/www/html/meus_orcamentos/sistema/Controlador/Painel/UserController.php on line 89
+[16-Oct-2025 21:46:33 America/Sao_Paulo] PHP Fatal error:  Uncaught TypeError: sistema\Suporte\Email::__construct(): Argument #4 ($porta) must be of type int, string given, called in /var/www/html/meus_orcamentos/sistema/Controlador/PasswordRecovery/EmaiRecuperacao.php on line 79 and defined in /var/www/html/meus_orcamentos/sistema/Suporte/Email.php:52
+Stack trace:
+#0 /var/www/html/meus_orcamentos/sistema/Controlador/PasswordRecovery/EmaiRecuperacao.php(79): sistema\Suporte\Email->__construct()
+#1 /var/www/html/meus_orcamentos/sistema/Controlador/PasswordRecovery/EmaiRecuperacao.php(29): sistema\Controlador\PasswordRecovery\EmaiRecuperacao->enviarEmail()
+#2 [internal function]: sistema\Controlador\PasswordRecovery\EmaiRecuperacao->emaiRecuperacao()
+#3 /var/www/html/meus_orcamentos/sistema/Nucleo/DIClassLoader.php(38): call_user_func_array()
+#4 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Route/Route.php(117): sistema\Nucleo\DIClassLoader->loadClassMethod()
+#5 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(427): Pecee\SimpleRouter\Route\Route->renderRoute()
+#6 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/Router.php(353): Pecee\SimpleRouter\Router->routeRequest()
+#7 /var/www/html/meus_orcamentos/vendor/pecee/simple-router/src/Pecee/SimpleRouter/SimpleRouter.php(69): Pecee\SimpleRouter\Router->start()
+#8 /var/www/html/meus_orcamentos/sistema/rotas.php(154): Pecee\SimpleRouter\SimpleRouter::start()
+#9 /var/www/html/meus_orcamentos/index.php(12): require('...')
+#10 {main}
+  thrown in /var/www/html/meus_orcamentos/sistema/Suporte/Email.php on line 52

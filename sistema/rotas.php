@@ -30,10 +30,11 @@ try {
     });
 
     //Grupo de Rotas Recuperação de senha
-    SimpleRouter::group(['namespace' => 'ReculperarSenha'], function () {
-        SimpleRouter::match(['get', 'post'], URL . 'recuperacao-de-senha', 'EmaiRecuperacao@emaiRecuperacao');
-        SimpleRouter::match(['get', 'post'], URL . 'nova-senha/', 'NovaSenha@novaSenha');
-        SimpleRouter::match(['get', 'post'], URL . 'salvar-senha', 'NovaSenha@salvarNovaSenha');
+    SimpleRouter::group(['namespace' => 'PasswordRecovery'], function () {
+        SimpleRouter::get(URL . 'password-recovery', 'EmaiRecuperacao@emaiRecuperacao');
+        SimpleRouter::post(URL . 'password-recovery', 'EmaiRecuperacao@emaiRecuperacao');
+        SimpleRouter::get(URL . 'password-recovery/create', 'NovaSenha@novaSenha');
+        SimpleRouter::patch(URL . 'password-recovery', 'NovaSenha@salvarNovaSenha');
     });
 
     //Grupo de Rotas Home
