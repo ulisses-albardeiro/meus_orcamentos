@@ -115,7 +115,7 @@
                     class="rounded-circle">
             </div>
             {% if usuario().img_logo %}
-            <form action="{{ url('profile/image/'~usuario().id)}}" method="post">
+            <form action="{{ url('user/image/'~usuario().id)}}" method="post">
                 <input type="hidden" name="_method" value="PATCH">
                 <div class="text-start">
                     <button class="btn btn-outline-danger btn-sm">Remover Foto</button>
@@ -146,7 +146,7 @@
                 <h5 class="modal-title" id="modalEditarPerfilLabel">Editar Perfil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('profile') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('user/'~usuario().id) }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="modal-body">
                     <div class="d-flex justify-content-center mb-3">

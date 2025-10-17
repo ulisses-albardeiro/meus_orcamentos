@@ -20,16 +20,12 @@ try {
         SimpleRouter::get(URL . 'logout', 'LoginController@destroy');
     });
 
-    SimpleRouter::group(['namespace' => 'Painel',], function () {
-        //Register new users
-        SimpleRouter::get(URL . 'register', 'RegisterUserController@create');
-        SimpleRouter::post(URL . 'register', 'RegisterUserController@store'); 
-    });
-
-    //Grupo de rotas de Perfil
-    SimpleRouter::group(['namespace' => 'Painel\Perfil', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::put(URL . 'profile', 'PerfilControlador@update');
-        SimpleRouter::patch(URL . 'profile/image/{id}', 'PerfilControlador@destroyImage');
+    SimpleRouter::group(['namespace' => 'Painel'], function () {
+        //Users
+        SimpleRouter::get(URL . 'user', 'UserController@create');
+        SimpleRouter::post(URL . 'user', 'UserController@store');
+        SimpleRouter::put(URL . 'user/{id}', 'UserController@update')->addMiddleware(AuthMiddleware::class);
+        SimpleRouter::patch(URL . 'user/image/{id}', 'UserController@destroyImage')->addMiddleware(AuthMiddleware::class);
     });
 
     //Grupo de Rotas Recuperação de senha
@@ -161,5 +157,4 @@ try {
     } else {
         Helpers::redirecionar('404');
     }
-
 }
