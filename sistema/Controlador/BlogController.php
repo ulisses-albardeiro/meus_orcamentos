@@ -4,10 +4,9 @@ namespace sistema\Controlador;
 
 use sistema\Modelos\BlogCategoriaModelo;
 use sistema\Modelos\BlogPostModelo;
-use sistema\Modelos\CategoriaModelo;
 use sistema\Nucleo\Controlador;
 
-class BlogControlador extends Controlador
+class BlogController extends Controlador
 {
     protected BlogPostModelo $postModelo;
     protected BlogCategoriaModelo $categoriaModelo;

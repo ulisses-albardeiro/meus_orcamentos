@@ -7,21 +7,22 @@ use sistema\Nucleo\EmpresaMiddleware;
 use sistema\Nucleo\Helpers;
 
 try {
+    //Site
     SimpleRouter::setDefaultNamespace('sistema\Controlador');
-    SimpleRouter::get(URL, 'SiteControlador@index');
-    SimpleRouter::get(URL . '404', 'SiteControlador@erro404');
-    SimpleRouter::get(URL . 'politica-de-privacidade', 'SiteControlador@politicaPrivacidade');
-    SimpleRouter::get(URL . 'blog', 'BlogControlador@index');
+    SimpleRouter::get(URL, 'SiteController@index');
+    SimpleRouter::get(URL . '404', 'SiteController@error404');
+    SimpleRouter::get(URL . 'pravicy-policy', 'SiteController@pravicyPolicy');
+    SimpleRouter::get(URL . 'blog', 'BlogController@index');
 
+    //Login and Logout
     SimpleRouter::group(['namespace' => 'Login'], function () {
-        //Login and Logout
         SimpleRouter::get(URL . 'login', 'LoginController@create');
         SimpleRouter::post(URL . 'login', 'LoginController@store');
         SimpleRouter::get(URL . 'logout', 'LoginController@destroy');
     });
 
+    //Users
     SimpleRouter::group(['namespace' => 'Painel'], function () {
-        //Users
         SimpleRouter::get(URL . 'user', 'UserController@create');
         SimpleRouter::post(URL . 'user', 'UserController@store');
         SimpleRouter::put(URL . 'user/{id}', 'UserController@update')->addMiddleware(AuthMiddleware::class);

@@ -6,7 +6,7 @@ use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers;
 use sistema\Nucleo\Sessao;
 
-class SiteControlador extends Controlador
+class SiteController extends Controlador
 {
     public function __construct()
     {
@@ -23,17 +23,17 @@ class SiteControlador extends Controlador
         );
     }
 
-    public function politicaPrivacidade(): void
+    public function pravicyPolicy(): void
     {
         echo $this->template->rendenizar(
-            "politica-de-privacidade.html",
+            "pravicy-policy.html",
             [
                 'titulo' => 'Política de Privacidade'
             ]
         );
     }
 
-    public function erro404(): void
+    public function error404(): void
     {
         echo $this->template->rendenizar("404.html", []);
     }
