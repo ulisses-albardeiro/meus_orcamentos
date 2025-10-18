@@ -12,7 +12,7 @@
                 <button data-bs-toggle="modal" data-bs-target="#modalClientes" class="botao">Novo
                     Cliente</button>
             </div>
-            {% include 'clientes/modais/form.html' %}
+            {% include 'clients/modais/form.html' %}
             <small>
                 <table id="data-table" class="table table-hover">
                     <thead class="table-light">
@@ -57,11 +57,11 @@
                                     class="text-primary text-decoration-none fs-4">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                {% include 'clientes/modais/form.html' %}
+                                {% include 'clients/modais/form.html' %}
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
                                     data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ cliente.id }}"><i
                                         class="bi bi-trash fs-4"></i></a>
-                                {% include 'clientes/modais/excluir.html' %}
+                                {% include 'clients/modais/excluir.html' %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -81,7 +81,7 @@
     $(document).ready(function () {
         $('#data-table').DataTable({
             language: {
-                url: "../templates/assets/DataTables/pt_br.json"
+                url: "templates/assets/DataTables/pt_br.json"
             },
             pageLength: 10, // Define o número de linhas por página
             lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página

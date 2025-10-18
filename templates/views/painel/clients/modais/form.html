@@ -11,8 +11,11 @@
             </div>
             <div class="modal-body">
                 <form
-                    action="{% if cliente.id %}{{ url('clientes/editar/'~cliente.id) }}{% else %}{{ url('clientes/cadastrar') }}{% endif %}"
+                    action="{% if cliente.id %}{{ url('clients/'~cliente.id) }}{% else %}{{ url('clients') }}{% endif %}"
                     method="post">
+                    {% if cliente.id %}
+                    <input type="hidden" name="_method" value="put">
+                    {% endif %}
                     <div class="row">
                         <!-- Nome -->
                         <div class="col-md-7">

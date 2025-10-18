@@ -39,15 +39,15 @@ try {
 
     //Home
     SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'home', 'HomeControlador@index');
+        SimpleRouter::get(URL . 'home', 'HomeController@index');
     });
 
-    //Grupo de Rotas Clientes
-    SimpleRouter::group(['namespace' => 'Painel\Clientes', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'clientes/listar', 'ClientesControlador@listar');
-        SimpleRouter::post(URL . 'clientes/cadastrar', 'ClientesControlador@cadastrar');
-        SimpleRouter::delete(URL . 'clientes/excluir/{id_cliente}', 'ClientesControlador@excluir');
-        SimpleRouter::patch(URL . 'clientes/editar/{id_cliente}', 'ClientesControlador@editar');
+    //Clients
+    SimpleRouter::group(['namespace' => 'Painel\Clients', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
+        SimpleRouter::get(URL . 'clients', 'ClientsController@index');
+        SimpleRouter::post(URL . 'clients', 'ClientsController@store');
+        SimpleRouter::delete(URL . 'clients/{id}', 'ClientsController@delete');
+        SimpleRouter::put(URL . 'clients/{id}', 'ClientsController@update');
     });
 
     //Grupo de Rotas Finanças
