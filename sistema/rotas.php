@@ -33,7 +33,7 @@ try {
     SimpleRouter::group(['namespace' => 'PasswordRecovery'], function () {
         SimpleRouter::get(URL . 'password-recovery', 'PasswordRecoveryController@index');
         SimpleRouter::post(URL . 'password-recovery', 'PasswordRecoveryController@store');
-        SimpleRouter::post(URL . 'password-recovery/create', 'PasswordRecoveryController@create');
+        SimpleRouter::get(URL . 'password-recovery/{token}', 'PasswordRecoveryController@create');
         SimpleRouter::patch(URL . 'password-recovery', 'PasswordRecoveryController@update');
     });
 

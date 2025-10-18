@@ -35,7 +35,7 @@ class PasswordRecoveryController extends Controlador
         }
 
         if ($this->passwordRecoveryService->initiateRecovery($email)) {
-            $this->mensagem->mensagemSucesso("Caso o email existisse em nossa base, um link de recuperação de senha seria enviado.")->flash();
+            $this->mensagem->mensagemSucesso("Caso o email exista em nossa base, um link de recuperação de senha sera enviado.")->flash();
         } else {
             $this->mensagem->mensagemErro("Houve um erro inesperado. Tente novamente ou fale com o suporte")->flash();
         }
@@ -43,9 +43,8 @@ class PasswordRecoveryController extends Controlador
         Helpers::redirecionar('login');
     }
 
-    public function create(): void
+    public function create(string $token): void
     {
-        $token = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
         $validToken = $this->passwordRecoveryService->validateToken($token);
 
         if ($validToken) {
@@ -65,13 +64,13 @@ class PasswordRecoveryController extends Controlador
     {
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (!$this->passwordRecoveryService->validateNewPassword($data['senha1'], $data['senha2'])) {
+        if (!$this->passwordRecoveryService->validateNewPassword($data['password1'], $data['password2'])) {
             $this->mensagem->mensagemAtencao("Dados inválidos ou incompletos.")->flash();
             Helpers::redirecionar('login');
             return;
         }
 
-        if ($this->passwordRecoveryService->saveNewPassword($data['token'], $data['senha1'])) {
+        if ($this->passwordRecoveryService->saveNewPassword($data['token'], $data['password1'])) {
             $this->mensagem->mensagemSucesso("Senha alterada com sucesso")->flash();
             Helpers::redirecionar('login');
         } else {
