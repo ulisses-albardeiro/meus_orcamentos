@@ -7,7 +7,7 @@ use sistema\Nucleo\EmpresaMiddleware;
 use sistema\Nucleo\Helpers;
 
 try {
-    //Site
+    //Site and Blog
     SimpleRouter::setDefaultNamespace('sistema\Controlador');
     SimpleRouter::get(URL, 'SiteController@index');
     SimpleRouter::get(URL . '404', 'SiteController@error404');
@@ -37,9 +37,9 @@ try {
         SimpleRouter::patch(URL . 'password-recovery', 'PasswordRecoveryController@update');
     });
 
-    //Grupo de Rotas Home
+    //Home
     SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'home', 'HomeControlador@listar');
+        SimpleRouter::get(URL . 'home', 'HomeControlador@index');
     });
 
     //Grupo de Rotas Clientes

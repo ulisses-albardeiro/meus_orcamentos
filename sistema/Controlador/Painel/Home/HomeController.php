@@ -7,7 +7,7 @@ use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Financas\FinancasInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 
-class HomeControlador extends PainelControlador
+class HomeController extends PainelControlador
 {
     protected FinancasInterface $financasServico;
     protected OrcamentosInterface $orcamentoServico;
@@ -22,7 +22,7 @@ class HomeControlador extends PainelControlador
     }
 
 
-    public function listar() : void
+    public function index() : void
     {
         $totalCaixaMesAtual = $this->financasServico->totalPeriodoCaixa(date('Y-m-01'), date('Y-m-d'), $this->usuario->usuarioId);
         $totalReceitaMesAtual = $this->financasServico->somaPeriodoReceitasUsuarioServico(date('Y-m-01'), date('Y-m-d'), $this->usuario->usuarioId);
