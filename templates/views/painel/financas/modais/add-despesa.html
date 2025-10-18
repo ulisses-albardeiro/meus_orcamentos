@@ -13,12 +13,16 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form method="post" {% if despesa.id %} action="{{ url('editar-despesa/' ~ despesa.id) }}" {% else %}
-                action="{{ url('add-despesa') }}" {% endif %}>
+            <form method="post" {% if despesa.id %} action="{{ url('finance/expense/' ~ despesa.id) }}" {% else %}
+                action="{{ url('finance/expense') }}" {% endif %}>
+
+                {% if despesa.id %} 
+                <input type="hidden" name="_method" value="put">
+                {% endif %}
+
                 <div class="modal-body">
                     <div class="mb-3 d-flex align-items-end gap-2">
-                        <!-- Campo Valor -->
-
+    
                         {% if categorias %}
                         <div class="flex-grow-1" style="max-width: 140px;">
                             <label for="valorDespesa{{ despesa.id }}" class="form-label small mb-1">Valor</label>
@@ -30,7 +34,6 @@
                             </div>
                         </div>
 
-                        <!-- Campo Categoria -->
                         <div class="flex-grow-1">
                             <label for="categoriaDespesa{{ despesa.id }}"
                                 class="form-label small mb-1">Categoria</label>
@@ -45,7 +48,6 @@
                             </select>
                         </div>
 
-                        <!-- Campo Data -->
                         <div class="flex-grow-1" style="max-width: 140px;">
                             <label for="dataDespesa{{ despesa.id }}" class="form-label small mb-1">Data</label>
                             <input value="{{ despesa.dt_despesa }}" required class="form-control" type="date"

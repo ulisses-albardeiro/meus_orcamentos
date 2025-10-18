@@ -61,11 +61,11 @@ try {
         SimpleRouter::put(URL . 'finance/category/{id}', 'CategoryController@update');
         SimpleRouter::delete(URL . 'finance/category/{id}', 'CategoryController@delete');
 
-        //Despesas
-        SimpleRouter::post(URL . 'add-despesa', 'Despesa@cadastrar');
-        SimpleRouter::get(URL . 'despesas', 'Despesa@listar');
-        SimpleRouter::get(URL . 'excluir-despesa/{id_despesa}', 'Despesa@excluir');
-        SimpleRouter::match(['get', 'post'], URL . 'editar-despesa/{id_despesa}', 'Despesa@editar');
+        //Expenses
+        SimpleRouter::post(URL . 'finance/expense', 'ExpenseController@store');
+        SimpleRouter::get(URL . 'finance/expense', 'ExpenseController@index');
+        SimpleRouter::delete(URL . 'finance/expense/{id}', 'ExpenseController@delete');
+        SimpleRouter::put(URL . 'finance/expense/{id}', 'ExpenseController@update');
 
         //Receitas
         SimpleRouter::post(URL . 'add-receita', 'Receita@cadastrar');

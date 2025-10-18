@@ -8,7 +8,7 @@ use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\DespesaModelo;
 use sistema\Nucleo\Helpers;
 
-class Despesa extends PainelControlador
+class ExpenseController extends PainelControlador
 {
     private object $servico;
 
@@ -18,7 +18,7 @@ class Despesa extends PainelControlador
         $this->servico = new ServicoDespesa;
     }
 
-    public function listar(): void
+    public function index(): void
     {
         $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->usuarioId}")->resultado(true) ?? [];
         $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->usuarioId} AND tipo = 'Despesas'")->resultado(true) ?? [];
@@ -33,7 +33,7 @@ class Despesa extends PainelControlador
         );
     }
 
-    public function cadastrar(): void
+    public function store(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new DespesaModelo);
@@ -47,10 +47,10 @@ class Despesa extends PainelControlador
         }
     }
 
-    public function excluir(int $id_despesa) : void
+    public function delete(int $id) : void
     {
         $excluir = (new DespesaModelo);
-        if ($excluir->apagar("id = {$id_despesa}")) {
+        if ($excluir->apagar("id = {$id}")) {
             $this->mensagem->mensagemSucesso("Despesa excluida com sucesso!")->flash();
             Helpers::voltar();
         }else {
@@ -59,11 +59,11 @@ class Despesa extends PainelControlador
         }
     }
 
-    public function editar(int $id_receita) : void
+    public function update(int $id) : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new DespesaModelo);
-        if ($salvar->editarDespesa($dados, $id_receita)) {
+        if ($salvar->editarDespesa($dados, $id)) {
             $this->mensagem->mensagemSucesso("Despesa editada com sucesso!")->flash();
             Helpers::voltar();
         }else {
