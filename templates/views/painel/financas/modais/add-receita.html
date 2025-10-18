@@ -11,9 +11,13 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form method="post" {% if receita.id %} action="{{ url('editar-receita/'~receita.id) }}" {% else %}
-                action="{{ url('add-receita') }}" {% endif %}>
+            <form method="post" {% if receita.id %} action="{{ url('finance/revenue/'~receita.id) }}" {% else %}
+                action="{{ url('finance/revenue') }}" {% endif %}>
                 <div class="modal-body">
+
+                    {% if receita.id %}
+                    <input type="hidden" name="_method" value="put">
+                    {% endif %}
                     <div class="mb-3 d-flex align-items-end gap-2">
 
                         {% if categorias %}

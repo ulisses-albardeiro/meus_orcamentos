@@ -67,11 +67,11 @@ try {
         SimpleRouter::delete(URL . 'finance/expense/{id}', 'ExpenseController@delete');
         SimpleRouter::put(URL . 'finance/expense/{id}', 'ExpenseController@update');
 
-        //Receitas
-        SimpleRouter::post(URL . 'add-receita', 'Receita@cadastrar');
-        SimpleRouter::get(URL . 'receitas', 'Receita@listar');
-        SimpleRouter::get(URL . 'excluir-receita/{id_receita}', 'Receita@excluir');
-        SimpleRouter::match(['get', 'post'], URL . 'editar-receita/{id_receita}', 'Receita@editar');
+        //Revenue
+        SimpleRouter::post(URL . 'finance/revenue', 'RevenueController@store');
+        SimpleRouter::get(URL . 'finance/revenue', 'RevenueController@index');
+        SimpleRouter::delete(URL . 'finance/revenue/{id}', 'RevenueController@delete');
+        SimpleRouter::put(URL . 'finance/revenue/{id}', 'RevenueController@update');
     });
 
     //Grupo de Rotas Lista

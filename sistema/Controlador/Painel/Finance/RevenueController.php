@@ -8,7 +8,7 @@ use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\ReceitaModelo;
 use sistema\Nucleo\Helpers;
 
-class Receita extends PainelControlador
+class RevenueController extends PainelControlador
 {
     private object $servico;
 
@@ -18,7 +18,7 @@ class Receita extends PainelControlador
         $this->servico = new ServicoReceita;
     }
     
-    public function listar(): void
+    public function index(): void
     {
         $receitas = (new ReceitaModelo)->busca("id_usuario = {$this->usuario->usuarioId}")->resultado(true) ?? [];
         $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->usuarioId} AND tipo = 'Receitas'")->resultado(true) ?? [];
@@ -33,7 +33,7 @@ class Receita extends PainelControlador
         );
     }
 
-    public function cadastrar(): void
+    public function store(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new ReceitaModelo);
@@ -47,10 +47,10 @@ class Receita extends PainelControlador
         }
     }
 
-    public function excluir(int $id_receita) : void
+    public function delete(int $id) : void
     {
         $excluir = (new ReceitaModelo);
-        if ($excluir->apagar("id = {$id_receita}")) {
+        if ($excluir->apagar("id = {$id}")) {
             $this->mensagem->mensagemSucesso("Receita excluida com sucesso!")->flash();
             Helpers::voltar();
         }else {
@@ -59,11 +59,11 @@ class Receita extends PainelControlador
         }
     }
 
-    public function editar(int $id_receita) : void
+    public function update(int $id) : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new ReceitaModelo);
-        if ($salvar->editarReceita($dados, $id_receita)) {
+        if ($salvar->editarReceita($dados, $id)) {
             $this->mensagem->mensagemSucesso("Receita editada com sucesso!")->flash();
             Helpers::voltar();
         }else {
