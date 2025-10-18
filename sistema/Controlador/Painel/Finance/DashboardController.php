@@ -1,14 +1,14 @@
 <?php
 
-namespace sistema\Controlador\Painel\Financas;
+namespace sistema\Controlador\Painel\Finance;
 
-use sistema\Controlador\Painel\Financas\Servicos\ServicosDashboard;
+use sistema\Controlador\Painel\Finance\Servicos\ServicosDashboard;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\DespesaModelo;
 use sistema\Modelos\ReceitaModelo;
 
-class Dashboard extends PainelControlador
+class DashboardController extends PainelControlador
 {
     private object $servico;
 
@@ -18,11 +18,9 @@ class Dashboard extends PainelControlador
         $this->servico = new ServicosDashboard;
     }
 
-    public function listar(): void
+    public function index(?string $date = null): void
     {
-        $data_input = filter_input(INPUT_POST, "data", FILTER_DEFAULT);
-
-        $data = $data_input ? date('Y-m-01', strtotime($data_input)) :  date('Y-m-01');
+        $data = $date ? date('Y-m-01', strtotime($date)) :  date('Y-m-01');
         
         echo $this->template->rendenizar("financas/dashboard.html",
             [

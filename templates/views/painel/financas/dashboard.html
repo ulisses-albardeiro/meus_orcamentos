@@ -7,20 +7,22 @@
     .card:hover {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) !important;
         transform: scale(1.02);
-    }       
+    }
 </style>
 
 <div class="mt-4">
 
     {{ flash() }}
 
-    <form action="dashboard-financas" method="post">
+    <form id="formDashboard" onsubmit="return redirecionarDashboard(event)">
         <div class="mb-3 d-flex justify-content-end">
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 <label for="data" class="form-control-md fw-bold">Escolha o mês e ano dos dados</label>
                 <input value="{{ data }}" class="form-control form-control-sm" type="month" name="data" id="data"
                     style="width: 160px;">
-                <button style="background-color: black; color: white;" type="submit" class="btn text-nowrap btn-sm">Buscar dados financeiros</button>
+                <button style="background-color: black; color: white;" type="submit" class="btn text-nowrap btn-sm">
+                    Buscar dados financeiros
+                </button>
             </div>
         </div>
     </form>
@@ -51,7 +53,7 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas do mês {{ data|date("m/Y")
                             }}</h6>
-                        <h4 class="text-white" >R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
+                        <h4 class="text-white">R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
                         <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"></i>
                         <span class="stretched-link"></span>
                     </div>
@@ -67,7 +69,9 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}
                         </h6>
-                        <h4 class="text-white">R$ <span {% if (receita_total - despesas_total) < 0 %} class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2, ',', '.') }}</span></h4>
+                        <h4 class="text-white">R$ <span {% if (receita_total - despesas_total) < 0 %}
+                                class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2,
+                                ',', '.') }}</span></h4>
 
                         <span class="stretched-link"></span>
                     </div>
@@ -134,12 +138,12 @@
             datasets: [
                 {
                     label: 'Receitas',
-                    data: dadosGrafico.receitas, 
+                    data: dadosGrafico.receitas,
                     backgroundColor: '#198754'
                 },
                 {
                     label: 'Despesas',
-                    data: dadosGrafico.despesas, 
+                    data: dadosGrafico.despesas,
                     backgroundColor: '#dc3545'
                 }
             ]
@@ -183,6 +187,12 @@
         }
     });
 
+    function redirecionarDashboard(event) {
+        event.preventDefault();
+        const data = document.getElementById('data').value;
+        if (!data) return;
 
+        window.location.href = `{{ url('finance/dashboard/') }}${data}`;
+    }
 </script>
 {% endblock %}

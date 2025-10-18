@@ -51,10 +51,11 @@ try {
     });
 
     //Grupo de Rotas Finanças
-    SimpleRouter::group(['namespace' => 'Painel\Financas', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
+    SimpleRouter::group(['namespace' => 'Painel\Finance', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         //dashboard
-        SimpleRouter::match(["get", "post"], URL . 'dashboard-financas', 'Dashboard@listar');
-        //Nova Categoria
+        SimpleRouter::get(URL . 'finance/dashboard/{date?}', 'DashboardController@index');
+        
+        //Category Finance
         SimpleRouter::post(URL . 'add-categoria', 'Categoria@cadastrar');
         SimpleRouter::get(URL . 'categoria', 'Categoria@listar');
         SimpleRouter::match(['get', 'post'], URL . 'editar-categoria/{id_categoria}', 'Categoria@editar');

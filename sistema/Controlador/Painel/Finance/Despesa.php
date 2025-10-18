@@ -1,8 +1,8 @@
 <?php
 
-namespace sistema\Controlador\Painel\Financas;
+namespace sistema\Controlador\Painel\Finance;
 
-use sistema\Controlador\Painel\Financas\Servicos\ServicoDespesa;
+use sistema\Controlador\Painel\Finance\Servicos\ServicoDespesa;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
 use sistema\Modelos\DespesaModelo;

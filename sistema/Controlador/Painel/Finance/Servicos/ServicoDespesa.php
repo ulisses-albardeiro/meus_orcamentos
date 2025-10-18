@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\Painel\Financas\Servicos;
+namespace sistema\Controlador\Painel\Finance\Servicos;
 
 final class ServicoDespesa
 {

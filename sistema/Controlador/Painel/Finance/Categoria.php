@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\Painel\Financas;
+namespace sistema\Controlador\Painel\Finance;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
