@@ -6,9 +6,9 @@ use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
 use sistema\Nucleo\Helpers;
 
-class Categoria extends PainelControlador
+class CategoryController extends PainelControlador
 {
-    public function cadastrar(): void
+    public function store(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
@@ -27,7 +27,7 @@ class Categoria extends PainelControlador
         }
     }
 
-    public function listar() : void
+    public function index() : void
     {
         echo $this->template->rendenizar("financas/categorias.html", 
         [
@@ -37,12 +37,12 @@ class Categoria extends PainelControlador
         ]);    
     }
 
-    public function editar(int $id_categoria) : void
+    public function update(int $id) : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new CategoriaModelo);
 
-        if ($salvar->editarCategoria($dados, $id_categoria)) {
+        if ($salvar->editarCategoria($dados, $id)) {
             $this->mensagem->mensagemSucesso("Categoria editada com Sucesso!")->flash();
             Helpers::voltar();
         }else {
@@ -51,10 +51,10 @@ class Categoria extends PainelControlador
         }
     }
 
-    public function excluir(int $id_categoria) : void
+    public function delete(int $id) : void
     {
         $excluir = (new CategoriaModelo);
-        if ($excluir->apagar("id = {$id_categoria}")) {
+        if ($excluir->apagar("id = {$id}")) {
             $this->mensagem->mensagemSucesso("Categoria excluida com sucesso!")->flash();
             Helpers::voltar();
         }else {

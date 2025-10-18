@@ -54,12 +54,12 @@ try {
     SimpleRouter::group(['namespace' => 'Painel\Finance', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         //dashboard
         SimpleRouter::get(URL . 'finance/dashboard/{date?}', 'DashboardController@index');
-        
+
         //Category Finance
-        SimpleRouter::post(URL . 'add-categoria', 'Categoria@cadastrar');
-        SimpleRouter::get(URL . 'categoria', 'Categoria@listar');
-        SimpleRouter::match(['get', 'post'], URL . 'editar-categoria/{id_categoria}', 'Categoria@editar');
-        SimpleRouter::get(URL . 'excluir-categoria/{id_categoria}', 'Categoria@excluir');
+        SimpleRouter::post(URL . 'finance/category', 'CategoryController@store');
+        SimpleRouter::get(URL . 'finance/category', 'CategoryController@index');
+        SimpleRouter::put(URL . 'finance/category/{id}', 'CategoryController@update');
+        SimpleRouter::delete(URL . 'finance/category/{id}', 'CategoryController@delete');
 
         //Despesas
         SimpleRouter::post(URL . 'add-despesa', 'Despesa@cadastrar');
