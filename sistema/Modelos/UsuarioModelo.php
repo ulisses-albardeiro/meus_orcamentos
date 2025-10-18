@@ -56,30 +56,20 @@ class UsuarioModelo extends Modelo
     {
         $sucesso = true;
 
-        // Tabela de usuários:
-        // Primeiro, excluímos o próprio usuário da tabela 'usuarios'.
         $tabelaUsuario = new self();
         if (!$tabelaUsuario->apagar("id = {$id_usuario}")) {
             $sucesso = false;
         }
 
-        // Tabela de posts:
-        // Excluímos todos os posts associados a esse id_usuario.
         $tabelaPosts = new Modelo('posts');
         if (!$tabelaPosts->apagar("id_usuario = {$id_usuario}")) {
             $sucesso = false;
         }
 
-        // Tabela de comentários:
-        // Excluímos todos os comentários associados a esse id_usuario.
         $tabelaComentarios = new Modelo('comentarios');
         if (!$tabelaComentarios->apagar("id_usuario = {$id_usuario}")) {
             $sucesso = false;
         }
-
-        // Adicione outras tabelas que você precise excluir aqui.
-        // A lógica é a mesma para cada tabela: instancie a classe Modelo com o nome da tabela
-        // e chame o método apagar() com o termo de busca.
 
         return $sucesso;
     }
@@ -89,4 +79,21 @@ class UsuarioModelo extends Modelo
         return $this->apagar("id = {$idUsuario}");    
     }
 
+    public function saveToken(int $id, string $token): bool
+    {
+        $this->id = $id;
+        $this->token = $token;
+        $this->dt_hr_token = date('Y-m-d H:i:s');
+        return $this->salvar();
+    }
+
+    public function updatePassword(int $id, string $password): bool
+    {
+        $this->id = $id;
+        $this->senha = $password;
+        $this->token = null;
+        $this->dt_hr_token = null;
+
+        return $this->salvar();
+    }
 }

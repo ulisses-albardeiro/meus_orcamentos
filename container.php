@@ -11,6 +11,7 @@ use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Listas\ListaServicos;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Orcamentos\OrcamentosServicos;
+
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Servicos\Usuarios\UsuariosServico;
 
@@ -24,12 +25,12 @@ $builder->addDefinitions([
     ListaInterface::class => autowire(ListaServicos::class),
     UsuariosInterface::class => autowire(UsuariosServico::class),
     FinancasInterface::class => autowire(FinancasServico::class),
-
     //Clientes
     ClientesInterface::class => autowire(ClientesServico::class),
-
     //Empresa
     EmpresasInterface::class => autowire(EmpresasServico::class),
+    //Password Recovery
+    sistema\Servicos\PasswordRecovery\PasswordRecoveryInterface::class => autowire(sistema\Servicos\PasswordRecovery\PasswordRecoveryService::class),
 ]);
 
 return $builder->build();

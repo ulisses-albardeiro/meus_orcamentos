@@ -5,13 +5,12 @@ namespace sistema\Suporte;
 use sistema\Controlador\UsuarioControlador;
 use Twig\Lexer;
 use sistema\Nucleo\Helpers;
-use sistema\Nucleo\Mensagem;
 
 class Template
 {
     private \Twig\Environment $twig;
 
-    public function __construct(string $diretorio)
+    public function __construct(string $diretorio = 'templates')
     {
         $loader = new \Twig\Loader\FilesystemLoader($diretorio);
         $this->twig = new \Twig\Environment($loader);

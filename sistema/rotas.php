@@ -29,12 +29,12 @@ try {
         SimpleRouter::patch(URL . 'user/image/{id}', 'UserController@destroyImage')->addMiddleware(AuthMiddleware::class);
     });
 
-    //Grupo de Rotas Recuperação de senha
+    //Password Recovery
     SimpleRouter::group(['namespace' => 'PasswordRecovery'], function () {
-        SimpleRouter::get(URL . 'password-recovery', 'EmaiRecuperacao@emaiRecuperacao');
-        SimpleRouter::post(URL . 'password-recovery', 'EmaiRecuperacao@emaiRecuperacao');
-        SimpleRouter::get(URL . 'password-recovery/create', 'NovaSenha@novaSenha');
-        SimpleRouter::patch(URL . 'password-recovery', 'NovaSenha@salvarNovaSenha');
+        SimpleRouter::get(URL . 'password-recovery', 'PasswordRecoveryController@index');
+        SimpleRouter::post(URL . 'password-recovery', 'PasswordRecoveryController@store');
+        SimpleRouter::post(URL . 'password-recovery/create', 'PasswordRecoveryController@create');
+        SimpleRouter::patch(URL . 'password-recovery', 'PasswordRecoveryController@update');
     });
 
     //Grupo de Rotas Home
