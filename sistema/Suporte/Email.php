@@ -63,7 +63,7 @@ final class Email
         $this->email->setLanguage('pt_br');
         $this->email->isHTML(true);
         $this->anexo = [];
-        $this->email->SMTPDebug = 2;
+        $this->email->SMTPDebug = 0;
 
     }
 
