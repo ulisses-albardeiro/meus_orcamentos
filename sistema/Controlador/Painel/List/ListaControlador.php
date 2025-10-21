@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Controlador\Painel\Lista;
+namespace sistema\Controlador\Painel\List;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
@@ -61,19 +61,19 @@ class ListaControlador extends PainelControlador
         );
     }
 
-    public function criar(string $form, string $modelo): void
+    public function criar(string $form, string $template): void
     {
         echo $this->template->rendenizar(
             "listas/forms/$form.html",
             [
                 "titulo" => "Criar Lista",
-                "modelo" => $modelo,
+                "modelo" => $template,
                 "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId) ?? [],
             ]
         );
     }
 
-    public function cadastrar(string $modelo): void
+    public function cadastrar(string $template): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -85,21 +85,21 @@ class ListaControlador extends PainelControlador
 
         $hash = Helpers::gerarHash();
 
-        $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->usuario->usuarioId, $modelo, $hash);
+        $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->usuario->usuarioId, $template, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'
-            Helpers::redirecionar("listas/$modelo/$hash");
+            Helpers::redirecionar("listas/$template/$hash");
         }
     }
 
-    public function pdf(string $modelo, string $hash): void
+    public function pdf(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
-            "listas/pdf/$modelo.html",
+            "listas/pdf/$template.html",
             [
                 "dados" => $dados,
                 'empresa' => $empresa,
@@ -125,17 +125,17 @@ class ListaControlador extends PainelControlador
             $this->mensagem->mensagemSucesso("Lista excluida com sucesso.")->flash();
         }
 
-        Helpers::redirecionar("listas/listar");
+        Helpers::redirecionar("list");
     }
 
-    public function exibir(string $modelo, string $hash): void
+    public function exibir(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
 
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
         $html = $this->template->rendenizar(
-            "listas/pdf/$modelo.html",
+            "listas/pdf/$template.html",
             [
                 "dados" => $dados,
                 'empresa' => $empresa,
@@ -162,7 +162,7 @@ class ListaControlador extends PainelControlador
             [
                 "orcamento" => $lista_url,
                 'hash' => $hash,
-                'modelo' => $modelo,
+                'modelo' => $template,
                 'empresa' => $empresa,
             ]
         );

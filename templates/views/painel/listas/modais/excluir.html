@@ -16,9 +16,12 @@
                 <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle me-1"></i> Cancelar
                 </button>
-                <a href="{{ url('listas/excluir/'~lista.hash) }}" class="btn-sm btn btn-danger">
-                    <i class="bi bi-trash-fill me-1"></i> Excluir
-                </a>
+                <form action="{{ url('list/'~lista.hash) }}" method="post" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash-fill me-1"></i> Excluir
+                    </button>
+                </form>
             </div>
         </div>
     </div>

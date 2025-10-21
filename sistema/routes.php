@@ -50,7 +50,7 @@ try {
         SimpleRouter::put(URL . 'clients/{id}', 'ClientsController@update');
     });
 
-    //Grupo de Rotas Finanças
+    //Finance
     SimpleRouter::group(['namespace' => 'Painel\Finance', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         //dashboard
         SimpleRouter::get(URL . 'finance/dashboard/{date?}', 'DashboardController@index');
@@ -74,19 +74,19 @@ try {
         SimpleRouter::put(URL . 'finance/revenue/{id}', 'RevenueController@update');
     });
 
-    //Grupo de Rotas Lista
-    SimpleRouter::group(['namespace' => 'Painel\Lista', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'listas/listar', 'ListaControlador@listar');
-        SimpleRouter::get(URL . 'listas/modelos', 'ListaControlador@modelos');
-        SimpleRouter::get(URL . 'listas/criar/{form}/{modelo}', 'ListaControlador@criar');
-        SimpleRouter::post(URL . 'listas/cadastrar/{modelo}', 'ListaControlador@cadastrar');
-        SimpleRouter::get(URL . 'listas/excluir/{hash}', 'ListaControlador@excluir');
+    //List
+    SimpleRouter::group(['namespace' => 'Painel\List', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
+        SimpleRouter::get(URL . 'list', 'ListaControlador@listar');
+        SimpleRouter::get(URL . 'list/templates', 'ListaControlador@modelos');
+        SimpleRouter::get(URL . 'list/{form}/{template}', 'ListaControlador@criar');
+        SimpleRouter::post(URL . 'list/{template}', 'ListaControlador@cadastrar');
+        SimpleRouter::delete(URL . 'list/{hash}', 'ListaControlador@excluir');
     });
 
     //Grupo de rotas de LIsta que não precisa de autenticação
-    SimpleRouter::group(['namespace' => 'Painel\Lista'], function () {
-        SimpleRouter::get(URL . 'listas/{modelo}/{hash}', 'ListaControlador@exibir');
-        SimpleRouter::get(URL . 'listas/pdf/{modelo}/{hash}', 'ListaControlador@pdf');
+    SimpleRouter::group(['namespace' => 'Painel\List'], function () {
+        SimpleRouter::get(URL . 'listas/{template}/{hash}', 'ListaControlador@exibir');
+        SimpleRouter::get(URL . 'listas/pdf/{template}/{hash}', 'ListaControlador@pdf');
     });
 
     //Grupo de Rotas Orçamento
