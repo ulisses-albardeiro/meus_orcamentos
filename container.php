@@ -1,8 +1,6 @@
 <?php
 
 use DI\ContainerBuilder;
-use sistema\Servicos\Clientes\ClientesInterface;
-use sistema\Servicos\Clientes\ClientesServico;
 use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Empresas\EmpresasServico;
 use sistema\Servicos\Financas\FinancasInterface;
@@ -26,7 +24,7 @@ $builder->addDefinitions([
     UsuariosInterface::class => autowire(UsuariosServico::class),
     FinancasInterface::class => autowire(FinancasServico::class),
     //Clientes
-    ClientesInterface::class => autowire(ClientesServico::class),
+    sistema\Servicos\Clients\ClientsInterface::class => autowire(sistema\Servicos\Clients\ClientsService::class),
     //Empresa
     EmpresasInterface::class => autowire(EmpresasServico::class),
     //Password Recovery

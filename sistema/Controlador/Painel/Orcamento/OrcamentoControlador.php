@@ -5,22 +5,22 @@ namespace sistema\Controlador\Painel\Orcamento;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\OrcamentoModelo;
 use sistema\Nucleo\Helpers;
-use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Adapter\Pdf;
 use sistema\Adapter\PdfAdapter\PDFInterface;
+use sistema\Servicos\Clients\ClientsInterface;
 
 class OrcamentoControlador extends PainelControlador
 {
     protected OrcamentosInterface $orcamentosServicos;
-    protected ClientesInterface $clientesServico;
+    protected ClientsInterface $clientesServico;
     protected UsuariosInterface $usuarioServico;
     protected EmpresasInterface $empresaServico;
     protected PDFInterface $pdfService;
 
-    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico, PDFInterface $pdfService)
+    public function __construct(OrcamentosInterface $orcamentosServicos, ClientsInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico, PDFInterface $pdfService)
     {
         parent::__construct();
         $this->orcamentosServicos = $orcamentosServicos;
@@ -33,7 +33,7 @@ class OrcamentoControlador extends PainelControlador
     public function listar(): void
     {
         $orcamentos = $this->orcamentosServicos->buscaOrcamentosServico($this->usuario->usuarioId);
-        $clientes = $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId);
+        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->usuarioId);
 
         echo $this->template->rendenizar(
             "orcamentos/listar.html",
@@ -63,7 +63,7 @@ class OrcamentoControlador extends PainelControlador
             [
                 "titulo" => "Criar Orçamento",
                 "modelo" => $modelo,
-                "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId) ?? [],
+                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->usuarioId) ?? [],
             ]
         );
     }
@@ -73,7 +73,7 @@ class OrcamentoControlador extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (empty($dados['id_cliente'])) {
-            $id_cliente = $this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId);
+            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->usuarioId);
         } else {
             $id_cliente = $dados['id_cliente'];
         }

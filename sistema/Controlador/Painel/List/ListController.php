@@ -4,24 +4,24 @@ namespace sistema\Controlador\Painel\List;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Nucleo\Helpers;
-use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Adapter\Pdf;
+use sistema\Servicos\Clients\ClientsInterface;
 
 class ListController extends PainelControlador
 {
     protected ListaInterface $listaServico;
-    protected ClientesInterface $clientesServico;
+    protected ClientsInterface $clientesServico;
     protected OrcamentosInterface $orcamentoInterface;
     protected UsuariosInterface $usuarioServico;
     protected EmpresasInterface $empresaServico;
 
     public function __construct(
         ListaInterface $listaServico,
-        ClientesInterface $clientesServico,
+        ClientsInterface $clientesServico,
         OrcamentosInterface $orcamentoInterface,
         UsuariosInterface $usuarioServico,
         EmpresasInterface $empresaServico
@@ -37,7 +37,7 @@ class ListController extends PainelControlador
     public function index(): void
     {
         $orcamentos = $this->listaServico->buscarListasServico($this->usuario->usuarioId);
-        $clientes = $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId);
+        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->usuarioId);
 
         echo $this->template->rendenizar(
             "listas/listar.html",
@@ -66,7 +66,7 @@ class ListController extends PainelControlador
             [
                 "titulo" => "Criar Lista",
                 "modelo" => $template,
-                "clientes" => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId) ?? [],
+                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->usuarioId) ?? [],
             ]
         );
     }
@@ -76,7 +76,7 @@ class ListController extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (empty($dados['id_cliente'])) {
-            $id_cliente = $this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId);
+            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->usuarioId);
         } else {
             $id_cliente = $dados['id_cliente'];
         }

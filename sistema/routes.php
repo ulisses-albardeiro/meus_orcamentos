@@ -82,7 +82,6 @@ try {
         SimpleRouter::post(URL . 'list/{template}', 'ListController@store');
         SimpleRouter::delete(URL . 'list/{hash}', 'ListController@destroy');
     });
-
     SimpleRouter::group(['namespace' => 'Painel\List'], function () {
         SimpleRouter::get(URL . 'list/{template}/{hash}', 'ListController@show');
         SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@showPdf');

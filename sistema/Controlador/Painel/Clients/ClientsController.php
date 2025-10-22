@@ -4,15 +4,15 @@ namespace sistema\Controlador\Painel\Clients;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Nucleo\Helpers;
-use sistema\Servicos\Clientes\ClientesInterface;
+use sistema\Servicos\Clients\ClientsInterface;
 
 class ClientsController extends PainelControlador
 {
-    protected ClientesInterface $clientesServico;
+    protected ClientsInterface $clientService;
 
-    public function __construct(ClientesInterface $clientesServico)
+    public function __construct(ClientsInterface $clientService)
     {
-        parent::__construct($this->clientesServico = $clientesServico);
+        parent::__construct($this->clientService = $clientService);
     }
 
     public function index(): void
@@ -21,16 +21,16 @@ class ClientsController extends PainelControlador
             'clients/index.html',
             [
                 'titulo' => 'Clientes',
-                'clientes' => $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId)
+                'clientes' => $this->clientService->findClientsByUserId($this->usuario->usuarioId)
             ]
         );
     }
 
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->clientesServico->cadastraClientesServico($dados, $this->usuario->usuarioId)) {
+        if ($this->clientService->registerClient($data, $this->usuario->usuarioId)) {
             $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso.')->flash();
         }
 
@@ -39,7 +39,7 @@ class ClientsController extends PainelControlador
 
     public function destroy(int $id): void
     {
-        if ($this->clientesServico->excluirClientesServico($id)) {
+        if ($this->clientService->destroyClient($id)) {
             $this->mensagem->mensagemSucesso('Cliente excluido com sucesso.')->flash();
         }
         Helpers::redirecionar('clients');
@@ -47,9 +47,9 @@ class ClientsController extends PainelControlador
 
     public function update(int $id): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->clientesServico->editarClientesServico($dados, $id)) {
+        if ($this->clientService->updateClient($data, $id)) {
             $this->mensagem->mensagemSucesso('Cliente editado com sucesso.')->flash();
         }
         Helpers::redirecionar('clients');
