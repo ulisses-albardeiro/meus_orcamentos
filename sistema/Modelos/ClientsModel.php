@@ -4,19 +4,19 @@ namespace sistema\Modelos;
 
 use sistema\Nucleo\Modelo;
 
-class ClientesModelo extends Modelo
+class ClientsModel extends Modelo
 {
     public function __construct()
     {
         parent::__construct("clientes");
     }
 
-    public function buscaClientesPorIdUsuario(int $id_usuario): ?array
+    public function findClientsByUserId(int $id_usuario): ?array
     {
         return $this->busca("id_usuario = {$id_usuario}")->resultado(true);
     }
 
-    public function cadastraClientes(array $dados, int $id_usuario): ?int
+    public function registerClient(array $dados, int $id_usuario): ?int
     {
         $this->nome = $dados['nome_cliente'];
         $this->id_usuario = $id_usuario;
@@ -37,7 +37,7 @@ class ClientesModelo extends Modelo
     }
 
 
-    public function editarCliente(array $dados, int $id_cliente): bool
+    public function updateClient(array $dados, int $id_cliente): bool
     {
         $this->id = $id_cliente;
         $this->nome = $dados['nome_cliente'];
@@ -55,13 +55,8 @@ class ClientesModelo extends Modelo
         return $this->salvar();
     }
 
-    public function excluirClientes(int $id_cliente): bool
+    public function destroyClient(int $id_cliente): bool
     {
         return $this->apagar("id = {$id_cliente}");
-    }
-
-    public function VerificaNomeIdExiste(int $id_cliente, string $nome_cliente) : ?array
-    {
-        return $this->busca("id = {$id_cliente} AND nome = '{$nome_cliente}'")->resultado();
     }
 }
