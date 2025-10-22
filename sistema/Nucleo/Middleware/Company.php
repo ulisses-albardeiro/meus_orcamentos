@@ -1,14 +1,15 @@
 <?php
 
-namespace sistema\Nucleo;
+namespace sistema\Nucleo\Middleware;
 
 use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
 use sistema\Modelos\EmpresasModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Nucleo\Mensagem;
+use sistema\Nucleo\Sessao;
 
-class EmpresaMiddleware implements IMiddleware
+class Company implements IMiddleware
 {
     protected Mensagem $mensagem;
     protected EmpresasModelo $empresaModelo;

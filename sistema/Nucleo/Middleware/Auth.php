@@ -1,22 +1,23 @@
 <?php
 
-namespace sistema\Nucleo;
+namespace sistema\Nucleo\Middleware;
 
 use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
 use sistema\Nucleo\Helpers;
 use sistema\Nucleo\Mensagem;
+use sistema\Nucleo\Sessao;
 
-class AuthMiddleware implements IMiddleware
+class Auth implements IMiddleware
 {
-    protected Mensagem $mensagem;
+    protected Mensagem $mesagem;
 
     public function handle(Request $request): void
     {
-        $this->mensagem = new Mensagem();
+        $this->mesagem = new Mensagem();
 
         if (!(new Sessao)->checarSessao('usuarioId')) {
-            $this->mensagem->mensagemErro('Necessário fazer login!')->flash();
+            $this->mesagem->mensagemErro('Necessário fazer login!')->flash();
             Helpers::redirecionar('login');
         }
     }
