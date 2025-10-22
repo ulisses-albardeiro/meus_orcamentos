@@ -3,8 +3,8 @@
 namespace sistema\Servicos\PasswordRecovery;
 
 use sistema\Modelos\UsuarioModelo;
-use sistema\Suporte\Email;
-use sistema\Suporte\Template;
+use sistema\Adapter\Email;
+use sistema\Adapter\Template;
 
 class PasswordRecoveryService implements PasswordRecoveryInterface
 {

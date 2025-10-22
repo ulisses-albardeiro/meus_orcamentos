@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Suporte;
+namespace sistema\Adapter;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -8,7 +8,7 @@ use Dompdf\Options;
 /**
  * Classe para geração de PDFs utilizando a biblioteca DOMPDF.
  *
- * @package sistema\Suporte
+ * @package sistema\Adapter
  */
 final class Pdf
 {

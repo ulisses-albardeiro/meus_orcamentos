@@ -31,6 +31,10 @@ $builder->addDefinitions([
     EmpresasInterface::class => autowire(EmpresasServico::class),
     //Password Recovery
     sistema\Servicos\PasswordRecovery\PasswordRecoveryInterface::class => autowire(sistema\Servicos\PasswordRecovery\PasswordRecoveryService::class),
+
+    //Adapter
+    sistema\Adapter\PdfAdapter\PdfInterface::class => autowire(sistema\Adapter\PdfAdapter\PdfService::class),
+    sistema\Adapter\PdfAdapter\DompdfFactoryInterface::class => autowire(sistema\Adapter\PdfAdapter\DompdfFactory::class),
 ]);
 
 return $builder->build();

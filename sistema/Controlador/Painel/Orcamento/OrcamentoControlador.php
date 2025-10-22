@@ -9,7 +9,8 @@ use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
-use sistema\Suporte\Pdf;
+use sistema\Adapter\Pdf;
+use sistema\Adapter\PdfAdapter\PDFInterface;
 
 class OrcamentoControlador extends PainelControlador
 {
@@ -17,14 +18,16 @@ class OrcamentoControlador extends PainelControlador
     protected ClientesInterface $clientesServico;
     protected UsuariosInterface $usuarioServico;
     protected EmpresasInterface $empresaServico;
+    protected PDFInterface $pdfService;
 
-    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico)
+    public function __construct(OrcamentosInterface $orcamentosServicos, ClientesInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico, PDFInterface $pdfService)
     {
         parent::__construct();
         $this->orcamentosServicos = $orcamentosServicos;
         $this->clientesServico = $clientesServico;
         $this->usuarioServico = $usuarioServico;
         $this->empresaServico = $empresaServico;
+        $this->pdfService = $pdfService;
     }
 
     public function listar(): void
@@ -109,11 +112,14 @@ class OrcamentoControlador extends PainelControlador
             ]
         );
 
-        $pdf = new Pdf;
-        $pdf->carregarHTML($html);
-        $pdf->configurarPapel('A4');
-        $pdf->renderizar();
-        $pdf->baixar("orçamento-" . Helpers::slug($dados_cliente['nome_cliente']) . ".pdf");
+        $filename = "orcamento-" . Helpers::slug($dados_cliente['nome_cliente']) . ".pdf";
+
+        $pdfOutput = $this->pdfService->generatePDF($html, ['chroot' => __DIR__]);
+
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        echo $pdfOutput;
+        exit;
     }
 
     public function excluir(string $hash): void

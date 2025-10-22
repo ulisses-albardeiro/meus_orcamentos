@@ -1,7 +1,7 @@
 <?php
 
 namespace sistema\Nucleo;
-use sistema\Suporte\Template;
+use sistema\Adapter\Template;
 
 class Controlador{
 

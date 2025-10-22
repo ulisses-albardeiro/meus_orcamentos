@@ -5,7 +5,7 @@ namespace sistema\Controlador\Painel\Recibo;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\ReciboModelo;
 use sistema\Nucleo\Helpers;
-use sistema\Suporte\Pdf;
+use sistema\Adapter\Pdf;
 
 class Recibo extends PainelControlador
 {

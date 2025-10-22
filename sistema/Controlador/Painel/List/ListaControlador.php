@@ -11,7 +11,7 @@ use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
-use sistema\Suporte\Pdf;
+use sistema\Adapter\Pdf;
 
 class ListaControlador extends PainelControlador
 {

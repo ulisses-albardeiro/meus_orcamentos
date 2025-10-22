@@ -1,6 +1,6 @@
 <?php
 
-namespace sistema\Suporte;
+namespace sistema\Adapter;
 
 use sistema\Controlador\UsuarioControlador;
 use Twig\Lexer;
