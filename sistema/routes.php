@@ -46,7 +46,7 @@ try {
     SimpleRouter::group(['namespace' => 'Painel\Clients', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
         SimpleRouter::get(URL . 'clients', 'ClientsController@index');
         SimpleRouter::post(URL . 'clients', 'ClientsController@store');
-        SimpleRouter::delete(URL . 'clients/{id}', 'ClientsController@delete');
+        SimpleRouter::delete(URL . 'clients/{id}', 'ClientsController@destroy');
         SimpleRouter::put(URL . 'clients/{id}', 'ClientsController@update');
     });
 
@@ -59,34 +59,33 @@ try {
         SimpleRouter::post(URL . 'finance/category', 'CategoryController@store');
         SimpleRouter::get(URL . 'finance/category', 'CategoryController@index');
         SimpleRouter::put(URL . 'finance/category/{id}', 'CategoryController@update');
-        SimpleRouter::delete(URL . 'finance/category/{id}', 'CategoryController@delete');
+        SimpleRouter::delete(URL . 'finance/category/{id}', 'CategoryController@destroy');
 
         //Expenses
         SimpleRouter::post(URL . 'finance/expense', 'ExpenseController@store');
         SimpleRouter::get(URL . 'finance/expense', 'ExpenseController@index');
-        SimpleRouter::delete(URL . 'finance/expense/{id}', 'ExpenseController@delete');
+        SimpleRouter::delete(URL . 'finance/expense/{id}', 'ExpenseController@destroy');
         SimpleRouter::put(URL . 'finance/expense/{id}', 'ExpenseController@update');
 
         //Revenue
         SimpleRouter::post(URL . 'finance/revenue', 'RevenueController@store');
         SimpleRouter::get(URL . 'finance/revenue', 'RevenueController@index');
-        SimpleRouter::delete(URL . 'finance/revenue/{id}', 'RevenueController@delete');
+        SimpleRouter::delete(URL . 'finance/revenue/{id}', 'RevenueController@destroy');
         SimpleRouter::put(URL . 'finance/revenue/{id}', 'RevenueController@update');
     });
 
     //List
     SimpleRouter::group(['namespace' => 'Painel\List', 'middleware' => [AuthMiddleware::class, EmpresaMiddleware::class]], function () {
-        SimpleRouter::get(URL . 'list', 'ListaControlador@listar');
-        SimpleRouter::get(URL . 'list/templates', 'ListaControlador@modelos');
-        SimpleRouter::get(URL . 'list/{form}/{template}', 'ListaControlador@criar');
-        SimpleRouter::post(URL . 'list/{template}', 'ListaControlador@cadastrar');
-        SimpleRouter::delete(URL . 'list/{hash}', 'ListaControlador@excluir');
+        SimpleRouter::get(URL . 'list', 'ListController@index');
+        SimpleRouter::get(URL . 'list/templates', 'ListController@templates');
+        SimpleRouter::get(URL . 'list/{form}/{template}', 'ListController@create');
+        SimpleRouter::post(URL . 'list/{template}', 'ListController@store');
+        SimpleRouter::delete(URL . 'list/{hash}', 'ListController@destroy');
     });
 
-    //Grupo de rotas de LIsta que não precisa de autenticação
     SimpleRouter::group(['namespace' => 'Painel\List'], function () {
-        SimpleRouter::get(URL . 'listas/{template}/{hash}', 'ListaControlador@exibir');
-        SimpleRouter::get(URL . 'listas/pdf/{template}/{hash}', 'ListaControlador@pdf');
+        SimpleRouter::get(URL . 'list/{template}/{hash}', 'ListController@show');
+        SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@showPdf');
     });
 
     //Grupo de Rotas Orçamento

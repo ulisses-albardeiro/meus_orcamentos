@@ -37,7 +37,7 @@ class ClientsController extends PainelControlador
         Helpers::redirecionar('clients');
     }
 
-    public function delete(int $id): void
+    public function destroy(int $id): void
     {
         if ($this->clientesServico->excluirClientesServico($id)) {
             $this->mensagem->mensagemSucesso('Cliente excluido com sucesso.')->flash();

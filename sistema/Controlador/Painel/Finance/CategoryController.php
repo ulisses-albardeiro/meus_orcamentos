@@ -51,7 +51,7 @@ class CategoryController extends PainelControlador
         }
     }
 
-    public function delete(int $id) : void
+    public function destroy(int $id) : void
     {
         $excluir = (new CategoriaModelo);
         if ($excluir->apagar("id = {$id}")) {

@@ -3,8 +3,6 @@
 namespace sistema\Controlador\Painel\List;
 
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\OrcamentoModelo;
-use sistema\Modelos\UsuarioModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clientes\ClientesInterface;
 use sistema\Servicos\Empresas\EmpresasInterface;
@@ -13,7 +11,7 @@ use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Adapter\Pdf;
 
-class ListaControlador extends PainelControlador
+class ListController extends PainelControlador
 {
     protected ListaInterface $listaServico;
     protected ClientesInterface $clientesServico;
@@ -36,7 +34,7 @@ class ListaControlador extends PainelControlador
         $this->empresaServico = $empresaServico;
     }
 
-    public function listar(): void
+    public function index(): void
     {
         $orcamentos = $this->listaServico->buscarListasServico($this->usuario->usuarioId);
         $clientes = $this->clientesServico->buscaClientesPorIdUsuarioServico($this->usuario->usuarioId);
@@ -51,7 +49,7 @@ class ListaControlador extends PainelControlador
         );
     }
 
-    public function modelos(): void
+    public function templates(): void
     {
         echo $this->template->rendenizar(
             "listas/modelos.html",
@@ -61,7 +59,7 @@ class ListaControlador extends PainelControlador
         );
     }
 
-    public function criar(string $form, string $template): void
+    public function create(string $form, string $template): void
     {
         echo $this->template->rendenizar(
             "listas/forms/$form.html",
@@ -73,7 +71,7 @@ class ListaControlador extends PainelControlador
         );
     }
 
-    public function cadastrar(string $template): void
+    public function store(string $template): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -93,7 +91,7 @@ class ListaControlador extends PainelControlador
         }
     }
 
-    public function pdf(string $template, string $hash): void
+    public function showPdf(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
@@ -113,7 +111,7 @@ class ListaControlador extends PainelControlador
         $pdf->baixar("orçamento-" . Helpers::slug($dados['nome_cliente']) . ".pdf");
     }
 
-    public function excluir(string $hash): void
+    public function destroy(string $hash): void
     {
         $arquivo = "templates/assets/arquivos/listas/$hash.pdf";
 
@@ -128,7 +126,7 @@ class ListaControlador extends PainelControlador
         Helpers::redirecionar("list");
     }
 
-    public function exibir(string $template, string $hash): void
+    public function show(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
 
