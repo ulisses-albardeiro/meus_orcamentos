@@ -3,7 +3,7 @@
 namespace sistema\Controlador;
 
 use sistema\Modelos\EmpresasModelo;
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Modelo;
 use sistema\Nucleo\Sessao;
@@ -18,17 +18,16 @@ class UsuarioControlador extends Controlador
     public static function usuario()
     {
         $sessao = new Sessao();
-        if (!$sessao->checarSessao('usuarioId')) {
+        if (!$sessao->checarSessao('userId')) {
             return null;
         }
 
-        return (new UsuarioModelo)->buscaPorId($sessao->usuarioId);
+        return (new UserModel)->buscaPorId($sessao->userId);
     }
 
     public static function empresa(): ?Modelo
     {
         $sessao = new Sessao();
-        return (new EmpresasModelo)->buscaEmpresaPorIdUsuario($sessao->usuarioId);
+        return (new EmpresasModelo)->buscaEmpresaPorIdUsuario($sessao->userId);
     }
-    
 }

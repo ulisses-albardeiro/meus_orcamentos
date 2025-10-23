@@ -2,17 +2,17 @@
 
 namespace sistema\Servicos\PasswordRecovery;
 
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 use sistema\Adapter\Email;
 use sistema\Adapter\Template;
 
 class PasswordRecoveryService implements PasswordRecoveryInterface
 {
-    protected UsuarioModelo $userModel;
+    protected UserModel $userModel;
     protected string $token;
     protected Template $template;
 
-    public function __construct(UsuarioModelo $userModel, Template $template)
+    public function __construct(UserModel $userModel, Template $template)
     {
         $this->userModel = $userModel;
         $this->template = $template;

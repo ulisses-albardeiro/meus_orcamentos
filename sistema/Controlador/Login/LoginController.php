@@ -4,61 +4,38 @@ namespace sistema\Controlador\Login;
 
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers;
-use sistema\Modelos\UsuarioModelo;
-use sistema\Nucleo\Sessao;
+use sistema\Servicos\Login\AuthInterface;
 
 class LoginController extends Controlador
 {
-    public function __construct()
+    public function __construct(private AuthInterface $loginService)
     {
         parent::__construct('templates/views');
     }
 
     public function create(): void
     {
-        $this->checarSessao();
-
+        if ($this->loginService->check()) {
+            Helpers::redirecionar('home');
+            return;
+        }
         echo $this->template->rendenizar('login.html', []);
     }
 
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (isset($dados)) {
-            if (in_array("", $dados)) {
-                $this->mensagem->mensagemAtencao("Preencha todos os campos!")->flash();
-                Helpers::redirecionar('login');
-            } else {
-                $usuario = (new UsuarioModelo())->login($dados, 1);
-                if ($usuario) {
-                    Helpers::redirecionar('home');
-                }
-            }
+        if (!$this->loginService->attempt(...$data)) {
+            $this->mensagem->mensagemErro("Dados incorretos")->flash();
+            Helpers::redirecionar('login');
         }
-    }
-
-    public function checarDados(array $dados): bool
-    {
-        if (empty($dados['email']) or empty($dados['senha'])) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private function checarSessao(): void
-    {
-        if ((new Sessao)->checarSessao('usuarioId')) {
-            Helpers::redirecionar('home');
-        }
+        Helpers::redirecionar('home');
     }
 
     public function destroy(): void
     {
-        $sessao = new Sessao;
-        $sessao->deletarSessao('usuarioId');
-
+        $this->loginService->logout();
         Helpers::redirecionar('/');
     }
 }

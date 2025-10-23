@@ -4,7 +4,7 @@ namespace sistema\Controlador\Painel\Config;
 
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\GerenciadorExclusaoUsuario;
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 use sistema\Nucleo\Helpers;
 use sistema\Nucleo\Sessao;
 
@@ -24,7 +24,7 @@ class ConfigControlador extends PainelControlador
     public function excluir(int $idUsuario): void
     {
         $exclusaoDados = new GerenciadorExclusaoUsuario;
-        $exclusaoUsuario = new UsuarioModelo;
+        $exclusaoUsuario = new UserModel;
 
 
         if ($exclusaoDados->apagarRegistrosPorUsuarioGeral($idUsuario) && $exclusaoUsuario->apagarUsuario($idUsuario)) {

@@ -24,7 +24,7 @@ class EmpresaControlador extends PainelControlador
             [
                 "titulo" => "Configure os dados da sua Empresa",
                 "subTitulo" => "",
-                'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId),
+                'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->userId),
             ]
         );
     }
@@ -33,7 +33,7 @@ class EmpresaControlador extends PainelControlador
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
-            $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->usuario->usuarioId, $_FILES['logo']);
+            $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->usuario->userId, $_FILES['logo']);
 
             if ($cadastro) {
                 $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('orcamento/modelos'), 'Sim, criar agora')->flash();
@@ -65,7 +65,7 @@ class EmpresaControlador extends PainelControlador
 
     public function excluirLogo(): void
     {
-        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->usuarioId);
+        $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->usuario->userId);
 
         unlink($_SERVER['DOCUMENT_ROOT'] . URL . 'templates/assets/img/logos/' . $empresa->logo);
 

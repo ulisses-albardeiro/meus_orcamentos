@@ -20,8 +20,8 @@ class RevenueController extends PainelControlador
     
     public function index(): void
     {
-        $receitas = (new ReceitaModelo)->busca("id_usuario = {$this->usuario->usuarioId}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->usuarioId} AND tipo = 'Receitas'")->resultado(true) ?? [];
+        $receitas = (new ReceitaModelo)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
+        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Receitas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/receitas.html",
             [
@@ -38,7 +38,7 @@ class RevenueController extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $salvar = (new ReceitaModelo);
 
-        if ($salvar->cadastrarReceita($dados, $this->usuario->usuarioId)) {
+        if ($salvar->cadastrarReceita($dados, $this->usuario->userId)) {
             $this->mensagem->mensagemSucesso("Receita Cadastrada com Sucesso!")->flash();
             Helpers::voltar();
         } else {

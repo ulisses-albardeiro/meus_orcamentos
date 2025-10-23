@@ -16,7 +16,7 @@ class FinancasServico implements FinancasInterface
         $this->despesaModelo = $despesaModelo;
     }
 
-    public function somaPeriodoReceitasUsuarioServico(string $dataInicial, string $dataFinal, int $idUsuario): int
+    public function somaPeriodoReceitasUsuarioServico(string $dataInicial, string $dataFinal, int $idUsuario): float|int
     {
         $receitasDoMes = $this->receitaModelo->buscaReceitasPorData($dataInicial, $dataFinal, $idUsuario);
 
@@ -28,7 +28,7 @@ class FinancasServico implements FinancasInterface
         return $totalReceitas/100;
     }
 
-    public function somaPeriodoDespesasUsuarioServico(string $dataInicial, string $dataFinal, int $idUsuario): int
+    public function somaPeriodoDespesasUsuarioServico(string $dataInicial, string $dataFinal, int $idUsuario): float|int
     {
         $despesasDoMes = $this->despesaModelo->buscaDespesasPorData($dataInicial, $dataFinal, $idUsuario);
 
@@ -41,7 +41,7 @@ class FinancasServico implements FinancasInterface
         return $totalDespesas/100;
     }
 
-    public function totalPeriodoCaixa(string $dataInicial, string $dataFinal, int $idUsuario): int
+    public function totalPeriodoCaixa(string $dataInicial, string $dataFinal, int $idUsuario): float|int
     {
         $totalDespesas = $this->somaPeriodoDespesasUsuarioServico($dataInicial, $dataFinal, $idUsuario);
         $totalReceitas = $this->somaPeriodoReceitasUsuarioServico($dataInicial, $dataFinal, $idUsuario);
@@ -51,7 +51,7 @@ class FinancasServico implements FinancasInterface
         return $caixa;
     }
 
-    public function calculaMargem(int $lucro, int $receita): int
+    public function calculaMargem(float|int $lucro, float|int $receita): float|int
     {
         if (empty($receita)) {
             return 0;

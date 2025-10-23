@@ -2,7 +2,7 @@
 namespace sistema\Controlador\Painel;
 
 use sistema\Nucleo\Controlador;
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 use sistema\Nucleo\Helpers;
 use sistema\Biblioteca\Upload;
 use sistema\Servicos\Usuarios\UsuariosInterface;
@@ -28,7 +28,7 @@ class UserController extends Controlador
 
         $this->verificarExistenciaUsuario($dados['email']);
 
-        $novo_usuario = (new UsuarioModelo);
+        $novo_usuario = (new UserModel);
         $novo_usuario->nome = $dados['nome'];
         $novo_usuario->email = $dados['email'];
         $novo_usuario->cadastrado_em = date('Y-m-d H:i:s');
@@ -43,7 +43,7 @@ class UserController extends Controlador
 
     public function verificarExistenciaUsuario(string $email) : void
     {
-        $busca = (new UsuarioModelo)->busca("email = :e", ":e={$email}")->resultado();
+        $busca = (new UserModel)->busca("email = :e", ":e={$email}")->resultado();
 
         if (!empty($busca)) {
             $this->mensagem->mensagemAtencao("O email $email já possui uma conta, caso não saiba a senha, clique abaixo em 'Esqueceu sua senha' para fazer uma nova.")->flash();
@@ -64,7 +64,7 @@ class UserController extends Controlador
             }
         }
 
-        $usuario = (new UsuarioModelo);
+        $usuario = (new UserModel);
         if (isset($nome_arquivo)) {
             $usuario->img_logo = $nome_arquivo;
         }
@@ -84,7 +84,7 @@ class UserController extends Controlador
         $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($id);
 
         unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
-        $usuario = (new UsuarioModelo);
+        $usuario = (new UserModel);
         $usuario->id = $id;
         $usuario->img_logo = null;
         if ($usuario->salvar()) {

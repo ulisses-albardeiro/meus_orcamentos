@@ -32,8 +32,8 @@ class OrcamentoControlador extends PainelControlador
 
     public function listar(): void
     {
-        $orcamentos = $this->orcamentosServicos->buscaOrcamentosServico($this->usuario->usuarioId);
-        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->usuarioId);
+        $orcamentos = $this->orcamentosServicos->buscaOrcamentosServico($this->usuario->userId);
+        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->userId);
 
         echo $this->template->rendenizar(
             "orcamentos/listar.html",
@@ -63,7 +63,7 @@ class OrcamentoControlador extends PainelControlador
             [
                 "titulo" => "Criar Orçamento",
                 "modelo" => $modelo,
-                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->usuarioId) ?? [],
+                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->userId) ?? [],
             ]
         );
     }
@@ -73,7 +73,7 @@ class OrcamentoControlador extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (empty($dados['id_cliente'])) {
-            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->usuarioId);
+            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->userId);
         } else {
             $id_cliente = $dados['id_cliente'];
         }
@@ -81,7 +81,7 @@ class OrcamentoControlador extends PainelControlador
         $total_orcamento = $this->orcamentosServicos->calcularTotalOrcamento($dados);
         $hash = Helpers::gerarHash();
 
-        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($id_cliente, $total_orcamento, $dados, $this->usuario->usuarioId, $modelo, $hash);
+        $id_orcamento = (new OrcamentoModelo)->cadastrarOrcamento($id_cliente, $total_orcamento, $dados, $this->usuario->userId, $modelo, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'

@@ -36,8 +36,8 @@ class ListController extends PainelControlador
 
     public function index(): void
     {
-        $orcamentos = $this->listaServico->buscarListasServico($this->usuario->usuarioId);
-        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->usuarioId);
+        $orcamentos = $this->listaServico->buscarListasServico($this->usuario->userId);
+        $clientes = $this->clientesServico->findClientsByUserId($this->usuario->userId);
 
         echo $this->template->rendenizar(
             "listas/listar.html",
@@ -66,7 +66,7 @@ class ListController extends PainelControlador
             [
                 "titulo" => "Criar Lista",
                 "modelo" => $template,
-                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->usuarioId) ?? [],
+                "clientes" => $this->clientesServico->findClientsByUserId($this->usuario->userId) ?? [],
             ]
         );
     }
@@ -76,14 +76,14 @@ class ListController extends PainelControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if (empty($dados['id_cliente'])) {
-            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->usuarioId);
+            $id_cliente = $this->clientesServico->registerClient($dados, $this->usuario->userId);
         } else {
             $id_cliente = $dados['id_cliente'];
         }
 
         $hash = Helpers::gerarHash();
 
-        $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->usuario->usuarioId, $template, $hash);
+        $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->usuario->userId, $template, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'

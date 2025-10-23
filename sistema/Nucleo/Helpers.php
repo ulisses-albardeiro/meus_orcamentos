@@ -58,12 +58,12 @@ class Helpers
     }
 
     /**
-     * Valida o email, exigindo um '@' e um '.' para poder ser aprovado
-     * @param string email de entrada
-     * @return bool retorno com verdadeiro ou falso para a validação do email
+     *Validates the email, requiring an '@' and a '.' to be approved
+     * @param string email
+     * @return bool return with true or false
      */
 
-    public static function validarEmail(string $email): bool
+    public static function validateEmail(string $email): bool
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }

@@ -6,7 +6,7 @@ use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\ListaModelo;
 use sistema\Modelos\OrcamentoModelo;
 use sistema\Modelos\ReciboModelo;
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 
 class Admin extends PainelControlador
 {
@@ -15,7 +15,7 @@ class Admin extends PainelControlador
         echo $this->template->rendenizar(
             "admin/usuarios.html",
             [
-                "usuarios" => (new UsuarioModelo)->busca()->resultado(true),
+                "usuarios" => (new UserModel)->busca()->resultado(true),
                 "orcamentos" => (new OrcamentoModelo)->busca()->resultado(true),
                 "listas" => (new ListaModelo)->busca()->resultado(true),
                 "recibos" => (new ReciboModelo)->busca()->resultado(true),
@@ -29,7 +29,7 @@ class Admin extends PainelControlador
         echo $this->template->rendenizar(
             "admin/orcamentos.html",
             [
-                "usuarios" => (new UsuarioModelo)->busca()->resultado(true),
+                "usuarios" => (new UserModel)->busca()->resultado(true),
                 "orcamentos" => (new OrcamentoModelo)->busca()->resultado(true),
                 'link_orcamentos' => 'active'
             ]
@@ -41,7 +41,7 @@ class Admin extends PainelControlador
         echo $this->template->rendenizar(
             "admin/listas.html",
             [
-                "usuarios" => (new UsuarioModelo)->busca()->resultado(true),
+                "usuarios" => (new UserModel)->busca()->resultado(true),
                 "listas" => (new ListaModelo)->busca()->resultado(true),
                 'link_listas' => 'active'
             ]
@@ -53,7 +53,7 @@ class Admin extends PainelControlador
         echo $this->template->rendenizar(
             "admin/recibos.html",
             [
-                "usuarios" => (new UsuarioModelo)->busca()->resultado(true),
+                "usuarios" => (new UserModel)->busca()->resultado(true),
                 "recibos" => (new ReciboModelo)->busca()->resultado(true),
                 'link_recibos' => 'active'
             ]

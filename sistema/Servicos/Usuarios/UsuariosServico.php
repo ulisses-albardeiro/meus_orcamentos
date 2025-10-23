@@ -2,13 +2,13 @@
 
 namespace sistema\Servicos\Usuarios;
 
-use sistema\Modelos\UsuarioModelo;
+use sistema\Modelos\UserModel;
 
 class UsuariosServico implements UsuariosInterface
 {
-    protected UsuarioModelo $usuarioModelo;
+    protected UserModel $usuarioModelo;
 
-    public function __construct(UsuarioModelo $usuarioModelo)
+    public function __construct(UserModel $usuarioModelo)
     {
         $this->usuarioModelo = $usuarioModelo;
     }
