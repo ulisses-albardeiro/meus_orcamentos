@@ -5,7 +5,7 @@ namespace sistema\Controlador\Painel\Finance;
 use sistema\Controlador\Painel\Finance\Servicos\ServicoDespesa;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
-use sistema\Modelos\DespesaModelo;
+use sistema\Modelos\ExpenseModel;
 use sistema\Nucleo\Helpers;
 
 class ExpenseController extends PainelControlador
@@ -20,7 +20,7 @@ class ExpenseController extends PainelControlador
 
     public function index(): void
     {
-        $despesas = (new DespesaModelo)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
+        $despesas = (new ExpenseModel)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
         $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Despesas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/despesas.html",
@@ -36,9 +36,9 @@ class ExpenseController extends PainelControlador
     public function store(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $salvar = (new DespesaModelo);
+        $salvar = (new ExpenseModel);
 
-        if ($salvar->cadastrarDespesa($dados, $this->usuario->userId)) {
+        if ($salvar->createExpense($dados, $this->usuario->userId)) {
             $this->mensagem->mensagemSucesso("Despesa Cadastrada com Sucesso!")->flash();
             Helpers::voltar();
         }else {
@@ -49,7 +49,7 @@ class ExpenseController extends PainelControlador
 
     public function destroy(int $id) : void
     {
-        $excluir = (new DespesaModelo);
+        $excluir = (new ExpenseModel);
         if ($excluir->apagar("id = {$id}")) {
             $this->mensagem->mensagemSucesso("Despesa excluida com sucesso!")->flash();
             Helpers::voltar();
@@ -62,8 +62,8 @@ class ExpenseController extends PainelControlador
     public function update(int $id) : void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $salvar = (new DespesaModelo);
-        if ($salvar->editarDespesa($dados, $id)) {
+        $salvar = (new ExpenseModel);
+        if ($salvar->updateExpense($dados, $id)) {
             $this->mensagem->mensagemSucesso("Despesa editada com sucesso!")->flash();
             Helpers::voltar();
         }else {

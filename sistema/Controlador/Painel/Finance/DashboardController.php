@@ -5,8 +5,8 @@ namespace sistema\Controlador\Painel\Finance;
 use sistema\Controlador\Painel\Finance\Servicos\ServicosDashboard;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
-use sistema\Modelos\DespesaModelo;
-use sistema\Modelos\ReceitaModelo;
+use sistema\Modelos\ExpenseModel;
+use sistema\Modelos\RevenueModel;
 
 class DashboardController extends PainelControlador
 {
@@ -22,6 +22,7 @@ class DashboardController extends PainelControlador
     {
         $data = $date ? date('Y-m-01', strtotime($date)) :  date('Y-m-01');
         
+        echo $this->servico->somarReceita($data, date('Y-m-t', strtotime($data)), $this->usuario->userId);
         echo $this->template->rendenizar("financas/dashboard.html",
             [
                 "categorias" => (new CategoriaModelo)->busca()->resultado(true),

@@ -3,14 +3,14 @@
 namespace sistema\Controlador\Painel\Finance\Servicos;
 
 use sistema\Modelos\CategoriaModelo;
-use sistema\Modelos\DespesaModelo;
-use sistema\Modelos\ReceitaModelo;
+use sistema\Modelos\ExpenseModel;
+use sistema\Modelos\RevenueModel;
 
 class ServicosDashboard
 {
     public function somarReceita(string $data, string $data_final, int $id_usuario): float
     {
-        $receitas = (new ReceitaModelo)->getReceitasPorData($data, $data_final, $id_usuario);
+        $receitas = (new RevenueModel)->findRevenuesByDate($data, $data_final, $id_usuario);
         if (empty($receitas)) {
             return 0;
         }
@@ -19,7 +19,7 @@ class ServicosDashboard
 
     public function somarDespesa(string $data, string $data_final, int $id_usuario): float
     {
-        $despesa = (new DespesaModelo)->getDespesasPorData($data, $data_final, $id_usuario);
+        $despesa = (new ExpenseModel)->findExpensesByDate($data, $data_final, $id_usuario);
         if (empty($despesa)) {
             return 0;
         }
@@ -28,7 +28,7 @@ class ServicosDashboard
 
     public function despesasPorCategoria(string $data, string $data_final, int $id_usuario): array
     {
-        $despesas = (new DespesaModelo)->getDespesasPorCategoria($data, $data_final, $id_usuario);
+        $despesas = (new ExpenseModel)->findExpensesByCategory($data, $data_final, $id_usuario);
 
         if (empty($despesas)) {
             return [];
@@ -70,7 +70,7 @@ class ServicosDashboard
     {
         $data_fim = date('Y-m-t', strtotime($data_fim));
         $data_inicio = date('Y-m-1', strtotime('first day of -2 months', strtotime($data_fim)));
-        $receita_trimestral = (new ReceitaModelo)->getReceitaTrimestral($data_inicio, $data_fim, $id_usuario);
+        $receita_trimestral = (new RevenueModel)->findQuarterlyRevenues($data_inicio, $data_fim, $id_usuario);
 
         return $receita_trimestral;
     }
@@ -79,7 +79,7 @@ class ServicosDashboard
     {
         $data_fim = date('Y-m-t', strtotime($data_fim));
         $data_inicio = date('Y-m-01', strtotime('first day of -2 months', strtotime($data_fim)));
-        $despesa_trimestral = (new DespesaModelo)->getDespesaTrimestral($data_inicio, $data_fim, $id_usuario);
+        $despesa_trimestral = (new ExpenseModel)->findQuarterlyExpenses($data_inicio, $data_fim, $id_usuario);
 
         return $despesa_trimestral ?? [];
     }

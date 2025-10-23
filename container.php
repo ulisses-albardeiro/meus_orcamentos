@@ -3,13 +3,10 @@
 use DI\ContainerBuilder;
 use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Empresas\EmpresasServico;
-use sistema\Servicos\Financas\FinancasInterface;
-use sistema\Servicos\Financas\FinancasServico;
 use sistema\Servicos\Listas\ListaInterface;
 use sistema\Servicos\Listas\ListaServicos;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Orcamentos\OrcamentosServicos;
-
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Servicos\Usuarios\UsuariosServico;
 
@@ -22,7 +19,9 @@ $builder->addDefinitions([
     OrcamentosInterface::class => autowire(OrcamentosServicos::class),
     ListaInterface::class => autowire(ListaServicos::class),
     UsuariosInterface::class => autowire(UsuariosServico::class),
-    FinancasInterface::class => autowire(FinancasServico::class),
+    
+    //Finance
+    sistema\Servicos\Finance\FinanceInterface::class => autowire(sistema\Servicos\Finance\FinanceService::class),
     //Clientes
     sistema\Servicos\Clients\ClientsInterface::class => autowire(sistema\Servicos\Clients\ClientsService::class),
     //Empresa
