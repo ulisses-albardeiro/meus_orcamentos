@@ -5,7 +5,8 @@
             "sistema\\": "sistema/"
         },
         "files": [
-            "sistema/config.php"
+            "sistema/config.php",
+            "sistema/Nucleo/Suport/Debug.php"
         ]
     },
     "authors": [

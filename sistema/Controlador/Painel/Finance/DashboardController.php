@@ -22,7 +22,6 @@ class DashboardController extends PainelControlador
     {
         $data = $date ? date('Y-m-01', strtotime($date)) :  date('Y-m-01');
         
-        echo $this->servico->somarReceita($data, date('Y-m-t', strtotime($data)), $this->usuario->userId);
         echo $this->template->rendenizar("financas/dashboard.html",
             [
                 "categorias" => (new CategoriaModelo)->busca()->resultado(true),

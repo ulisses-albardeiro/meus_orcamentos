@@ -12,6 +12,7 @@ class ConfigControlador extends PainelControlador
 {
     public function listar(): void
     {
+        
         echo $this->template->rendenizar(
             'config.html',
             [
