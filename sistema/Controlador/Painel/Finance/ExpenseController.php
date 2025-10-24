@@ -4,7 +4,7 @@ namespace sistema\Controlador\Painel\Finance;
 
 use sistema\Controlador\Painel\Finance\Servicos\ServicoDespesa;
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\CategoriaModelo;
+use sistema\Modelos\CategoryModel;
 use sistema\Modelos\ExpenseModel;
 use sistema\Nucleo\Helpers;
 
@@ -21,7 +21,7 @@ class ExpenseController extends PainelControlador
     public function index(): void
     {
         $despesas = (new ExpenseModel)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Despesas'")->resultado(true) ?? [];
+        $categorias = (new CategoryModel)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Despesas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/despesas.html",
             [

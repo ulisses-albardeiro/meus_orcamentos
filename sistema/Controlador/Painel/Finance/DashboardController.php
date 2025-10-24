@@ -4,7 +4,7 @@ namespace sistema\Controlador\Painel\Finance;
 
 use sistema\Controlador\Painel\Finance\Servicos\ServicosDashboard;
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\CategoriaModelo;
+use sistema\Modelos\CategoryModel;
 
 class DashboardController extends PainelControlador
 {
@@ -22,7 +22,7 @@ class DashboardController extends PainelControlador
         
         echo $this->template->rendenizar("financas/dashboard.html",
             [
-                "categorias" => (new CategoriaModelo)->busca()->resultado(true),
+                "categorias" => (new CategoryModel)->busca()->resultado(true),
                 "receita_total" => $this->servico->somarReceita($data, date('Y-m-t', strtotime($data)), $this->usuario->userId),
                 "despesas_total" => $this->servico->somarDespesa($data, date('Y-m-t', strtotime($data)), $this->usuario->userId),
                 "data" => substr($data, 0, 7),

@@ -1,65 +1,66 @@
 <?php
 
+
 namespace sistema\Controlador\Painel\Finance;
 
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\CategoriaModelo;
+use sistema\Modelos\CategoryModel;
 use sistema\Nucleo\Helpers;
+use sistema\Servicos\Finance\CategoryInterface;
 
 class CategoryController extends PainelControlador
 {
+    public function __construct(private CategoryInterface $categoryService)
+    {
+        parent::__construct();
+    }
+
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $salvar = (new CategoriaModelo);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($salvar->categoriaExiste($dados, $this->usuario->userId)) {
-            $this->mensagem->mensagemAtencao("A categoria {$dados['nome']} do tipo {$dados['tipo']} já está cadastrada!")->flash();
+        if (!empty($this->categoryService->findCategoryByName($data['nome'], $data['tipo'], $this->usuario->userId))) {
+            $this->mensagem->mensagemAtencao(
+                "A categoria '{$data['nome']}' do tipo '{$data['tipo']}' já está cadastrada! Use outro tipo ou nome."
+            )->flash();
             Helpers::voltar();
+            return;
         }
 
-        if ($salvar->cadastrarCategoria($dados, $this->usuario->userId)) {
+        if ($this->categoryService->saveCategory($data, $this->usuario->userId)) {
             $this->mensagem->mensagemSucesso("Categoria cadastrada com Sucesso!")->flash();
-            Helpers::voltar();
-        }else {
-            $this->mensagem->mensagemErro("ERRO: ". $salvar->getErro())->flash();
-            Helpers::voltar();
         }
+
+        Helpers::voltar();
     }
 
-    public function index() : void
+    public function index(): void
     {
-        echo $this->template->rendenizar("financas/categorias.html", 
-        [
-            "categorias" => (new CategoriaModelo)->getCategorias($this->usuario->userId),
-            "tipos" => ["Despesas", "Receitas"],
-            'titulo' => 'Categoria'
-        ]);    
+        echo $this->template->rendenizar(
+            "financas/category.html",
+            [
+                "categorias" => (new CategoryModel)->getCategorias($this->usuario->userId),
+                "tipos" => ["Despesas", "Receitas"],
+                'titulo' => 'Categoria'
+            ]
+        );
     }
 
-    public function update(int $id) : void
+    public function update(int $id): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $salvar = (new CategoriaModelo);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($salvar->editarCategoria($dados, $id)) {
-            $this->mensagem->mensagemSucesso("Categoria editada com Sucesso!")->flash();
-            Helpers::voltar();
-        }else {
-            $this->mensagem->mensagemErro("ERRO: ". $salvar->getErro())->flash();
-            Helpers::voltar();
+        if ($this->categoryService->updateCategory($data['nome'], $id)) {
+            $this->mensagem->mensagemSucesso("Categoria '{$data['nome']}' editada com Sucesso!")->flash();
         }
+        Helpers::voltar();
     }
 
-    public function destroy(int $id) : void
+    public function destroy(int $id): void
     {
-        $excluir = (new CategoriaModelo);
-        if ($excluir->apagar("id = {$id}")) {
+        if ($this->categoryService->destroyCategory($id)) {
             $this->mensagem->mensagemSucesso("Categoria excluida com sucesso!")->flash();
-            Helpers::voltar();
-        }else {
-            $this->mensagem->mensagemErro("Houve um erro inesperado")->flash();
-            Helpers::voltar();
         }
+        Helpers::voltar();
     }
 }

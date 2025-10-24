@@ -4,7 +4,7 @@ namespace sistema\Controlador\Painel\Finance;
 
 use sistema\Controlador\Painel\Finance\Servicos\ServicoReceita;
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\CategoriaModelo;
+use sistema\Modelos\CategoryModel;
 use sistema\Modelos\RevenueModel;
 use sistema\Nucleo\Helpers;
 
@@ -21,7 +21,7 @@ class RevenueController extends PainelControlador
     public function index(): void
     {
         $receitas = (new RevenueModel)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
-        $categorias = (new CategoriaModelo)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Receitas'")->resultado(true) ?? [];
+        $categorias = (new CategoryModel)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Receitas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
             "financas/receitas.html",
             [

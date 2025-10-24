@@ -2,7 +2,7 @@
 
 namespace sistema\Controlador\Painel\Finance\Servicos;
 
-use sistema\Modelos\CategoriaModelo;
+use sistema\Modelos\CategoryModel;
 use sistema\Modelos\ExpenseModel;
 use sistema\Modelos\RevenueModel;
 
@@ -52,7 +52,7 @@ class ServicosDashboard
 
     private function getNomeCategoria(array $despesas): array
     {
-        $categorias = (new CategoriaModelo)->busca()->resultado(true);
+        $categorias = (new CategoryModel)->busca()->resultado(true);
 
         $despesas = array_map(function ($despesa) use ($categorias) {
             foreach ($categorias as $categoria) {
