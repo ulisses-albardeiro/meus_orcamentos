@@ -17,10 +17,9 @@ class HomeController extends PainelControlador
         parent::__construct();
     }
 
-
     public function index() : void
     {
-        $totalCaixaMesAtual = $this->financasServico->getCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
+        $totalCaixaMesAtual = $this->financasServico->findCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
         $totalReceitaMesAtual = $this->financasServico->sumUserRevenueByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
         $totalDespesasMesAtual = $this->financasServico->sumUserExpensesByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
         $margemMes = $this->financasServico->calculateMargin($totalCaixaMesAtual, $totalReceitaMesAtual);

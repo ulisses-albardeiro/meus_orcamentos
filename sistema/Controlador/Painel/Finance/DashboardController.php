@@ -5,8 +5,6 @@ namespace sistema\Controlador\Painel\Finance;
 use sistema\Controlador\Painel\Finance\Servicos\ServicosDashboard;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Modelos\CategoriaModelo;
-use sistema\Modelos\ExpenseModel;
-use sistema\Modelos\RevenueModel;
 
 class DashboardController extends PainelControlador
 {

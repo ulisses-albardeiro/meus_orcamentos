@@ -16,8 +16,9 @@ class FinanceService implements FinanceInterface
         if (empty($revenues)) {
             return 0;
         }
+        $totalRevenue = array_sum(array_column($revenues, 'valor'));
 
-        $totalRevenue = array_sum(array_column($revenues, 'value'));
+        
         return $totalRevenue / 100;
     }
 
@@ -29,11 +30,11 @@ class FinanceService implements FinanceInterface
             return 0;
         }
 
-        $totalExpenses = array_sum(array_column($expenses, 'value'));
+        $totalExpenses = array_sum(array_column($expenses, 'valor'));
         return $totalExpenses / 100;
     }
 
-    public function getCashBalanceByPeriod(string $startDate, string $endDate, int $userId): float
+    public function findCashBalanceByPeriod(string $startDate, string $endDate, int $userId): float
     {
         $totalExpenses = $this->sumUserExpensesByPeriod($startDate, $endDate, $userId);
         $totalRevenue = $this->sumUserRevenueByPeriod($startDate, $endDate, $userId);
@@ -47,6 +48,6 @@ class FinanceService implements FinanceInterface
             return 0;
         }
 
-        return ($profit / $revenue) * 100;
+        return round(($profit / $revenue) * 100, 2);
     }
 }
