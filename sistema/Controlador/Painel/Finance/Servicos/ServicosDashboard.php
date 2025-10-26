@@ -10,7 +10,7 @@ class ServicosDashboard
 {
     public function somarReceita(string $data, string $data_final, int $id_usuario): float
     {
-        $receitas = (new RevenueModel)->findRevenuesByDate($data, $data_final, $id_usuario);
+        $receitas = (new RevenueModel)->findRevenuesByRangeDate($data, $data_final, $id_usuario);
         if (empty($receitas)) {
             return 0;
         }
@@ -19,7 +19,7 @@ class ServicosDashboard
 
     public function somarDespesa(string $data, string $data_final, int $id_usuario): float
     {
-        $despesa = (new ExpenseModel)->findExpensesByDate($data, $data_final, $id_usuario);
+        $despesa = (new ExpenseModel)->findExpensesByRangeDate($data, $data_final, $id_usuario);
         if (empty($despesa)) {
             return 0;
         }

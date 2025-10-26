@@ -44,4 +44,11 @@ class CategoryModel extends Modelo
             "nome = :n AND tipo = :t AND id_usuario = :id", ":n={$name}&:t={$type}&:id={$userId}"
             )->resultado();
     }
+
+     public function findCategoryByUserId(int $userId) : ?array
+    {
+        return $this->busca(
+            "id_usuario = {$userId}"
+            )->resultado(true);
+    }
 }

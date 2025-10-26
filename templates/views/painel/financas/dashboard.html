@@ -4,194 +4,211 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+    .card {
+        border: none;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+    }
+
     .card:hover {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) !important;
-        transform: scale(1.02);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi-icon {
+        font-size: 2rem;
+        opacity: 0.8;
+    }
+
+    .chart-card {
+        min-height: 380px;
+    }
+
+    .dashboard-header {
+        background: linear-gradient(135deg, #0d6efd, #198754);
+        border-radius: 1rem;
+        color: white;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .dashboard-header h4 {
+        margin-bottom: 0.5rem;
     }
 </style>
-
-<div class="mt-4">
+{% include 'financas/menu.html' %}
+<div class="mt-4 mb-4 container-fluid">
+    <!-- Cabeçalho -->
+    <div class="dashboard-header d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h4 class="fw-bold">Painel Financeiro</h4>
+            <p class="mb-0">Resumo geral das suas finanças — <span class="fw-semibold">{{ dateInPortuguese }}</span></p>
+        </div>
+        <form id="formDashboard" onsubmit="return redirectDashboard(event)"
+            class="d-flex gap-2 align-items-center mt-2 mt-md-0">
+            <label for="data" class="fw-bold mb-0">Selecionar período:</label>
+            <input value="{{ data }}" type="month" class="form-control form-control-sm" id="data" name="data"
+                style="width: 160px;">
+            <button type="submit" class="btn btn-dark btn-sm">Buscar</button>
+        </form>
+    </div>
 
     {{ flash() }}
 
-    <form id="formDashboard" onsubmit="return redirecionarDashboard(event)">
-        <div class="mb-3 d-flex justify-content-end">
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                <label for="data" class="form-control-md fw-bold">Escolha o mês e ano dos dados</label>
-                <input value="{{ data }}" class="form-control form-control-sm" type="month" name="data" id="data"
-                    style="width: 160px;">
-                <button style="background-color: black; color: white;" type="submit" class="btn text-nowrap btn-sm">
-                    Buscar dados financeiros
-                </button>
+    <!-- Cards principais -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6 col-xl-3">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold"><i class="bi bi-cash-coin me-4 kpi-icon"></i>Receitas</h6>
+                        <i class="bi bi-arrow-up-circle fs-4"></i>
+                    </div>
+                    <h3 class="fw-bold mt-2">R$ {{ totalRevenueCurrentMonth | number_format(2, ',', '.') }}</h3>
+                    <small>Mês: {{ data|date("m/Y") }}</small>
+                </div>
             </div>
         </div>
-    </form>
 
-    <!-- Cards Resumo -->
-    <div class="row g-3 mb-4">
-        <!-- Receita -->
-        <div class="col-md-6 col-lg-4">
-            <a href="{{ url('finance/revenue') }}" class="text-decoration-none">
-                <div class="card shadow-sm border-0 bg-success text-white h-100 position-relative"
-                    style="cursor: pointer; transition: all 0.2s ease;">
-                    <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-cash-coin me-2"></i>Receita do mês {{ data|date("m/Y") }}
-                        </h6>
-                        <h4 class="text-white">R$ {{ receita_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"></i>
-                        <span class="stretched-link"></span>
+        <div class="col-md-6 col-xl-3">
+            <div class="card bg-danger text-white h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold"><i class="bi bi-cart-x-fill me-4 kpi-icon"></i>Despesas</h6>
+                        <i class="bi bi-arrow-down-circle fs-4"></i>
                     </div>
+                    <h3 class="fw-bold mt-2">R$ {{ totalExpensesCurrentMonth | number_format(2, ',', '.') }}</h3>
+                    <small>Mês: {{ data|date("m/Y") }}</small>
                 </div>
-            </a>
+            </div>
         </div>
 
-        <!-- Despesas -->
-        <div class="col-md-6 col-lg-4">
-            <a href="{{ url('finance/expense') }}" class="text-decoration-none">
-                <div class="card shadow-sm border-0 bg-danger text-white h-100 position-relative"
-                    style="cursor: pointer; transition: all 0.2s ease;">
-                    <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-cart-x-fill me-2"></i>Despesas do mês {{ data|date("m/Y")
-                            }}</h6>
-                        <h4 class="text-white">R$ {{ despesas_total|number_format(2, ',', '.') }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"></i>
-                        <span class="stretched-link"></span>
+        <div class="col-md-6 col-xl-3">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold"><i class="bi bi-wallet2 me-4 kpi-icon"></i>Saldo</h6>
+                        <i class="bi bi-graph-up fs-4"></i>
                     </div>
+                    <h3 class="fw-bold mt-2 {% if saldo < 0 %}text-danger{% endif %}">R$ {{ balance | number_format(2,
+                        ',', '.') }}</h3>
+                    <small>Resultado líquido do mês</small>
                 </div>
-            </a>
+            </div>
         </div>
 
-        <!-- Saldo -->
-        <div class="col-md-6 col-lg-4">
-            <a href="#" class="text-decoration-none">
-                <div class="card shadow-sm border-0 bg-primary text-white h-100 position-relative"
-                    style="cursor: pointer; transition: all 0.2s ease;">
-                    <div class="card-body">
-                        <h6 class="card-title"><i class="bi bi-wallet2 me-2"></i>Saldo do mês {{ data|date("m/Y") }}
-                        </h6>
-                        <h4 class="text-white">R$ <span {% if (receita_total - despesas_total) < 0 %}
-                                class="text-danger" {% endif %}>{{ (receita_total - despesas_total)|number_format(2,
-                                ',', '.') }}</span></h4>
-
-                        <span class="stretched-link"></span>
+        <div class="col-md-6 col-xl-3">
+            <div class="card bg-warning text-dark h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold"><i class="bi bi-clipboard-data me-4 kpi-icon"></i>Orçamentos(em
+                            desenvolvimento)</h6>
+                        <i class="bi bi-list-check fs-4"></i>
                     </div>
+                    <h3 class="fw-bold mt-2">---</h3>
+                    <small>Orçamentos fechados este mês</small>
                 </div>
-            </a>
+            </div>
         </div>
-
-        <!-- Orçamentos -->
-        <!-- <div class="col-md-6 col-lg-3">
-            <a href="/detalhes/orcamentos" class="text-decoration-none">
-                <div class="card shadow-sm border-0 bg-warning text-dark h-100 position-relative"
-                    style="cursor: pointer; transition: all 0.2s ease;">
-                    <div class="card-body" style=" margin-bottom: -22px;">
-                        <h6 style=" margin-bottom: -3px;" class="card-title"><i class="bi bi-clipboard-data me-2"></i>Orçamentos</h6><h6 style="margin-left: 25px;">Fechados</h6>
-                        <h4>{{ orcamentos_fechados|default(5) }}</h4>
-                        <i class="bi bi-plus-circle-fill position-absolute top-0 end-0 m-2" title="Ver detalhes"> Mais</i>
-                        <span class="stretched-link"></span>
-                    </div>
-                </div>
-            </a>
-        </div> -->
     </div>
 
-
-    <!-- Gráficos -->
+    <!-- charts -->
     <div class="row g-4">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0">
+        <div class="col-lg-6">
+            <div class="card chart-card shadow-sm">
                 <div class="card-body">
-                    <h6 class="mb-3"><i class="bi bi-bar-chart-line me-2"></i>Receitas e Despesas - Últimos 3 meses</h6>
-                    <canvas id="graficoBarra"></canvas>
+                    <h6 class="fw-bold mb-3"><i class="bi bi-bar-chart-line me-2"></i>Receitas e Despesas — Últimos 3
+                        Meses</h6>
+                    <canvas id="chart-bar"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-lg-6">
+            <div class="card chart-card shadow-sm">
                 <div class="card-body">
-                    <h6 class="mb-3"><i class="bi bi-pie-chart-fill me-2"></i>Despesas por Categoria</h6>
-                    {% if despesas_categoria == null %}
-                    <div>
-                        <p>Você ainda não tem despesas no mês <span class="fw-bold">{{ data|date("m/Y") }}</span> para
-                            mostrar nos gráficos</p>
-                    </div>
+                    <h6 class="fw-bold mb-3"><i class="bi bi-pie-chart-fill me-2"></i>Despesas por Categoria</h6>
+                    {% if expensesByCategory.labels is empty or expensesByCategory.values is empty %}
+                    <p class="text-muted">Você não tem nenhuma despesa cadastrada nesse mês</p>
                     {% endif %}
-                    <canvas id="graficoPizza"></canvas>
+                    <canvas style="transform: translateY(-60px);" id="chart-doughnut"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
-<!-- Script dos gráficos -->
 <script>
-    const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
-    const dadosGrafico = JSON.parse('{{ dados_grafico_trimestral|json_encode|raw }}');
-
+    const dataBar = JSON.parse('{{ quarterlyData|json_encode|raw }}');
+    const ctxBarra = document.getElementById('chart-bar').getContext('2d');
     new Chart(ctxBarra, {
         type: 'bar',
         data: {
-            labels: dadosGrafico.labels,
+            labels: dataBar.labels,
             datasets: [
-                {
-                    label: 'Receitas',
-                    data: dadosGrafico.receitas,
-                    backgroundColor: '#198754'
-                },
-                {
-                    label: 'Despesas',
-                    data: dadosGrafico.despesas,
-                    backgroundColor: '#dc3545'
-                }
+                { label: 'Receitas', data: dataBar.reavenues, backgroundColor: '#198754' },
+                { label: 'Despesas', data: dataBar.expenses, backgroundColor: '#dc3545' }
             ]
         },
         options: {
             responsive: true,
-            plugins: { legend: { position: 'top' } }
+            plugins: { legend: { position: 'bottom' } },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => 'R$ ' + value.toLocaleString('pt-BR',
+                            {
+                                minimumFractionDigits: 2,
+                                minimumFractionDigits: 2,
+                            }
+                        )
+                    }
+                }
+            }
         }
     });
 
-    const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
-    const despesasCategoria = JSON.parse('{{ despesas_categoria|json_encode|raw }}');
-
-    const categorias = Object.keys(despesasCategoria);
-    const valores = Object.values(despesasCategoria);
-
-    // Função para gerar cores aleatórias
-    function gerarCores(qtd) {
-        const cores = [];
-        for (let i = 0; i < qtd; i++) {
-            const hue = Math.floor(360 * i / qtd); // espalha as cores no espectro
-            cores.push(`hsl(${hue}, 70%, 60%)`);
-        }
-        return cores;
-    }
-
+    const dataDoughnut = JSON.parse('{{ expensesByCategory|json_encode|raw }}');
+    const ctxPizza = document.getElementById('chart-doughnut').getContext('2d');
     new Chart(ctxPizza, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
-            labels: categorias,
+            labels: dataDoughnut.labels,
             datasets: [{
-                data: valores,
-                backgroundColor: gerarCores(categorias.length)
+                data: dataDoughnut.values,
+                backgroundColor: getColors(dataDoughnut.labels.length)
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { position: 'bottom' }
+                legend: { position: 'right' }
             }
         }
     });
 
-    function redirecionarDashboard(event) {
+
+    function getColors(quantity) {
+        const colors = [
+            '#0d6efd', '#6610f2', '#6f42c1',
+            '#d63384', '#dc3545', '#fd7e14',
+            '#ffc107', '#198754', '#20c997', '#0dcaf0'
+        ];
+        for (let i = 0; i < quantity; i++) {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            colors.push(`rgba(${r}, ${g}, ${b}, 0.8)`);
+        }
+        return colors;
+    }
+
+    function redirectDashboard(event) {
         event.preventDefault();
         const data = document.getElementById('data').value;
         if (!data) return;
-
         window.location.href = `{{ url('finance/dashboard/') }}${data}`;
     }
 </script>

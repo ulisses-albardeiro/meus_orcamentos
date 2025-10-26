@@ -13,11 +13,11 @@ class ExpenseModel extends Modelo
 
     public function createExpense(array $data, int $userId): bool
     {
-        $this->value = $data["expense"] * 100;
-        $this->category_id = $data["category_id"];
-        $this->created_at = date('Y-m-d H:i:s');
-        $this->expense_date = $data["date"];
-        $this->user_id = $userId;
+        $this->valor = $data["value"] * 100;
+        $this->id_categoria = $data["category_id"];
+        $this->dt_hr_criacao = date('Y-m-d H:i:s');
+        $this->dt_despesa = $data["date"];
+        $this->id_usuario = $userId;
 
         return $this->salvar();
     }
@@ -31,11 +31,11 @@ class ExpenseModel extends Modelo
         return $expensesByCategory;
     }
 
-    public function findExpensesByDate(string $startDate, string $endDate, int $userId): array
+    public function findExpensesByRangeDate(string $startDate, string $endDate, int $userId): ?array
     {
         $expenses = $this->busca(
             'dt_despesa >= :inicio AND dt_despesa <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}"
-            )->resultado(true) ?? [];
+            )->resultado(true);
 
         return $expenses;
     }
@@ -43,15 +43,8 @@ class ExpenseModel extends Modelo
     public function updateExpense(array $data, int $id): bool
     {
         $this->id = $id;
-        $this->valor = $data["despesa"]*100;
-        $this->dt_despesa = $data["data"];
+        $this->valor = $data["value"]*100;
+        $this->dt_despesa = $data["date"];
         return $this->salvar();
-    }
-
-    public function findQuarterlyExpenses(string $startDate, string $endDate, int $userId): ?array
-    {
-        $quarterlyExpenses = $this->busca('dt_despesa >= :inicio AND dt_despesa <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}")->resultado(true);    
-
-        return $quarterlyExpenses;
     }
 }

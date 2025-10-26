@@ -28,4 +28,9 @@ class CategoryService implements CategoryInterface
     {
         return $this->categoryModel->destroyCategory($id);
     }
+
+    public function findCategoryByUserId(int $userId): ?array
+    {
+        return $this->categoryModel->findCategoryByUserId($userId);
+    }
 }

@@ -10,7 +10,7 @@ use sistema\Servicos\Orcamentos\OrcamentosInterface;
 class HomeController extends PainelControlador
 {
     public function __construct(
-        private FinanceInterface $financasServico, 
+        private FinanceInterface $financeService, 
         private OrcamentosInterface $orcamentoServico, 
         private ClientsInterface $clientesServico)
     {
@@ -19,10 +19,10 @@ class HomeController extends PainelControlador
 
     public function index() : void
     {
-        $totalCaixaMesAtual = $this->financasServico->findCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
-        $totalReceitaMesAtual = $this->financasServico->sumUserRevenueByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
-        $totalDespesasMesAtual = $this->financasServico->sumUserExpensesByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
-        $margemMes = $this->financasServico->calculateMargin($totalCaixaMesAtual, $totalReceitaMesAtual);
+        $totalCaixaMesAtual = $this->financeService->findCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
+        $totalReceitaMesAtual = $this->financeService->sumRevenueByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
+        $totalDespesasMesAtual = $this->financeService->sumExpensesByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
+        $margemMes = $this->financeService->calculateMargin($totalCaixaMesAtual, $totalReceitaMesAtual);
 
         $clientes = $this->clientesServico->findClientsByUserId($this->usuario->userId);
         $orcamentos = Helpers::colocarTodosNomesClientesPeloId($clientes, $this->orcamentoServico->buscaOrcamentosServico($this->usuario->userId));

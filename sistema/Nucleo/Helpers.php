@@ -2,11 +2,12 @@
 
 namespace sistema\Nucleo;
 
+use DateTime;
+use IntlDateFormatter;
 use sistema\Nucleo\Sessao;
 
 class Helpers
 {
-
     /**
      * Redireciona o navegador para uma URL especificada.
      *
@@ -274,7 +275,6 @@ class Helpers
             return null;
         }
 
-        // Para maior flexibilidade, podemos indexar os clientes por ID primeiro
         $clientes_map = [];
         foreach ($clientes as $cliente) {
             $clientes_map[$cliente->id ?? null] = $cliente->nome ?? null;
@@ -310,5 +310,29 @@ class Helpers
             }
         }
         return '';
+    }
+
+    /**
+     * Returns the month and year of a given date formatted in Portuguese (e.g. "Outubro de 2025").
+     *
+     * This method uses the IntlDateFormatter class instead of strftime(), which is deprecated since PHP 8.1.
+     * It supports proper locale-based month names with accents for the 'pt_BR' locale.
+     *
+     * @param string $date A date string in a format recognized by DateTime (e.g. '2025-10-01').
+     * @return string The formatted month and year in Portuguese, e.g. "Outubro de 2025".
+     */
+    public static function monthInPortuguese(string $date): string
+    {
+        $dateObj = new DateTime($date);
+        $formatter = new IntlDateFormatter(
+            'pt_BR',
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::NONE,
+            'America/Sao_Paulo',
+            IntlDateFormatter::GREGORIAN,
+            "LLLL 'de' y"
+        );
+
+        return ucfirst($formatter->format($dateObj));
     }
 }

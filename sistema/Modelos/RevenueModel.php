@@ -30,16 +30,9 @@ class RevenueModel extends Modelo
         return $this->salvar();
     }
 
-    public function findRevenuesByDate(string $startDate, string $endDate, int $userId): array
+    public function findRevenuesByRangeDate(string $startDate, string $endDate, int $userId): array
     {
         $receitas = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}")->resultado(true) ?? [];
         return $receitas;    
-    }
-
-    public function findQuarterlyRevenues(string $startDate, string $endDate, int $userId): array
-    {
-        $receita_trimestral = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}")->resultado(true)??[];    
-
-        return $receita_trimestral;
     }
 }

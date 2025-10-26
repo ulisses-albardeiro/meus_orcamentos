@@ -2,33 +2,46 @@
 
 namespace sistema\Controlador\Painel\Finance;
 
-use sistema\Controlador\Painel\Finance\Servicos\ServicosDashboard;
+use DateTime;
 use sistema\Controlador\Painel\PainelControlador;
-use sistema\Modelos\CategoryModel;
+use sistema\Nucleo\Helpers;
+use sistema\Servicos\Finance\CategoryInterface;
+use sistema\Servicos\Finance\FinanceInterface;
 
 class DashboardController extends PainelControlador
 {
-    private object $servico;
-
-    public function __construct()
+    public function __construct(
+        private FinanceInterface $financeService,
+        private CategoryInterface $categoryService)
     {
         parent::__construct();
-        $this->servico = new ServicosDashboard;
     }
 
     public function index(?string $date = null): void
     {
-        $data = $date ? date('Y-m-01', strtotime($date)) :  date('Y-m-01');
+        $date = $date ? date('Y-m-01', strtotime($date)) :  date('Y-m-01');
+
+        $endDate = new DateTime($date);
+        $endDate->modify('last day of this month');
+        $endDate = $endDate->format('Y-m-d');
+        
+        $totalRevenueCurrentMonth = $this->financeService->sumRevenueByPeriod($date, $endDate, $this->usuario->userId);
+        $totalExpensesCurrentMonth = $this->financeService->sumExpensesByPeriod($date, $endDate, $this->usuario->userId);
+        $categories = $this->categoryService->findCategoryByUserId($this->usuario->userId);
+        $quarterlyData = $this->financeService->findQuarterlyFiananceData($endDate, $this->usuario->userId);
+        $expensesByCategory = $this->financeService->getExpensesByCategory($date, $endDate, $this->usuario->userId);
         
         echo $this->template->rendenizar("financas/dashboard.html",
             [
-                "categorias" => (new CategoryModel)->busca()->resultado(true),
-                "receita_total" => $this->servico->somarReceita($data, date('Y-m-t', strtotime($data)), $this->usuario->userId),
-                "despesas_total" => $this->servico->somarDespesa($data, date('Y-m-t', strtotime($data)), $this->usuario->userId),
-                "data" => substr($data, 0, 7),
-                "despesas_categoria" => $this->servico->despesasPorCategoria($data, date('Y-m-t', strtotime($data)), $this->usuario->userId),
-                "dados_grafico_trimestral" => $this->servico->getDadosGraficoTrimestral($data, $this->usuario->userId),
-                "titulo" => "Finanças"
+                "categorias" => $categories,
+                "totalRevenueCurrentMonth" => $totalRevenueCurrentMonth,
+                "totalExpensesCurrentMonth" => $totalExpensesCurrentMonth,
+                "balance" => $totalRevenueCurrentMonth - $totalExpensesCurrentMonth,
+                "expensesByCategory" => $expensesByCategory,
+                "quarterlyData" => $quarterlyData,
+                "date" => substr($date, 0, 7),
+                "dateInPortuguese" => Helpers::monthInPortuguese($date),
+                "titulo" => "Visão Geral Finanças"
             ]
         );
     }
