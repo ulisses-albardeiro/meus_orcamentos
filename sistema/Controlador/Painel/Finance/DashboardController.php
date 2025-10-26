@@ -31,7 +31,7 @@ class DashboardController extends PainelControlador
         $quarterlyData = $this->financeService->findQuarterlyFiananceData($endDate, $this->usuario->userId);
         $expensesByCategory = $this->financeService->getExpensesByCategory($date, $endDate, $this->usuario->userId);
         
-        echo $this->template->rendenizar("financas/dashboard.html",
+        echo $this->template->rendenizar("finances/dashboard.html",
             [
                 "categorias" => $categories,
                 "totalRevenueCurrentMonth" => $totalRevenueCurrentMonth,

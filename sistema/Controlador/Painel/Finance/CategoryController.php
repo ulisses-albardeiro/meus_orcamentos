@@ -36,7 +36,7 @@ class CategoryController extends PainelControlador
     public function index(): void
     {
         echo $this->template->rendenizar(
-            "financas/category.html",
+            "finances/category.html",
             [
                 "categorias" => (new CategoryModel)->getCategorias($this->usuario->userId),
                 "tipos" => ["Despesas", "Receitas"],

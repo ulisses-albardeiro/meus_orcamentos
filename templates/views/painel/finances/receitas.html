@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 <div>
-    {% include 'financas/menu.html' %}
+    {% include 'finances/menu.html' %}
     {{ flash() }}
 
     <div class="card shadow-lg border-0 mb-3">
@@ -13,13 +13,13 @@
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarReceita"
                         class="btn btn-success btn-sm">Nova
                         Receita</button>
-                    {% include 'financas/modais/add-receita.html' %}
+                    {% include 'finances/modais/add-receita.html' %}
                 </div>
 
                 <div class="col-auto ms-2">
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
                         class="btn btn-secondary btn-sm">Nova Categoria</button>
-                    {% include 'financas/modais/add-categoria.html' %}
+                    {% include 'finances/modais/add-categoria.html' %}
                 </div>
 
                 <div class="col-auto ms-2">
@@ -48,13 +48,13 @@
                                         class="bi bi-pencil-square fs-4"></i>
                                 </a>
 
-                                {% include 'financas/modais/add-receita.html' %}
+                                {% include 'finances/modais/add-receita.html' %}
 
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
                                     data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ receita.id }}"><i
                                         class="bi bi-trash fs-4"></i>
                                 </a>
-                                {% include 'financas/modais/excluir-receitas.html' %}
+                                {% include 'finances/modais/excluir-receitas.html' %}
                             </td>
                         </tr>
                         {% endfor %}

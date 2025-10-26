@@ -1,22 +1,22 @@
 <!-- Modal Adicionar/Editar Despesa -->
-<div class="modal fade" id="modalAdicionarDespesa{{ despesa.id }}" tabindex="-1"
-    aria-labelledby="modalLabelAdicionarDespesa{{ despesa.id }}" aria-hidden="true">
+<div class="modal fade" id="modalAdicionarDespesa{{ expense.id }}" tabindex="-1"
+    aria-labelledby="modalLabelAdicionarDespesa{{ expense.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabelAdicionarDespesa{{ despesa.id }}">
+                <h5 class="modal-title fw-bold" id="modalLabelAdicionarDespesa{{ expense.id }}">
                     <i class="bi bi-cart-x-fill text-danger"></i>
                     <span class="text-body">
-                        {% if despesa.id %}Editar Despesa{% else %}Nova Despesa{% endif %}
+                        {% if expense.id %}Editar Despesa{% else %}Nova Despesa{% endif %}
                     </span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form method="post" {% if despesa.id %} action="{{ url('finance/expense/' ~ despesa.id) }}" {% else %}
+            <form method="post" {% if expense.id %} action="{{ url('finance/expense/' ~ expense.id) }}" {% else %}
                 action="{{ url('finance/expense') }}" {% endif %}>
 
-                {% if despesa.id %} 
+                {% if expense.id %} 
                 <input type="hidden" name="_method" value="put">
                 {% endif %}
 
@@ -25,33 +25,33 @@
     
                         {% if categorias %}
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="valorDespesa{{ despesa.id }}" class="form-label small mb-1">Valor</label>
+                            <label for="valorDespesa{{ expense.id }}" class="form-label small mb-1">Valor</label>
                             <div class="input-group">
                                 <span class="input-group-text">R$</span>
-                                <input value="{{ (despesa.valor/100)|number_format(2, '.', '') }}" type="text"
-                                    class="form-control money-mask text-end" id="valorDespesa{{ despesa.id }}"
+                                <input value="{{ expense.valor | number_format(2, '.', '') }}" type="text"
+                                    class="form-control money-mask text-end" id="valorDespesa{{ expense.id }}"
                                     name="value" placeholder="0,00" required>
                             </div>
                         </div>
 
                         <div class="flex-grow-1">
-                            <label for="categoriaDespesa{{ despesa.id }}"
+                            <label for="categoriaDespesa{{ expense.id }}"
                                 class="form-label small mb-1">Categoria</label>
-                            <select required name="category_id" id="categoriaDespesa{{ despesa.id }}"
+                            <select required name="category_id" id="categoriaDespesa{{ expense.id }}"
                                 class="form-select">
-                                <option value="" disabled {% if not despesa.id %}selected{% endif %}>Selecione...
+                                <option value="" disabled {% if not expense.id %}selected{% endif %}>Selecione...
                                 </option>
                                 {% for categoria in categorias %}
-                                <option {% if despesa.id_categoria==categoria.id %} selected {% endif %}
+                                <option {% if expense.id_categoria==categoria.id %} selected {% endif %}
                                     value="{{ categoria.id }}">{{ categoria.nome }}</option>
                                 {% endfor %}
                             </select>
                         </div>
 
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="dataDespesa{{ despesa.id }}" class="form-label small mb-1">Data</label>
-                            <input value="{{ despesa.dt_despesa }}" required class="form-control" type="date"
-                                id="dataDespesa{{ despesa.id }}" name="date">
+                            <label for="dataDespesa{{ expense.id }}" class="form-label small mb-1">Data</label>
+                            <input value="{{ expense.dt_despesa }}" required class="form-control" type="date"
+                                id="dataDespesa{{ expense.id }}" name="date">
                         </div>
                         {% else %}
                         <div class="text-center">

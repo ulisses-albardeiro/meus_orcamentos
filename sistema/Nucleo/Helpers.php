@@ -335,4 +335,57 @@ class Helpers
 
         return ucfirst($formatter->format($dateObj));
     }
+
+    /**
+     * Enriches an array of items with related data from another array, similar to a SQL JOIN.
+     *
+     * @param array $items         Array of main objects (e.g. despesas)
+     * @param array $related       Array of related objects (e.g. categorias)
+     * @param string $localKey     Property in $items that matches $foreignKey (e.g. 'id_categoria')
+     * @param string $foreignKey   Property in $related that corresponds to the local key (e.g. 'id')
+     * @param string $targetField  Property name to add in $items with related data (e.g. 'categoria')
+     * @param string $relatedField Property from related object to copy (e.g. 'nome')
+     * @return array
+     */
+    public static function attachRelated(
+        array $items,
+        array $related,
+        string $localKey,
+        string $foreignKey,
+        string $targetField,
+        string $relatedField
+    ): array {
+        // Mapeia os dados relacionados para lookup rápido (tipo um índice de chave primária)
+        $map = [];
+        foreach ($related as $rel) {
+            $map[$rel->$foreignKey] = $rel->$relatedField ?? null;
+        }
+
+        // Adiciona o campo em cada item
+        foreach ($items as $item) {
+            $key = $item->$localKey ?? null;
+            $item->$targetField = $key && isset($map[$key]) ? $map[$key] : null;
+        }
+
+        return $items;
+    }
+
+    /**
+     * Converts an array of items with a field in cents to float values in reais.
+     *
+     * @param array $items Array of objects or associative arrays.
+     * @param string $field The field name that contains the value in cents.
+     * @return array The same array with the field converted to float in reais.
+     */
+    public static function centsToReais(array $items, string $field): array
+    {
+        return array_map(function ($item) use ($field) {
+            if (is_object($item) && isset($item->$field)) {
+                $item->$field = $item->$field / 100;
+            } elseif (is_array($item) && isset($item[$field])) {
+                $item[$field] = $item[$field] / 100;
+            }
+            return $item;
+        }, $items);
+    }
 }

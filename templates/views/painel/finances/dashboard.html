@@ -37,7 +37,7 @@
         margin-bottom: 0.5rem;
     }
 </style>
-{% include 'financas/menu.html' %}
+{% include 'finances/menu.html' %}
 <div class="mt-4 mb-4 container-fluid">
     <!-- Cabeçalho -->
     <div class="dashboard-header d-flex justify-content-between align-items-center flex-wrap">
@@ -141,8 +141,8 @@
 
 <script>
     const dataBar = JSON.parse('{{ quarterlyData|json_encode|raw }}');
-    const ctxBarra = document.getElementById('chart-bar').getContext('2d');
-    new Chart(ctxBarra, {
+    const ctxBar = document.getElementById('chart-bar').getContext('2d');
+    new Chart(ctxBar, {
         type: 'bar',
         data: {
             labels: dataBar.labels,
@@ -171,8 +171,8 @@
     });
 
     const dataDoughnut = JSON.parse('{{ expensesByCategory|json_encode|raw }}');
-    const ctxPizza = document.getElementById('chart-doughnut').getContext('2d');
-    new Chart(ctxPizza, {
+    const ctxDoughnut = document.getElementById('chart-doughnut').getContext('2d');
+    new Chart(ctxDoughnut, {
         type: 'doughnut',
         data: {
             labels: dataDoughnut.labels,

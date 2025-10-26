@@ -10,6 +10,10 @@ class ExpenseModel extends Modelo
     {
         parent::__construct("despesas");
     }
+    public function findExpensesByUserId(int $userId): ?array
+    {
+        return $this->busca("id_usuario = {$userId}")->resultado(true);
+    }
 
     public function createExpense(array $data, int $userId): bool
     {
@@ -20,6 +24,19 @@ class ExpenseModel extends Modelo
         $this->id_usuario = $userId;
 
         return $this->salvar();
+    }
+
+     public function updateExpense(array $data, int $id): bool
+    {
+        $this->id = $id;
+        $this->valor = $data["value"]*100;
+        $this->dt_despesa = $data["date"];
+        return $this->salvar();
+    }
+
+    public function destroyExpense(int $id): bool
+    {
+        return $this->apagar("id = {$id}");
     }
 
     public function findExpensesByCategory(string $startDate, string $endDate, int $userId): array
@@ -38,13 +55,5 @@ class ExpenseModel extends Modelo
             )->resultado(true);
 
         return $expenses;
-    }
-
-    public function updateExpense(array $data, int $id): bool
-    {
-        $this->id = $id;
-        $this->valor = $data["value"]*100;
-        $this->dt_despesa = $data["date"];
-        return $this->salvar();
     }
 }

@@ -16,7 +16,7 @@
                 <div class="col-auto ms-2">
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
                         class="btn btn-secondary btn-sm">Nova Categoria</button>
-                    {% include 'financas/modais/add-categoria.html' %}
+                    {% include 'finances/modais/add-categoria.html' %}
                 </div>
 
             </div>
@@ -40,12 +40,12 @@
                                     data-bs-target="#modalAdicionarCategoria{{ categoria.id }}"><i
                                         class="bi bi-pencil-square fs-4"></i></a>
 
-                                {% include 'financas/modais/add-categoria.html' %}
+                                {% include 'finances/modais/add-categoria.html' %}
 
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
                                     data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ categoria.id }}"><i
                                         class="bi bi-trash fs-4"></i></a>
-                                {% include 'financas/modais/excluir-categoria.html' %}
+                                {% include 'finances/modais/excluir-categoria.html' %}
                             </td>
                         </tr>
                         {% endfor %}

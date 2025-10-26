@@ -33,4 +33,9 @@ class CategoryService implements CategoryInterface
     {
         return $this->categoryModel->findCategoryByUserId($userId);
     }
+
+    public function findCategoryByUserIdAndType(int $userId, string $type): ?array
+    {
+        return $this->categoryModel->findCategoryByUserIdAndType($userId, $type);
+    }
 }

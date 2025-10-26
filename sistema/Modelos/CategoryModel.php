@@ -11,7 +11,7 @@ class CategoryModel extends Modelo
         parent::__construct("categorias");
     }
 
-    public function getCategorias(int $id_usuario) : array
+    public function getCategorias(int $id_usuario): array
     {
         $categorias = $this->busca("id_usuario = {$id_usuario}")->ordem("id DESC")->resultado(true) ?? [];
         return $categorias;
@@ -34,21 +34,29 @@ class CategoryModel extends Modelo
     {
         $this->id = $id;
         $this->nome = $name;
-        
+
         return $this->salvar();
     }
 
-    public function findCategoryByName(string $name, string $type, int $userId) : ?Modelo
+    public function findCategoryByName(string $name, string $type, int $userId): ?Modelo
     {
         return $this->busca(
-            "nome = :n AND tipo = :t AND id_usuario = :id", ":n={$name}&:t={$type}&:id={$userId}"
-            )->resultado();
+            "nome = :n AND tipo = :t AND id_usuario = :id",
+            ":n={$name}&:t={$type}&:id={$userId}"
+        )->resultado();
     }
 
-     public function findCategoryByUserId(int $userId) : ?array
+    public function findCategoryByUserId(int $userId): ?array
     {
         return $this->busca(
             "id_usuario = {$userId}"
-            )->resultado(true);
+        )->resultado(true);
+    }
+
+    public function findCategoryByUserIdAndType(int $userId, string $type): ?array
+    {
+        return $this->busca(
+            "id_usuario = {$userId} AND tipo = '{$type}'"
+        )->resultado(true);
     }
 }
