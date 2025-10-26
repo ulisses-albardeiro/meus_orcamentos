@@ -348,20 +348,23 @@ class Helpers
      * @return array
      */
     public static function attachRelated(
-        array $items,
-        array $related,
+        ?array $items,
+        ?array $related,
         string $localKey,
         string $foreignKey,
         string $targetField,
         string $relatedField
     ): array {
-        // Mapeia os dados relacionados para lookup rápido (tipo um índice de chave primária)
+
+        if (empty($items) || empty($related)) {
+            return $items;
+        }
+
         $map = [];
         foreach ($related as $rel) {
             $map[$rel->$foreignKey] = $rel->$relatedField ?? null;
         }
 
-        // Adiciona o campo em cada item
         foreach ($items as $item) {
             $key = $item->$localKey ?? null;
             $item->$targetField = $key && isset($map[$key]) ? $map[$key] : null;

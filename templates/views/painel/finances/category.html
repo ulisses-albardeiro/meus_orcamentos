@@ -28,8 +28,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for categoria in categorias %}
                         <tr>
-                            {% for categoria in categorias %}
                             <td class="text-start">{{ categoria.nome }}</td>
                             <td class="text-center">{{ categoria.tipo }}</td>
                             <td class="text-center">
