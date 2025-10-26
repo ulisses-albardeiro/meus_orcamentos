@@ -16,16 +16,12 @@
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa"
                         class="btn btn-danger btn-sm">Nova
                         Despesa</button>
-                    {% include 'finances/modais/add-expense.html' %}
+                    {% include 'finances/modals/add-expense.html' %}
                 </div>
                 <div class="col-auto ms-2">
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
                         class="btn btn-secondary btn-sm">Nova Categoria</button>
-                    {% include 'finances/modais/add-categoria.html' %}
-                </div>
-
-                <div class="col-auto ms-2">
-                    <a href="{{ url('finance/category') }}" class="btn btn-primary btn-sm">Ver Categorias</a>
+                    {% include 'finances/modals/add-category.html' %}
                 </div>
             </div>
             <small>
@@ -50,12 +46,12 @@
                                     data-bs-target="#modalAdicionarDespesa{{ expense.id }}"><i
                                         class="bi bi-pencil-square fs-4"></i></a>
 
-                                {% include 'finances/modais/add-expense.html' %}
+                                {% include 'finances/modals/add-expense.html' %}
 
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
                                     data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ expense.id }}"><i
                                         class="bi bi-trash fs-4"></i></a>
-                                {% include 'finances/modais/delete-expense.html' %}
+                                {% include 'finances/modals/delete-expense.html' %}
                             </td>
                         </tr>
                         {% endfor %}

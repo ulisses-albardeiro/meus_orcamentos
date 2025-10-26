@@ -23,7 +23,7 @@
                 <div class="modal-body">
                     <div class="mb-3 d-flex align-items-end gap-2">
     
-                        {% if categorias %}
+                        {% if categories %}
                         <div class="flex-grow-1" style="max-width: 140px;">
                             <label for="valorDespesa{{ expense.id }}" class="form-label small mb-1">Valor</label>
                             <div class="input-group">
@@ -41,9 +41,9 @@
                                 class="form-select">
                                 <option value="" disabled {% if not expense.id %}selected{% endif %}>Selecione...
                                 </option>
-                                {% for categoria in categorias %}
-                                <option {% if expense.id_categoria==categoria.id %} selected {% endif %}
-                                    value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                {% for categorie in categories %}
+                                <option {% if expense.id_categoria==categorie.id %} selected {% endif %}
+                                    value="{{ categorie.id }}">{{ categorie.nome }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -65,7 +65,7 @@
                     <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle me-1"></i> Cancelar
                     </button>
-                    <button style="background-color: #157347; color: white;" {% if categorias==null %} disabled {% endif %} type="submit" class="btn-sm btn btn-success">
+                    <button style="background-color: #157347; color: white;" {% if categories==null %} disabled {% endif %} type="submit" class="btn-sm btn btn-success">
                         <i class="bi bi-check-circle-fill me-1"></i> Salvar</button>
                 </div>
             </form>

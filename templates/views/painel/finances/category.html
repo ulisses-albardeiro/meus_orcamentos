@@ -2,10 +2,8 @@
 
 {% block conteudo %}
 <div>
-
-    <h3 class="text-center">Suas Categorias</h3>
-
     <div class="py-1">
+        {% include 'finances/menu.html' %}
         {{ flash() }}
     </div>
 
@@ -16,7 +14,7 @@
                 <div class="col-auto ms-2">
                     <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
                         class="btn btn-secondary btn-sm">Nova Categoria</button>
-                    {% include 'finances/modais/add-categoria.html' %}
+                    {% include 'finances/modals/add-category.html' %}
                 </div>
 
             </div>
@@ -32,20 +30,20 @@
                     <tbody>
                         <tr>
                             {% for categoria in categorias %}
-
                             <td class="text-start">{{ categoria.nome }}</td>
                             <td class="text-center">{{ categoria.tipo }}</td>
                             <td class="text-center">
-                                <a href title="Editar" class="text-primary text-decoration-none me-3" data-bs-toggle="modal"
+                                <a href title="Editar" class="text-primary text-decoration-none me-3"
+                                    data-bs-toggle="modal"
                                     data-bs-target="#modalAdicionarCategoria{{ categoria.id }}"><i
                                         class="bi bi-pencil-square fs-4"></i></a>
 
-                                {% include 'finances/modais/add-categoria.html' %}
+                                {% include 'finances/modals/add-category.html' %}
 
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
                                     data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ categoria.id }}"><i
                                         class="bi bi-trash fs-4"></i></a>
-                                {% include 'finances/modais/excluir-categoria.html' %}
+                                {% include 'finances/modals/delete-category.html' %}
                             </td>
                         </tr>
                         {% endfor %}

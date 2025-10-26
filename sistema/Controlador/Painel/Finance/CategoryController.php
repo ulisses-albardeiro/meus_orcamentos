@@ -40,7 +40,8 @@ class CategoryController extends PainelControlador
             [
                 "categorias" => (new CategoryModel)->getCategorias($this->usuario->userId),
                 "tipos" => ["Despesas", "Receitas"],
-                'titulo' => 'Categoria'
+                'titulo' => 'Categoria',
+                'categoryMenu' => "active",
             ]
         );
     }

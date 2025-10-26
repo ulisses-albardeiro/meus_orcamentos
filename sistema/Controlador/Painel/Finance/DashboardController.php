@@ -41,7 +41,8 @@ class DashboardController extends PainelControlador
                 "quarterlyData" => $quarterlyData,
                 "date" => substr($date, 0, 7),
                 "dateInPortuguese" => Helpers::monthInPortuguese($date),
-                "titulo" => "Visão Geral Finanças"
+                "titulo" => "Visão Geral Finanças",
+                "dashboardMenu" => "active",
             ]
         );
     }

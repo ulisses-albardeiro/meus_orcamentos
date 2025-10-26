@@ -19,16 +19,17 @@ class ExpenseController extends PainelControlador
     public function index(): void
     {
         $expenses = $this->serviceExpense->findExpensesByUserId($this->usuario->userId);
-        $categoryes = $this->serviceCategory->findCategoryByUserIdAndType($this->usuario->userId, 'Despesas');
-        $expenses = Helpers::attachRelated($expenses, $categoryes, 'id_categoria', 'id', 'categoria', 'nome');
+        $categories = $this->serviceCategory->findCategoryByUserIdAndType($this->usuario->userId, 'Despesas');
+        $expenses = Helpers::attachRelated($expenses, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
         echo $this->template->rendenizar(
             "finances/expenses.html",
             [
                 "expenses" => $expenses,
-                "categorias" => $categoryes,
+                "categories" => $categories,
                 "tipo" => "Despesas",
                 'titulo' => 'Despesas',
+                "expenseMenu" => "active"
             ]
         );
     }

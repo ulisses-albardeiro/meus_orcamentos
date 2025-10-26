@@ -23,12 +23,13 @@ class RevenueController extends PainelControlador
         $receitas = (new RevenueModel)->busca("id_usuario = {$this->usuario->userId}")->resultado(true) ?? [];
         $categorias = (new CategoryModel)->busca("id_usuario = {$this->usuario->userId} AND tipo = 'Receitas'")->resultado(true) ?? [];
         echo $this->template->rendenizar(
-            "finances/receitas.html",
+            "finances/revenues.html",
             [
                 "receitas" => $this->servico->getNomeCategoria($receitas, $categorias),
                 "categorias" => $categorias,
                 "tipo" => "Receitas",
-                'titulo' => 'Receitas'
+                'titulo' => 'Receitas',
+                "revenueMenu" => "active",
             ]
         );
     }
