@@ -7,7 +7,6 @@ date_default_timezone_set('America/Sao_Paulo');
 $dotEnv = new Dotenv();
 $dotEnv->load(__DIR__.'/../.env');
 
-// Define as constantes
 define('DB_NAME', $_ENV['DB_NAME']);
 define('DB_HOST', $_ENV['DB_HOST']);
 define('DB_USER', $_ENV['DB_USER']);

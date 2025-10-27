@@ -14,9 +14,9 @@ class CategoryService implements CategoryInterface
         return $this->categoryModel->findCategoryByName($name, $type, $userId);
     }
 
-    public function saveCategory(array $data, int $userId): bool
+    public function createCategory(array $data, int $userId): bool
     {
-        return $this->categoryModel->saveCategory($data, $userId);
+        return $this->categoryModel->createCategory($data, $userId);
     }    
 
     public function updateCategory(string $name, int $id): bool

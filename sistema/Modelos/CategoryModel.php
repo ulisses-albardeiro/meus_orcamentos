@@ -21,10 +21,10 @@ class CategoryModel extends Modelo
     {
         return $this->apagar("id = {$id}");
     }
-    public function saveCategory(array $data, int $userId): bool
+    public function createCategory(array $data, int $userId): bool
     {
-        $this->nome = $data['nome'];
-        $this->tipo = $data['tipo'];
+        $this->nome = $data['name'];
+        $this->tipo = $data['type'];
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $userId;
         return $this->salvar();

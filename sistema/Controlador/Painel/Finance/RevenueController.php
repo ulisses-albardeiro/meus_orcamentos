@@ -26,8 +26,8 @@ class RevenueController extends PainelControlador
             "finances/revenues.html",
             [
                 "revenues" => $revenues,
-                "categorias" => $categories,
-                "tipo" => "Receitas",
+                "categories" => $categories,
+                "type" => "Receitas",
                 'titulo' => 'Receitas',
                 "revenueMenu" => "active",
             ]

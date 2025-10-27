@@ -1,43 +1,47 @@
-<!-- Modal Adicionar/Editar Categoria -->
-<div class="modal fade" id="modalAddCategory{% if categoria.id %}{{ categoria.id }}{% endif %}" tabindex="-1" aria-labelledby="modalLabelAdicionarCategoria{% if categoria.id %}{{ categoria.id }}{% endif %}" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="modalAddCategory{% if category.id %}{{ category.id }}{% endif %}" tabindex="-1"
+    aria-labelledby="modalLabelAddCategory{% if category.id %}{{ category.id }}{% endif %}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabelAdicionarCategoria{% if categoria.id %}{{ categoria.id }}{% endif %}">
+                <h5 class="modal-title fw-bold"
+                    id="modalLabelAddCategory{% if category.id %}{{ category.id }}{% endif %}">
                     <i class="bi bi-tag-fill"></i>
                     <span class="text-body">
-                        {% if categoria.id %}Editar Categoria{% else %}Nova Categoria{% endif %}
+                        {% if category.id %}Editar Categoria{% else %}Nova Categoria{% endif %}
                     </span>
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
-            <form method="post" {% if categoria.id %} action="{{ url('finance/category/' ~ categoria.id) }}" {% else %} action="{{ url('finance/category') }}" {% endif %}>
+            <form method="post" {% if category.id %} action="{{ url('finance/category/' ~ category.id) }}" {% else %}
+                action="{{ url('finance/category') }}" {% endif %}>
 
-                {% if categoria.id %}
+                {% if category.id %}
                 <input type="hidden" name="_method" value="put">
                 {% endif %}
                 <div class="modal-body">
                     <div class="mb-3">
 
-                        {% if tipos is null %}
-                        <!-- input hidden -->
-                        <input readonly type="text" class="form-control mb-3" name="tipo" value="{{ tipo }}">
+                        {% if types is null %}
+                        <input readonly type="text" class="form-control mb-3" name="type" value="{{ type }}">
                         {% else %}
-                        <select name="tipo" class="form-select mb-3">
+                        <select name="type" class="form-select mb-3">
                             <option selected disabled>Selecione o tipo da categoria</option>
-                            <option {% if categoria.tipo == tipos[0] %} selected {% endif %} value="{{ tipos[0] }}">{{ tipos[0] }}</option>
-                            <option {% if categoria.tipo == tipos[1] %} selected {% endif %} value="{{ tipos[1] }}">{{ tipos[1] }}</option>   
+                            <option {% if category.tipo==types[0] %} selected {% endif %} value="{{ types[0] }}">{{
+                                types[0] }} </option>
+                            <option {% if category.tipo==types[1] %} selected {% endif %} value="{{ types[1] }}">{{
+                                types[1] }} </option>
                         </select>
                         {% endif %}
                         <!-- input category -->
-                        <input type="text" class="form-control" name="nome" 
-                               placeholder="Digite o nome da categoria" 
-                               value="{{ categoria.nome }}"
-                               required maxlength="50">
+                        <input type="text" class="form-control" name="name" placeholder="Digite o nome da categoria"
+                            value="{{ category.nome }}" required maxlength="50">
                     </div>
                 </div>
                 <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
-                    <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                    <button style="background-color: #5C636A; color: white;" type="button"
+                        class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle me-1"></i> Cancelar
                     </button>
                     <button style="background-color: #157347; color: white;" type="submit" class="btn-sm btn">

@@ -27,7 +27,7 @@ class ExpenseController extends PainelControlador
             [
                 "expenses" => $expenses,
                 "categories" => $categories,
-                "tipo" => "Despesas",
+                "type" => "Despesas",
                 'titulo' => 'Despesas',
                 "expenseMenu" => "active"
             ]
