@@ -19,7 +19,7 @@ class RevenueController extends PainelControlador
     public function index(): void
     {
         $revenues = $this->revenueService->findRevenueByUserId($this->usuario->userId);
-        $categories = $this->categoryService->findCategoryByUserId($this->usuario->userId);
+        $categories = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Receitas');
         $revenues = Helpers::attachRelated($revenues, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
         echo $this->template->rendenizar(
