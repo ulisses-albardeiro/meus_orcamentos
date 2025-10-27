@@ -7,7 +7,7 @@ use sistema\Modelos\CategoryModel;
 use sistema\Modelos\ExpenseModel;
 use sistema\Modelos\RevenueModel;
 
-class FinanceService implements FinanceInterface
+class DashboardService implements DashboardInterface
 {
     public function __construct(
         private RevenueModel $revenueModel,

@@ -6,12 +6,12 @@ use DateTime;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Finance\CategoryInterface;
-use sistema\Servicos\Finance\FinanceInterface;
+use sistema\Servicos\Finance\DashboardInterface;
 
 class DashboardController extends PainelControlador
 {
     public function __construct(
-        private FinanceInterface $financeService,
+        private DashboardInterface $financeService,
         private CategoryInterface $categoryService)
     {
         parent::__construct();

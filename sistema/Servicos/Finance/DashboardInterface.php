@@ -2,7 +2,7 @@
 
 namespace sistema\Servicos\Finance;
 
-interface FinanceInterface
+interface DashboardInterface
 {
     public function sumRevenueByPeriod(string $startDate, string $endDate, int $userId): float;
     public function sumExpensesByPeriod(string $startDate, string $endDate, int $userId): float;

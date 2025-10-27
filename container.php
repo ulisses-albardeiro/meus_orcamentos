@@ -22,7 +22,7 @@ $builder->addDefinitions([
 
     //Finance
     sistema\Servicos\Finance\CategoryInterface::class => autowire(sistema\Servicos\Finance\CategoryService::class),
-    sistema\Servicos\Finance\FinanceInterface::class => autowire(sistema\Servicos\Finance\FinanceService::class),
+    sistema\Servicos\Finance\DashboardInterface::class => autowire(sistema\Servicos\Finance\DashboardService::class),
     sistema\Servicos\Finance\ExpenseInterface::class => autowire(sistema\Servicos\Finance\ExpenseService::class),
     sistema\Servicos\Finance\RevenueInterface::class => autowire(sistema\Servicos\Finance\RevenueService::class),
 

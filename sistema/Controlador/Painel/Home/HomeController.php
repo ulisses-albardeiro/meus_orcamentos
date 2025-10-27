@@ -4,13 +4,13 @@ namespace sistema\Controlador\Painel\Home;
 use sistema\Controlador\Painel\PainelControlador;
 use sistema\Nucleo\Helpers;
 use sistema\Servicos\Clients\ClientsInterface;
-use sistema\Servicos\Finance\FinanceInterface;
+use sistema\Servicos\Finance\DashboardInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 
 class HomeController extends PainelControlador
 {
     public function __construct(
-        private FinanceInterface $financeService, 
+        private DashboardInterface $financeService, 
         private OrcamentosInterface $orcamentoServico, 
         private ClientsInterface $clientesServico)
     {
