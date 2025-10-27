@@ -9,7 +9,7 @@ use sistema\Servicos\Empresas\EmpresasInterface;
 use sistema\Servicos\Orcamentos\OrcamentosInterface;
 use sistema\Servicos\Usuarios\UsuariosInterface;
 use sistema\Adapter\Pdf;
-use sistema\Adapter\PdfAdapter\PDFInterface;
+use sistema\Adapter\PdfAdapter\PdfInterface;
 use sistema\Servicos\Clients\ClientsInterface;
 
 class OrcamentoControlador extends PainelControlador
@@ -18,7 +18,7 @@ class OrcamentoControlador extends PainelControlador
     protected ClientsInterface $clientesServico;
     protected UsuariosInterface $usuarioServico;
     protected EmpresasInterface $empresaServico;
-    protected PDFInterface $pdfService;
+    protected PdfInterface $pdfService;
 
     public function __construct(OrcamentosInterface $orcamentosServicos, ClientsInterface $clientesServico, UsuariosInterface $usuarioServico, EmpresasInterface $empresaServico, PDFInterface $pdfService)
     {

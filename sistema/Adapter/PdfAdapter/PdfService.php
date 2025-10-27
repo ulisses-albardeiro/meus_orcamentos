@@ -4,12 +4,7 @@ namespace sistema\Adapter\PdfAdapter;
 
 class PdfService implements PdfInterface
 {
-    private DompdfFactoryInterface $dompdfFactory;
-
-    public function __construct(DompdfFactoryInterface $dompdfFactory)
-    {
-        $this->dompdfFactory = $dompdfFactory;
-    }
+    public function __construct(private DompdfFactoryInterface $dompdfFactory){}
 
     public function generatePDF(string $content, array $options = []): string
     {

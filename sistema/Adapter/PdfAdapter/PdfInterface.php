@@ -2,6 +2,7 @@
 
 namespace sistema\Adapter\PdfAdapter;
 
-interface PdfInterface{
+interface PdfInterface
+{
     public function generatePDF(string $content, array $options = []): string;
 }
