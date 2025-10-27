@@ -24,6 +24,7 @@ $builder->addDefinitions([
     sistema\Servicos\Finance\CategoryInterface::class => autowire(sistema\Servicos\Finance\CategoryService::class),
     sistema\Servicos\Finance\FinanceInterface::class => autowire(sistema\Servicos\Finance\FinanceService::class),
     sistema\Servicos\Finance\ExpenseInterface::class => autowire(sistema\Servicos\Finance\ExpenseService::class),
+    sistema\Servicos\Finance\RevenueInterface::class => autowire(sistema\Servicos\Finance\RevenueService::class),
 
     sistema\Servicos\Clients\ClientsInterface::class => autowire(sistema\Servicos\Clients\ClientsService::class),
     EmpresasInterface::class => autowire(EmpresasServico::class),

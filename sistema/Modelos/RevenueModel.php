@@ -11,6 +11,16 @@ class RevenueModel extends Modelo
         parent::__construct("receitas");
     }
 
+    public function findRevenueByUserId(int $userId): ?array
+    {
+        return $this->busca("id_usuario = {$userId}")->resultado(true);
+    }
+
+    public function destroyRevenue(int $id): bool
+    {
+        return $this->apagar("id = {$id}");
+    }
+
     public function createRevenue(array $data, int $userId): bool
     {
         $this->valor = $data["receita"] * 100;
@@ -24,15 +34,17 @@ class RevenueModel extends Modelo
     public function updateRevenue(array $data, int $id): bool
     {
         $this->id = $id;
-        $this->valor = $data["receita"]*100;
+        $this->valor = $data["receita"] * 100;
         $this->dt_receita = $data["data"];
-        
+
         return $this->salvar();
     }
 
     public function findRevenuesByRangeDate(string $startDate, string $endDate, int $userId): array
     {
-        $receitas = $this->busca('dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}")->resultado(true) ?? [];
-        return $receitas;    
+        $receitas = $this->busca(
+            'dt_receita >= :inicio AND dt_receita <= :fim AND id_usuario = :id', ":inicio={$startDate}&:fim={$endDate}&:id={$userId}"
+            )->resultado(true) ?? [];
+        return $receitas;
     }
 }

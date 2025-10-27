@@ -24,7 +24,7 @@ class ExpenseService implements ExpenseInterface
         return $this->expenseModel->createExpense($data, $userId);
     }
 
-    public function findExpensesByUserId(int $userId): ?array
+    public function findExpensesByUserId(int $userId): array
     {
         $expenses = $this->expenseModel->findExpensesByUserId($userId) ?? [];
         return Helpers::centsToReais($expenses, 'valor');
