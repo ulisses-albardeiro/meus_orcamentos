@@ -1,56 +1,58 @@
-<!-- Modal Adicionar/Editar Despesa -->
-<div class="modal fade" id="modalAdicionarReceita{{ receita.id }}" tabindex="-1"
-    aria-labelledby="modalLabelAdicionarReceita{{ receita.id }}" aria-hidden="true">
+<!-- Modal -->
+<style>
+    .money-mask {
+        text-align: right;
+        padding-right: 10px;
+    }
+</style>
+<div class="modal fade" id="modalAddRevenue{{ revenue.id }}" tabindex="-1"
+    aria-labelledby="modalAddRevenue{{ revenue.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabelAdicionarReceita{{ receita.id }}">
-                    <i class="bi bi-cash-coin text-success"></i> <span class="text-body">{% if receita.id %}Editar
+                <h5 class="modal-title fw-bold" id="modalAddRevenue{{ revenue.id }}">
+                    <i class="bi bi-cash-coin text-success"></i> <span class="text-body">{% if revenue.id %}Editar
                         Receita{% else %}Nova Receita{% endif %}</span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <form method="post" {% if receita.id %} action="{{ url('finance/revenue/'~receita.id) }}" {% else %}
+            <form method="post" {% if revenue.id %} action="{{ url('finance/revenue/'~revenue.id) }}" {% else %}
                 action="{{ url('finance/revenue') }}" {% endif %}>
                 <div class="modal-body">
 
-                    {% if receita.id %}
+                    {% if revenue.id %}
                     <input type="hidden" name="_method" value="put">
                     {% endif %}
                     <div class="mb-3 d-flex align-items-end gap-2">
 
                         {% if categorias %}
-                        <!-- Campo Valor -->
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="valorReceita" class="form-label small mb-1">Valor</label>
+                            <label for="value" class="form-label small mb-1">Valor</label>
                             <div class="input-group">
                                 <span class="input-group-text">R$</span>
-                                <input value="{{ (receita.valor / 100)|number_format(2, '.', '') }}" type="text"
-                                    class="form-control money-mask text-end" id="valorReceita" name="receita"
+                                <input value="{{ revenue.valor }}" type="text"
+                                    class="form-control money-mask{{revenue.id}} text-end" id="value" name="revenue"
                                     placeholder="0,00" required>
                             </div>
                         </div>
 
-                        <!-- Campo Categoria -->
                         <div class="flex-grow-1">
-                            <label for="categoriaReceita" class="form-label small mb-1">Categoria</label>
-                            <select required name="id-categoria" id="categoriaReceita{{ receita.id }}"
-                                class="form-select">
+                            <label for="category" class="form-label small mb-1">Categoria</label>
+                            <select required name="category_id" id="category" class="form-select">
                                 <option value="" selected disabled>Selecione...</option>
                                 {% for categoria in categorias %}
-                                <option {% if receita.id_categoria==categoria.id %} selected {% endif %}
+                                <option {% if revenue.id_categoria==categoria.id %} selected {% endif %}
                                     value="{{ categoria.id }}">{{ categoria.nome }}</option>
                                 {% endfor %}
                             </select>
                         </div>
 
-                        <!-- Campo Data -->
                         <div class="flex-grow-1" style="max-width: 140px;">
-                            <label for="dataReceita" class="form-label small mb-1">Data</label>
+                            <label for="date" class="form-label small mb-1">Data</label>
                             <div class="input-group">
-                                <input value="{{ receita.dt_receita }}" required class="form-control" type="date"
-                                    id="dataReceita{{ receita.id }}" name="data">
+                                <input value="{{ revenue.dt_receita }}" required class="form-control" type="date"
+                                    id="date" name="date">
 
                             </div>
                         </div>
@@ -64,10 +66,12 @@
                     </div>
                 </div>
                 <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
-                    <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
+                    <button style="background-color: #5C636A; color: white;" type="button"
+                        class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle me-1"></i> Cancelar
                     </button>
-                    <button style="background-color: #157347; color: white;" {% if categorias==null %} disabled {% endif %} type="submit" class="btn-sm btn btn-success">
+                    <button style="background-color: #157347; color: white;" {% if categorias==null %} disabled {% endif
+                        %} type="submit" class="btn-sm btn btn-success">
                         <i class="bi bi-check-circle-fill me-1"></i> Salvar
                     </button>
                 </div>
@@ -76,61 +80,10 @@
     </div>
 </div>
 
+{% block code_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const moneyInputs = document.querySelectorAll('.money-mask');
-
-        moneyInputs.forEach(input => {
-            input.addEventListener('input', function (e) {
-                // Remove tudo que não é dígito
-                let value = this.value.replace(/\D/g, '');
-
-                // Converte para número e divide por 100 para ter decimais
-                if (value.length > 2) {
-                    value = value.replace(/^0+/, ''); // remove zeros à esquerda
-                    value = (parseInt(value, 10) / 100).toFixed(2);
-                } else {
-                    value = (parseInt(value, 10)).toString();
-                }
-
-
-                // Formata como moeda brasileira
-                this.value = formatCurrency(value);
-            });
-
-            // Formata o valor inicial se existir
-            if (input.value && !input.value.includes(',')) {
-                input.value = formatCurrency(input.value);
-            }
-
-        });
-
-        function formatCurrency(value) {
-            // Converte para float e formata como moeda BRL
-            return parseFloat(value).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2
-            }).replace('R$', '').trim();
-        }
-
-        // Antes de enviar o formulário, remove a formatação
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => {
-            form.addEventListener('submit', function (e) {
-                const moneyFields = this.querySelectorAll('.money-mask');
-                moneyFields.forEach(field => {
-                    // Remove formatação e mantém apenas números e decimais
-                    field.value = field.value.replace(/\D/g, '').replace(/(\d+)(\d{2})$/, '$1.$2');
-                });
-            });
-        });
+        formatNumberPtBr('.money-mask{{ revenue.id }}');
     });
 </script>
-
-<style>
-    .money-mask {
-        text-align: right;
-        padding-right: 10px;
-    }
-</style>
+{% endblock %}

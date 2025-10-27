@@ -23,9 +23,9 @@ class RevenueModel extends Modelo
 
     public function createRevenue(array $data, int $userId): bool
     {
-        $this->valor = $data["receita"] * 100;
-        $this->id_categoria = $data["id-categoria"];
-        $this->dt_receita = $data["data"];
+        $this->valor = $data["revenue"];
+        $this->id_categoria = $data["category_id"];
+        $this->dt_receita = $data["date"];
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->id_usuario = $userId;
         return $this->salvar();
@@ -34,8 +34,8 @@ class RevenueModel extends Modelo
     public function updateRevenue(array $data, int $id): bool
     {
         $this->id = $id;
-        $this->valor = $data["receita"] * 100;
-        $this->dt_receita = $data["data"];
+        $this->valor = $data["revenue"];
+        $this->dt_receita = $data["date"];
 
         return $this->salvar();
     }

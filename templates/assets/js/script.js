@@ -1,3 +1,24 @@
+function formatNumberPtBr(inputClass) {
+  const moneyInput = document.querySelector(inputClass);
+
+  if (!moneyInput) return;
+
+  if (moneyInput.value) {
+    let val = moneyInput.value
+    moneyInput.value = parseFloat(val).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  }
+
+  moneyInput.addEventListener('input', function (e) {
+    let value = this.value;
+    value = value.replace(/\D/g, '');
+
+    if (!value) value = '0';
+
+    const numberValue = parseInt(value, 10) / 100;
+    this.value = numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  });
+}
+
 /**
  * Exibe um preview da imagem selecionada em um input file
  * 

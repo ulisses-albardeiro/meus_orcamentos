@@ -10,14 +10,14 @@
         <div class="card-body">
             <div class="d-flex justify-content-end pb-1">
                 <div class="col-auto">
-                    <button data-bs-toggle="modal" data-bs-target="#modalAdicionarReceita"
+                    <button data-bs-toggle="modal" data-bs-target="#modalAddRevenue"
                         class="btn btn-success btn-sm">Nova
                         Receita</button>
                     {% include 'finances/modals/add-revenue.html' %}
                 </div>
 
                 <div class="col-auto ms-2">
-                    <button data-bs-toggle="modal" data-bs-target="#modalAdicionarCategoria"
+                    <button data-bs-toggle="modal" data-bs-target="#modalAddCategory"
                         class="btn btn-secondary btn-sm">Nova Categoria</button>
                     {% include 'finances/modals/add-category.html' %}
                 </div>
@@ -33,21 +33,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for receita in receitas %}
+                        {% for revenue in revenues %}
                         <tr>
-                            <td class="text-start">R$ {{ (receita.valor / 100) | number_format(2, ',', '.') }}</td>
-                            <td class="text-center">{{ receita.categoria }}</td>
-                            <td class="text-center">{{ receita.dt_receita | date("d/m/Y")}}</td>
+                            <td class="text-start">R$ {{ revenue.valor | number_format(2, ',', '.') }}</td>
+                            <td class="text-center">{{ revenue.categoria }}</td>
+                            <td class="text-center">{{ revenue.dt_receita | date("d/m/Y")}}</td>
                             <td class="text-center">
                                 <a href title="Editar" class="text-primary text-decoration-none me-3"
-                                    data-bs-toggle="modal" data-bs-target="#modalAdicionarReceita{{ receita.id }}"><i
+                                    data-bs-toggle="modal" data-bs-target="#modalAddRevenue{{ revenue.id }}"><i
                                         class="bi bi-pencil-square fs-4"></i>
                                 </a>
 
                                 {% include 'finances/modals/add-revenue.html' %}
 
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
-                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ receita.id }}"><i
+                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ revenue.id }}"><i
                                         class="bi bi-trash fs-4"></i>
                                 </a>
                                 {% include 'finances/modals/delete-revenue.html' %}
@@ -61,7 +61,6 @@
     </div>
 </div>
 
-
 <script>
     //DataTable
     $(document).ready(function () {
@@ -69,10 +68,10 @@
             language: {
                 url: "../templates/assets/DataTables/pt_br.json"
             },
-            pageLength: 10, // Define o número de linhas por página
-            lengthMenu: [5, 10, 25, 50, 100], // Opções de linhas por página
-            ordering: false, // Habilita ordenação
-            responsive: true // Torna a tabela responsiva
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],
+            ordering: false,
+            responsive: true
         });
     });
 </script>

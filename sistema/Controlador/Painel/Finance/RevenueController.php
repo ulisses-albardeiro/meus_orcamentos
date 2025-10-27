@@ -25,7 +25,7 @@ class RevenueController extends PainelControlador
         echo $this->template->rendenizar(
             "finances/revenues.html",
             [
-                "receitas" => $revenues,
+                "revenues" => $revenues,
                 "categorias" => $categories,
                 "tipo" => "Receitas",
                 'titulo' => 'Receitas',
@@ -36,9 +36,9 @@ class RevenueController extends PainelControlador
 
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->revenueService->createRevenue($dados, $this->usuario->userId)) {
+        if ($this->revenueService->createRevenue($data, $this->usuario->userId)) {
             $this->mensagem->mensagemSucesso("Receita Cadastrada com Sucesso!")->flash();
         }
         Helpers::voltar();
@@ -54,9 +54,8 @@ class RevenueController extends PainelControlador
 
     public function update(int $id): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        if ($this->revenueService->updateRevenue($dados, $id)) {
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if ($this->revenueService->updateRevenue($data, $id)) {
             $this->mensagem->mensagemSucesso("Receita editada com sucesso!")->flash();
         }
         Helpers::voltar();

@@ -1,22 +1,22 @@
 <!-- Modal Excluir -->
-<div class="modal fade" id="modalConfirmDelete{{ receita.id }}" tabindex="-1" aria-labelledby="modalLabel{{ receita.id }}" aria-hidden="true">
+<div class="modal fade" id="modalConfirmDelete{{ revenue.id }}" tabindex="-1" aria-labelledby="modalLabel{{ revenue.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabel{{ receita.id }}">
+                <h5 class="modal-title fw-bold" id="modalLabel{{ revenue.id }}">
                     <i class="bi bi-exclamation-triangle-fill text-danger"></i> <span class="text-body">Atenção!</span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p class="text-body">Deseja realmente excluir a Receita da categoria <strong>{{ receita.categoria }}</strong> e da data <strong>{{ receita.dt_receita | date("d/m/Y") }}</strong>?</p>
+                <p class="text-body">Deseja realmente excluir a receita de <strong>R$ {{ revenue.valor | number_format(2, ',', '.') }}</strong> da categoria <strong>{{ revenue.categoria }}</strong> e da data <strong>{{ revenue.dt_receita | date("d/m/Y") }}</strong>?</p>
                 <p class="text-muted">Esta ação não poderá ser desfeita.</p>
             </div>
             <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
                 <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle me-1"></i> Cancelar
                 </button>
-                <form action="{{ url('finance/revenue/'~receita.id) }}" method="post" class="d-inline">
+                <form action="{{ url('finance/revenue/'~revenue.id) }}" method="post" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn btn-sm btn-danger">
                         <i class="bi bi-trash-fill me-1"></i> Excluir

@@ -391,4 +391,40 @@ class Helpers
             return $item;
         }, $items);
     }
+
+    /**
+     * Converts a monetary field in Brazilian format (e.g. "1.250,00") to cents (e.g. 12500)
+     * for an array of items (arrays or objects).
+     *
+     * @param array $items Array of arrays or objects containing the field to convert
+     * @param string $field Name of the field/property to convert
+     * @return array Array with the specified field converted to cents
+     */
+    public static function ReaisToCents(array $items, string $field): array
+    {
+        return array_map(function ($item) use ($field) {
+            if (is_object($item) && isset($item->$field)) {
+                $item->$field = self::ReaisToCentsSingle($item->$field);
+            } elseif (is_array($item) && isset($item[$field])) {
+                $item[$field] = self::ReaisToCentsSingle($item[$field]);
+            }
+            return $item;
+        }, $items);
+    }
+
+    /**
+     * Converts a Brazilian-formatted monetary string (e.g. "1.250,00") to cents (e.g. 125000).
+     *
+     * @param string $value Monetary value as a string
+     * @return int Value in cents
+     */
+    public static function ReaisToCentsSingle(string $value): int
+    {
+        $value = str_replace(['R$', ' '], '', $value);
+        $value = str_replace('.', '', $value);
+        $value = str_replace(',', '.', $value);
+
+        $floatValue = (float) $value;
+        return (int) round($floatValue * 100);
+    }
 }
