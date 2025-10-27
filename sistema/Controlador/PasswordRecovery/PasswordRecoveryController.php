@@ -8,9 +8,7 @@ use sistema\Servicos\PasswordRecovery\PasswordRecoveryInterface;
 
 class PasswordRecoveryController extends Controlador
 {
-    private PasswordRecoveryInterface $passwordRecoveryService;
-
-    public function __construct(PasswordRecoveryInterface $passwordRecoveryService)
+    public function __construct(private PasswordRecoveryInterface $passwordRecoveryService)
     {
         parent::__construct('templates/views');
         $this->passwordRecoveryService = $passwordRecoveryService;
@@ -35,7 +33,7 @@ class PasswordRecoveryController extends Controlador
         }
 
         if ($this->passwordRecoveryService->initiateRecovery($email)) {
-            $this->mensagem->mensagemSucesso("Caso o email exista em nossa base, um link de recuperação de senha sera enviado.")->flash();
+            $this->mensagem->mensagemSucesso("Caso o email exista em nossa base, um link de recuperação de senha sera enviado para ele.")->flash();
         } else {
             $this->mensagem->mensagemErro("Houve um erro inesperado. Tente novamente ou fale com o suporte")->flash();
         }
@@ -47,17 +45,18 @@ class PasswordRecoveryController extends Controlador
     {
         $validToken = $this->passwordRecoveryService->validateToken($token);
 
-        if ($validToken) {
-            echo $this->template->rendenizar(
-                'password-recovery/new-password.html',
-                [
-                    'token' => $token
-                ]
-            );
-        } else {
+        if (!$validToken) {
             $this->mensagem->mensagemAtencao("Solicitação inválida ou expirada. Faça uma nova solicitação.")->flash();
             Helpers::redirecionar('login');
+            return;
         }
+
+        echo $this->template->rendenizar(
+            'password-recovery/new-password.html',
+            [
+                'token' => $token
+            ]
+        );
     }
 
     public function update(): void
@@ -70,12 +69,12 @@ class PasswordRecoveryController extends Controlador
             return;
         }
 
-        if ($this->passwordRecoveryService->saveNewPassword($data['token'], $data['password1'])) {
-            $this->mensagem->mensagemSucesso("Senha alterada com sucesso")->flash();
-            Helpers::redirecionar('login');
-        } else {
+        if (!$this->passwordRecoveryService->saveNewPassword($data['token'], $data['password1'])) {
             $this->mensagem->mensagemErro("Erro ao salvar a nova senha ou token inválido.")->flash();
             Helpers::redirecionar('login');
+            return;
         }
+        $this->mensagem->mensagemSucesso("Senha alterada com sucesso")->flash();
+        Helpers::redirecionar('login');
     }
 }
