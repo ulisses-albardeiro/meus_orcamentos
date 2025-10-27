@@ -11,6 +11,7 @@ class ExpenseService implements ExpenseInterface
 
     public function updateExpense(array $data, int $id): bool
     {
+        $data['expense'] = Helpers::ReaisToCentsSingle($data['expense']);
         return $this->expenseModel->updateExpense($data, $id);
     }
 
@@ -21,6 +22,7 @@ class ExpenseService implements ExpenseInterface
 
     public function createExpense(array $data, int $userId): bool
     {
+        $data['expense'] = Helpers::ReaisToCentsSingle($data['expense']);
         return $this->expenseModel->createExpense($data, $userId);
     }
 

@@ -17,7 +17,7 @@ class ExpenseModel extends Modelo
 
     public function createExpense(array $data, int $userId): bool
     {
-        $this->valor = $data["value"] * 100;
+        $this->valor = $data["expense"];
         $this->id_categoria = $data["category_id"];
         $this->dt_hr_criacao = date('Y-m-d H:i:s');
         $this->dt_despesa = $data["date"];
@@ -29,7 +29,7 @@ class ExpenseModel extends Modelo
      public function updateExpense(array $data, int $id): bool
     {
         $this->id = $id;
-        $this->valor = $data["value"]*100;
+        $this->valor = $data["expense"];
         $this->dt_despesa = $data["date"];
         return $this->salvar();
     }

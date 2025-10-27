@@ -36,9 +36,9 @@ class ExpenseController extends PainelControlador
 
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->serviceExpense->createExpense($dados, $this->usuario->userId)) {
+        if ($this->serviceExpense->createExpense($data, $this->usuario->userId)) {
             $this->mensagem->mensagemSucesso("Despesa Cadastrada com Sucesso!")->flash();
         }
         Helpers::voltar();

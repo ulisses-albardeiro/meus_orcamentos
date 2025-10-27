@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-end">
                 <div class="col-auto">
-                    <button data-bs-toggle="modal" data-bs-target="#modalAdicionarDespesa"
+                    <button data-bs-toggle="modal" data-bs-target="#modalAddExpense"
                         class="btn btn-danger btn-sm">Nova
                         Despesa</button>
                     {% include 'finances/modals/add-expense.html' %}
@@ -43,7 +43,7 @@
                             <td class="text-center">
 
                                 <a href title="Editar" class="text-primary text-decoration-none me-3" data-bs-toggle="modal"
-                                    data-bs-target="#modalAdicionarDespesa{{ expense.id }}"><i
+                                    data-bs-target="#modalAddExpense{{ expense.id }}"><i
                                         class="bi bi-pencil-square fs-4"></i></a>
 
                                 {% include 'finances/modals/add-expense.html' %}

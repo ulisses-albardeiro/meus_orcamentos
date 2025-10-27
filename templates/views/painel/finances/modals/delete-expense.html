@@ -1,4 +1,4 @@
-<!-- Modal Excluir -->
+<!-- Modal Delete -->
 <div class="modal fade" id="modalConfirmDelete{{ expense.id }}" tabindex="-1" aria-labelledby="modalLabel{{ expense.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p class="text-body">Deseja realmente excluir a Despesa de <strong>R$ {{ expense.valor | number_format(2, '.', '') }},</strong> da categoria <strong>{{ expense.categoria }}</strong> e da data <strong>{{ expense.dt_despesa | date("d/m/Y") }}</strong>?</p>
+                <p class="text-body">Deseja realmente excluir a Despesa de <strong>R$ {{ expense.valor | number_format(2, ',', '.') }}</strong> da categoria <strong>{{ expense.categoria }}</strong> e da data <strong>{{ expense.dt_despesa | date("d/m/Y") }}</strong>?</p>
                 <p class="text-muted">Esta ação não poderá ser desfeita.</p>
             </div>
             <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
