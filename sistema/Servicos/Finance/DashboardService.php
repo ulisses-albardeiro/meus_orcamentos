@@ -126,7 +126,7 @@ class DashboardService implements DashboardInterface
 
     public function getExpensesByCategory(string $startDate, string $endDate, int $userId): array
     {
-        $expenses = $this->expenseModel->findExpensesByRangeDate($startDate, $endDate, $userId);
+        $expenses = $this->expenseModel->findExpensesByRangeDate($startDate, $endDate, $userId) ?? [];
         $expenses = Helpers::centsToReais($expenses, 'valor');
 
         $categories = $this->categoryModel->findCategoryByUserId($userId);

@@ -1,22 +1,22 @@
 <!-- Modal Excluir -->
-<div class="modal fade" id="modalConfirmDelete{{ categoria.id }}" tabindex="-1" aria-labelledby="modalLabel{{ categoria.id }}" aria-hidden="true">
+<div class="modal fade" id="modalConfirmDelete{{ category.id }}" tabindex="-1" aria-labelledby="modalLabel{{ category.id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="modalLabel{{ categoria.id }}">
+                <h5 class="modal-title fw-bold" id="modalLabel{{ category.id }}">
                     <i class="bi bi-exclamation-triangle-fill text-danger"></i> <span class="text-body">Atenção!</span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p class="text-body">Deseja realmente excluir a Categoria <strong>{{ categoria.nome }}</strong> do tipo <strong>{{ categoria.tipo }}</strong>?</p>
+                <p class="text-body">Deseja realmente excluir a Categoria <strong>{{ category.nome }}</strong> do tipo <strong>{{ category.tipo }}</strong>?</p>
                 <p class="text-muted">Esta ação não poderá ser desfeita.</p>
             </div>
             <div style="margin-top: -25px;" class="modal-footer border-0 d-flex justify-content-center">
                 <button style="background-color: #5C636A; color: white;" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle me-1"></i> Cancelar
                 </button>
-                <form action="{{ url('finance/category/'~categoria.id) }}" method="post" class="d-inline">
+                <form action="{{ url('finance/category/'~category.id) }}" method="post" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn btn-sm btn-danger">
                         <i class="bi bi-trash-fill me-1"></i> Excluir
