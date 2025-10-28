@@ -31,10 +31,10 @@ class ClientsController extends PainelControlador
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if ($this->clientService->registerClient($data, $this->usuario->userId)) {
-            $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso.')->flash();
+            $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso!')->flash();
         }
 
-        Helpers::redirecionar('clients');
+        Helpers::voltar();
     }
 
     public function destroy(int $id): void

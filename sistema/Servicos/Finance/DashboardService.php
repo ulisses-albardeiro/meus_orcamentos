@@ -6,6 +6,7 @@ use DateTime;
 use sistema\Modelos\CategoryModel;
 use sistema\Modelos\ExpenseModel;
 use sistema\Modelos\RevenueModel;
+use sistema\Nucleo\Helpers;
 
 class DashboardService implements DashboardInterface
 {
@@ -22,10 +23,11 @@ class DashboardService implements DashboardInterface
         if (empty($revenues)) {
             return 0;
         }
+        $revenues = Helpers::centsToReais($revenues, 'valor');
         $totalRevenue = array_sum(array_column($revenues, 'valor'));
 
 
-        return $totalRevenue / 100;
+        return $totalRevenue;
     }
 
     public function sumExpensesByPeriod(string $startDate, string $endDate, int $userId): float
@@ -36,8 +38,9 @@ class DashboardService implements DashboardInterface
             return 0;
         }
 
+        $expenses = Helpers::centsToReais($expenses, 'valor');
         $totalExpenses = array_sum(array_column($expenses, 'valor'));
-        return $totalExpenses / 100;
+        return $totalExpenses;
     }
 
     public function findCashBalanceByPeriod(string $startDate, string $endDate, int $userId): float
@@ -65,7 +68,10 @@ class DashboardService implements DashboardInterface
         $startDate = $quarter->format('Y-m-d');
 
         $revenues = $this->revenueModel->findRevenuesByRangeDate($startDate, $endDate, $userId) ?? [];
+        $revenues = Helpers::centsToReais($revenues, 'valor');
+
         $expenses = $this->expenseModel->findExpensesByRangeDate($startDate, $endDate, $userId) ?? [];
+        $expenses = Helpers::centsToReais($expenses, 'valor');
 
         $monthsDisplayed = [
             date('Y-m', strtotime('first day of -2 months', strtotime($endDate))),
@@ -76,13 +82,13 @@ class DashboardService implements DashboardInterface
         $revenuesGroup = [];
         foreach ($revenues as $revenue) {
             $month = date('Y-m', strtotime($revenue->dt_receita));
-            $revenuesGroup[$month] = ($revenuesGroup[$month] ?? 0) + ($revenue->valor / 100);
+            $revenuesGroup[$month] = ($revenuesGroup[$month] ?? 0) + ($revenue->valor);
         }
 
         $expensesGroup = [];
         foreach ($expenses as $expense) {
             $month = date('Y-m', strtotime($expense->dt_despesa));
-            $expensesGroup[$month] = ($expensesGroup[$month] ?? 0) + ($expense->valor / 100);
+            $expensesGroup[$month] = ($expensesGroup[$month] ?? 0) + ($expense->valor);
         }
 
         $translatedMonths = [
@@ -121,6 +127,8 @@ class DashboardService implements DashboardInterface
     public function getExpensesByCategory(string $startDate, string $endDate, int $userId): array
     {
         $expenses = $this->expenseModel->findExpensesByRangeDate($startDate, $endDate, $userId);
+        $expenses = Helpers::centsToReais($expenses, 'valor');
+
         $categories = $this->categoryModel->findCategoryByUserId($userId);
 
         if (empty($expenses) || empty($categories)) {
@@ -140,7 +148,7 @@ class DashboardService implements DashboardInterface
         foreach ($expenses as $expense) {
             $catId = $expense->id_categoria;
             if (isset($expenseTotals[$catId])) {
-                $expenseTotals[$catId] += ($expense->valor / 100);
+                $expenseTotals[$catId] += ($expense->valor);
             }
         }
 
