@@ -28,8 +28,8 @@ class HomeController extends PainelControlador
         $categoriesExpense = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Despesas');
         $categoriesRevenue = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Receitas');
 
-        $clients = $this->clientService->findClientsByUserId($this->usuario->userId);
-        $quotes = $this->quoteService->buscaOrcamentosServico($this->usuario->userId);
+        $clients = $this->clientService->findClientsByUserId($this->usuario->userId) ?? [];
+        $quotes = $this->quoteService->buscaOrcamentosServico($this->usuario->userId) ?? [];
         
         echo $this->template->rendenizar("home.html", 
         [
