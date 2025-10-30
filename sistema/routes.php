@@ -82,24 +82,24 @@ try {
         SimpleRouter::post(URL . 'list/{template}', 'ListController@store');
         SimpleRouter::delete(URL . 'list/{hash}', 'ListController@destroy');
     });
+    //List - public routes
     SimpleRouter::group(['namespace' => 'Painel\List'], function () {
         SimpleRouter::get(URL . 'list/{template}/{hash}', 'ListController@show');
-        SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@showPdf');
+        SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@export');
     });
 
     //Quotes
     SimpleRouter::group(['namespace' => 'Painel\Quotes', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'orcamento/modelos', 'QuotesController@templates');
-        SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'QuotesController@delete');
-        SimpleRouter::get(URL . 'orcamento/criar/{form}/{template}', 'QuotesController@create');
-        SimpleRouter::post(URL . 'orcamento/cadastrar/{template}', 'QuotesController@store');
-        SimpleRouter::get(URL . 'orcamento/listar', 'QuotesController@index');
+        SimpleRouter::get(URL . 'quote/templates', 'QuotesController@templates');
+        SimpleRouter::delete(URL . 'quote/{hash}', 'QuotesController@destroy');
+        SimpleRouter::get(URL . 'quote/{form}/{template}', 'QuotesController@create');
+        SimpleRouter::post(URL . 'quote/{template}', 'QuotesController@store');
+        SimpleRouter::get(URL . 'quote', 'QuotesController@index');
     });
-
-    //Grupo de rotas que não precisa de autenticação
+    //Quote - public routes
     SimpleRouter::group(['namespace' => 'Painel\Quotes'], function () {
-        SimpleRouter::get(URL . 'orcamento/{template}/{hash}', 'QuotesController@show');
-        SimpleRouter::get(URL . 'orcamento/pdf/{template}/{hash}', 'QuotesController@export');
+        SimpleRouter::get(URL . 'quote/{template}/{hash}', 'QuotesController@show');
+        SimpleRouter::get(URL . 'quote/pdf/{template}/{hash}', 'QuotesController@export');
     });
 
     //Grupo de Rotas Recibo

@@ -80,7 +80,7 @@ class QuotesController extends PainelControlador
 
         if (!empty($quotesId)) {
             //redirect to method 'show'
-            Helpers::redirecionar("orcamento/$template/$hash");
+            Helpers::redirecionar("quote/$template/$hash");
         }
     }
 
@@ -112,7 +112,7 @@ class QuotesController extends PainelControlador
         $this->fileManager->download($pdfOutput, $filename, 'application/pdf');
     }
 
-    public function delete(string $hash): void
+    public function destroy(string $hash): void
     {
         $path = "storage/pdf/user_{$this->session->userId}/quotes/$hash.pdf";
 
@@ -122,7 +122,7 @@ class QuotesController extends PainelControlador
             $this->mensagem->mensagemSucesso("Orçamento excluido com sucesso!")->flash();
         }
 
-        Helpers::redirecionar("orcamento/listar");
+        Helpers::redirecionar("quote");
     }
 
     public function show(string $template, string $hash): void

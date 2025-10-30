@@ -91,7 +91,7 @@ class ListController extends PainelControlador
         }
     }
 
-    public function showPdf(string $template, string $hash): void
+    public function export(string $template, string $hash): void
     {
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);

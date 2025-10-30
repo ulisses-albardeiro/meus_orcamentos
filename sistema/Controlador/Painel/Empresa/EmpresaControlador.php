@@ -36,7 +36,7 @@ class EmpresaControlador extends PainelControlador
             $cadastro = $this->empresaServico->cadastrarEmpresaServico($dados, $this->session->userId, $_FILES['logo']);
 
             if ($cadastro) {
-                $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('orcamento/modelos'), 'Sim, criar agora')->flash();
+                $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
             }
 
             Helpers::redirecionar('home');
