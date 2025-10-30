@@ -67,7 +67,7 @@ class EmpresaControlador extends PainelControlador
     {
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->session->userId);
 
-        unlink($_SERVER['DOCUMENT_ROOT'] . URL . 'templates/assets/img/logos/' . $empresa->logo);
+        unlink($_SERVER['DOCUMENT_ROOT'] . BASE_PATH . 'templates/assets/img/logos/' . $empresa->logo);
 
         $exclusao = $this->empresaServico->excluirLogoServico($empresa->id);
 

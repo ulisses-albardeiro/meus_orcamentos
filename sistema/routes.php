@@ -9,150 +9,151 @@ use sistema\Nucleo\Helpers;
 try {
     //Site and Blog
     SimpleRouter::setDefaultNamespace('sistema\Controlador');
-    SimpleRouter::get(URL, 'SiteController@index');
-    SimpleRouter::get(URL . '404', 'SiteController@error404');
-    SimpleRouter::get(URL . 'pravicy-policy', 'SiteController@pravicyPolicy');
-    SimpleRouter::get(URL . 'blog', 'BlogController@index');
+    SimpleRouter::get(BASE_PATH, 'SiteController@index');
+    SimpleRouter::get('404', 'SiteController@error404');
+    SimpleRouter::get('pravicy-policy', 'SiteController@pravicyPolicy');
+    SimpleRouter::get('blog', 'BlogController@index');
 
     //Login and Logout
-    SimpleRouter::group(['namespace' => 'Login'], function () {
-        SimpleRouter::get(URL . 'login', 'LoginController@create');
-        SimpleRouter::post(URL . 'login', 'LoginController@store');
-        SimpleRouter::get(URL . 'logout', 'LoginController@destroy');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Login'], function () {
+        SimpleRouter::get('login', 'LoginController@create');
+        SimpleRouter::post('login', 'LoginController@store');
+        SimpleRouter::get('logout', 'LoginController@destroy');
     });
 
     //Users
-    SimpleRouter::group(['namespace' => 'Painel'], function () {
-        SimpleRouter::get(URL . 'user', 'UserController@create');
-        SimpleRouter::post(URL . 'user', 'UserController@store');
-        SimpleRouter::put(URL . 'user/{id}', 'UserController@update')->addMiddleware(Auth::class);
-        SimpleRouter::patch(URL . 'user/image/{id}', 'UserController@destroyImage')->addMiddleware(Auth::class);
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel'], function () {
+        SimpleRouter::get('user', 'UserController@create');
+        SimpleRouter::post('user', 'UserController@store');
+        SimpleRouter::put('user/{id}', 'UserController@update')->addMiddleware(Auth::class);
+        SimpleRouter::patch('user/image/{id}', 'UserController@destroyImage')->addMiddleware(Auth::class);
     });
 
     //Password Recovery
-    SimpleRouter::group(['namespace' => 'PasswordRecovery'], function () {
-        SimpleRouter::get(URL . 'password-recovery', 'PasswordRecoveryController@index');
-        SimpleRouter::post(URL . 'password-recovery', 'PasswordRecoveryController@store');
-        SimpleRouter::get(URL . 'password-recovery/{token}', 'PasswordRecoveryController@create');
-        SimpleRouter::patch(URL . 'password-recovery', 'PasswordRecoveryController@update');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'PasswordRecovery'], function () {
+        SimpleRouter::get('password-recovery', 'PasswordRecoveryController@index');
+        SimpleRouter::post('password-recovery', 'PasswordRecoveryController@store');
+        SimpleRouter::get('password-recovery/{token}', 'PasswordRecoveryController@create');
+        SimpleRouter::patch('password-recovery', 'PasswordRecoveryController@update');
     });
 
     //Home
-    SimpleRouter::group(['namespace' => 'Painel\Home', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'home', 'HomeController@index');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Home', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('home', 'HomeController@index');
     });
 
     //Clients
-    SimpleRouter::group(['namespace' => 'Painel\Clients', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'clients', 'ClientsController@index');
-        SimpleRouter::post(URL . 'clients', 'ClientsController@store');
-        SimpleRouter::delete(URL . 'clients/{id}', 'ClientsController@destroy');
-        SimpleRouter::put(URL . 'clients/{id}', 'ClientsController@update');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Clients', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('clients', 'ClientsController@index');
+        SimpleRouter::post('clients', 'ClientsController@store');
+        SimpleRouter::delete('clients/{id}', 'ClientsController@destroy');
+        SimpleRouter::put('clients/{id}', 'ClientsController@update');
     });
 
     //Finance
-    SimpleRouter::group(['namespace' => 'Painel\Finance', 'middleware' => [Auth::class, Company::class]], function () {
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Finance', 'middleware' => [Auth::class, Company::class]], function () {
         //dashboard
-        SimpleRouter::get(URL . 'finance/dashboard/{date?}', 'DashboardController@index');
+        SimpleRouter::get('finance/dashboard/{date?}', 'DashboardController@index');
 
         //Category Finance
-        SimpleRouter::post(URL . 'finance/category', 'CategoryController@store');
-        SimpleRouter::get(URL . 'finance/category', 'CategoryController@index');
-        SimpleRouter::put(URL . 'finance/category/{id}', 'CategoryController@update');
-        SimpleRouter::delete(URL . 'finance/category/{id}', 'CategoryController@destroy');
+        SimpleRouter::post('finance/category', 'CategoryController@store');
+        SimpleRouter::get('finance/category', 'CategoryController@index');
+        SimpleRouter::put('finance/category/{id}', 'CategoryController@update');
+        SimpleRouter::delete('finance/category/{id}', 'CategoryController@destroy');
 
         //Expenses
-        SimpleRouter::post(URL . 'finance/expense', 'ExpenseController@store');
-        SimpleRouter::get(URL . 'finance/expense', 'ExpenseController@index');
-        SimpleRouter::delete(URL . 'finance/expense/{id}', 'ExpenseController@destroy');
-        SimpleRouter::put(URL . 'finance/expense/{id}', 'ExpenseController@update');
+        SimpleRouter::post('finance/expense', 'ExpenseController@store');
+        SimpleRouter::get('finance/expense', 'ExpenseController@index');
+        SimpleRouter::delete('finance/expense/{id}', 'ExpenseController@destroy');
+        SimpleRouter::put('finance/expense/{id}', 'ExpenseController@update');
 
         //Revenue
-        SimpleRouter::post(URL . 'finance/revenue', 'RevenueController@store');
-        SimpleRouter::get(URL . 'finance/revenue', 'RevenueController@index');
-        SimpleRouter::delete(URL . 'finance/revenue/{id}', 'RevenueController@destroy');
-        SimpleRouter::put(URL . 'finance/revenue/{id}', 'RevenueController@update');
+        SimpleRouter::post('finance/revenue', 'RevenueController@store');
+        SimpleRouter::get('finance/revenue', 'RevenueController@index');
+        SimpleRouter::delete('finance/revenue/{id}', 'RevenueController@destroy');
+        SimpleRouter::put('finance/revenue/{id}', 'RevenueController@update');
     });
 
     //List
-    SimpleRouter::group(['namespace' => 'Painel\List', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'list', 'ListController@index');
-        SimpleRouter::get(URL . 'list/templates', 'ListController@templates');
-        SimpleRouter::get(URL . 'list/{form}/{template}', 'ListController@create');
-        SimpleRouter::post(URL . 'list/{template}', 'ListController@store');
-        SimpleRouter::delete(URL . 'list/{hash}', 'ListController@destroy');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\List', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('list', 'ListController@index');
+        SimpleRouter::get('list/templates', 'ListController@templates');
+        SimpleRouter::get('list/{form}/{template}', 'ListController@create');
+        SimpleRouter::post('list/{template}', 'ListController@store');
+        SimpleRouter::delete('list/{hash}', 'ListController@destroy');
     });
     //List - public routes
-    SimpleRouter::group(['namespace' => 'Painel\List'], function () {
-        SimpleRouter::get(URL . 'list/{template}/{hash}', 'ListController@show');
-        SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@export');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\List'], function () {
+        SimpleRouter::get('list/{template}/{hash}', 'ListController@show');
+        SimpleRouter::get('list/pdf/{template}/{hash}', 'ListController@export');
     });
 
     //Quotes
-    SimpleRouter::group(['namespace' => 'Painel\Quotes', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'quote/templates', 'QuotesController@templates');
-        SimpleRouter::delete(URL . 'quote/{hash}', 'QuotesController@destroy');
-        SimpleRouter::get(URL . 'quote/{form}/{template}', 'QuotesController@create');
-        SimpleRouter::post(URL . 'quote/{template}', 'QuotesController@store');
-        SimpleRouter::get(URL . 'quote', 'QuotesController@index');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Quotes', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('quote/templates', 'QuotesController@templates');
+        SimpleRouter::delete('quote/{hash}', 'QuotesController@destroy');
+        SimpleRouter::get('quote/{form}/{template}', 'QuotesController@create');
+        SimpleRouter::post('quote/{template}', 'QuotesController@store');
+        SimpleRouter::get('quote', 'QuotesController@index');
     });
     //Quote - public routes
-    SimpleRouter::group(['namespace' => 'Painel\Quotes'], function () {
-        SimpleRouter::get(URL . 'quote/{template}/{hash}', 'QuotesController@show');
-        SimpleRouter::get(URL . 'quote/pdf/{template}/{hash}', 'QuotesController@export');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Quotes'], function () {
+        SimpleRouter::get('quote/{template}/{hash}', 'QuotesController@show');
+        SimpleRouter::get('quote/pdf/{template}/{hash}', 'QuotesController@export');
     });
 
     //Grupo de Rotas Recibo
-    SimpleRouter::group(['namespace' => 'Painel\Recibo', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'recibo/gerar', 'Recibo@gerar');
-        SimpleRouter::get(URL . 'recibo/gerar/{id_recibo}', 'Recibo@gerar');
-        SimpleRouter::get(URL . 'recibo/criar', 'Recibo@criar');
-        SimpleRouter::get(URL . 'recibo/listar', 'Recibo@listar');
-        SimpleRouter::get(URL . 'recibo/excluir/{id_recibo}', 'Recibo@excluir');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Recibo', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('recibo/gerar', 'Recibo@gerar');
+        SimpleRouter::get('recibo/gerar/{id_recibo}', 'Recibo@gerar');
+        SimpleRouter::get('recibo/criar', 'Recibo@criar');
+        SimpleRouter::get('recibo/listar', 'Recibo@listar');
+        SimpleRouter::get('recibo/excluir/{id_recibo}', 'Recibo@excluir');
     });
 
     //Grupo de Rotas Lista
-    SimpleRouter::group(['namespace' => 'Painel\Config', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'config', 'ConfigControlador@listar');
-        SimpleRouter::get(URL . 'config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Config', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get('config', 'ConfigControlador@listar');
+        SimpleRouter::get('config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
     });
 
     //Grupo de Rotas Empresa
-    SimpleRouter::group(['namespace' => 'Painel\Empresa', 'middleware' => Auth::class], function () {
-        SimpleRouter::get(URL . 'empresa', 'EmpresaControlador@listar');
-        SimpleRouter::post(URL . 'empresa/editar/{id}', 'EmpresaControlador@editar');
-        SimpleRouter::match(['get', 'post'], URL . 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
-        SimpleRouter::get(URL . 'empresa/excluir/logo', 'EmpresaControlador@excluirLogo');
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Painel\Empresa', 'middleware' => Auth::class], function () {
+        SimpleRouter::get('empresa', 'EmpresaControlador@listar');
+        SimpleRouter::post('empresa/editar/{id}', 'EmpresaControlador@editar');
+        SimpleRouter::match(['get', 'post'], 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
+        SimpleRouter::get('empresa/excluir/logo', 'EmpresaControlador@excluirLogo');
     });
 
     //Grupo de Rotas Dashboard
     SimpleRouter::group([
+        'prefix' => BASE_PATH,
         'namespace' => 'Painel\Admin',
         'middleware' => [
             Admin::class,
             Auth::class
         ]
     ], function () {
-        SimpleRouter::get(URL . 'admin/usuarios', 'Admin@usuarios');
-        SimpleRouter::get(URL . 'admin/orcamentos', 'Admin@orcamentos');
-        SimpleRouter::get(URL . 'admin/listas', 'Admin@listas');
-        SimpleRouter::get(URL . 'admin/recibos', 'Admin@recibos');
+        SimpleRouter::get('admin/usuarios', 'Admin@usuarios');
+        SimpleRouter::get('admin/orcamentos', 'Admin@orcamentos');
+        SimpleRouter::get('admin/listas', 'Admin@listas');
+        SimpleRouter::get('admin/recibos', 'Admin@recibos');
     });
 
     //Grupo de Rotas Dashboard
     SimpleRouter::group([
+        'prefix' => BASE_PATH,
         'namespace' => 'Painel\Blog',
         'middleware' => [
             Admin::class,
             Auth::class
         ]
     ], function () {
-        SimpleRouter::get(URL . 'admin/categorias', 'BlogControlador@listar');
+        SimpleRouter::get('admin/categorias', 'BlogControlador@listar');
     });
 
     SimpleRouter::start();
 } catch (Exception $e) {
-
     if (Helpers::localhost()) {
         echo $e;
     } else {

@@ -59,7 +59,7 @@ class UserController extends Controlador
             $upload = new Upload('templates/assets/img/');
             $upload->arquivo($_FILES['imagem'], Helpers::slug($dados['nome']), 'perfil');
             if ($upload->getResultado()) {
-                unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
+                unlink($_SERVER['DOCUMENT_ROOT'].BASE_PATH.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
                 $nome_arquivo = $upload->getResultado();
             }
         }
@@ -83,7 +83,7 @@ class UserController extends Controlador
     {
         $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($id);
 
-        unlink($_SERVER['DOCUMENT_ROOT'].URL.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
+        unlink($_SERVER['DOCUMENT_ROOT'].BASE_PATH.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
         $usuario = (new UserModel);
         $usuario->id = $id;
         $usuario->img_logo = null;

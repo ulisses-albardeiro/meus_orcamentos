@@ -22,4 +22,4 @@ define('EMAIL_PORT', $_ENV['EMAIL_PORT']);
 
 define('PRODUCTION_URL', $_ENV['PRODUCTION_URL']);
 define('DEVELOPMENT_URL', $_ENV['DEVELOPMENT_URL']);
-define('URL', $_ENV['URL']);
+define('BASE_PATH', $_ENV['BASE_PATH']);

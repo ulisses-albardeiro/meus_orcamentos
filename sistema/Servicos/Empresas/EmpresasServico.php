@@ -33,7 +33,7 @@ class EmpresasServico implements EmpresasInterface
         if (!empty($logo['size'])) {
             $empresa = $this->empresaModelo->buscaPorId($idEmpresa);
 
-            unlink($_SERVER['DOCUMENT_ROOT'].URL."templates/assets/img/logos/$empresa->logo");
+            unlink($_SERVER['DOCUMENT_ROOT'].BASE_PATH."templates/assets/img/logos/$empresa->logo");
 
             $arquivo = new Upload('templates/assets/img/');
             $arquivo->arquivo($logo, Helpers::slug($dados['nome']), 'logos');
