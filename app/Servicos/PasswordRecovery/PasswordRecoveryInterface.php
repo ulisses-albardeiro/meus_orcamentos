@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\PasswordRecovery;
+namespace App\Servicos\PasswordRecovery;
 
 interface PasswordRecoveryInterface
 {

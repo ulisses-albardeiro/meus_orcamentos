@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
-use app\Modelos\CategoryModel;
-use app\Nucleo\Modelo;
+use App\Modelos\CategoryModel;
+use App\Nucleo\Modelo;
 
 class CategoryService implements CategoryInterface
 {

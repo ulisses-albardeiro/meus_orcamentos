@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Biblioteca;
+namespace App\Biblioteca;
 
 use GdImage;
 

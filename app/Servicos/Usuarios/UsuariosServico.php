@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Servicos\Usuarios;
+namespace App\Servicos\Usuarios;
 
-use app\Modelos\UserModel;
+use App\Modelos\UserModel;
 
 class UsuariosServico implements UsuariosInterface
 {

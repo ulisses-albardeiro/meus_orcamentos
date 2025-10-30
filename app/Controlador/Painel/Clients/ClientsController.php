@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador\Painel\Clients;
+namespace App\Controlador\Painel\Clients;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Nucleo\Helpers;
-use app\Servicos\Clients\ClientsInterface;
+use App\Controlador\Painel\PainelControlador;
+use App\Nucleo\Helpers;
+use App\Servicos\Clients\ClientsInterface;
 
 class ClientsController extends PainelControlador
 {

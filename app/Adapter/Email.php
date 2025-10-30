@@ -1,13 +1,13 @@
 <?php
 
-namespace app\Adapter;
+namespace App\Adapter;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Classe para envio de e-mails utilizando a biblioteca PHPMailer.
  * 
- * @package app\Adapter
+ * @package App\Adapter
  */
 final class Email
 {

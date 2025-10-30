@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Usuarios;
+namespace App\Servicos\Usuarios;
 
 interface UsuariosInterface
 {

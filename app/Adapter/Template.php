@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Adapter;
+namespace App\Adapter;
 
-use app\Controlador\UsuarioControlador;
+use App\Controlador\UsuarioControlador;
 use Twig\Lexer;
-use app\Nucleo\Helpers;
+use App\Nucleo\Helpers;
 
 class Template
 {

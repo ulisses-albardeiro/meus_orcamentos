@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador\PasswordRecovery;
+namespace App\Controlador\PasswordRecovery;
 
-use app\Nucleo\Controlador;
-use app\Nucleo\Helpers;
-use app\Servicos\PasswordRecovery\PasswordRecoveryInterface;
+use App\Nucleo\Controlador;
+use App\Nucleo\Helpers;
+use App\Servicos\PasswordRecovery\PasswordRecoveryInterface;
 
 class PasswordRecoveryController extends Controlador
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Nucleo;
+namespace App\Nucleo;
 
-use app\Nucleo\Conexao;
-use app\Nucleo\Mensagem;
+use App\Nucleo\Conexao;
+use App\Nucleo\Mensagem;
 
 abstract class Modelo
 {

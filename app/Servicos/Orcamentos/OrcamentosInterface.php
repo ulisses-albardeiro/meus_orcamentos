@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Orcamentos;
+namespace App\Servicos\Orcamentos;
 
 interface OrcamentosInterface
 {

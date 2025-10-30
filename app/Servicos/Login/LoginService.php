@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Servicos\Login;
+namespace App\Servicos\Login;
 
-use app\Modelos\UserModel;
-use app\Nucleo\Helpers;
-use app\Nucleo\Sessao;
-use app\Servicos\Login\AuthInterface;
+use App\Modelos\UserModel;
+use App\Nucleo\Helpers;
+use App\Nucleo\Sessao;
+use App\Servicos\Login\AuthInterface;
 
 class LoginService implements AuthInterface
 {

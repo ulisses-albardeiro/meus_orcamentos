@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
-use app\Nucleo\Modelo;
+use App\Nucleo\Modelo;
 
 interface CategoryInterface
 {

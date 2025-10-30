@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Servicos\Clients;
+namespace App\Servicos\Clients;
 
-use app\Modelos\ClientsModel;
+use App\Modelos\ClientsModel;
 
 class ClientsService implements ClientsInterface
 {

@@ -1,14 +1,14 @@
 <?php
 
 use DI\ContainerBuilder;
-use app\Servicos\Empresas\EmpresasInterface;
-use app\Servicos\Empresas\EmpresasServico;
-use app\Servicos\Listas\ListaInterface;
-use app\Servicos\Listas\ListaServicos;
-use app\Servicos\Orcamentos\OrcamentosInterface;
-use app\Servicos\Orcamentos\OrcamentosServicos;
-use app\Servicos\Usuarios\UsuariosInterface;
-use app\Servicos\Usuarios\UsuariosServico;
+use App\Servicos\Empresas\EmpresasInterface;
+use App\Servicos\Empresas\EmpresasServico;
+use App\Servicos\Listas\ListaInterface;
+use App\Servicos\Listas\ListaServicos;
+use App\Servicos\Orcamentos\OrcamentosInterface;
+use App\Servicos\Orcamentos\OrcamentosServicos;
+use App\Servicos\Usuarios\UsuariosInterface;
+use App\Servicos\Usuarios\UsuariosServico;
 
 use function DI\autowire;
 
@@ -21,25 +21,25 @@ $builder->addDefinitions([
     UsuariosInterface::class => autowire(UsuariosServico::class),
 
     //Finance
-    app\Servicos\Finance\CategoryInterface::class => autowire(app\Servicos\Finance\CategoryService::class),
-    app\Servicos\Finance\DashboardInterface::class => autowire(app\Servicos\Finance\DashboardService::class),
-    app\Servicos\Finance\ExpenseInterface::class => autowire(app\Servicos\Finance\ExpenseService::class),
-    app\Servicos\Finance\RevenueInterface::class => autowire(app\Servicos\Finance\RevenueService::class),
+    App\Servicos\Finance\CategoryInterface::class => autowire(App\Servicos\Finance\CategoryService::class),
+    App\Servicos\Finance\DashboardInterface::class => autowire(App\Servicos\Finance\DashboardService::class),
+    App\Servicos\Finance\ExpenseInterface::class => autowire(App\Servicos\Finance\ExpenseService::class),
+    App\Servicos\Finance\RevenueInterface::class => autowire(App\Servicos\Finance\RevenueService::class),
 
     //Clients
-    app\Servicos\Clients\ClientsInterface::class => autowire(app\Servicos\Clients\ClientsService::class),
+    App\Servicos\Clients\ClientsInterface::class => autowire(App\Servicos\Clients\ClientsService::class),
     EmpresasInterface::class => autowire(EmpresasServico::class),
     
     //Adapter
-    app\Adapter\PdfAdapter\PdfInterface::class => autowire(app\Adapter\PdfAdapter\PdfGenerator::class),
-    app\Adapter\PdfAdapter\DompdfFactoryInterface::class => autowire(app\Adapter\PdfAdapter\DompdfFactory::class),
+    App\Adapter\PdfAdapter\PdfInterface::class => autowire(App\Adapter\PdfAdapter\PdfGenerator::class),
+    App\Adapter\PdfAdapter\DompdfFactoryInterface::class => autowire(App\Adapter\PdfAdapter\DompdfFactory::class),
 
     //Login end Password
-    app\Servicos\Login\AuthInterface::class => autowire(app\Servicos\Login\LoginService::class),
-    app\Servicos\PasswordRecovery\PasswordRecoveryInterface::class => autowire(app\Servicos\PasswordRecovery\PasswordRecoveryService::class),
+    App\Servicos\Login\AuthInterface::class => autowire(App\Servicos\Login\LoginService::class),
+    App\Servicos\PasswordRecovery\PasswordRecoveryInterface::class => autowire(App\Servicos\PasswordRecovery\PasswordRecoveryService::class),
 
     //Files
-    app\Servicos\Files\FileManagerInterface::class => autowire(app\Servicos\Files\FileManagerService::class),
+    App\Servicos\Files\FileManagerInterface::class => autowire(App\Servicos\Files\FileManagerService::class),
 ]);
 
 return $builder->build();

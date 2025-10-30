@@ -1,7 +1,7 @@
 <?php
-namespace app\Servicos\Listas;
+namespace App\Servicos\Listas;
 
-use app\Modelos\ListaModelo;
+use App\Modelos\ListaModelo;
 
 class ListaServicos implements ListaInterface
 {

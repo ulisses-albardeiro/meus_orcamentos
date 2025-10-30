@@ -1,7 +1,7 @@
 <?php
 
-namespace app\Nucleo;
-use app\Adapter\Template;
+namespace App\Nucleo;
+use App\Adapter\Template;
 
 class Controlador{
 

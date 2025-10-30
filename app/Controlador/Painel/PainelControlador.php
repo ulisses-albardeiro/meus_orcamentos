@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Controlador\Painel;
+namespace App\Controlador\Painel;
 
-use app\Nucleo\Controlador;
-use app\Nucleo\Sessao;
+use App\Nucleo\Controlador;
+use App\Nucleo\Sessao;
 
 class PainelControlador extends Controlador
 {

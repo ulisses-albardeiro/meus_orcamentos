@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Adapter\WebSocket;
+namespace App\Adapter\WebSocket;
 
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
-use app\Adapter\WebSocket\Chat;
+use App\Adapter\WebSocket\Chat;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 

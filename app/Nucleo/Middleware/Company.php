@@ -1,13 +1,13 @@
 <?php
 
-namespace app\Nucleo\Middleware;
+namespace App\Nucleo\Middleware;
 
 use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
-use app\Modelos\EmpresasModelo;
-use app\Nucleo\Helpers;
-use app\Nucleo\Mensagem;
-use app\Nucleo\Sessao;
+use App\Modelos\EmpresasModelo;
+use App\Nucleo\Helpers;
+use App\Nucleo\Mensagem;
+use App\Nucleo\Sessao;
 
 class Company implements IMiddleware
 {

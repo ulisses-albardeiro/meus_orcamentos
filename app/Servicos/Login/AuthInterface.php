@@ -1,5 +1,5 @@
 <?php
-namespace app\Servicos\Login;
+namespace App\Servicos\Login;
 
 interface AuthInterface
 {

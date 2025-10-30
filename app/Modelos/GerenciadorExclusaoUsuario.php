@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Modelos;
+namespace App\Modelos;
 
-use app\Nucleo\Modelo;
-use app\Nucleo\Conexao;
+use App\Nucleo\Modelo;
+use App\Nucleo\Conexao;
 
 /**
  * Gerencia a exclusão de registros de um usuário em múltiplas tabelas de forma dinâmica.

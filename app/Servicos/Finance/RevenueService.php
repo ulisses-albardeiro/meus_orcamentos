@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
-use app\Modelos\RevenueModel;
-use app\Nucleo\Helpers;
+use App\Modelos\RevenueModel;
+use App\Nucleo\Helpers;
 
 class RevenueService implements RevenueInterface
 {

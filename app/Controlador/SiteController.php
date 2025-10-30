@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador;
+namespace App\Controlador;
 
-use app\Nucleo\Controlador;
-use app\Nucleo\Helpers;
-use app\Nucleo\Sessao;
+use App\Nucleo\Controlador;
+use App\Nucleo\Helpers;
+use App\Nucleo\Sessao;
 
 class SiteController extends Controlador
 {

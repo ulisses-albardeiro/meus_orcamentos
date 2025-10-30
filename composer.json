@@ -2,7 +2,7 @@
     "name": "note/meus_orcamentos",
     "autoload": {
         "psr-4": {
-            "app\\": "app/"
+            "App\\": "app/"
         },
         "files": [
             "app/config.php",

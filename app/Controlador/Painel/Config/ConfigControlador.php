@@ -1,12 +1,12 @@
 <?php
 
-namespace app\Controlador\Painel\Config;
+namespace App\Controlador\Painel\Config;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Modelos\GerenciadorExclusaoUsuario;
-use app\Modelos\UserModel;
-use app\Nucleo\Helpers;
-use app\Nucleo\Sessao;
+use App\Controlador\Painel\PainelControlador;
+use App\Modelos\GerenciadorExclusaoUsuario;
+use App\Modelos\UserModel;
+use App\Nucleo\Helpers;
+use App\Nucleo\Sessao;
 
 class ConfigControlador extends PainelControlador
 {

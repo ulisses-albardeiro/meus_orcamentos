@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador;
+namespace App\Controlador;
 
-use app\Modelos\BlogCategoriaModelo;
-use app\Modelos\BlogPostModelo;
-use app\Nucleo\Controlador;
+use App\Modelos\BlogCategoriaModelo;
+use App\Modelos\BlogPostModelo;
+use App\Nucleo\Controlador;
 
 class BlogController extends Controlador
 {

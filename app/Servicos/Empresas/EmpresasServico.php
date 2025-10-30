@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Servicos\Empresas;
+namespace App\Servicos\Empresas;
 
-use app\Biblioteca\Upload;
-use app\Modelos\EmpresasModelo;
-use app\Nucleo\Helpers;
-use app\Nucleo\Modelo;
+use App\Biblioteca\Upload;
+use App\Modelos\EmpresasModelo;
+use App\Nucleo\Helpers;
+use App\Nucleo\Modelo;
 
 class EmpresasServico implements EmpresasInterface
 {

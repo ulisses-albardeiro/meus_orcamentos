@@ -1,16 +1,16 @@
 <?php
 
-namespace app\Controlador\Painel\Quotes;
+namespace App\Controlador\Painel\Quotes;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Modelos\OrcamentoModelo;
-use app\Nucleo\Helpers;
-use app\Servicos\Empresas\EmpresasInterface;
-use app\Servicos\Orcamentos\OrcamentosInterface;
-use app\Servicos\Usuarios\UsuariosInterface;
-use app\Adapter\PdfAdapter\PdfInterface;
-use app\Servicos\Clients\ClientsInterface;
-use app\Servicos\Files\FileManagerInterface;
+use App\Controlador\Painel\PainelControlador;
+use App\Modelos\OrcamentoModelo;
+use App\Nucleo\Helpers;
+use App\Servicos\Empresas\EmpresasInterface;
+use App\Servicos\Orcamentos\OrcamentosInterface;
+use App\Servicos\Usuarios\UsuariosInterface;
+use App\Adapter\PdfAdapter\PdfInterface;
+use App\Servicos\Clients\ClientsInterface;
+use App\Servicos\Files\FileManagerInterface;
 
 class QuotesController extends PainelControlador
 {

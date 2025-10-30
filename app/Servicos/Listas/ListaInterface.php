@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Listas;
+namespace App\Servicos\Listas;
 
 interface ListaInterface
 {

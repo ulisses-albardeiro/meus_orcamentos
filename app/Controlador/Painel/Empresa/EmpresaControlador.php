@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador\Painel\Empresa;
+namespace App\Controlador\Painel\Empresa;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Nucleo\Helpers;
-use app\Servicos\Empresas\EmpresasInterface;
+use App\Controlador\Painel\PainelControlador;
+use App\Nucleo\Helpers;
+use App\Servicos\Empresas\EmpresasInterface;
 
 class EmpresaControlador extends PainelControlador
 {

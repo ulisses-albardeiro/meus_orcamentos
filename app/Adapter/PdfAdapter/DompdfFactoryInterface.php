@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Adapter\PdfAdapter;
+namespace App\Adapter\PdfAdapter;
 
 use Dompdf\Dompdf;
 

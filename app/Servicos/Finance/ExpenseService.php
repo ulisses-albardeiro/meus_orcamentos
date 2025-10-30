@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
-use app\Modelos\ExpenseModel;
-use app\Nucleo\Helpers;
+use App\Modelos\ExpenseModel;
+use App\Nucleo\Helpers;
 
 class ExpenseService implements ExpenseInterface
 {

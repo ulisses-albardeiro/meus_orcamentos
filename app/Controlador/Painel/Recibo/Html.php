@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Controlador\Painel\Recibo;
+namespace App\Controlador\Painel\Recibo;
 
-use app\Nucleo\Helpers;
+use App\Nucleo\Helpers;
 
 class Html
 {

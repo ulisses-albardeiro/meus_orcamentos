@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Clients;
+namespace App\Servicos\Clients;
 
 interface ClientsInterface
 {

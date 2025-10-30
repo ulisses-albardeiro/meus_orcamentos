@@ -1,12 +1,12 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
 use DateTime;
-use app\Modelos\CategoryModel;
-use app\Modelos\ExpenseModel;
-use app\Modelos\RevenueModel;
-use app\Nucleo\Helpers;
+use App\Modelos\CategoryModel;
+use App\Modelos\ExpenseModel;
+use App\Modelos\RevenueModel;
+use App\Nucleo\Helpers;
 
 class DashboardService implements DashboardInterface
 {

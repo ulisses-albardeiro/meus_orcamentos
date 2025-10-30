@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Servicos\Empresas;
+namespace App\Servicos\Empresas;
 
-use app\Nucleo\Modelo;
+use App\Nucleo\Modelo;
 
 interface EmpresasInterface
 {

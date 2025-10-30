@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Controlador\Painel\Recibo;
+namespace App\Controlador\Painel\Recibo;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Modelos\ReciboModelo;
-use app\Nucleo\Helpers;
-use app\Adapter\Pdf;
+use App\Controlador\Painel\PainelControlador;
+use App\Modelos\ReciboModelo;
+use App\Nucleo\Helpers;
+use App\Adapter\Pdf;
 
 class Recibo extends PainelControlador
 {

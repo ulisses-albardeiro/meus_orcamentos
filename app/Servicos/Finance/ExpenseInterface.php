@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Finance;
+namespace App\Servicos\Finance;
 
 interface ExpenseInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Nucleo;
+namespace App\Nucleo;
 
 use Pecee\SimpleRouter\ClassLoader\IClassLoader;
 use Psr\Container\ContainerInterface;

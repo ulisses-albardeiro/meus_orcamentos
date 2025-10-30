@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Controlador\Painel\Blog;
+namespace App\Controlador\Painel\Blog;
 
-use app\Controlador\Painel\PainelControlador;
+use App\Controlador\Painel\PainelControlador;
 
 class BlogControlador extends PainelControlador
 {

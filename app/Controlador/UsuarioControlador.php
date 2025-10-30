@@ -1,12 +1,12 @@
 <?php
 
-namespace app\Controlador;
+namespace App\Controlador;
 
-use app\Modelos\EmpresasModelo;
-use app\Modelos\UserModel;
-use app\Nucleo\Controlador;
-use app\Nucleo\Modelo;
-use app\Nucleo\Sessao;
+use App\Modelos\EmpresasModelo;
+use App\Modelos\UserModel;
+use App\Nucleo\Controlador;
+use App\Nucleo\Modelo;
+use App\Nucleo\Sessao;
 
 class UsuarioControlador extends Controlador 
 {

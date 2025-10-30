@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Adapter;
+namespace App\Adapter;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -8,7 +8,7 @@ use Dompdf\Options;
 /**
  * Classe para geração de PDFs utilizando a biblioteca DOMPDF.
  *
- * @package app\Adapter
+ * @package App\Adapter
  */
 final class Pdf
 {

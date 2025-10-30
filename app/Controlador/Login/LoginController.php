@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador\Login;
+namespace App\Controlador\Login;
 
-use app\Nucleo\Controlador;
-use app\Nucleo\Helpers;
-use app\Servicos\Login\AuthInterface;
+use App\Nucleo\Controlador;
+use App\Nucleo\Helpers;
+use App\Servicos\Login\AuthInterface;
 
 class LoginController extends Controlador
 {

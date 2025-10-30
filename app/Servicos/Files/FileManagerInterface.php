@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Servicos\Files;
+namespace App\Servicos\Files;
 
 interface FileManagerInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controlador\Painel\Finance;
+namespace App\Controlador\Painel\Finance;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Nucleo\Helpers;
-use app\Servicos\Finance\CategoryInterface;
+use App\Controlador\Painel\PainelControlador;
+use App\Nucleo\Helpers;
+use App\Servicos\Finance\CategoryInterface;
 
 class CategoryController extends PainelControlador
 {

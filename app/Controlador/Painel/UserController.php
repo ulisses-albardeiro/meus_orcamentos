@@ -1,11 +1,11 @@
 <?php
-namespace app\Controlador\Painel;
+namespace App\Controlador\Painel;
 
-use app\Nucleo\Controlador;
-use app\Modelos\UserModel;
-use app\Nucleo\Helpers;
-use app\Biblioteca\Upload;
-use app\Servicos\Usuarios\UsuariosInterface;
+use App\Nucleo\Controlador;
+use App\Modelos\UserModel;
+use App\Nucleo\Helpers;
+use App\Biblioteca\Upload;
+use App\Servicos\Usuarios\UsuariosInterface;
 
 class UserController extends Controlador
 {

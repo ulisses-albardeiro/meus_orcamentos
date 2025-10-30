@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Servicos\PasswordRecovery;
+namespace App\Servicos\PasswordRecovery;
 
-use app\Modelos\UserModel;
-use app\Adapter\Email;
-use app\Adapter\Template;
+use App\Modelos\UserModel;
+use App\Adapter\Email;
+use App\Adapter\Template;
 
 class PasswordRecoveryService implements PasswordRecoveryInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Servicos\Orcamentos;
+namespace App\Servicos\Orcamentos;
 
-use app\Modelos\OrcamentoModelo;
+use App\Modelos\OrcamentoModelo;
 
 class OrcamentosServicos implements OrcamentosInterface
 {

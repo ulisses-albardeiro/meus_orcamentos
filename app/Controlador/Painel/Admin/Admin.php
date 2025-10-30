@@ -1,12 +1,12 @@
 <?php
 
-namespace app\Controlador\Painel\Admin;
+namespace App\Controlador\Painel\Admin;
 
-use app\Controlador\Painel\PainelControlador;
-use app\Modelos\ListaModelo;
-use app\Modelos\OrcamentoModelo;
-use app\Modelos\ReciboModelo;
-use app\Modelos\UserModel;
+use App\Controlador\Painel\PainelControlador;
+use App\Modelos\ListaModelo;
+use App\Modelos\OrcamentoModelo;
+use App\Modelos\ReciboModelo;
+use App\Modelos\UserModel;
 
 class Admin extends PainelControlador
 {

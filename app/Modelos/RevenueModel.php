@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Modelos;
+namespace App\Modelos;
 
-use app\Nucleo\Modelo;
+use App\Nucleo\Modelo;
 
 class RevenueModel extends Modelo
 {

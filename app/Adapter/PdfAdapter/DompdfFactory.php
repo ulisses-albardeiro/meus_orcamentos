@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Adapter\PdfAdapter;
+namespace App\Adapter\PdfAdapter;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use app\Adapter\PdfAdapter\DompdfFactoryInterface;
+use App\Adapter\PdfAdapter\DompdfFactoryInterface;
 
 final class DompdfFactory implements DompdfFactoryInterface
 {
