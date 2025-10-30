@@ -2,11 +2,11 @@
     "name": "note/meus_orcamentos",
     "autoload": {
         "psr-4": {
-            "sistema\\": "sistema/"
+            "app\\": "app/"
         },
         "files": [
-            "sistema/config.php",
-            "sistema/Nucleo/Suport/Debug.php"
+            "app/config.php",
+            "app/Nucleo/Suport/Debug.php"
         ]
     },
     "authors": [

@@ -5,8 +5,8 @@ require 'vendor/autoload.php';
 $container = require 'container.php';
 
 use Pecee\SimpleRouter\SimpleRouter;
-use sistema\Nucleo\DIClassLoader;
+use app\Nucleo\DIClassLoader;
 
 SimpleRouter::setCustomClassLoader(new DIClassLoader($container));
 
-require 'sistema/routes.php';
+require 'app/routes.php';
