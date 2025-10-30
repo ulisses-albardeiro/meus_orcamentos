@@ -1,14 +1,14 @@
 <?php
 
 use Pecee\SimpleRouter\SimpleRouter;
-use App\Nucleo\Middleware\Admin;
-use App\Nucleo\Middleware\Auth;
-use App\Nucleo\Middleware\Company;
-use App\Nucleo\Helpers;
+use App\Core\Middleware\Admin;
+use App\Core\Middleware\Auth;
+use App\Core\Middleware\Company;
+use App\Core\Helpers;
 
 try {
     //Site and Blog
-    SimpleRouter::setDefaultNamespace('App\Controlador');
+    SimpleRouter::setDefaultNamespace('App\Controllers');
     SimpleRouter::get(BASE_PATH, 'SiteController@index');
     SimpleRouter::get('404', 'SiteController@error404');
     SimpleRouter::get('pravicy-policy', 'SiteController@pravicyPolicy');

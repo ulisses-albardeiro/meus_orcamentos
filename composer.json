@@ -6,7 +6,7 @@
         },
         "files": [
             "app/config.php",
-            "app/Nucleo/Suport/Debug.php"
+            "app/Core/Suport/Debug.php"
         ]
     },
     "authors": [
