@@ -16,9 +16,9 @@
 <h3 class="text-center">Confira Seus Dados</h3>
 <p style="margin-top: -15px;" class="text-danger text-center">Para uma configuração persistente dos seus dados ou para
     adicionar logo ao seu orçamento, vá para
-    <a href="{{ url('profile') }}">Perfil</a>
+    <a href="{{ url('empresa') }}">Perfil da Empresa</a>
 </p>
-<form action="{{ url('orcamento/cadastrar/' ~ modelo)}}" method="post" target="_blank">
+<form action="{{ url('orcamento/cadastrar/' ~ template)}}" method="post" target="_blank">
 
     {% include '/componentes/cabecalho-dados-empresa.html' %}
 
@@ -26,19 +26,23 @@
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
 
     {% include '/componentes/cabecalho-dados-cliente.html' %}
-
+    
     <h3 class="mt-4 text-center">Itens do Orçamento</h3>
     <p style="margin-top: -15px;" class="text-danger text-center">Campos com * são obrigatórios</p>
     <div class="card border-1 shadow-lg p-3">
         <div id="itens-container" class="mb-3">
             <div class="row g-2 item">
-                <div class="col-10">
+                <div class="col-7">
                     <input required type="text" class="form-control form-control-sm" placeholder="Nome do Serviço*"
                         name="itens[0][nome]">
                 </div>
                 <div class="col-2">
                     <input required type="number" class="form-control form-control-sm" placeholder="Qtd*"
                         name="itens[0][qtd]">
+                </div>
+                <div class="col-3">
+                    <input required type="text" class="form-control form-control-sm valor-unitario"
+                        placeholder="Valor unitário*" name="itens[0][valor]" id="valor-unitario">
                 </div>
 
                 <div class="col-12">
@@ -47,19 +51,8 @@
                 </div>
             </div>
         </div>
-        <button style="background-color: #0b5ed7;" type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItemSimples()">Adicionar
+        <button style="background-color: #0b5ed7;" type="button" class="btn btn-sm btn-primary mb-3" onclick="adicionarItemDetalhado()">Adicionar
             Item</button>
-    </div>
-
-    <h3 class="mt-4 text-center">Valor total do orçamento</h3>
-
-    <div class="card border-1 shadow-lg p-3">
-        <div class="mb-3 d-flex justify-content-center">
-            <div class="col-md-2">
-                <label class="form-label">Valor total</label>
-                <input type="text" id="valor_orcamento" class="form-control form-control-sm" name="valor_orcamento">
-            </div>
-        </div>
     </div>
 
     <h3 class="mt-4 text-center">Detalhes finais</h3>
@@ -83,21 +76,24 @@
                 class="bi bi-plus-circle"></i> Gerar Orçamento</button>
     </div>
 </form>
-<script></script>
+
 <script src="{{url('templates/assets/js/orcamentos.js')}}?v=1.0.2"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Função para adicionar novos itens ao orçamento
-        adicionarItemSimples();
+        adicionarItemDetalhado();
         mascaraCpfCnpjInput(document.getElementById('cpf_cnpj_cliente'));
         mascaraCepInput(document.getElementById('cep_cliente'));
         mascaraTelefoneInput(document.getElementById('telefone_cliente'));
         mascaraCelularInput(document.getElementById('celular_cliente'));
 
         // Aplica máscara monetária ao campo inicial
-        
-            aplicarMascaraMonetaria(document.getElementById('valor_orcamento'));
+        const camposValor = document.querySelectorAll('.valor-unitario');
+        camposValor.forEach(campo => {
+            aplicarMascaraMonetaria(campo);
+        });
+       
     });
 </script>
 

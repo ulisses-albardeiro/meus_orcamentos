@@ -21,15 +21,15 @@ class HomeController extends PainelControlador
 
     public function index() : void
     {
-        $cashBalanceMonth = $this->dashboardService->findCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
-        $totalRevenueMonth = $this->dashboardService->sumRevenueByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
-        $totalExpenseMonth = $this->dashboardService->sumExpensesByPeriod(date('Y-m-01'), date('Y-m-d'), $this->usuario->userId);
+        $cashBalanceMonth = $this->dashboardService->findCashBalanceByPeriod(date('Y-m-01'), date('Y-m-d'), $this->session->userId);
+        $totalRevenueMonth = $this->dashboardService->sumRevenueByPeriod(date('Y-m-01'), date('Y-m-d'), $this->session->userId);
+        $totalExpenseMonth = $this->dashboardService->sumExpensesByPeriod(date('Y-m-01'), date('Y-m-d'), $this->session->userId);
         $marginMonth = $this->dashboardService->calculateMargin($cashBalanceMonth, $totalRevenueMonth);
-        $categoriesExpense = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Despesas');
-        $categoriesRevenue = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Receitas');
+        $categoriesExpense = $this->categoryService->findCategoryByUserIdAndType($this->session->userId, 'Despesas');
+        $categoriesRevenue = $this->categoryService->findCategoryByUserIdAndType($this->session->userId, 'Receitas');
 
-        $clients = $this->clientService->findClientsByUserId($this->usuario->userId) ?? [];
-        $quotes = $this->quoteService->buscaOrcamentosServico($this->usuario->userId) ?? [];
+        $clients = $this->clientService->findClientsByUserId($this->session->userId) ?? [];
+        $quotes = $this->quoteService->buscaOrcamentosServico($this->session->userId) ?? [];
         
         echo $this->template->rendenizar("home.html", 
         [

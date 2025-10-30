@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf_viewer.min.css">
 
-    {% if empresa.logo %}
-    <link rel="icon" href="{{ url('templates/assets/img/logos/'~empresa.logo)}}">
+    {% if company.logo %}
+    <link rel="icon" href="{{ url('templates/assets/img/logos/'~company.logo)}}">
     {% else %}
     <link rel="icon" href="{{ url('templates/assets/img/gerais/icone.png') }}" />
     {% endif %}
@@ -62,7 +62,7 @@
     <script src="{{ url('templates/assets/js/script.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const pdfUrl = "{{ orcamento }}";
+            const pdfUrl = "{{ path }}";
             pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 
             pdfjsLib.getDocument(pdfUrl).promise.then(function (pdfDoc) {

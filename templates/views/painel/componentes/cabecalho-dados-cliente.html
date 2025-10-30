@@ -113,7 +113,7 @@
 </div>
 
 <script>
-    function dropdownClientes(clientes) {
+    function dropdownClientes(clients) {
         // Seletores do DOM
         const nomeInput = document.getElementById('nome_cliente');
         const dropdown = document.getElementById('autocomplete-dropdown');
@@ -210,7 +210,7 @@
             const query = nomeInput.value.toLowerCase();
 
             if (query.length > 0) {
-                const filteredClients = clientes.filter(cliente =>
+                const filteredClients = clients.filter(cliente =>
                     cliente.nome.toLowerCase().includes(query)
                 );
                 renderDropdown(filteredClients);
@@ -227,7 +227,7 @@
         });
     }
 
-    // Obtenha os dados dos clientes do Twig e parse o JSON
-    const clientes = JSON.parse('{{ clientes | json_encode() | raw }}');
-    dropdownClientes(clientes)
+    // Obtenha os dados dos clients do Twig e parse o JSON
+    const clients = JSON.parse('{{ clients | json_encode() | raw }}');
+    dropdownClientes(clients)
 </script>

@@ -26,16 +26,20 @@ $builder->addDefinitions([
     sistema\Servicos\Finance\ExpenseInterface::class => autowire(sistema\Servicos\Finance\ExpenseService::class),
     sistema\Servicos\Finance\RevenueInterface::class => autowire(sistema\Servicos\Finance\RevenueService::class),
 
+    //Clients
     sistema\Servicos\Clients\ClientsInterface::class => autowire(sistema\Servicos\Clients\ClientsService::class),
     EmpresasInterface::class => autowire(EmpresasServico::class),
     
     //Adapter
-    sistema\Adapter\PdfAdapter\PdfInterface::class => autowire(sistema\Adapter\PdfAdapter\PdfService::class),
+    sistema\Adapter\PdfAdapter\PdfInterface::class => autowire(sistema\Adapter\PdfAdapter\PdfGenerator::class),
     sistema\Adapter\PdfAdapter\DompdfFactoryInterface::class => autowire(sistema\Adapter\PdfAdapter\DompdfFactory::class),
 
     //Login end Password
     sistema\Servicos\Login\AuthInterface::class => autowire(sistema\Servicos\Login\LoginService::class),
     sistema\Servicos\PasswordRecovery\PasswordRecoveryInterface::class => autowire(sistema\Servicos\PasswordRecovery\PasswordRecoveryService::class),
+
+    //Files
+    sistema\Servicos\Files\FileManagerInterface::class => autowire(sistema\Servicos\Files\FileManagerService::class),
 ]);
 
 return $builder->build();

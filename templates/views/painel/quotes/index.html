@@ -21,22 +21,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for orcamento in orcamentos %}
+                        {% for quote in quotes %}
                         <tr>
-                            <td>{{ orcamento.nome_cliente }}</td>
-                            <td>{{ orcamento.modelo }}</td>
-                            <td>{{ orcamento.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
-                            <td>R$ {{ orcamento.vl_total |number_format(2, ',', '.') }}</td>
+                            <td>{{ quote.nome_cliente }}</td>
+                            <td>{{ quote.modelo }}</td>
+                            <td>{{ quote.dt_hr_criacao | date("d/m/Y - H:i") }}</td>
+                            <td>R$ {{ quote.vl_total |number_format(2, ',', '.') }}</td>
                             <td class="text-center">
                                 <a title="Ver Orçamento" target="_blank"
-                                    href="{{ url('orcamento/'~orcamento.modelo~'/'~orcamento.hash) }}"
+                                    href="{{ url('orcamento/'~quote.modelo~'/'~quote.hash) }}"
                                     class="text-success text-decoration-none fs-4 me-3">
                                     <i class="bi bi-search"></i>
                                 </a>
                                 <a href="#" title="Excluir" class="text-danger text-decoration-none"
-                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ orcamento.hash }}"><i
+                                    data-bs-toggle="modal" data-bs-target="#modalConfirmDelete{{ quote.hash }}"><i
                                         class="bi bi-trash fs-4"></i>
-                                    {% include 'orcamentos/modais/excluir.html' %}
+                                    {% include 'quotes/modals/delete.html' %}
 
                             </td>
                         </tr>

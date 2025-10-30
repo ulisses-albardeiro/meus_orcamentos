@@ -18,8 +18,8 @@ class RevenueController extends PainelControlador
 
     public function index(): void
     {
-        $revenues = $this->revenueService->findRevenueByUserId($this->usuario->userId);
-        $categories = $this->categoryService->findCategoryByUserIdAndType($this->usuario->userId, 'Receitas');
+        $revenues = $this->revenueService->findRevenueByUserId($this->session->userId);
+        $categories = $this->categoryService->findCategoryByUserIdAndType($this->session->userId, 'Receitas');
         $revenues = Helpers::attachRelated($revenues, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
         echo $this->template->rendenizar(
@@ -38,7 +38,7 @@ class RevenueController extends PainelControlador
     {
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->revenueService->createRevenue($data, $this->usuario->userId)) {
+        if ($this->revenueService->createRevenue($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso("Receita Cadastrada com Sucesso!")->flash();
         }
         Helpers::voltar();

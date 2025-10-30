@@ -25,11 +25,11 @@ class DashboardController extends PainelControlador
         $endDate->modify('last day of this month');
         $endDate = $endDate->format('Y-m-d');
         
-        $totalRevenueCurrentMonth = $this->financeService->sumRevenueByPeriod($date, $endDate, $this->usuario->userId);
-        $totalExpensesCurrentMonth = $this->financeService->sumExpensesByPeriod($date, $endDate, $this->usuario->userId);
-        $categories = $this->categoryService->findCategoryByUserId($this->usuario->userId);
-        $quarterlyData = $this->financeService->findQuarterlyFiananceData($endDate, $this->usuario->userId);
-        $expensesByCategory = $this->financeService->getExpensesByCategory($date, $endDate, $this->usuario->userId);
+        $totalRevenueCurrentMonth = $this->financeService->sumRevenueByPeriod($date, $endDate, $this->session->userId);
+        $totalExpensesCurrentMonth = $this->financeService->sumExpensesByPeriod($date, $endDate, $this->session->userId);
+        $categories = $this->categoryService->findCategoryByUserId($this->session->userId);
+        $quarterlyData = $this->financeService->findQuarterlyFiananceData($endDate, $this->session->userId);
+        $expensesByCategory = $this->financeService->getExpensesByCategory($date, $endDate, $this->session->userId);
         
         echo $this->template->rendenizar("finances/dashboard.html",
             [

@@ -87,19 +87,19 @@ try {
         SimpleRouter::get(URL . 'list/pdf/{template}/{hash}', 'ListController@showPdf');
     });
 
-    //Grupo de Rotas Orçamento
-    SimpleRouter::group(['namespace' => 'Painel\Orcamento', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get(URL . 'orcamento/modelos', 'OrcamentoControlador@modelos');
-        SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'OrcamentoControlador@excluir');
-        SimpleRouter::get(URL . 'orcamento/criar/{form}/{modelo}', 'OrcamentoControlador@criar');
-        SimpleRouter::post(URL . 'orcamento/cadastrar/{modelo}', 'OrcamentoControlador@cadastrar');
-        SimpleRouter::get(URL . 'orcamento/listar', 'OrcamentoControlador@listar');
+    //Quotes
+    SimpleRouter::group(['namespace' => 'Painel\Quotes', 'middleware' => [Auth::class, Company::class]], function () {
+        SimpleRouter::get(URL . 'orcamento/modelos', 'QuotesController@templates');
+        SimpleRouter::get(URL . 'orcamento/excluir/{hash}', 'QuotesController@delete');
+        SimpleRouter::get(URL . 'orcamento/criar/{form}/{template}', 'QuotesController@create');
+        SimpleRouter::post(URL . 'orcamento/cadastrar/{template}', 'QuotesController@store');
+        SimpleRouter::get(URL . 'orcamento/listar', 'QuotesController@index');
     });
 
     //Grupo de rotas que não precisa de autenticação
-    SimpleRouter::group(['namespace' => 'Painel\Orcamento'], function () {
-        SimpleRouter::get(URL . 'orcamento/{modelo}/{hash}', 'OrcamentoControlador@exibir');
-        SimpleRouter::get(URL . 'orcamento/pdf/{modelo}/{hash}', 'OrcamentoControlador@pdf');
+    SimpleRouter::group(['namespace' => 'Painel\Quotes'], function () {
+        SimpleRouter::get(URL . 'orcamento/{template}/{hash}', 'QuotesController@show');
+        SimpleRouter::get(URL . 'orcamento/pdf/{template}/{hash}', 'QuotesController@export');
     });
 
     //Grupo de Rotas Recibo

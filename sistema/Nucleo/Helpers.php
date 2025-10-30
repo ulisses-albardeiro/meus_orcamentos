@@ -354,7 +354,7 @@ class Helpers
         string $foreignKey,
         string $targetField,
         string $relatedField
-    ): array {
+    ): ?array {
 
         if (empty($items) || empty($related)) {
             return $items;

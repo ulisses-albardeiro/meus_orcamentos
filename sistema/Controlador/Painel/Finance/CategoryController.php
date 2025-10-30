@@ -15,7 +15,7 @@ class CategoryController extends PainelControlador
 
     public function index(): void
     {
-        $categories = $this->categoryService->findCategoryByUserId($this->usuario->userId);
+        $categories = $this->categoryService->findCategoryByUserId($this->session->userId);
         echo $this->template->rendenizar(
             "finances/category.html",
             [
@@ -31,7 +31,7 @@ class CategoryController extends PainelControlador
     {
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (!empty($this->categoryService->findCategoryByName($data['name'], $data['type'], $this->usuario->userId))) {
+        if (!empty($this->categoryService->findCategoryByName($data['name'], $data['type'], $this->session->userId))) {
             $this->mensagem->mensagemAtencao(
                 "A categoria '{$data['name']}' do tipo '{$data['type']}' já está cadastrada! Use outro tipo ou nome."
             )->flash();
@@ -40,7 +40,7 @@ class CategoryController extends PainelControlador
             return;
         }
 
-        if ($this->categoryService->createCategory($data, $this->usuario->userId)) {
+        if ($this->categoryService->createCategory($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso("Categoria cadastrada com Sucesso!")->flash();
         }
 

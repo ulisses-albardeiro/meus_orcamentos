@@ -18,8 +18,8 @@ class ExpenseController extends PainelControlador
 
     public function index(): void
     {
-        $expenses = $this->serviceExpense->findExpensesByUserId($this->usuario->userId);
-        $categories = $this->serviceCategory->findCategoryByUserIdAndType($this->usuario->userId, 'Despesas');
+        $expenses = $this->serviceExpense->findExpensesByUserId($this->session->userId);
+        $categories = $this->serviceCategory->findCategoryByUserIdAndType($this->session->userId, 'Despesas');
         $expenses = Helpers::attachRelated($expenses, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
         echo $this->template->rendenizar(
@@ -38,7 +38,7 @@ class ExpenseController extends PainelControlador
     {
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->serviceExpense->createExpense($data, $this->usuario->userId)) {
+        if ($this->serviceExpense->createExpense($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso("Despesa Cadastrada com Sucesso!")->flash();
         }
         Helpers::voltar();

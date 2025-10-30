@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Orçamento {{ dataClient.cliente_nome }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .titulo-orcamento {
+      color: white;
+      padding: 10px 20px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .img_logo img {
+      max-width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-white shadow-sm">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="titulo-orcamento bg-dark">ORÇAMENTO</div>
+      <div class="text-end small text-muted">
+        {% if company.logo %}
+        <div class="img_logo"><img src="{{ url('templates/assets/img/logos/'~company.logo) }}"></div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-4 mb-3 border-bottom pb-2">
+      <p class="mb-0"><strong>Cliente: </strong>{{ dataClient.nome_cliente }}</p>
+
+      {% if dataClient.telefone_cliente or dataClient.celular_cliente %}
+      <p class="mb-0">
+        <strong>Telefone: </strong>
+        {% if dataClient.telefone_cliente %}{{ dataClient.telefone_cliente }}{% endif %}
+        {% if dataClient.telefone_cliente and dataClient.celular_cliente %} / {% endif %}
+        {% if dataClient.celular_cliente %}{{ dataClient.celular_cliente }}{% endif %}
+      </p>
+      {% endif %}
+
+      {% if dataClient.email_cliente %}
+      <p class="mb-0"><strong>Email: </strong>{{ dataClient.email_cliente }}</p>
+      {% endif %}
+
+      {% if dataClient.cpf_cnpj_cliente %}
+      <p class="mb-0"><strong>Documento: </strong>{{ dataClient.cpf_cnpj_cliente }}</p>
+      {% endif %}
+
+      {% if dataClient.rua_cliente or dataClient.n_casa_cliente or dataClient.bairro_cliente or
+      dataClient.cidade_cliente or dataClient.uf_cliente or dataClient.cep_cliente %}
+      <p class="mb-0 w-75" >
+        <strong>Endereço: </strong>
+        {% if dataClient.rua_cliente %}{{ dataClient.rua_cliente }}{% endif %}
+        {% if dataClient.n_casa_cliente %}, {{ dataClient.n_casa_cliente }}{% endif %}
+        {% if dataClient.bairro_cliente %} - {{ dataClient.bairro_cliente }}{% endif %}
+        {% if dataClient.cidade_cliente %} - {{ dataClient.cidade_cliente }}{% endif %}
+        {% if dataClient.uf_cliente %}/{{ dataClient.uf_cliente }}{% endif %}
+        {% if dataClient.cep_cliente %} - CEP: {{ dataClient.cep_cliente }}{% endif %}
+      </p>
+      {% endif %}
+    </div>
+
+    <table class="table table-borderless mt-4">
+      <thead class="border-bottom text-red">
+        <tr>
+          <th style="width: 450px;" scope="col">ITEM</th>
+          <th scope="col">QT</th>
+          <th class="px-2" scope="col">Valor Unit.</th>
+          <th scope="col">Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>
+            <strong>{{ item.nome }}</strong><br>
+            <span class="text-muted fst-italic small">{{ item.descricao | raw }}</span>
+          </td>
+          <td>{{ item.qtd }}</td>
+          <td>{{ item.valor }}</td>
+          <td>R$ {{ (item.qtd * item.valor_float)|number_format(2, ',', '.') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-end fs-5 fw-bold mt-2">
+      TOTAL GERAL<p class="text-success">R$ {{ dataQuotes|number_format(2, ',', '.') }}</p>
+    </div>
+
+    <div class="text-center mt-1 small">
+      <p class="fw-bold mb-1">{{ dataCompany.nome_empresa }}</p>
+      {% if dataCompany.rua_empresa or dataCompany.n_casa_empresa or
+      dataCompany.bairro_empresa or dataCompany.cep_empresa or
+      dataCompany.cidade_empresa or dataCompany.uf_empresa %}
+      <p style="font-size: 15px;" class="mb-1">
+        <i class="fas fa-map-marker-alt text-muted me-1"></i>
+        {{ dataCompany.rua_empresa }}
+        {% if dataCompany.n_casa_empresa %}, {{dataCompany.n_casa_empresa }}{% endif %}
+        {% if dataCompany.bairro_empresa %} - {{ dataCompany.bairro_empresa }}{% endif
+        %}
+        {% if dataCompany.cep_empresa %}. CEP: {{ dataCompany.cep_empresa }}{% endif %}
+        {% if dataCompany.cidade_empresa %}. {{ dataCompany.cidade_empresa }}{% endif %}
+        {% if dataCompany.uf_empresa %}/{{ dataCompany.uf_empresa }}{% endif %}.
+      </p>
+      {% endif %}
+      <p class="mb-0">
+        {{ dataCompany.telefone_empresa }} |
+        {{ dataCompany.celular_empresa }} |
+        {{ dataCompany.email_empresa }} |
+        {{ dataCompany.cnpj_empresa }}
+      </p>
+      <p class="mt-2">
+        {% if dataCompany.facebook %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dataCompany.facebook }}
+        </span>
+        {% endif %}
+        
+        {% if dataCompany.instagram %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dataCompany.instagram }}
+        </span>
+        {% endif %}
+        
+        {% if dataCompany.x %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="X (Twitter)" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dataCompany.x }}
+        </span>
+        {% endif %}
+        
+        {% if dataCompany.tiktok %}
+        
+        <span class="me-1">
+          <img src="{{url('templates/assets/img/gerais/tiktok.png')}}" alt="LinkedIn" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dataCompany.tiktok }}
+        </span>
+        {% endif %}
+        
+        {% if dataCompany.linkedin %}
+        <span class="me-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="me-1"
+            style="width: 15px; height: 15px; margin-top: 10px;">
+          {{ dataCompany.linkedin }}
+        </span>
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="text-center small">
+      <p>
+        {{ fullData.anotacoes | raw }}
+      </p>
+      <p>
+        Obrigado por solicitar um orçamento conosco! Para dúvidas, entre em contato.
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

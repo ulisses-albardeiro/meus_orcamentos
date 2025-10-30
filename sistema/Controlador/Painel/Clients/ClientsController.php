@@ -21,7 +21,7 @@ class ClientsController extends PainelControlador
             'clients/index.html',
             [
                 'titulo' => 'Clientes',
-                'clientes' => $this->clientService->findClientsByUserId($this->usuario->userId)
+                'clientes' => $this->clientService->findClientsByUserId($this->session->userId)
             ]
         );
     }
@@ -30,7 +30,7 @@ class ClientsController extends PainelControlador
     {
         $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if ($this->clientService->registerClient($data, $this->usuario->userId)) {
+        if ($this->clientService->registerClient($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso!')->flash();
         }
 
