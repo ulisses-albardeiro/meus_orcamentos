@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class BlogPostModelo extends Modelo
+class BlogPostModelo extends Model
 {
     public function __construct()
     {

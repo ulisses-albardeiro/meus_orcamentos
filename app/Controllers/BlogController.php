@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use App\Models\BlogCategoriaModelo;
 use App\Models\BlogPostModelo;
-use App\Core\Controlador;
+use App\Core\Controller;
 
-class BlogController extends Controlador
+class BlogController extends Controller
 {
     protected BlogPostModelo $postModelo;
     protected BlogCategoriaModelo $categoriaModelo;

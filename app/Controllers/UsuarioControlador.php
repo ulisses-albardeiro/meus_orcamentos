@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 use App\Models\EmpresasModelo;
 use App\Models\UserModel;
-use App\Core\Controlador;
-use App\Core\Modelo;
+use App\Core\Controller;
+use App\Core\Model;
 use App\Core\Sessao;
 
-class UsuarioControlador extends Controlador 
+class UsuarioControlador extends Controller 
 {
     public function __construct()
     {
@@ -25,7 +25,7 @@ class UsuarioControlador extends Controlador
         return (new UserModel)->buscaPorId($sessao->userId);
     }
 
-    public static function empresa(): ?Modelo
+    public static function empresa(): ?Model
     {
         $sessao = new Sessao();
         return (new EmpresasModelo)->buscaEmpresaPorIdUsuario($sessao->userId);

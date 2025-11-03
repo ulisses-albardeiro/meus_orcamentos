@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class ListaModelo extends Modelo
+class ListaModelo extends Model
 {
     public function __construct()
     {

@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
-use App\Core\Conexao;
+use App\Core\Model;
+use App\Core\Connection;
 
 /**
  * Gerencia a exclusão de registros de um usuário em múltiplas tabelas de forma dinâmica.
  */
-class GerenciadorExclusaoUsuario extends Modelo
+class GerenciadorExclusaoUsuario extends Model
 {
     public function __construct()
     {
@@ -24,7 +24,7 @@ class GerenciadorExclusaoUsuario extends Modelo
      */
     public function apagarRegistrosPorUsuarioGeral(int $id_usuario): bool
     {
-        $conexao = Conexao::getInstancia();
+        $conexao = Connection::getInstancia();
         $sucessoTotal = true;
 
         try {

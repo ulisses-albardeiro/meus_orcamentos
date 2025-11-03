@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class CategoryModel extends Modelo
+class CategoryModel extends Model
 {
     public function __construct()
     {
@@ -38,7 +38,7 @@ class CategoryModel extends Modelo
         return $this->salvar();
     }
 
-    public function findCategoryByName(string $name, string $type, int $userId): ?Modelo
+    public function findCategoryByName(string $name, string $type, int $userId): ?Model
     {
         return $this->busca(
             "nome = :n AND tipo = :t AND id_usuario = :id",

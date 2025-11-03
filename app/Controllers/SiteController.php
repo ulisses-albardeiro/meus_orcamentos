@@ -2,11 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Core\Controlador;
+use App\Core\Controller;
 use App\Core\Helpers;
 use App\Core\Sessao;
 
-class SiteController extends Controlador
+class SiteController extends Controller
 {
     public function __construct()
     {

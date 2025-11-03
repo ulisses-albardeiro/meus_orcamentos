@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class RevenueModel extends Modelo
+class RevenueModel extends Model
 {
     public function __construct()
     {

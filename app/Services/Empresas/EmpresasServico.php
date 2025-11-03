@@ -5,7 +5,7 @@ namespace App\Services\Empresas;
 use App\Library\Upload;
 use App\Models\EmpresasModelo;
 use App\Core\Helpers;
-use App\Core\Modelo;
+use App\Core\Model;
 
 class EmpresasServico implements EmpresasInterface
 {
@@ -43,7 +43,7 @@ class EmpresasServico implements EmpresasInterface
         return $this->empresaModelo->editarEmpresa($dados, $idEmpresa, $nomeLogo);
     }
 
-    public function buscaEmpresaPorIdUsuarioServico(int $idUsuario): ?Modelo
+    public function buscaEmpresaPorIdUsuarioServico(int $idUsuario): ?Model
     {
         return $this->empresaModelo->buscaEmpresaPorIdUsuario($idUsuario);
     }

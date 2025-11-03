@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Login;
 
-use App\Core\Controlador;
+use App\Core\Controller;
 use App\Core\Helpers;
 use App\Services\Login\AuthInterface;
 
-class LoginController extends Controlador
+class LoginController extends Controller
 {
     public function __construct(private AuthInterface $loginService)
     {

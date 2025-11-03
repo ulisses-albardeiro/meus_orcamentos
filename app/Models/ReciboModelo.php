@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class ReciboModelo extends Modelo
+class ReciboModelo extends Model
 {
     public function __construct()
     {

@@ -2,11 +2,11 @@
 
 namespace App\Controllers\PasswordRecovery;
 
-use App\Core\Controlador;
+use App\Core\Controller;
 use App\Core\Helpers;
 use App\Services\PasswordRecovery\PasswordRecoveryInterface;
 
-class PasswordRecoveryController extends Controlador
+class PasswordRecoveryController extends Controller
 {
     public function __construct(private PasswordRecoveryInterface $passwordRecoveryService)
     {

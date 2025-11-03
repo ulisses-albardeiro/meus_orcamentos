@@ -48,7 +48,7 @@ class Sessao
         }
     }
 
-    public function flash(): ? Mensagem
+    public function flash(): ?Message
     {
         if($this->checarSessao('flash')){
             $flash = $this->flash;

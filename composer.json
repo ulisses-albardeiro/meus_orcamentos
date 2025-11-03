@@ -6,7 +6,7 @@
         },
         "files": [
             "app/config.php",
-            "app/Core/Suport/Debug.php"
+            "app/Core/Support/Debug.php"
         ]
     },
     "authors": [
@@ -18,12 +18,8 @@
     "require": {
         "pecee/simple-router": "5.4.1.7",
         "twig/twig": "^3.14",
-        "guzzlehttp/guzzle": "^7.9",
         "phpmailer/phpmailer": "^6.9",
-        "cboden/ratchet": "^0.4.4",
         "dompdf/dompdf": "^3.1",
-        "smalot/pdfparser": "^2.11",
-        "phpoffice/phpspreadsheet": "^4.1",
         "php-di/php-di": "^7.1",
         "symfony/dotenv": "^7.3"
     }

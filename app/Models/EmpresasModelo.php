@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class EmpresasModelo extends Modelo
+class EmpresasModelo extends Model
 {
     public function __construct()
     {
@@ -62,7 +62,7 @@ class EmpresasModelo extends Modelo
         return $this->salvar();
     }
 
-    public function buscaEmpresaPorIdUsuario(int $idUsuario): ?Modelo
+    public function buscaEmpresaPorIdUsuario(int $idUsuario): ?Model
     {
         return $this->busca("id_usuario = {$idUsuario}")->resultado();
     }

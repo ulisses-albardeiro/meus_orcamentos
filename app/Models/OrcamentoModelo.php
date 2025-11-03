@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class OrcamentoModelo extends Modelo
+class OrcamentoModelo extends Model
 {
     public function __construct()
     {

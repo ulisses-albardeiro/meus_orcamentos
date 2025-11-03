@@ -3,13 +3,13 @@
 namespace App\Services\Finance;
 
 use App\Models\CategoryModel;
-use App\Core\Modelo;
+use App\Core\Model;
 
 class CategoryService implements CategoryInterface
 {
     public function __construct(private CategoryModel $categoryModel){}
 
-    public function findCategoryByName(string $name, string $type, int $userId): ?Modelo
+    public function findCategoryByName(string $name, string $type, int $userId): ?Model
     {
         return $this->categoryModel->findCategoryByName($name, $type, $userId);
     }

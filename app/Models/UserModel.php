@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class UserModel extends Modelo
+class UserModel extends Model
 {
     public function __construct()
     {
         parent::__construct("usuarios");
     }
 
-    public function buscaUsuarioPorId(int $id_usuario): Modelo
+    public function buscaUsuarioPorId(int $id_usuario): ?Model
     {
         return $this->busca("id = {$id_usuario}")->resultado();
     }
@@ -39,7 +39,7 @@ class UserModel extends Modelo
         return $this->salvar();
     }
 
-    public function findByEmail(string $email): ?Modelo
+    public function findByEmail(string $email): ?Model
     {
         return $this->busca("email = :e", ":e={$email}")->resultado();
     }

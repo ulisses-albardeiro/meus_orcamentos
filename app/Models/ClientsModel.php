@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class ClientsModel extends Modelo
+class ClientsModel extends Model
 {
     public function __construct()
     {

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\Modelo;
+use App\Core\Model;
 
-class ExpenseModel extends Modelo
+class ExpenseModel extends Model
 {
     public function __construct()
     {
