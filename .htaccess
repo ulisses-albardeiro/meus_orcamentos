@@ -4,6 +4,9 @@ RewriteEngine on
     Require all denied
 </FilesMatch>
 
+RewriteCond %{REQUEST_URI} ^/storage [NC]
+RewriteRule ^ - [F,L]
+
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-l
