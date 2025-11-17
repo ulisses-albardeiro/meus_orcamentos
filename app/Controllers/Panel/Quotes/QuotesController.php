@@ -7,7 +7,7 @@ use App\Models\OrcamentoModelo;
 use App\Core\Helpers;
 use App\Services\Empresas\EmpresasInterface;
 use App\Services\Orcamentos\OrcamentosInterface;
-use App\Services\Usuarios\UsuariosInterface;
+use App\Services\User\UserInterface;
 use App\Adapters\PdfAdapter\PdfInterface;
 use App\Services\Clients\ClientsInterface;
 use App\Services\Files\FileManagerInterface;
@@ -17,7 +17,7 @@ class QuotesController extends PanelController
     public function __construct(
         private OrcamentosInterface $quoteService,
         private ClientsInterface $clientService,
-        private UsuariosInterface $userService,
+        private UserInterface $userService,
         private EmpresasInterface $companyService,
         private PdfInterface $pdfGenerator,
         private FileManagerInterface $fileManager,

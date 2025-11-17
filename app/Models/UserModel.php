@@ -11,7 +11,7 @@ class UserModel extends Model
         parent::__construct("usuarios");
     }
 
-    public function buscaUsuarioPorId(int $id_usuario): ?Model
+    public function findUserById(int $id_usuario): ?UserModel
     {
         return $this->busca("id = {$id_usuario}")->resultado();
     }

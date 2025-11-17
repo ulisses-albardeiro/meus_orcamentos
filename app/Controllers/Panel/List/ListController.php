@@ -7,7 +7,7 @@ use App\Core\Helpers;
 use App\Services\Empresas\EmpresasInterface;
 use App\Services\Listas\ListaInterface;
 use App\Services\Orcamentos\OrcamentosInterface;
-use App\Services\Usuarios\UsuariosInterface;
+use App\Services\User\UserInterface;
 use App\Adapters\Pdf;
 use App\Services\Clients\ClientsInterface;
 
@@ -16,14 +16,14 @@ class ListController extends PanelController
     protected ListaInterface $listaServico;
     protected ClientsInterface $clientesServico;
     protected OrcamentosInterface $orcamentoInterface;
-    protected UsuariosInterface $usuarioServico;
+    protected UserInterface $usuarioServico;
     protected EmpresasInterface $empresaServico;
 
     public function __construct(
         ListaInterface $listaServico,
         ClientsInterface $clientesServico,
         OrcamentosInterface $orcamentoInterface,
-        UsuariosInterface $usuarioServico,
+        UserInterface $usuarioServico,
         EmpresasInterface $empresaServico
     ) {
         parent::__construct();

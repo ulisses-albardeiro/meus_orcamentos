@@ -7,8 +7,8 @@ use App\Services\Listas\ListaInterface;
 use App\Services\Listas\ListaServicos;
 use App\Services\Orcamentos\OrcamentosInterface;
 use App\Services\Orcamentos\OrcamentosServicos;
-use App\Services\Usuarios\UsuariosInterface;
-use App\Services\Usuarios\UsuariosServico;
+use App\Services\User\UserInterface;
+use App\Services\User\UserService;
 
 use function DI\autowire;
 
@@ -18,7 +18,7 @@ $builder->addDefinitions([
 
     OrcamentosInterface::class => autowire(OrcamentosServicos::class),
     ListaInterface::class => autowire(ListaServicos::class),
-    UsuariosInterface::class => autowire(UsuariosServico::class),
+    UserInterface::class => autowire(UserService::class),
 
     //Finance
     App\Services\Finance\CategoryInterface::class => autowire(App\Services\Finance\CategoryService::class),

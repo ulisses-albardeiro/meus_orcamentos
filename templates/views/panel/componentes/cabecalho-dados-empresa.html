@@ -13,32 +13,32 @@
 </style>
 <div class="card border-1 shadow-lg p-3">
     <div class="text-center mb-3">
-        {% if empresa().logo %}
-        <img src="{{ url('templates/assets/img/logos/'~empresa().logo) }}" class="img-fluid" style="max-height: 150px;">
+        {% if company().logo %}
+        <img src="{{ url('templates/assets/img/logos/'~company().logo) }}" class="img-fluid" style="max-height: 150px;">
         {% endif %}
     </div>
     <div class="row g-2 mb-3">
         <div class="col-md-4">
             <label class="form-label">Seu nome*</label>
-            <input required value="{{ empresa().nome }}" type="text" class="form-control form-control-sm"
+            <input required value="{{ company().nome }}" type="text" class="form-control form-control-sm"
                 name="nome_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label"> Seu Email</label>
-            <input value="{{ empresa().email }}" type="email" class="form-control form-control-sm" name="email_empresa">
+            <input value="{{ company().email }}" type="email" class="form-control form-control-sm" name="email_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label"> Seu Telefone</label>
-            <input value="{{ empresa().telefone }}" type="text" class="form-control form-control-sm"
+            <input value="{{ company().telefone }}" type="text" class="form-control form-control-sm"
                 name="telefone_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label">Celular</label>
-            <input value="{{ empresa().celular }}" type="tel" class="form-control form-control-sm" name="celular_empresa">
+            <input value="{{ company().celular }}" type="tel" class="form-control form-control-sm" name="celular_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label">Seu CNPJ</label>
-            <input value="{{ empresa().cnpj }}" type="text" class="form-control form-control-sm" name="cnpj_empresa"
+            <input value="{{ company().cnpj }}" type="text" class="form-control form-control-sm" name="cnpj_empresa"
                 id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18">
         </div>
     </div>
@@ -46,23 +46,23 @@
     <div class="row g-2 mb-3">
         <div class="col-md-1">
             <label class="form-label">CEP</label>
-            <input value="{{ empresa().cep }}" type="text" class="form-control form-control-sm" name="cep_empresa">
+            <input value="{{ company().cep }}" type="text" class="form-control form-control-sm" name="cep_empresa">
         </div>
         <div class="col-md-5">
             <label class="form-label">Rua</label>
-            <input value="{{ empresa().rua }}" type="text" class="form-control form-control-sm" name="rua_empresa">
+            <input value="{{ company().rua }}" type="text" class="form-control form-control-sm" name="rua_empresa">
         </div>
         <div class="col-md-1">
             <label class="form-label">Número</label>
-            <input value="{{ empresa().n_casa }}" type="text" class="form-control form-control-sm" name="n_casa_empresa">
+            <input value="{{ company().n_casa }}" type="text" class="form-control form-control-sm" name="n_casa_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label">Bairro</label>
-            <input value="{{ empresa().bairro }}" type="text" class="form-control form-control-sm" name="bairro_empresa">
+            <input value="{{ company().bairro }}" type="text" class="form-control form-control-sm" name="bairro_empresa">
         </div>
         <div class="col-md-2">
             <label class="form-label">Cidade</label>
-            <input value="{{ empresa().cidade }}" type="text" class="form-control form-control-sm" name="cidade_empresa">
+            <input value="{{ company().cidade }}" type="text" class="form-control form-control-sm" name="cidade_empresa">
         </div>
         <div class="col-md-1">
             <label class="form-label">Estado</label>
@@ -71,7 +71,7 @@
                 {% for estado in
                 ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
                 %}
-                <option {% if estado==empresa().uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
+                <option {% if estado==company().uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -82,21 +82,21 @@
             <div class="input-group">
                 <span class="input-group-text">Facebook</span>
                 <input name="facebook" type="text" class="form-control" id="facebook"
-                    placeholder="@suaempresa" value="{{empresa().facebook}}">
+                    placeholder="@suaempresa" value="{{company().facebook}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">Instagram</span>
                 <input name="instagram" type="text" class="form-control" id="instagram"
-                    placeholder="@suaempresa" value="{{empresa().instagram}}">
+                    placeholder="@suaempresa" value="{{company().instagram}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">YouTube</span>
                 <input name="youtube" type="text" class="form-control" id="youtube"
-                    placeholder="@suaempresa" value="{{empresa().youtube}}">
+                    placeholder="@suaempresa" value="{{company().youtube}}">
             </div>
         </div>
     </div>
@@ -106,21 +106,21 @@
             <div class="input-group">
                 <span class="input-group-text">LinkedIn</span>
                 <input name="linkedin" type="text" class="form-control" id="linkedin"
-                    placeholder="@suaempresa" value="{{empresa().linkedin}}">
+                    placeholder="@suaempresa" value="{{company().linkedin}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">X (Twitter)</span>
                 <input name="x" type="text" class="form-control" id="x" placeholder="@suaempresa"
-                    value="{{empresa().x}}">
+                    value="{{company().x}}">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="input-group">
                 <span class="input-group-text">TikTok</span>
                 <input name="tiktok" type="text" class="form-control" id="tiktok"
-                    placeholder="@suaempresa" value="{{empresa().tiktok}}">
+                    placeholder="@suaempresa" value="{{company().tiktok}}">
             </div>
         </div>
     </div>

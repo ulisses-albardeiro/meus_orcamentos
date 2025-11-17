@@ -5,13 +5,13 @@ use App\Core\Controller;
 use App\Models\UserModel;
 use App\Core\Helpers;
 use App\Library\Upload;
-use App\Services\Usuarios\UsuariosInterface;
+use App\Services\User\UserInterface;
 
 class UserController extends Controller
 {
-    protected UsuariosInterface $usuarioServico;
+    protected UserInterface $usuarioServico;
 
-    public function __construct(UsuariosInterface $usuarioServico, private UsuariosInterface $userService)
+    public function __construct(UserInterface $usuarioServico, private UserInterface $userService)
     {
         parent::__construct('templates/views');
         $this->usuarioServico = $usuarioServico;
@@ -54,7 +54,7 @@ class UserController extends Controller
     public function update(int $id): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($id);
+        $dadosUsuario = $this->usuarioServico->findUserById($id);
         if (isset($_FILES['imagem']) && $_FILES['imagem']['name'] != '') {
             $upload = new Upload('templates/assets/img/');
             $upload->arquivo($_FILES['imagem'], Helpers::slug($dados['nome']), 'perfil');
@@ -81,7 +81,7 @@ class UserController extends Controller
 
     public function destroyImage(int $id): void
     {
-        $dadosUsuario = $this->usuarioServico->buscaUsuariosPorIdServico($id);
+        $dadosUsuario = $this->usuarioServico->findUserById($id);
 
         unlink($_SERVER['DOCUMENT_ROOT'].BASE_PATH.'templates/assets/img/perfil/' . $dadosUsuario->img_logo);
         $usuario = (new UserModel);

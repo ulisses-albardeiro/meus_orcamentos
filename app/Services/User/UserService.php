@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Services\Usuarios;
+namespace App\Services\User;
 
 use App\Core\Sessao;
 use App\Models\UserModel;
 
-class UsuariosServico implements UsuariosInterface
+class UserService implements UserInterface
 {
     public function __construct(private UserModel $userModel, private Sessao $sessao) {}
 
-    public function buscaUsuariosPorIdServico(int $id_usuario)
+    public function findUserById(int $id_usuario)
     {
-        return $this->userModel->buscaUsuarioPorId($id_usuario);
+        return $this->userModel->findUserById($id_usuario);
     }
 
     public function updateStatus(int $id, int $status): bool

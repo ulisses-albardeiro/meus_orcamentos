@@ -26,13 +26,13 @@
                         que precisar.</p>
                 </div>
 
-                <form action="{% if empresa() %}{{url('empresa/editar/'~empresa().id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}"
+                <form action="{% if company() %}{{url('empresa/editar/'~company().id)}}{% else %}{{url('empresa/cadastrar')}}{% endif %}"
     method="post" enctype="multipart/form-data">
                     <!-- Logo -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="mt-2">
-                                <img src="{% if empresa() %}{{url('templates/assets/img/gerais/empresa().logo')}}{% else %}{{url('templates/assets/img/gerais/logo-default.png')}}{% endif %}" id="logo-preview" class="img-thumbnail" style="max-height: 150px;">
+                                <img src="{% if company() %}{{url('templates/assets/img/gerais/company().logo')}}{% else %}{{url('templates/assets/img/gerais/logo-default.png')}}{% endif %}" id="logo-preview" class="img-thumbnail" style="max-height: 150px;">
                             </div>
                         </div>
                     </div>
@@ -51,21 +51,21 @@
 
                         <div class="col-md-4 mb-3">
                             <label for="nome" class="form-label">Nome</label>
-                            <input name="nome" type="text" class="form-control" id="nome" value="{{empresa().nome}}" required>
+                            <input name="nome" type="text" class="form-control" id="nome" value="{{company().nome}}" required>
                             <div class="form-text text-danger">*Obrigatório.</div>
                         </div>
 
                         <div class="col-md-3 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input name="email" type="email" class="form-control" id="email" value="{{empresa().email}}">
+                            <input name="email" type="email" class="form-control" id="email" value="{{company().email}}">
                         </div>
                         <div class="col-md-2 mb-2">
                             <label for="telefone" class="form-label">Telefone</label>
-                            <input name="telefone" type="tel" class="form-control" id="telefone" value="{{empresa().telefone}}">
+                            <input name="telefone" type="tel" class="form-control" id="telefone" value="{{company().telefone}}">
                         </div>
                         <div class="col-md-2 mb-2">
                             <label for="celular" class="form-label">Celular</label>
-                            <input name="celular" type="tel" class="form-control" id="celular" value="{{empresa().celular}}">
+                            <input name="celular" type="tel" class="form-control" id="celular" value="{{company().celular}}">
                         </div>
                         
                     </div>
@@ -76,23 +76,23 @@
                     <div class="row">
                         <div class="col-2 mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input name="cep" type="text" class="form-control" id="cep" value="{{empresa().cep}}">
+                            <input name="cep" type="text" class="form-control" id="cep" value="{{company().cep}}">
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="rua" class="form-label">Rua</label>
-                            <input name="rua" type="text" class="form-control" id="rua" value="{{empresa().rua}}">
+                            <input name="rua" type="text" class="form-control" id="rua" value="{{company().rua}}">
                         </div>
                         <div class="col-md-1 mb-3">
                             <label for="numero" class="form-label">Número</label>
-                            <input name="n_casa" type="text" class="form-control" id="numero" value="{{empresa().n_casa}}">
+                            <input name="n_casa" type="text" class="form-control" id="numero" value="{{company().n_casa}}">
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input name="bairro" type="text" class="form-control" id="bairro" value="{{empresa().bairro}}">
+                            <input name="bairro" type="text" class="form-control" id="bairro" value="{{company().bairro}}">
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="cidade" class="form-label">Cidade</label>
-                            <input name="cidade" type="text" class="form-control" id="cidade" value="{{empresa().cidade}}">
+                            <input name="cidade" type="text" class="form-control" id="cidade" value="{{company().cidade}}">
                         </div>
                         <div class="col-md-1 mb-3">
                             <label for="estado" class="form-label">Estado</label>
@@ -101,7 +101,7 @@
                                 {% for estado in
                                 ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
                                 %}
-                                <option {% if estado==empresa().uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
+                                <option {% if estado==company().uf %}selected{% endif %} value="{{ estado }}">{{ estado }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -114,19 +114,19 @@
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">Facebook</span>
-                                <input name="facebook" type="text" class="form-control" id="facebook" placeholder="@suaempresa" value="{{empresa().facebook}}">
+                                <input name="facebook" type="text" class="form-control" id="facebook" placeholder="@suaempresa" value="{{company().facebook}}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">Instagram</span>
-                                <input name="instagram" type="text" class="form-control" id="instagram" placeholder="@suaempresa" value="{{empresa().instagram}}">
+                                <input name="instagram" type="text" class="form-control" id="instagram" placeholder="@suaempresa" value="{{company().instagram}}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">YouTube</span>
-                                <input name="youtube" type="text" class="form-control" id="youtube" placeholder="@suaempresa" value="{{empresa().youtube}}">
+                                <input name="youtube" type="text" class="form-control" id="youtube" placeholder="@suaempresa" value="{{company().youtube}}">
                             </div>
                         </div>
                     </div>
@@ -135,19 +135,19 @@
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">LinkedIn</span>
-                                <input name="linkedin" type="text" class="form-control" id="linkedin" placeholder="@suaempresa" value="{{empresa().linkedin}}">
+                                <input name="linkedin" type="text" class="form-control" id="linkedin" placeholder="@suaempresa" value="{{company().linkedin}}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">X (Twitter)</span>
-                                <input name="x" type="text" class="form-control" id="x" placeholder="@suaempresa" value="{{empresa().x}}">
+                                <input name="x" type="text" class="form-control" id="x" placeholder="@suaempresa" value="{{company().x}}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">TikTok</span>
-                                <input name="tiktok" type="text" class="form-control" id="tiktok" placeholder="@suaempresa" value="{{empresa().tiktok}}">
+                                <input name="tiktok" type="text" class="form-control" id="tiktok" placeholder="@suaempresa" value="{{company().tiktok}}">
                             </div>
                         </div>
                     </div>

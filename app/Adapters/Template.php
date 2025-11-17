@@ -2,7 +2,7 @@
 
 namespace App\Adapters;
 
-use App\Controllers\UsuarioControlador;
+use App\Controllers\TemplateController;
 use Twig\Lexer;
 use App\Core\Helpers;
 
@@ -10,9 +10,9 @@ class Template
 {
     private \Twig\Environment $twig;
 
-    public function __construct(string $diretorio = 'templates')
+    public function __construct(string $directory = 'templates')
     {
-        $loader = new \Twig\Loader\FilesystemLoader($diretorio);
+        $loader = new \Twig\Loader\FilesystemLoader($directory);
         $this->twig = new \Twig\Environment($loader);
 
         $lexer = new Lexer($this->twig, array(
@@ -21,15 +21,14 @@ class Template
         $this->twig->setLexer($lexer);
     }
 
-    public function render(string $view, array $dados):string
+    public function render(string $view, array $data):string
     {
-        return $this->twig->render($view, $dados);
+        return $this->twig->render($view, $data);
     }
 
     private function helpers():void
     {
         array(
-            //add metodos ao twig para poder usar nas views
             $this->twig->addFunction(
                 new \Twig\TwigFunction('url', function(?string $url = null){
                     return Helpers::url($url);
@@ -48,13 +47,13 @@ class Template
             ),
 
             $this->twig->addFunction(
-                new \Twig\TwigFunction('usuario', function(){
-                    return UsuarioControlador::usuario();
+                new \Twig\TwigFunction('user', function(){
+                    return TemplateController::user();
                 })
             ),
             $this->twig->addFunction(
-                new \Twig\TwigFunction('empresa', function(){
-                    return UsuarioControlador::empresa();
+                new \Twig\TwigFunction('company', function(){
+                    return TemplateController::company();
                 })
             ),
             $this->twig->addFunction(
