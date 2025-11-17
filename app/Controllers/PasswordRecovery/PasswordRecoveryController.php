@@ -16,7 +16,7 @@ class PasswordRecoveryController extends Controller
 
     public function index(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'password-recovery/email-form.html',
             []
         );
@@ -51,7 +51,7 @@ class PasswordRecoveryController extends Controller
             return;
         }
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'password-recovery/new-password.html',
             [
                 'token' => $token

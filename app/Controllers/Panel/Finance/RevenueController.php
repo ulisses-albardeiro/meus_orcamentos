@@ -22,7 +22,7 @@ class RevenueController extends PanelController
         $categories = $this->categoryService->findCategoryByUserIdAndType($this->session->userId, 'Receitas');
         $revenues = Helpers::attachRelated($revenues, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "finances/revenues.html",
             [
                 "revenues" => $revenues,

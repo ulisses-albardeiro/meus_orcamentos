@@ -30,7 +30,7 @@ class QuotesController extends PanelController
         $quotes = $this->quoteService->buscaOrcamentosServico($this->session->userId);
         $clients = $this->clientService->findClientsByUserId($this->session->userId);
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "quotes/index.html",
             [
                 'quotes' => Helpers::attachRelated($quotes, $clients, 'id_cliente', 'id', 'nome_cliente', 'nome'),
@@ -43,7 +43,7 @@ class QuotesController extends PanelController
 
     public function templates(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "quotes/templates.html",
             [
                 "title" => "Templates"
@@ -53,7 +53,7 @@ class QuotesController extends PanelController
 
     public function create(string $form, string $template): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "quotes/forms/$form.html",
             [
                 "title" => "Criar Orçamento",
@@ -94,7 +94,7 @@ class QuotesController extends PanelController
         $items = $this->quoteService->processarItensParaView($data);
         $company = $this->companyService->buscaEmpresaPorIdUsuarioServico($data['id_usuario']);
 
-        $html = $this->template->rendenizar(
+        $html = $this->template->render(
             "quotes/pdf/$template.html",
             [
                 'dataCompany' => $dataCompany,
@@ -135,7 +135,7 @@ class QuotesController extends PanelController
         $items = $this->quoteService->processarItensParaView($data);
         $company = $this->companyService->buscaEmpresaPorIdUsuarioServico($data['id_usuario']);
 
-        $html = $this->template->rendenizar(
+        $html = $this->template->render(
             "quotes/pdf/$template.html",
             [
                 'dataCompany' => $dataCompany,
@@ -152,7 +152,7 @@ class QuotesController extends PanelController
         $pdfOutput = $this->pdfGenerator->generate($html, ['chroot' => __DIR__]);
         $this->fileManager->save($pdfOutput, $path, "$hash.pdf");
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "quotes/preview.html",
             [
                 "path" => Helpers::url("/storage/pdf/user_{$data['id_usuario']}/quotes/$hash.pdf"),

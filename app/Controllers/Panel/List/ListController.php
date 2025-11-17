@@ -39,7 +39,7 @@ class ListController extends PanelController
         $orcamentos = $this->listaServico->buscarListasServico($this->session->userId);
         $clientes = $this->clientesServico->findClientsByUserId($this->session->userId);
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "listas/listar.html",
             [
                 'listas' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
@@ -51,7 +51,7 @@ class ListController extends PanelController
 
     public function templates(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "listas/modelos.html",
             [
                 "title" => "Modelos"
@@ -61,7 +61,7 @@ class ListController extends PanelController
 
     public function create(string $form, string $template): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "listas/forms/$form.html",
             [
                 "title" => "Criar Lista",
@@ -96,7 +96,7 @@ class ListController extends PanelController
         $dados = $this->listaServico->buscaListaPorHashServico($hash);
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
-        $html = $this->template->rendenizar(
+        $html = $this->template->render(
             "listas/pdf/$template.html",
             [
                 "dados" => $dados,
@@ -132,7 +132,7 @@ class ListController extends PanelController
 
         $empresa = $this->empresaServico->buscaEmpresaPorIdUsuarioServico($dados['id_usuario']);
 
-        $html = $this->template->rendenizar(
+        $html = $this->template->render(
             "listas/pdf/$template.html",
             [
                 "dados" => $dados,
@@ -155,7 +155,7 @@ class ListController extends PanelController
 
         $lista_url = Helpers::url('templates/assets/arquivos/listas/' . $hash . '.pdf');
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "listas/pre-view.html",
             [
                 "orcamento" => $lista_url,

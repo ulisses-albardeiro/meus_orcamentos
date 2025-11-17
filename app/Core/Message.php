@@ -13,7 +13,7 @@ class Message
 
     public function __toString()
     {
-        return $this->rendenizar();
+        return $this->render();
     }
 
     public function mensagemSucesso(string $mensagem): Message

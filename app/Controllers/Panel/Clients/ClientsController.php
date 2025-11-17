@@ -17,7 +17,7 @@ class ClientsController extends PanelController
 
     public function index(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'clients/index.html',
             [
                 'title' => 'Clientes',

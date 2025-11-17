@@ -8,6 +8,6 @@ class BlogControlador extends PanelController
 {
     public function listar() : void
     {
-        echo $this->template->rendenizar('admin/categorias.html', []);    
+        echo $this->template->render('admin/categorias.html', []);    
     }
 }

@@ -15,7 +15,7 @@ class SiteController extends Controller
 
     public function index(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "index.html",
             [
                 'home' => 'Home'
@@ -25,7 +25,7 @@ class SiteController extends Controller
 
     public function pravicyPolicy(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "pravicy-policy.html",
             [
                 'title' => 'Política de Privacidade'
@@ -35,6 +35,6 @@ class SiteController extends Controller
 
     public function error404(): void
     {
-        echo $this->template->rendenizar("404.html", []);
+        echo $this->template->render("404.html", []);
     }
 }

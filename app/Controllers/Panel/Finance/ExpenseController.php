@@ -22,7 +22,7 @@ class ExpenseController extends PanelController
         $categories = $this->serviceCategory->findCategoryByUserIdAndType($this->session->userId, 'Despesas');
         $expenses = Helpers::attachRelated($expenses, $categories, 'id_categoria', 'id', 'categoria', 'nome');
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "finances/expenses.html",
             [
                 "expenses" => $expenses,

@@ -31,7 +31,7 @@ class HomeController extends PanelController
         $clients = $this->clientService->findClientsByUserId($this->session->userId) ?? [];
         $quotes = $this->quoteService->buscaOrcamentosServico($this->session->userId) ?? [];
         
-        echo $this->template->rendenizar("home.html", 
+        echo $this->template->render("home.html", 
         [
             'title' => 'Home',
             'cashBalanceMonth' => $cashBalanceMonth,

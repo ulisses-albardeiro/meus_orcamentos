@@ -19,7 +19,7 @@ class UserController extends Controller
 
     function create() : void
     {
-        echo $this->template->rendenizar("register.html", []);
+        echo $this->template->render("register.html", []);
     }
 
     public function store() : void

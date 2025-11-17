@@ -8,7 +8,7 @@ class ConfigController extends PanelController
 {
     public function index(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'config.html',
             [
                 'title' => 'Configurações',

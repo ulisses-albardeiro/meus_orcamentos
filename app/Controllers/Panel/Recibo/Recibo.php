@@ -11,7 +11,7 @@ class Recibo extends PanelController
 {
     public function listar(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "recibos/listar.html",
             [
                 'recibos' => (new ReciboModelo)->getRecibos($this->usuario->id)
@@ -47,7 +47,7 @@ class Recibo extends PanelController
 
     public function criar(): void
     {
-        echo $this->template->rendenizar("recibos/form-recibos.html", []);
+        echo $this->template->render("recibos/form-recibos.html", []);
     }
 
     public function excluir(int $id_recibo): void

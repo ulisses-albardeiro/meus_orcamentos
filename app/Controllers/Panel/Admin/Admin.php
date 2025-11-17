@@ -12,7 +12,7 @@ class Admin extends PanelController
 {
     public function usuarios(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "admin/usuarios.html",
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),
@@ -26,7 +26,7 @@ class Admin extends PanelController
 
     public function orcamentos(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "admin/orcamentos.html",
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),
@@ -38,7 +38,7 @@ class Admin extends PanelController
 
     public function listas(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "admin/listas.html",
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),
@@ -50,7 +50,7 @@ class Admin extends PanelController
 
     public function recibos(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "admin/recibos.html",
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),

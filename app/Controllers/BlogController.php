@@ -20,7 +20,7 @@ class BlogController extends Controller
 
     public function index(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "index.html",
             [
                 'title' => 'Blog Meus Orçamentos',

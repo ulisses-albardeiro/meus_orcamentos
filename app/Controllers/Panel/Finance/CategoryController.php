@@ -16,7 +16,7 @@ class CategoryController extends PanelController
     public function index(): void
     {
         $categories = $this->categoryService->findCategoryByUserId($this->session->userId);
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             "finances/category.html",
             [
                 "categories" => $categories,

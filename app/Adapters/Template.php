@@ -21,7 +21,7 @@ class Template
         $this->twig->setLexer($lexer);
     }
 
-    public function rendenizar(string $view, array $dados):string
+    public function render(string $view, array $dados):string
     {
         return $this->twig->render($view, $dados);
     }

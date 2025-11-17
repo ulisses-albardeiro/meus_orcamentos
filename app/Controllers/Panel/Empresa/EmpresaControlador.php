@@ -19,7 +19,7 @@ class EmpresaControlador extends PanelController
 
     public function listar(): void
     {
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'empresa/form.html',
             [
                 "title" => "Configure os dados da sua Empresa",
@@ -42,7 +42,7 @@ class EmpresaControlador extends PanelController
             Helpers::redirecionar('home');
         }
 
-        echo $this->template->rendenizar(
+        echo $this->template->render(
             'empresa/cadastro.html',
             [
                 "title" => "Configure os dados da sua Empresa",                

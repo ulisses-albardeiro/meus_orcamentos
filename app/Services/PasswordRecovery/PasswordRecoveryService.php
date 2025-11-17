@@ -61,7 +61,7 @@ class PasswordRecoveryService implements PasswordRecoveryInterface
 
     private function templateEmail(string $token): string
     {
-        return $this->template->rendenizar(
+        return $this->template->render(
             '/views/password-recovery/email-password-recovery.html',
             [
                 'token' => $token

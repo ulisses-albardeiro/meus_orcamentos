@@ -19,7 +19,7 @@ class LoginController extends Controller
             Helpers::redirecionar('home');
             return;
         }
-        echo $this->template->rendenizar('login.html', []);
+        echo $this->template->render('login.html', []);
     }
 
     public function store(): void
