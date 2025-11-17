@@ -8,7 +8,7 @@ use App\Services\Company\CompanyInterface;
 
 class CompanyController extends PanelController
 {
-    public function __construct(private CompanyInterface $empresaServico)
+    public function __construct(private CompanyInterface $companyService)
     {
         parent::__construct();
     }
@@ -16,11 +16,10 @@ class CompanyController extends PanelController
     public function index(): void
     {
         echo $this->template->render(
-            'empresa/form.html',
+            'company/index.html',
             [
                 "title" => "Configure os dados da sua Empresa",
                 "subTitle" => "",
-                'empresa' => $this->empresaServico->findCompanyByUserId($this->session->userId),
             ]
         );
     }
@@ -28,7 +27,7 @@ class CompanyController extends PanelController
     public function create(): void
     {
         echo $this->template->render(
-            'empresa/cadastro.html',
+            'company/register.html',
             [
                 "title" => "Configure os dados da sua Empresa",
             ]
@@ -37,43 +36,40 @@ class CompanyController extends PanelController
 
     public function store(): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if (isset($dados)) {
-            $cadastro = $this->empresaServico->registerCompany($dados, $this->session->userId, $_FILES['logo']);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            if ($cadastro) {
-                $this->mensagem->modal('🎉Tudo está pronto!', 'Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
-            }
-
-            Helpers::redirect('home');
+        if ($this->companyService->registerCompany($data, $this->session->userId, $_FILES['logo'])) {
+            $this->mensagem
+                ->modal('🎉Tudo está pronto!', 'Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')
+                ->flash();
         }
+
+        Helpers::redirect('home');
     }
 
     public function update(int $id): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        $cadastro = $this->empresaServico->updateCompany($dados, $id, $_FILES['logo']);
-
-        if ($cadastro) {
-            $this->mensagem->mensagemSucesso('Empresa editada com sucesso.')->flash();
+        if ($this->companyService->updateCompany($data, $id, $_FILES['logo'])) {
+            $this->mensagem
+                ->mensagemSucesso('Empresa editada com sucesso.')
+                ->flash();
         }
 
-        Helpers::redirect('company');
+        Helpers::redirect("company");
     }
 
     public function destroyLogo(): void
     {
-        $empresa = $this->empresaServico->findCompanyByUserId($this->session->userId);
+        $company = $this->companyService->findCompanyByUserId($this->session->userId);
 
-        unlink($_SERVER['DOCUMENT_ROOT'] . BASE_PATH . 'templates/assets/img/logos/' . $empresa->logo);
+        unlink($_SERVER['DOCUMENT_ROOT'] . BASE_PATH . 'templates/assets/img/logos/' . $company->logo);
 
-        $exclusao = $this->empresaServico->destroyLogo($empresa->id);
-
-        if ($exclusao) {
+        if ($this->companyService->destroyLogo($company->id)) {
             $this->mensagem->mensagemSucesso('Logo excluida com sucesso.')->flash();
         }
 
-        Helpers::redirect('company');
+        Helpers::redirect("company");
     }
 }
