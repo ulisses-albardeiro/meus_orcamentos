@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\EmpresasModelo;
+use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Core\Model;
 use App\Core\Sessao;
@@ -17,7 +17,7 @@ final class TemplateController
 
     public static function company(): ?Model
     {
-        return (new EmpresasModelo)
-            ->buscaEmpresaPorIdUsuario((new Sessao)->userId);
+        return (new CompanyModel)
+            ->findCompanyByUserId((new Sessao)->userId);
     }
 }

@@ -3,15 +3,15 @@
 namespace App\Services\Empresas;
 
 use App\Library\Upload;
-use App\Models\EmpresasModelo;
+use App\Models\CompanyModel;
 use App\Core\Helpers;
 use App\Core\Model;
 
 class EmpresasServico implements EmpresasInterface
 {
-    protected EmpresasModelo $empresaModelo;
+    protected CompanyModel $empresaModelo;
 
-    public function __construct(EmpresasModelo $empresaModelo)
+    public function __construct(CompanyModel $empresaModelo)
     {
         $this->empresaModelo = $empresaModelo;
     }
@@ -24,7 +24,7 @@ class EmpresasServico implements EmpresasInterface
             $logo = $arquivo->getResultado();
         }
 
-        return $this->empresaModelo->cadastrarEmpresa($dados, $idUsuario, $logo);
+        return $this->empresaModelo->registerCompany($dados, $idUsuario, $logo);
     }
 
     public function editarEmpresaServico(array $dados, int $idEmpresa, ?array $logo): bool
@@ -40,16 +40,16 @@ class EmpresasServico implements EmpresasInterface
             $nomeLogo = $arquivo->getResultado();
         }
 
-        return $this->empresaModelo->editarEmpresa($dados, $idEmpresa, $nomeLogo);
+        return $this->empresaModelo->updateCompany($dados, $idEmpresa, $nomeLogo);
     }
 
     public function buscaEmpresaPorIdUsuarioServico(int $idUsuario): ?Model
     {
-        return $this->empresaModelo->buscaEmpresaPorIdUsuario($idUsuario);
+        return $this->empresaModelo->findCompanyByUserId($idUsuario);
     }
 
     public function excluirLogoServico(int $idEmpresa): bool
     {
-        return $this->empresaModelo->excluirLogo($idEmpresa);
+        return $this->empresaModelo->destroyLogo($idEmpresa);
     }
 }
