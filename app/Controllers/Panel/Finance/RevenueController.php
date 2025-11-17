@@ -28,7 +28,7 @@ class RevenueController extends PanelController
                 "revenues" => $revenues,
                 "categoriesRevenue" => $categories,
                 "type" => "Receitas",
-                'titulo' => 'Receitas',
+                'title' => 'Receitas',
                 "revenueMenu" => "active",
             ]
         );

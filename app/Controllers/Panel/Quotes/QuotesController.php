@@ -34,8 +34,8 @@ class QuotesController extends PanelController
             "quotes/index.html",
             [
                 'quotes' => Helpers::attachRelated($quotes, $clients, 'id_cliente', 'id', 'nome_cliente', 'nome'),
-                "titulo" => "Orçamentos",
-                'subTitulo' => 'Seus Orçamentos Gerados',
+                "title" => "Orçamentos",
+                'subTitle' => 'Seus Orçamentos Gerados',
                 'linkAtivo' => 'active',
             ]
         );
@@ -46,7 +46,7 @@ class QuotesController extends PanelController
         echo $this->template->rendenizar(
             "quotes/templates.html",
             [
-                "titulo" => "Templates"
+                "title" => "Templates"
             ]
         );
     }
@@ -56,7 +56,7 @@ class QuotesController extends PanelController
         echo $this->template->rendenizar(
             "quotes/forms/$form.html",
             [
-                "titulo" => "Criar Orçamento",
+                "title" => "Criar Orçamento",
                 "template" => $template,
                 "clients" => $this->clientService->findClientsByUserId($this->session->userId) ?? [],
             ]
@@ -158,7 +158,7 @@ class QuotesController extends PanelController
                 "path" => Helpers::url("/storage/pdf/user_{$data['id_usuario']}/quotes/$hash.pdf"),
                 'template' => $template,
                 'hash' => $hash,
-                'titulo' => $dataCompany['nome_empresa'],
+                'title' => $dataCompany['nome_empresa'],
                 'company' => $company,
             ]
         );

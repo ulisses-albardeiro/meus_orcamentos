@@ -13,6 +13,9 @@ try {
     SimpleRouter::get('404', 'SiteController@error404');
     SimpleRouter::get('pravicy-policy', 'SiteController@pravicyPolicy');
     SimpleRouter::get('blog', 'BlogController@index');
+    SimpleRouter::get(BASE_PATH.'deleted-account', function () {
+        include __DIR__ . '/../templates/views/deleted-account.html';
+    });
 
     //Login and Logout
     SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Login'], function () {
@@ -25,6 +28,7 @@ try {
     SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel'], function () {
         SimpleRouter::get('user', 'UserController@create');
         SimpleRouter::post('user', 'UserController@store');
+        SimpleRouter::delete('user/{id}', 'UserController@destroy');
         SimpleRouter::put('user/{id}', 'UserController@update')->addMiddleware(Auth::class);
         SimpleRouter::patch('user/image/{id}', 'UserController@destroyImage')->addMiddleware(Auth::class);
     });
@@ -102,19 +106,9 @@ try {
         SimpleRouter::get('quote/pdf/{template}/{hash}', 'QuotesController@export');
     });
 
-    //Grupo de Rotas Recibo
-    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\Recibo', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get('recibo/gerar', 'Recibo@gerar');
-        SimpleRouter::get('recibo/gerar/{id_recibo}', 'Recibo@gerar');
-        SimpleRouter::get('recibo/criar', 'Recibo@criar');
-        SimpleRouter::get('recibo/listar', 'Recibo@listar');
-        SimpleRouter::get('recibo/excluir/{id_recibo}', 'Recibo@excluir');
-    });
-
-    //Grupo de Rotas Lista
+    //Config
     SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\Config', 'middleware' => [Auth::class, Company::class]], function () {
-        SimpleRouter::get('config', 'ConfigControlador@listar');
-        SimpleRouter::get('config/excluir/{idUsuario}', 'ConfigControlador@Excluir');
+        SimpleRouter::get('config', 'ConfigController@index');
     });
 
     //Grupo de Rotas Empresa

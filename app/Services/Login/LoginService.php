@@ -13,7 +13,7 @@ class LoginService implements AuthInterface
 
     public function attempt(string $email, string $password): bool
     {
-        
+
         if (!Helpers::validateEmail($email)) {
             return false;
         }
@@ -27,6 +27,11 @@ class LoginService implements AuthInterface
         if (!password_verify($password, $user->senha)) {
             return false;
         }
+
+        if ($user->status != 1) {
+            return false;
+        }
+        
         $this->session->criarSessao('userId', $user->id);
 
         return true;

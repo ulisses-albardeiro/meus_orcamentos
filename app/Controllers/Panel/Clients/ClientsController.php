@@ -20,7 +20,7 @@ class ClientsController extends PanelController
         echo $this->template->rendenizar(
             'clients/index.html',
             [
-                'titulo' => 'Clientes',
+                'title' => 'Clientes',
                 'clientes' => $this->clientService->findClientsByUserId($this->session->userId)
             ]
         );

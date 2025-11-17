@@ -43,7 +43,7 @@ class ListController extends PanelController
             "listas/listar.html",
             [
                 'listas' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
-                "titulo" => "Listas",
+                "title" => "Listas",
                 'linkAtivo' => 'active',
             ]
         );
@@ -54,7 +54,7 @@ class ListController extends PanelController
         echo $this->template->rendenizar(
             "listas/modelos.html",
             [
-                "titulo" => "Modelos"
+                "title" => "Modelos"
             ]
         );
     }
@@ -64,7 +64,7 @@ class ListController extends PanelController
         echo $this->template->rendenizar(
             "listas/forms/$form.html",
             [
-                "titulo" => "Criar Lista",
+                "title" => "Criar Lista",
                 "modelo" => $template,
                 "clientes" => $this->clientesServico->findClientsByUserId($this->session->userId) ?? [],
             ]

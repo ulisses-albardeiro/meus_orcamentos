@@ -28,7 +28,7 @@ class SiteController extends Controller
         echo $this->template->rendenizar(
             "pravicy-policy.html",
             [
-                'titulo' => 'Política de Privacidade'
+                'title' => 'Política de Privacidade'
             ]
         );
     }

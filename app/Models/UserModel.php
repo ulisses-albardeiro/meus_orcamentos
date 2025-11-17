@@ -16,9 +16,9 @@ class UserModel extends Model
         return $this->busca("id = {$id_usuario}")->resultado();
     }
 
-    public function apagarUsuario(int $idUsuario) : bool
+    public function apagarUsuario(int $idUsuario): bool
     {
-        return $this->apagar("id = {$idUsuario}");    
+        return $this->apagar("id = {$idUsuario}");
     }
 
     public function saveToken(int $id, string $token): bool
@@ -26,6 +26,13 @@ class UserModel extends Model
         $this->id = $id;
         $this->token = $token;
         $this->dt_hr_token = date('Y-m-d H:i:s');
+        return $this->salvar();
+    }
+
+    public function updateStatus(int $id, int $status): bool
+    {
+        $this->id = $id;
+        $this->status = $status;
         return $this->salvar();
     }
 

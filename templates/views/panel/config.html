@@ -101,7 +101,7 @@
     
 </style>
 {{ flash() }}
-<!-- Card de Informações do Perfil -->
+<!-- profile information card -->
 <div class="card pb-4 shadow-lg mb-4">
 
     <div class="card-header">
@@ -137,7 +137,7 @@
     </div>
 </div>
 
-<!-- Modal para Edição do Perfil -->
+<!-- Modal edit profile -->
 <div class="modal fade" id="modalEditarPerfil" tabindex="-1" aria-labelledby="modalEditarPerfilLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -187,7 +187,7 @@
     </div>
 </div>
 
-<!-- Configurações de Aparência -->
+<!-- appearance settings -->
 <div class="card">
     <div class="card-header">
         <h5 class="mb-0">Configurações de Aparência</h5>
@@ -216,7 +216,7 @@
     </div>
 </div>
 
-<!-- Área Perigosa -->
+<!-- delete account -->
 <div class="card">
     <div class="card-header">
         <h5 class="mb-0 text-danger">Área Perigosa!</h5>
@@ -231,7 +231,7 @@
     </div>
 </div>
 
-<!-- Modal Excluir -->
+<!-- Modal delete account -->
 <div class="modal fade" id="modalConfirmDeleteConta" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
@@ -251,16 +251,17 @@
                     data-bs-dismiss="modal">
                     <i class="bi bi-x-circle me-1"></i> Cancelar
                 </button>
-                <a href="{{ url('config/excluir/'~usuario().id) }}" class="btn-sm btn btn-danger">
-                    <i class="bi bi-trash-fill me-1"></i> Excluir
-                </a>
+                <form action="{{ url('user/'~usuario().id) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill me-1"></i> Excluir</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Script para preview da imagem
+    // preview image
     document.getElementById('imagem').addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
@@ -273,11 +274,10 @@
         }
     });
 
-    // Script para o tema
+    //teme
     document.addEventListener('DOMContentLoaded', function () {
         const themeOptions = document.querySelectorAll('.theme-option');
 
-        // Função para ativar o tema selecionado
         function setActiveTheme(selectedTheme) {
             themeOptions.forEach(option => {
                 option.classList.remove('active');
@@ -287,7 +287,6 @@
             selectedOption.classList.add('active');
         }
 
-        // Adicionar event listeners para os botões
         themeOptions.forEach(option => {
             option.addEventListener('click', function () {
                 const themeValue = this.getAttribute('data-bs-theme-value');
@@ -295,7 +294,6 @@
             });
         });
 
-        // Inicializar com o tema atual (pode ser obtido do localStorage)
         const currentTheme = localStorage.getItem('theme') || 'auto';
         setActiveTheme(currentTheme);
     });

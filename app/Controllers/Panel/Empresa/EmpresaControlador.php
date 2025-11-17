@@ -22,8 +22,8 @@ class EmpresaControlador extends PanelController
         echo $this->template->rendenizar(
             'empresa/form.html',
             [
-                "titulo" => "Configure os dados da sua Empresa",
-                "subTitulo" => "",
+                "title" => "Configure os dados da sua Empresa",
+                "subTitle" => "",
                 'empresa' => $this->empresaServico->buscaEmpresaPorIdUsuarioServico($this->session->userId),
             ]
         );
@@ -45,7 +45,7 @@ class EmpresaControlador extends PanelController
         echo $this->template->rendenizar(
             'empresa/cadastro.html',
             [
-                "titulo" => "Configure os dados da sua Empresa",                
+                "title" => "Configure os dados da sua Empresa",                
             ]
         );
     }

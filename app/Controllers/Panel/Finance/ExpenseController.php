@@ -28,7 +28,7 @@ class ExpenseController extends PanelController
                 "expenses" => $expenses,
                 "categoriesExpense" => $categories,
                 "type" => "Despesas",
-                'titulo' => 'Despesas',
+                'title' => 'Despesas',
                 "expenseMenu" => "active"
             ]
         );

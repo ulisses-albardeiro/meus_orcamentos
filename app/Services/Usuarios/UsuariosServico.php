@@ -2,19 +2,24 @@
 
 namespace App\Services\Usuarios;
 
+use App\Core\Sessao;
 use App\Models\UserModel;
 
 class UsuariosServico implements UsuariosInterface
 {
-    protected UserModel $usuarioModelo;
-
-    public function __construct(UserModel $usuarioModelo)
-    {
-        $this->usuarioModelo = $usuarioModelo;
-    }
+    public function __construct(private UserModel $userModel, private Sessao $sessao) {}
 
     public function buscaUsuariosPorIdServico(int $id_usuario)
     {
-        return $this->usuarioModelo->buscaUsuarioPorId($id_usuario);
+        return $this->userModel->buscaUsuarioPorId($id_usuario);
+    }
+
+    public function updateStatus(int $id, int $status): bool
+    {
+        if ($this->userModel->updateStatus($id, $status)) {
+            $this->sessao->deletarSessao();
+            return true;
+        }
+        return false;
     }
 }

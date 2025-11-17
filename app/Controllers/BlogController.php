@@ -23,7 +23,7 @@ class BlogController extends Controller
         echo $this->template->rendenizar(
             "index.html",
             [
-                'titulo' => 'Blog Meus Orçamentos',
+                'title' => 'Blog Meus Orçamentos',
                 'categorias' => $this->categoriaModelo->buscaCategorias(),
                 'posts' => $this->postModelo->buscaPost(),
             ]

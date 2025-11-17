@@ -21,7 +21,7 @@ class CategoryController extends PanelController
             [
                 "categories" => $categories,
                 "types" => ["Despesas", "Receitas"],
-                'titulo' => 'Categoria',
+                'title' => 'Categoria',
                 'categoryMenu' => "active",
             ]
         );

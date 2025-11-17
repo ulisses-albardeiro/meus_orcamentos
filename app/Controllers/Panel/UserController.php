@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     protected UsuariosInterface $usuarioServico;
 
-    public function __construct(UsuariosInterface $usuarioServico)
+    public function __construct(UsuariosInterface $usuarioServico, private UsuariosInterface $userService)
     {
         parent::__construct('templates/views');
         $this->usuarioServico = $usuarioServico;
@@ -94,5 +94,14 @@ class UserController extends Controller
             $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();
             Helpers::redirecionar('config');
         }
+    }
+
+    public function destroy(int $id): void
+    {
+        if ($this->userService->updateStatus($id, 0)) {
+            Helpers::redirecionar("deleted-account");
+            return;
+        }
+        Helpers::redirecionar('config');
     }
 }

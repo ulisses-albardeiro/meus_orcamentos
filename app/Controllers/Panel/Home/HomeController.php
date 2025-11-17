@@ -33,7 +33,7 @@ class HomeController extends PanelController
         
         echo $this->template->rendenizar("home.html", 
         [
-            'titulo' => 'Home',
+            'title' => 'Home',
             'cashBalanceMonth' => $cashBalanceMonth,
             'totalRevenueMonth' => $totalRevenueMonth,
             'totalExpenseMonth' => $totalExpenseMonth,
