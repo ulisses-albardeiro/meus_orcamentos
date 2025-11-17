@@ -100,6 +100,7 @@ try {
         SimpleRouter::post('quote/{template}', 'QuotesController@store');
         SimpleRouter::get('quote', 'QuotesController@index');
     });
+
     //Quote - public routes
     SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\Quotes'], function () {
         SimpleRouter::get('quote/{template}/{hash}', 'QuotesController@show');
@@ -111,12 +112,13 @@ try {
         SimpleRouter::get('config', 'ConfigController@index');
     });
 
-    //Grupo de Rotas Empresa
-    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\Empresa', 'middleware' => Auth::class], function () {
-        SimpleRouter::get('empresa', 'EmpresaControlador@listar');
-        SimpleRouter::post('empresa/editar/{id}', 'EmpresaControlador@editar');
-        SimpleRouter::match(['get', 'post'], 'empresa/cadastrar', 'EmpresaControlador@cadastrar');
-        SimpleRouter::get('empresa/excluir/logo', 'EmpresaControlador@excluirLogo');
+    //Company
+    SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\Company', 'middleware' => Auth::class], function () {
+        SimpleRouter::get('company', 'CompanyController@index');
+        SimpleRouter::get('company/create', 'CompanyController@create');
+        SimpleRouter::put('company/{id}', 'CompanyController@update');
+        SimpleRouter::post('company', 'CompanyController@store');
+        SimpleRouter::get('company/logo', 'CompanyController@destroyLogo');
     });
 
     //Grupo de Rotas Dashboard

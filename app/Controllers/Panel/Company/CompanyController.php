@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Controllers\Panel\Empresa;
+namespace App\Controllers\Panel\Company;
 
 use App\Controllers\Panel\PanelController;
 use App\Core\Helpers;
 use App\Services\Company\CompanyInterface;
 
-class EmpresaControlador extends PanelController
+class CompanyController extends PanelController
 {
-    protected CompanyInterface $empresaServico;
-
-    public function __construct(CompanyInterface $empresaServico)
+    public function __construct(private CompanyInterface $empresaServico)
     {
         parent::__construct();
-        $this->empresaServico = $empresaServico;
     }
 
-
-    public function listar(): void
+    public function index(): void
     {
         echo $this->template->render(
             'empresa/form.html',
@@ -29,28 +25,31 @@ class EmpresaControlador extends PanelController
         );
     }
 
-    public function cadastrar(): void
+    public function create(): void
+    {
+        echo $this->template->render(
+            'empresa/cadastro.html',
+            [
+                "title" => "Configure os dados da sua Empresa",
+            ]
+        );
+    }
+
+    public function store(): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
             $cadastro = $this->empresaServico->registerCompany($dados, $this->session->userId, $_FILES['logo']);
 
             if ($cadastro) {
-                $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
+                $this->mensagem->modal('🎉Tudo está pronto!', 'Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
             }
 
             Helpers::redirect('home');
         }
-
-        echo $this->template->render(
-            'empresa/cadastro.html',
-            [
-                "title" => "Configure os dados da sua Empresa",                
-            ]
-        );
     }
 
-    public function editar(int $id): void
+    public function update(int $id): void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -60,10 +59,10 @@ class EmpresaControlador extends PanelController
             $this->mensagem->mensagemSucesso('Empresa editada com sucesso.')->flash();
         }
 
-        Helpers::redirect('empresa');
+        Helpers::redirect('company');
     }
 
-    public function excluirLogo(): void
+    public function destroyLogo(): void
     {
         $empresa = $this->empresaServico->findCompanyByUserId($this->session->userId);
 
@@ -75,6 +74,6 @@ class EmpresaControlador extends PanelController
             $this->mensagem->mensagemSucesso('Logo excluida com sucesso.')->flash();
         }
 
-        Helpers::redirect('empresa');
+        Helpers::redirect('company');
     }
 }
