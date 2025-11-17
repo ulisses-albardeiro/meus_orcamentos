@@ -36,8 +36,8 @@ class Template
                 })
             ),
             $this->twig->addFunction(
-                new \Twig\TwigFunction('textoResumido', function (string $text, int $limit, string $continues = '...') {
-                    return Helpers::textoResumido($text, $limit, $continues);
+                new \Twig\TwigFunction('truncateText', function (string $text, int $limit, string $continues = '...') {
+                    return Helpers::truncateText($text, $limit, $continues);
                 })
             ),
 
@@ -58,13 +58,8 @@ class Template
                 })
             ),
             $this->twig->addFunction(
-                new \Twig\TwigFunction('decodeHtml', function (string $texto) {
-                    return Helpers::decodeHtml($texto);
-                })
-            ),
-            $this->twig->addFunction(
-                new \Twig\TwigFunction('contagemTempo', function($data){
-                    return Helpers::contagemTempo($data);
+                new \Twig\TwigFunction('countTime', function($data){
+                    return Helpers::countTime($data);
                 })
             )
             

@@ -28,7 +28,7 @@ class PasswordRecoveryController extends Controller
 
         if (!$email) {
             $this->mensagem->mensagemAtencao("Por favor, informe um email válido.")->flash();
-            Helpers::redirecionar('password-recovery');
+            Helpers::redirect('password-recovery');
             return;
         }
 
@@ -38,7 +38,7 @@ class PasswordRecoveryController extends Controller
             $this->mensagem->mensagemErro("Houve um erro inesperado. Tente novamente ou fale com o suporte")->flash();
         }
 
-        Helpers::redirecionar('login');
+        Helpers::redirect('login');
     }
 
     public function create(string $token): void
@@ -47,7 +47,7 @@ class PasswordRecoveryController extends Controller
 
         if (!$validToken) {
             $this->mensagem->mensagemAtencao("Solicitação inválida ou expirada. Faça uma nova solicitação.")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
             return;
         }
 
@@ -65,16 +65,16 @@ class PasswordRecoveryController extends Controller
 
         if (!$this->passwordRecoveryService->validateNewPassword($data['password1'], $data['password2'])) {
             $this->mensagem->mensagemAtencao("Dados inválidos ou incompletos.")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
             return;
         }
 
         if (!$this->passwordRecoveryService->saveNewPassword($data['token'], $data['password1'])) {
             $this->mensagem->mensagemErro("Erro ao salvar a nova senha ou token inválido.")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
             return;
         }
         $this->mensagem->mensagemSucesso("Senha alterada com sucesso")->flash();
-        Helpers::redirecionar('login');
+        Helpers::redirect('login');
     }
 }

@@ -41,7 +41,7 @@ class ExpenseController extends PanelController
         if ($this->serviceExpense->createExpense($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso("Despesa Cadastrada com Sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function destroy(int $id): void
@@ -49,7 +49,7 @@ class ExpenseController extends PanelController
         if ($this->serviceExpense->destroyExpense($id)) {
             $this->mensagem->mensagemSucesso("Despesa excluida com sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function update(int $id): void
@@ -59,6 +59,6 @@ class ExpenseController extends PanelController
         if ($this->serviceExpense->updateExpense($dados, $id)) {
             $this->mensagem->mensagemSucesso("Despesa editada com sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 }

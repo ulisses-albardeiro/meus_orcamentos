@@ -39,7 +39,7 @@ class EmpresaControlador extends PanelController
                 $this->mensagem->modal('🎉Tudo está pronto!','Gostaria de criar seu primeiro Orçamento? É bem rápido!', Helpers::url('quote/templates'), 'Sim, criar agora')->flash();
             }
 
-            Helpers::redirecionar('home');
+            Helpers::redirect('home');
         }
 
         echo $this->template->render(
@@ -60,7 +60,7 @@ class EmpresaControlador extends PanelController
             $this->mensagem->mensagemSucesso('Empresa editada com sucesso.')->flash();
         }
 
-        Helpers::redirecionar('empresa');
+        Helpers::redirect('empresa');
     }
 
     public function excluirLogo(): void
@@ -75,6 +75,6 @@ class EmpresaControlador extends PanelController
             $this->mensagem->mensagemSucesso('Logo excluida com sucesso.')->flash();
         }
 
-        Helpers::redirecionar('empresa');
+        Helpers::redirect('empresa');
     }
 }

@@ -42,7 +42,14 @@ class ListController extends PanelController
         echo $this->template->render(
             "listas/listar.html",
             [
-                'listas' => Helpers::colocarTodosNomesClientesPeloId($clientes, $orcamentos),
+                'listas' => Helpers::attachRelated(
+                    $orcamentos,
+                    $clientes,
+                    'id_cliente',
+                    'id',
+                    'nome_cliente',
+                    'nome'
+                ),
                 "title" => "Listas",
                 'linkAtivo' => 'active',
             ]
@@ -81,13 +88,13 @@ class ListController extends PanelController
             $id_cliente = $dados['id_cliente'];
         }
 
-        $hash = Helpers::gerarHash();
+        $hash = Helpers::hash();
 
         $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->session->userId, $template, $hash);
 
         if (!empty($id_orcamento)) {
             //redireciona para o método 'exibir'
-            Helpers::redirecionar("listas/$template/$hash");
+            Helpers::redirect("listas/$template/$hash");
         }
     }
 
@@ -123,7 +130,7 @@ class ListController extends PanelController
             $this->mensagem->mensagemSucesso("Lista excluida com sucesso.")->flash();
         }
 
-        Helpers::redirecionar("list");
+        Helpers::redirect("list");
     }
 
     public function show(string $template, string $hash): void

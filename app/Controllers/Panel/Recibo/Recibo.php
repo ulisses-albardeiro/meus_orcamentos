@@ -55,10 +55,10 @@ class Recibo extends PanelController
         $excluir = new ReciboModelo;
         if ($excluir->excluirRecibo($id_recibo)) {
             $this->mensagem->mensagemSucesso("Recibo excluido com sucesso")->flash();
-            Helpers::redirecionar("recibo/listar");
+            Helpers::redirect("recibo/listar");
         } else {
             $this->mensagem->mensagemErro("Houve um erro inesperado")->flash();
-            Helpers::redirecionar("recibo/listar");
+            Helpers::redirect("recibo/listar");
         }
     }
 }

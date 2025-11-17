@@ -41,7 +41,7 @@ class RevenueController extends PanelController
         if ($this->revenueService->createRevenue($data, $this->session->userId)) {
             $this->mensagem->mensagemSucesso("Receita Cadastrada com Sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function destroy(int $id): void
@@ -49,7 +49,7 @@ class RevenueController extends PanelController
         if ($this->revenueService->destroyRevenue($id)) {
             $this->mensagem->mensagemSucesso("Receita excluida com sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function update(int $id): void
@@ -58,6 +58,6 @@ class RevenueController extends PanelController
         if ($this->revenueService->updateRevenue($data, $id)) {
             $this->mensagem->mensagemSucesso("Receita editada com sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 }

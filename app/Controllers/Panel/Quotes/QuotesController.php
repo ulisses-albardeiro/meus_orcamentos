@@ -74,13 +74,13 @@ class QuotesController extends PanelController
         }
 
         $totalQuote = $this->quoteService->calcularTotalOrcamento($data);
-        $hash = Helpers::gerarHash();
+        $hash = Helpers::hash();
 
         $quotesId = (new OrcamentoModelo)->cadastrarOrcamento($clientId, $totalQuote, $data, $this->session->userId, $template, $hash);
 
         if (!empty($quotesId)) {
             //redirect to method 'show'
-            Helpers::redirecionar("quote/$template/$hash");
+            Helpers::redirect("quote/$template/$hash");
         }
     }
 
@@ -122,7 +122,7 @@ class QuotesController extends PanelController
             $this->mensagem->mensagemSucesso("Orçamento excluido com sucesso!")->flash();
         }
 
-        Helpers::redirecionar("quote");
+        Helpers::redirect("quote");
     }
 
     public function show(string $template, string $hash): void

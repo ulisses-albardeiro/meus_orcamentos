@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function create(): void
     {
         if ($this->loginService->check()) {
-            Helpers::redirecionar('home');
+            Helpers::redirect('home');
             return;
         }
         echo $this->template->render('login.html', []);
@@ -28,14 +28,14 @@ class LoginController extends Controller
 
         if (!$this->loginService->attempt(...$data)) {
             $this->mensagem->mensagemErro("Dados incorretos")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
         }
-        Helpers::redirecionar('home');
+        Helpers::redirect('home');
     }
 
     public function destroy(): void
     {
         $this->loginService->logout();
-        Helpers::redirecionar('/');
+        Helpers::redirect('/');
     }
 }

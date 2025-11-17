@@ -22,7 +22,7 @@ class Company implements IMiddleware
         $this->empresaModelo = new EmpresasModelo();
         $empresa = $this->empresaModelo->buscaEmpresaPorIdUsuario($this->sessao->userId);
         if ($empresa === null) {
-            Helpers::redirecionar('empresa/cadastrar');
+            Helpers::redirect('empresa/cadastrar');
         }
     }
 }

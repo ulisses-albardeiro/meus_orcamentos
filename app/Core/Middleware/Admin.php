@@ -18,7 +18,7 @@ class Admin implements IMiddleware
         if ($user->nivel != 1) {
             $mesagem = (new Message());
             $mesagem->mensagemErro('Acesso negado!')->flash();
-            Helpers::redirecionar("login");
+            Helpers::redirect("login");
             exit;
         }
     }

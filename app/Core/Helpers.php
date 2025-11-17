@@ -9,15 +9,15 @@ use App\Core\Sessao;
 class Helpers
 {
     /**
-     * Redireciona o navegador para uma URL especificada.
+     * Redirects the browser to a specified URL.
      *
-     * Este método envia um cabeçalho HTTP 302 para redirecionar o navegador
-     * para a URL fornecida. Se nenhuma URL for passada, redireciona para a URL padrão.
+     * This method sends an HTTP 302 header to redirect the browser
+     * to the provided URL. If no URL is given, it redirects to the default URL.
      *
-     * @param string|null $url A URL para redirecionar. Se nulo, redireciona para a URL padrão (404).
+     * @param string|null $url The URL to redirect to. If null, redirects to the default URL (404).
      *
      */
-    public static function redirecionar(?string $url = null): void
+    public static function redirect(?string $url = null): void
     {
         header('HTTP/1.1 302 Found');
         $local = ($url ? self::url($url) : self::url());
@@ -26,14 +26,15 @@ class Helpers
     }
 
     /**
-     * Busca o ambiente de desenvolvimento 
-     * @return boll retorna valor true ser for em localhost e false para ambiente de produção
+     * Retrieves the current environment.
+     *
+     * @return bool Returns true if running on localhost, and false if running in production.
      */
     public static function localhost(): bool
     {
-        $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
+        $server = filter_input(INPUT_SERVER, 'SERVER_NAME');
 
-        if ($servidor == 'localhost') {
+        if ($server == 'localhost') {
             return true;
         } else {
             return false;
@@ -41,20 +42,20 @@ class Helpers
     }
 
     /**
-     * Redireciona o usuário para a página anterior, utilizando o cabeçalho HTTP `Referer`.
-     * Caso o cabeçalho `Referer` não esteja disponível, redireciona para uma página padrão (dashboard).
+     * Redirects the user back to the previous page using the HTTP `Referer` header.
+     * If the `Referer` header is not available, it redirects to a default page (dashboard).
      *
      * @return void
-     * @throws Exception Se o redirecionamento falhar (embora isso seja raro).
+     * @throws Exception If the redirect fails (although this is unlikely).
      */
-    public static function voltar(): void
+    public static function back(): void
     {
         if (isset($_SERVER['HTTP_REFERER'])) {
-            $pagina_anterior = $_SERVER['HTTP_REFERER'];
+            $lastePage = $_SERVER['HTTP_REFERER'];
         } else {
-            $pagina_anterior = 'home';
+            $lastePage = 'home';
         }
-        header("Location: $pagina_anterior");
+        header("Location: $lastePage");
         exit();
     }
 
@@ -70,14 +71,13 @@ class Helpers
     }
 
     /**
-     * Limpa a string, gerando um slug amigável para URLs.
+     * Sanitizes a string and generates a URL-friendly slug.
      *
-     * @param string $title Título do post.
-     * @return string Slug sem símbolos, acentos, com letras minúsculas e traços.
+     * @param string $title The post title.
+     * @return string A slug without symbols or accents, using lowercase letters and hyphens.
      */
     public static function slug(string $title): string
     {
-        // Mapeamento de caracteres acentuados para seus equivalentes
         $map = [
             'Á' => 'A',
             'À' => 'A',
@@ -125,81 +125,60 @@ class Helpers
             'ũ' => 'u'
         ];
 
-        // Substitui caracteres mapeados
         $slug = strtr($title, $map);
 
-        // Remove tags HTML e espaços extras
         $slug = strip_tags(trim($slug));
-
-        // Substitui caracteres não permitidos por traços
         $slug = preg_replace('/[^a-zA-Z0-9]+/', '-', $slug);
-
-        // Remove traços duplicados
         $slug = preg_replace('/-+/', '-', $slug);
 
-        // Converte para minúsculas
         return strtolower($slug);
     }
 
     /**
-     * Faz o decode do texto de entidades para HTML
-     * @param string Texto com entidades
-     * @return string Texto com tag HTML
+     * Builds the URL according to the current environment.
+     *
+     * @param string $url A path segment (e.g., 'admin' or '/admin').
+     * @return string The full URL for the current environment.
      */
-
-    public static function decodeHtml($texto): string
-    {
-        $texto_decode = html_entity_decode($texto);
-
-        return $texto_decode;
-    }
-
-
-    /**
-     * Monta a URL de acordo com o ambiente.
-     * @param string $url Parte do caminho (ex.: 'admin' ou '/admin').
-     * @return string URL completa do ambiente atual.
-     */
-
     public static function url(?string $url = null): string
     {
-        $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
-        $ambiente = ($servidor == 'localhost' ? DEVELOPMENT_URL : PRODUCTION_URL);
+        $server = filter_input(INPUT_SERVER, 'SERVER_NAME');
+        $enviroment = ($server == 'localhost' ? DEVELOPMENT_URL : PRODUCTION_URL);
 
         if (str_starts_with($url, '/')) {
-            return $ambiente . $url;
+            return $enviroment . $url;
         } else {
-            return $ambiente . '/' . $url;
+            return $enviroment . '/' . $url;
         }
     }
 
     /**
-     * Trunca um texto para caber dentro do card
-     * @param string $text é o texto completo
-     * @param int $limit é o tamanho do texto final
-     * @param string valor padrão '...'
-     * @return $textoResumido texto truncado concatenado com '...'
+     * Truncates text to fit inside a card.
+     *
+     * @param string $text The full text.
+     * @param int $limit The maximum length of the final text.
+     * @param string $continues The suffix to append (default: '...').
+     * @return string The truncated text concatenated with the suffix.
      */
-
-    public static function textoResumido(string $text, int $limit, string $continues = '...'): string
+    public static function truncateText(string $text, int $limit, string $continues = '...'): string
     {
         $cleanText = strip_tags(trim($text));
         if (mb_strlen($cleanText) <= $limit) {
             return $cleanText;
         }
 
-        $textoResumido = mb_substr($cleanText, 0, mb_strrpos(mb_substr($cleanText, 0, $limit), ''));
+        $truncateText = mb_substr($cleanText, 0, mb_strrpos(mb_substr($cleanText, 0, $limit), ''));
 
-        return $textoResumido . $continues;
+        return $truncateText . $continues;
     }
 
     /**
-     * Conta o tempo passado desde a publicação (ex.: há 1 minuto, há 3 dias, etc)
-     * @param string $data data da publicação
-     * @return string tempo passado desde a publicação
+     * Calculates the time elapsed since publication (e.g., "1 minute ago", "3 days ago").
+     *
+     * @param string $date The publication date.
+     * @return string The time elapsed since publication.
      */
-
-    public static function contagemTempo(string $date): string
+    public static function countTime(string $date): string
     {
         $now = strtotime(date('Y-m-d H:i:s'));
         $time = strtotime($date);
@@ -242,74 +221,24 @@ class Helpers
     }
 
     /**
-     * Gera uma hash aleatória de tamanho fixo.
-     * * @param int $tamanho O número de dígitos da hash.
-     * @return string A hash gerada.
+     * Generates a random hash with a fixed length.
+     *
+     * @param int $length The number of characters in the hash.
+     * @return string The generated hash.
      */
-    public static function gerarHash(int $tamanho = 6): string
+    public static function hash(int $size = 6): string
     {
-        if ($tamanho <= 0) {
+        if ($size <= 0) {
             return '';
         }
 
-        $min = pow(36, $tamanho - 1);
-        $max = pow(36, $tamanho) - 1;
+        $min = pow(36, $size - 1);
+        $max = pow(36, $size) - 1;
 
-        $numero_randomico = random_int($min, $max);
-        $hash = base_convert($numero_randomico, 10, 36);
+        $random = random_int($min, $max);
+        $hash = base_convert($random, 10, 36);
 
         return $hash;
-    }
-
-    /**
-     * Adiciona o nome de todos os clientes a uma coleção de orçamentos,
-     * ou a qualquer array de objetos com 'id_cliente' e que pode receber 'nome_cliente'.
-     *
-     * @param array $clientes Uma lista de objetos cliente (ou arrays associativos com 'id' e 'nome').
-     * @param array $itens Uma lista de objetos (e.g., orçamentos) que contêm 'id_cliente'.
-     * @return array Os itens com os nomes dos clientes adicionados.
-     */
-    public static function colocarTodosNomesClientesPeloId(?array $clientes, ?array $itens): ?array
-    {
-        if (empty($clientes) || empty($itens)) {
-            return null;
-        }
-
-        $clientes_map = [];
-        foreach ($clientes as $cliente) {
-            $clientes_map[$cliente->id ?? null] = $cliente->nome ?? null;
-        }
-
-        return array_map(function ($item) use ($clientes_map) {
-            $id_cliente = $item->id_cliente ?? null;
-            if ($id_cliente !== null && isset($clientes_map[$id_cliente])) {
-                $item->nome_cliente = $clientes_map[$id_cliente];
-            } else {
-                $item->nome_cliente = 'Nome não encontrado';
-            }
-            return $item;
-        }, $itens);
-    }
-
-    /**
-     * Retorna o nome de um cliente com base no seu ID a partir de uma lista de clientes.
-     *
-     * @param array $clientes Uma lista de objetos cliente (ou arrays associativos com 'id' e 'nome').
-     * @param mixed $id_cliente O ID do cliente a ser procurado.
-     * @return string O nome do cliente ou uma string vazia se não encontrado.
-     */
-    public static function colocarNomeClientePeloId(?array $clientes, ?int $id_cliente): ?string
-    {
-        if (empty($clientes) || empty($itens)) {
-            return null;
-        }
-
-        foreach ($clientes as $cliente) {
-            if (($cliente->id ?? null) == $id_cliente) {
-                return $cliente->nome ?? 'Nome não encontrado';
-            }
-        }
-        return '';
     }
 
     /**

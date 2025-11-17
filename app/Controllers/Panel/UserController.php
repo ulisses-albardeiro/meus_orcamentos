@@ -37,7 +37,7 @@ class UserController extends Controller
 
         if ($novo_usuario->salvar()) {
             $this->mensagem->mensagemSucesso("Cadastro feito com sucesso!")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
         }
     }
 
@@ -47,7 +47,7 @@ class UserController extends Controller
 
         if (!empty($busca)) {
             $this->mensagem->mensagemAtencao("O email $email já possui uma conta, caso não saiba a senha, clique abaixo em 'Esqueceu sua senha' para fazer uma nova.")->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
         }
     }
 
@@ -76,7 +76,7 @@ class UserController extends Controller
         if ($usuario->salvar()) {
             $this->mensagem->mensagemSucesso('Perfil atualizado com sucesso!')->flash();
         }
-        Helpers::redirecionar('config');
+        Helpers::redirect('config');
     }
 
     public function destroyImage(int $id): void
@@ -89,19 +89,19 @@ class UserController extends Controller
         $usuario->img_logo = null;
         if ($usuario->salvar()) {
             $this->mensagem->mensagemSucesso('Foto removida com sucesso!')->flash();
-            Helpers::redirecionar('config');
+            Helpers::redirect('config');
         } else {
             $this->mensagem->mensagemErro('Houve um erro inesperado')->flash();
-            Helpers::redirecionar('config');
+            Helpers::redirect('config');
         }
     }
 
     public function destroy(int $id): void
     {
         if ($this->userService->updateStatus($id, 0)) {
-            Helpers::redirecionar("deleted-account");
+            Helpers::redirect("deleted-account");
             return;
         }
-        Helpers::redirecionar('config');
+        Helpers::redirect('config');
     }
 }

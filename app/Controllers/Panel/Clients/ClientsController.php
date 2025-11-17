@@ -34,7 +34,7 @@ class ClientsController extends PanelController
             $this->mensagem->mensagemSucesso('Cliente Cadastrado com sucesso!')->flash();
         }
 
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function destroy(int $id): void
@@ -42,7 +42,7 @@ class ClientsController extends PanelController
         if ($this->clientService->destroyClient($id)) {
             $this->mensagem->mensagemSucesso('Cliente excluido com sucesso.')->flash();
         }
-        Helpers::redirecionar('clients');
+        Helpers::redirect('clients');
     }
 
     public function update(int $id): void
@@ -52,6 +52,6 @@ class ClientsController extends PanelController
         if ($this->clientService->updateClient($data, $id)) {
             $this->mensagem->mensagemSucesso('Cliente editado com sucesso.')->flash();
         }
-        Helpers::redirecionar('clients');
+        Helpers::redirect('clients');
     }
 }

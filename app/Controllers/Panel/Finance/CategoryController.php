@@ -36,7 +36,7 @@ class CategoryController extends PanelController
                 "A categoria '{$data['name']}' do tipo '{$data['type']}' já está cadastrada! Use outro tipo ou nome."
             )->flash();
 
-            Helpers::voltar();
+            Helpers::back();
             return;
         }
 
@@ -44,7 +44,7 @@ class CategoryController extends PanelController
             $this->mensagem->mensagemSucesso("Categoria cadastrada com Sucesso!")->flash();
         }
 
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function update(int $id): void
@@ -54,7 +54,7 @@ class CategoryController extends PanelController
         if ($this->categoryService->updateCategory($data['nome'], $id)) {
             $this->mensagem->mensagemSucesso("Categoria '{$data['nome']}' editada com Sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 
     public function destroy(int $id): void
@@ -62,6 +62,6 @@ class CategoryController extends PanelController
         if ($this->categoryService->destroyCategory($id)) {
             $this->mensagem->mensagemSucesso("Categoria excluida com sucesso!")->flash();
         }
-        Helpers::voltar();
+        Helpers::back();
     }
 }

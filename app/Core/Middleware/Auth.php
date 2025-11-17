@@ -18,7 +18,7 @@ class Auth implements IMiddleware
 
         if (!(new Sessao)->checarSessao('userId')) {
             $this->mesagem->mensagemErro('Necessário fazer login!')->flash();
-            Helpers::redirecionar('login');
+            Helpers::redirect('login');
         }
     }
 }

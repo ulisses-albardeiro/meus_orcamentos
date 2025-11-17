@@ -151,6 +151,6 @@ try {
     if (Helpers::localhost()) {
         echo $e;
     } else {
-        Helpers::redirecionar('404');
+        Helpers::redirect('404');
     }
 }
