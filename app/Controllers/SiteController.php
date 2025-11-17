@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Helpers;
-use App\Core\Sessao;
+use App\Core\Session;
 
 class SiteController extends Controller
 {

@@ -106,6 +106,6 @@ class Message
 
     public function flash(): void
     {
-        (new Sessao())->criarSessao('flash', $this);
+        (new Session())->create('flash', $this);
     }
 }

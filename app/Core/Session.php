@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-class Sessao
+class Session
 {
     public function __construct()
     {
@@ -11,31 +11,31 @@ class Sessao
         }
     }
 
-    public function criarSessao(string $chave, mixed $valor) : Sessao
+    public function create(string $chave, mixed $valor) : Session
     {
         $_SESSION[$chave] = (is_array($valor) ? (object) $valor : $valor);
 
         return $this;
     }
 
-    public function limparSessao(string $chave) : Sessao
+    public function clear(string $chave) : Session
     {
         unset($_SESSION[$chave]);
 
         return $this;
     }
 
-    public function carregarSessao() : ? object
+    public function loading() : ? object
     {
         return (object) $_SESSION;
     }
 
-    public function checarSessao(string $chave) : bool
+    public function check(string $chave) : bool
     {
         return isset($_SESSION[$chave]);
     }
 
-    public function deletarSessao() : Sessao
+    public function destroy() : Session
     {
         session_destroy();
         return $this;
@@ -50,9 +50,9 @@ class Sessao
 
     public function flash(): ?Message
     {
-        if($this->checarSessao('flash')){
+        if($this->check('flash')){
             $flash = $this->flash;
-            $this->limparSessao('flash');
+            $this->clear('flash');
             return $flash;
         }
 

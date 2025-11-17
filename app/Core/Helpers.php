@@ -4,7 +4,7 @@ namespace App\Core;
 
 use DateTime;
 use IntlDateFormatter;
-use App\Core\Sessao;
+use App\Core\Session;
 
 class Helpers
 {
@@ -212,7 +212,7 @@ class Helpers
 
     public static function flash(): ?string
     {
-        $sessao = new Sessao();
+        $sessao = new Session();
         if ($flash = $sessao->flash()) {
             echo $flash;
         }

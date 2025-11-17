@@ -6,7 +6,7 @@ use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
 use App\Core\Helpers;
 use App\Core\Message;
-use App\Core\Sessao;
+use App\Core\Session;
 
 class Auth implements IMiddleware
 {
@@ -16,7 +16,7 @@ class Auth implements IMiddleware
     {
         $this->mesagem = new Message();
 
-        if (!(new Sessao)->checarSessao('userId')) {
+        if (!(new Session)->check('userId')) {
             $this->mesagem->mensagemErro('Necessário fazer login!')->flash();
             Helpers::redirect('login');
         }
