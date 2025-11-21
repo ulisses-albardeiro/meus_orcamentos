@@ -3,19 +3,15 @@
 namespace App\Services\PasswordRecovery;
 
 use App\Models\UserModel;
-use App\Adapters\Email;
+use App\Adapters\MailAdapter\MailInterface;
 use App\Adapters\Template;
 
 class PasswordRecoveryService implements PasswordRecoveryInterface
 {
-    protected UserModel $userModel;
     protected string $token;
-    protected Template $template;
 
-    public function __construct(UserModel $userModel, Template $template)
+    public function __construct(private UserModel $userModel, private Template $template, private MailInterface $mailer)
     {
-        $this->userModel = $userModel;
-        $this->template = $template;
         $this->token = hash('sha256', random_bytes(64));
     }
 
@@ -49,15 +45,18 @@ class PasswordRecoveryService implements PasswordRecoveryInterface
     {
         $emailBody = $this->templateEmail($this->token);
 
-        $mailer = (new Email(HOST_EMAIL, EMAIL_USER, EMAIL_PASSWORD, EMAIL_PORT));
-        $mailer->criar('Recuperação de senha', $emailBody, $email, $name);
+        $this->mailer->create(
+            'Recuperação de senha',
+            $emailBody,
+            $email,
+            $name,
+            EMAIL_USER,
+            "Meus Orçamentos - Suporte"
+        );
 
-        if ($mailer->enviar(EMAIL_USER, 'Recuperação de senha - Meus Orçamentos (Não responda)')) {
-
-            return true;
-        }
-        return false;
+        return $this->mailer->send();
     }
+
 
     private function templateEmail(string $token): string
     {
