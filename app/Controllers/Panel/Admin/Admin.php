@@ -3,7 +3,7 @@
 namespace App\Controllers\Panel\Admin;
 
 use App\Controllers\Panel\PanelController;
-use App\Models\ListaModelo;
+use App\Models\ListModel;
 use App\Models\OrcamentoModelo;
 use App\Models\ReciboModelo;
 use App\Models\UserModel;
@@ -17,7 +17,7 @@ class Admin extends PanelController
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),
                 "orcamentos" => (new OrcamentoModelo)->busca()->resultado(true),
-                "listas" => (new ListaModelo)->busca()->resultado(true),
+                "listas" => (new ListModel)->busca()->resultado(true),
                 "recibos" => (new ReciboModelo)->busca()->resultado(true),
                 'title' => 'Admin Usuários'
             ]
@@ -42,7 +42,7 @@ class Admin extends PanelController
             "admin/listas.html",
             [
                 "usuarios" => (new UserModel)->busca()->resultado(true),
-                "listas" => (new ListaModelo)->busca()->resultado(true),
+                "listas" => (new ListModel)->busca()->resultado(true),
                 'link_listas' => 'active'
             ]
         );

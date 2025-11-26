@@ -5,53 +5,40 @@ namespace App\Controllers\Panel\List;
 use App\Controllers\Panel\PanelController;
 use App\Core\Helpers;
 use App\Services\Company\CompanyInterface;
-use App\Services\Listas\ListaInterface;
-use App\Services\Orcamentos\OrcamentosInterface;
-use App\Services\User\UserInterface;
-use App\Adapters\Pdf;
+use App\Services\Lists\ListInterface;
+use App\Adapters\PdfAdapter\PdfInterface;
 use App\Services\Clients\ClientsInterface;
+use App\Services\Files\FileManagerInterface;
 
 class ListController extends PanelController
 {
-    protected ListaInterface $listaServico;
-    protected ClientsInterface $clientesServico;
-    protected OrcamentosInterface $orcamentoInterface;
-    protected UserInterface $usuarioServico;
-    protected CompanyInterface $empresaServico;
-
     public function __construct(
-        ListaInterface $listaServico,
-        ClientsInterface $clientesServico,
-        OrcamentosInterface $orcamentoInterface,
-        UserInterface $usuarioServico,
-        CompanyInterface $empresaServico
+        private ListInterface $listService,
+        private ClientsInterface $clientsService,
+        private CompanyInterface $empresaServico,
+        private FileManagerInterface $fileManager,
+        private PdfInterface $pdfGenerator,
     ) {
         parent::__construct();
-        $this->listaServico = $listaServico;
-        $this->clientesServico = $clientesServico;
-        $this->orcamentoInterface = $orcamentoInterface;
-        $this->usuarioServico = $usuarioServico;
-        $this->empresaServico = $empresaServico;
     }
 
     public function index(): void
     {
-        $orcamentos = $this->listaServico->buscarListasServico($this->session->userId);
-        $clientes = $this->clientesServico->findClientsByUserId($this->session->userId);
+        $list = $this->listService->findListsByUserId($this->session->userId);
+        $clients = $this->clientsService->findClientsByUserId($this->session->userId);
 
         echo $this->template->render(
-            "listas/listar.html",
+            "lists/index.html",
             [
-                'listas' => Helpers::attachRelated(
-                    $orcamentos,
-                    $clientes,
+                'lists' => Helpers::attachRelated(
+                    $list,
+                    $clients,
                     'id_cliente',
                     'id',
                     'nome_cliente',
                     'nome'
                 ),
                 "title" => "Listas",
-                'linkAtivo' => 'active',
             ]
         );
     }
@@ -59,7 +46,7 @@ class ListController extends PanelController
     public function templates(): void
     {
         echo $this->template->render(
-            "listas/modelos.html",
+            "lists/templates.html",
             [
                 "title" => "Modelos"
             ]
@@ -69,62 +56,61 @@ class ListController extends PanelController
     public function create(string $form, string $template): void
     {
         echo $this->template->render(
-            "listas/forms/$form.html",
+            "lists/forms/$form.html",
             [
                 "title" => "Criar Lista",
-                "modelo" => $template,
-                "clientes" => $this->clientesServico->findClientsByUserId($this->session->userId) ?? [],
+                "template" => $template,
+                "clients" => $this->clientsService->findClientsByUserId($this->session->userId) ?? [],
             ]
         );
     }
 
     public function store(string $template): void
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (empty($dados['id_cliente'])) {
-            $id_cliente = $this->clientesServico->registerClient($dados, $this->session->userId);
+        if (empty($data['id_cliente'])) {
+            $clientId = $this->clientsService->registerClient($data, $this->session->userId);
         } else {
-            $id_cliente = $dados['id_cliente'];
+            $clientId = $data['id_cliente'];
         }
 
         $hash = Helpers::hash();
 
-        $id_orcamento = $this->listaServico->cadastrarListaServico($dados, $id_cliente, $this->session->userId, $template, $hash);
+        $listId = $this->listService->registerList($data, $clientId, $this->session->userId, $template, $hash);
 
-        if (!empty($id_orcamento)) {
-            //redireciona para o método 'exibir'
-            Helpers::redirect("listas/$template/$hash");
+        if (!empty($listId)) {
+            //redirect to method 'show'
+            Helpers::redirect("list/$template/$hash");
         }
     }
 
     public function export(string $template, string $hash): void
     {
-        $dados = $this->listaServico->buscaListaPorHashServico($hash);
-        $empresa = $this->empresaServico->findCompanyByUserId($dados['id_usuario']);
+        $data = $this->listService->findListByHash($hash);
+        $company = $this->empresaServico->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(
-            "listas/pdf/$template.html",
+            "lists/pdf/$template.html",
             [
-                "dados" => $dados,
-                'empresa' => $empresa,
+                "data" => $data,
+                'company' => $company,
             ]
         );
 
-        $pdf = new Pdf;
-        $pdf->carregarHTML($html);
-        $pdf->configurarPapel('A4');
-        $pdf->renderizar();
-        $pdf->baixar("orçamento-" . Helpers::slug($dados['nome_cliente']) . ".pdf");
+        $filename = "lista_" . Helpers::slug($data['nome_cliente']) . ".pdf";
+
+        $pdfOutput = $this->pdfGenerator->generate($html, ['chroot' => __DIR__]);
+        $this->fileManager->download($pdfOutput, $filename, 'application/pdf');
     }
 
     public function destroy(string $hash): void
     {
-        $arquivo = "templates/assets/arquivos/listas/$hash.pdf";
+        $file = "templates/assets/arquivos/lists/$hash.pdf";
 
-        if ($this->listaServico->excluirListasServico($hash)) {
-            if (file_exists($arquivo)) {
-                unlink($arquivo);
+        if ($this->listService->destroyList($hash)) {
+            if (file_exists($file)) {
+                unlink($file);
             }
 
             $this->mensagem->mensagemSucesso("Lista excluida com sucesso.")->flash();
@@ -135,40 +121,30 @@ class ListController extends PanelController
 
     public function show(string $template, string $hash): void
     {
-        $dados = $this->listaServico->buscaListaPorHashServico($hash);
+        $data = $this->listService->findListByHash($hash);
 
-        $empresa = $this->empresaServico->findCompanyByUserId($dados['id_usuario']);
+        $company = $this->empresaServico->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(
-            "listas/pdf/$template.html",
+            "lists/pdf/$template.html",
             [
-                "dados" => $dados,
-                'empresa' => $empresa,
+                "data" => $data,
+                'company' => $company,
             ]
         );
 
-        if (Helpers::localhost()) {
-            $caminho_local = $_SERVER['DOCUMENT_ROOT'] . '/meus_orcamentos/templates/assets/arquivos/listas/';
-        } else {
-            $caminho_local = 'templates/assets/arquivos/listas/';
-        }
+        $path = "storage/pdf/user_{$data['id_usuario']}/lists/";
 
-
-        $pdf = new Pdf;
-        $pdf->carregarHTML($html);
-        $pdf->configurarPapel('A4');
-        $pdf->renderizar();
-        $pdf->salvarPDF($caminho_local, $hash . '.pdf');
-
-        $lista_url = Helpers::url('templates/assets/arquivos/listas/' . $hash . '.pdf');
+        $pdfOutput = $this->pdfGenerator->generate($html, ['chroot' => __DIR__]);
+        $this->fileManager->save($pdfOutput, $path, "$hash.pdf");
 
         echo $this->template->render(
-            "listas/pre-view.html",
+            "lists/pre-view.html",
             [
-                "orcamento" => $lista_url,
+                "list" => Helpers::url("$path/$hash.pdf"),
                 'hash' => $hash,
-                'modelo' => $template,
-                'empresa' => $empresa,
+                'template' => $template,
+                'company' => $company,
             ]
         );
     }

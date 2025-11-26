@@ -56,88 +56,88 @@
         <table class="bg-light border-bottom border-primary border-2" style="width: 100%;">
             <tbody>
                 <tr>
-                    {% if empresa.logo %}
+                    {% if company.logo %}
                     <td style="width: 30%; vertical-align: middle; padding: 20px;">
-                        <img src="{{ url('templates/assets/img/logos/'~empresa.logo) }}" class="img-fluid"
+                        <img src="{{ url('templates/assets/img/logos/'~company.logo) }}" class="img-fluid"
                             style="max-height: 220px;">
                     </td>
                     {% endif %}
                     <td style="width: 70%; vertical-align: middle;">
-                        <h2 class="fw-bold mb-2">{{ dados.nome_empresa }}</h2>
+                        <h2 class="fw-bold mb-2">{{ data.nome_empresa }}</h2>
                         <div class="row">
                             <div class="col-lg-12">
                                 <p style="font-size: 15px;" class="mb-1">
                                     <i class="fas fa-phone-alt text-muted me-1"></i>
-                                    {{ dados.telefone_empresa }} / {{ dados.celular_empresa }}
+                                    {{ data.telefone_empresa }} / {{ data.celular_empresa }}
                                 </p>
-                                {% if dados.cnpj_empresa %}
+                                {% if data.cnpj_empresa %}
                                 <p style="font-size: 15px;" class="mb-1">
                                     <i class="fas fa-id-card text-muted me-1"></i>
-                                    {{ dados.cnpj_empresa }}
+                                    {{ data.cnpj_empresa }}
                                 </p>
                                 {% endif %}
-                                {% if dados.email_empresa %}
+                                {% if data.email_empresa %}
                                 <p style="font-size: 15px;" class="mb-1">
                                     <i class="fas fa-envelope text-muted me-1"></i>
-                                    {{ dados['email-empresa'] }}
+                                    {{ data['email-empresa'] }}
                                 </p>
                                 {% endif %}
-                                {% if dados.rua_empresa or dados.n_casa_empresa or
-                                dados.bairro_empresa or dados.cep_empresa or
-                                dados.cidade_empresa or dados.uf_empresa %}
+                                {% if data.rua_empresa or data.n_casa_empresa or
+                                data.bairro_empresa or data.cep_empresa or
+                                data.cidade_empresa or data.uf_empresa %}
                                 <p style="font-size: 15px;" class="mb-1">
                                     <i class="fas fa-map-marker-alt text-muted me-1"></i>
-                                    {{ dados.rua_empresa }}
-                                    {% if dados.n_casa_empresa %}, {{dados.n_casa_empresa }}{% endif %}
-                                    {% if dados.bairro_empresa %} - {{ dados.bairro_empresa }}{% endif
+                                    {{ data.rua_empresa }}
+                                    {% if data.n_casa_empresa %}, {{data.n_casa_empresa }}{% endif %}
+                                    {% if data.bairro_empresa %} - {{ data.bairro_empresa }}{% endif
                                     %}
-                                    {% if dados.cep_empresa %}. CEP: {{ dados.cep_empresa }}{% endif %}
-                                    {% if dados.cidade_empresa %}. {{ dados.cidade_empresa }}{% endif %}
-                                    {% if dados.uf_empresa %}/{{ dados.uf_empresa }}{% endif %}.
+                                    {% if data.cep_empresa %}. CEP: {{ data.cep_empresa }}{% endif %}
+                                    {% if data.cidade_empresa %}. {{ data.cidade_empresa }}{% endif %}
+                                    {% if data.uf_empresa %}/{{ data.uf_empresa }}{% endif %}.
                                 </p>
                                 {% endif %}
                             </div>
                         </div>
         
                         <div class="mt-1">
-                            {% if dados.facebook %}
+                            {% if data.facebook %}
                             <span class="me-1">
                                 <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="me-1"
                                     style="width: 15px; height: 15px; margin-top: 10px;">
-                                {{ dados.facebook }}
+                                {{ data.facebook }}
                             </span>
                             {% endif %}
         
-                            {% if dados.instagram %}
+                            {% if data.instagram %}
                             <span class="me-1">
                                 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="me-1"
                                     style="width: 15px; height: 15px; margin-top: 10px;">
-                                {{ dados.instagram }}
+                                {{ data.instagram }}
                             </span>
                             {% endif %}
         
-                            {% if dados.x %}
+                            {% if data.x %}
                             <span class="me-1">
                                 <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="X (Twitter)"
                                     class="me-1" style="width: 15px; height: 15px; margin-top: 10px;">
-                                {{ dados.x }}
+                                {{ data.x }}
                             </span>
                             {% endif %}
         
-                            {% if dados.tiktok %}
+                            {% if data.tiktok %}
         
                             <span class="me-1">
                                 <img src="{{url('templates/assets/img/gerais/tiktok.png')}}" alt="LinkedIn" class="me-1"
                                     style="width: 15px; height: 15px; margin-top: 10px;">
-                                {{ dados.tiktok }}
+                                {{ data.tiktok }}
                             </span>
                             {% endif %}
         
-                            {% if dados.linkedin %}
+                            {% if data.linkedin %}
                             <span class="me-1">
                                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="me-1"
                                     style="width: 15px; height: 15px; margin-top: 10px;">
-                                {{ dados.linkedin }}
+                                {{ data.linkedin }}
                             </span>
                             {% endif %}
                         </div>
@@ -150,35 +150,35 @@
             Dados do Cliente
         </div>
         <div class="mb-3 border p-2">
-            <p class="mb-0 border-bottom"><strong>Nome:</strong> {{ dados.nome_cliente }}</p>
+            <p class="mb-0 border-bottom"><strong>Nome:</strong> {{ data.nome_cliente }}</p>
 
-            {% if dados.cpf_cnpj_cliente %}
-            <p class="mb-0 border-bottom"><strong>CPF/CNPJ:</strong> {{ dados.cpf_cnpj_cliente }}</p>
+            {% if data.cpf_cnpj_cliente %}
+            <p class="mb-0 border-bottom"><strong>CPF/CNPJ:</strong> {{ data.cpf_cnpj_cliente }}</p>
             {% endif %}
 
-            {% if dados.cep_cliente or dados.rua_cliente or dados.n_casa_cliente or dados.bairro_cliente or dados.cidade_cliente or dados.uf_cliente %}
+            {% if data.cep_cliente or data.rua_cliente or data.n_casa_cliente or data.bairro_cliente or data.cidade_cliente or data.uf_cliente %}
             <p class="mb-0 border-bottom">
                 <strong>Endereço:</strong>
-                {% if dados.rua_cliente %}{{ dados.rua_cliente }}{% endif %}
-                {% if dados.n_casa_cliente %}, {{ dados.n_casa_cliente }}{% endif %}
-                {% if dados.bairro_cliente %} - {{ dados.bairro_cliente }}{% endif %}
-                {% if dados.cidade_cliente %} - {{ dados.cidade_cliente }}{% endif %}
-                {% if dados.uf_cliente %}/{{ dados.uf_cliente }}{% endif %}
-                {% if dados.cep_cliente %} - CEP: {{ dados.cep_cliente }}{% endif %}
+                {% if data.rua_cliente %}{{ data.rua_cliente }}{% endif %}
+                {% if data.n_casa_cliente %}, {{ data.n_casa_cliente }}{% endif %}
+                {% if data.bairro_cliente %} - {{ data.bairro_cliente }}{% endif %}
+                {% if data.cidade_cliente %} - {{ data.cidade_cliente }}{% endif %}
+                {% if data.uf_cliente %}/{{ data.uf_cliente }}{% endif %}
+                {% if data.cep_cliente %} - CEP: {{ data.cep_cliente }}{% endif %}
             </p>
             {% endif %}
 
-            {% if dados.telefone_cliente or dados.celular_cliente %}
+            {% if data.telefone_cliente or data.celular_cliente %}
             <p class="mb-0 border-bottom">
                 <strong>Contato:</strong>
-                {% if dados.telefone_cliente %}Tel: {{ dados.telefone_cliente }}{% endif %}
-                {% if dados.telefone_cliente and dados.celular_cliente %} / {% endif %}
-                {% if dados.celular_cliente %}Cel: {{ dados.celular_cliente }}{% endif %}
+                {% if data.telefone_cliente %}Tel: {{ data.telefone_cliente }}{% endif %}
+                {% if data.telefone_cliente and data.celular_cliente %} / {% endif %}
+                {% if data.celular_cliente %}Cel: {{ data.celular_cliente }}{% endif %}
             </p>
             {% endif %}
 
-            {% if dados.email_cliente %}
-            <p class="mb-0"><strong>Email:</strong> {{ dados.email_cliente }}</p>
+            {% if data.email_cliente %}
+            <p class="mb-0"><strong>Email:</strong> {{ data.email_cliente }}</p>
             {% endif %}
         </div>
 
@@ -194,7 +194,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in dados.itens %}
+                {% for item in data.itens %}
                 <tr style="border-left: #dee2e6 solid 1px; border-right: #dee2e6 solid 1px;">
                     <td class="text-center">{{ item['qtd-item'] }}</td>
                     <td>
@@ -207,8 +207,8 @@
         </table>
 
         <div class="footer">
-            {% if dados.anotacoes %}
-            <p>*{{ dados.anotacoes }}</p>
+            {% if data.anotacoes %}
+            <p>*{{ data.anotacoes }}</p>
             {% endif %}
             <p>Obrigado por utilizar nosso serviço! Para dúvidas, entre em contato</p>
         </div>

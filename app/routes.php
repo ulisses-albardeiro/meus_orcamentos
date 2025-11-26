@@ -82,7 +82,7 @@ try {
     SimpleRouter::group(['prefix' => BASE_PATH, 'namespace' => 'Panel\List', 'middleware' => [Auth::class, Company::class]], function () {
         SimpleRouter::get('list', 'ListController@index');
         SimpleRouter::get('list/templates', 'ListController@templates');
-        SimpleRouter::get('list/{form}/{template}', 'ListController@create');
+        SimpleRouter::get('list/create/{form}/{template}', 'ListController@create');
         SimpleRouter::post('list/{template}', 'ListController@store');
         SimpleRouter::delete('list/{hash}', 'ListController@destroy');
     });

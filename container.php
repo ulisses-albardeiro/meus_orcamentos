@@ -1,8 +1,7 @@
 <?php
 
 use DI\ContainerBuilder;
-use App\Services\Listas\ListaInterface;
-use App\Services\Listas\ListaServicos;
+
 use App\Services\Orcamentos\OrcamentosInterface;
 use App\Services\Orcamentos\OrcamentosServicos;
 use App\Services\User\UserInterface;
@@ -15,7 +14,7 @@ $builder = new ContainerBuilder();
 $builder->addDefinitions([
 
     OrcamentosInterface::class => autowire(OrcamentosServicos::class),
-    ListaInterface::class => autowire(ListaServicos::class),
+    App\Services\Lists\ListInterface::class => autowire(App\Services\Lists\ListService::class),
     UserInterface::class => autowire(UserService::class),
 
     //Finance
