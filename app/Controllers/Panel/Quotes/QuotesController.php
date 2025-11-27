@@ -3,10 +3,10 @@
 namespace App\Controllers\Panel\Quotes;
 
 use App\Controllers\Panel\PanelController;
-use App\Models\OrcamentoModelo;
+use App\Models\QuoteModel;
 use App\Core\Helpers;
 use App\Services\Company\CompanyInterface;
-use App\Services\Orcamentos\OrcamentosInterface;
+use App\Services\Quotes\QuotesInterface;
 use App\Adapters\PdfAdapter\PdfInterface;
 use App\Services\Clients\ClientsInterface;
 use App\Services\Files\FileManagerInterface;
@@ -14,7 +14,7 @@ use App\Services\Files\FileManagerInterface;
 class QuotesController extends PanelController
 {
     public function __construct(
-        private OrcamentosInterface $quoteService,
+        private QuotesInterface $quoteService,
         private ClientsInterface $clientService,
         private CompanyInterface $companyService,
         private PdfInterface $pdfGenerator,
@@ -25,7 +25,7 @@ class QuotesController extends PanelController
 
     public function index(): void
     {
-        $quotes = $this->quoteService->buscaOrcamentosServico($this->session->userId);
+        $quotes = $this->quoteService->findsQuotesByUserId($this->session->userId);
         $clients = $this->clientService->findClientsByUserId($this->session->userId);
 
         echo $this->template->render(
@@ -71,10 +71,10 @@ class QuotesController extends PanelController
             $clientId = $data['id_cliente'];
         }
 
-        $totalQuote = $this->quoteService->calcularTotalOrcamento($data);
+        $totalQuote = $this->quoteService->calculateTotalQuote($data);
         $hash = Helpers::hash();
 
-        $quotesId = (new OrcamentoModelo)->cadastrarOrcamento($clientId, $totalQuote, $data, $this->session->userId, $template, $hash);
+        $quotesId = (new QuoteModel)->registerQuote($clientId, $totalQuote, $data, $this->session->userId, $template, $hash);
 
         if (!empty($quotesId)) {
             //redirect to method 'show'
@@ -84,12 +84,12 @@ class QuotesController extends PanelController
 
     public function export(string $template, string $hash): void
     {
-        $data = $this->quoteService->buscaOrcamentoPorHashServico($hash);
+        $data = $this->quoteService->findQuoteByHash($hash);
 
-        $dataCompany = $this->quoteService->separarDadosUsuario($data);
-        $dataClient = $this->quoteService->separarDadosCliente($data);
+        $dataCompany = $this->quoteService->separateDataUser($data);
+        $dataClient = $this->quoteService->separateDataClient($data);
 
-        $items = $this->quoteService->processarItensParaView($data);
+        $items = $this->quoteService->processesItemsForView($data);
         $company = $this->companyService->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(
@@ -114,7 +114,7 @@ class QuotesController extends PanelController
     {
         $path = "storage/pdf/user_{$this->session->userId}/quotes/$hash.pdf";
 
-        if ($this->quoteService->excluirOrcamentoServico($hash)) {
+        if ($this->quoteService->destroyQuote($hash)) {
             $this->fileManager->delete($path);
 
             $this->mensagem->mensagemSucesso("Orçamento excluido com sucesso!")->flash();
@@ -125,12 +125,12 @@ class QuotesController extends PanelController
 
     public function show(string $template, string $hash): void
     {
-        $data = $this->quoteService->buscaOrcamentoPorHashServico($hash);
+        $data = $this->quoteService->findQuoteByHash($hash);
 
-        $dataCompany = $this->quoteService->separarDadosUsuario($data);
-        $dataClient = $this->quoteService->separarDadosCliente($data);
+        $dataCompany = $this->quoteService->separateDataUser($data);
+        $dataClient = $this->quoteService->separateDataClient($data);
 
-        $items = $this->quoteService->processarItensParaView($data);
+        $items = $this->quoteService->processesItemsForView($data);
         $company = $this->companyService->findCompanyByUserId($data['id_usuario']);
 
         $html = $this->template->render(

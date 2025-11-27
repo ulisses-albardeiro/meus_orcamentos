@@ -2,10 +2,8 @@
 
 use DI\ContainerBuilder;
 
-use App\Services\Orcamentos\OrcamentosInterface;
-use App\Services\Orcamentos\OrcamentosServicos;
-use App\Services\User\UserInterface;
-use App\Services\User\UserService;
+use App\Services\Quotes\QuotesInterface;
+use App\Services\Quotes\QuotesService;
 
 use function DI\autowire;
 
@@ -13,9 +11,12 @@ $builder = new ContainerBuilder();
 
 $builder->addDefinitions([
 
-    OrcamentosInterface::class => autowire(OrcamentosServicos::class),
+    //PDF
+    QuotesInterface::class => autowire(QuotesService::class),
     App\Services\Lists\ListInterface::class => autowire(App\Services\Lists\ListService::class),
-    UserInterface::class => autowire(UserService::class),
+
+    //User
+    App\Services\User\UserInterface::class => autowire(App\Services\User\UserService::class),
 
     //Finance
     App\Services\Finance\CategoryInterface::class => autowire(App\Services\Finance\CategoryService::class),

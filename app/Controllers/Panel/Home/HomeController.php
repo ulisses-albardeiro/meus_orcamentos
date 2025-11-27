@@ -6,13 +6,13 @@ use App\Core\Helpers;
 use App\Services\Clients\ClientsInterface;
 use App\Services\Finance\CategoryInterface;
 use App\Services\Finance\DashboardInterface;
-use App\Services\Orcamentos\OrcamentosInterface;
+use App\Services\Quotes\QuotesInterface;
 
 class HomeController extends PanelController
 {
     public function __construct(
         private DashboardInterface $dashboardService, 
-        private OrcamentosInterface $quoteService, 
+        private QuotesInterface $quoteService, 
         private ClientsInterface $clientService,
         private CategoryInterface $categoryService)
     {
@@ -29,7 +29,7 @@ class HomeController extends PanelController
         $categoriesRevenue = $this->categoryService->findCategoryByUserIdAndType($this->session->userId, 'Receitas');
 
         $clients = $this->clientService->findClientsByUserId($this->session->userId) ?? [];
-        $quotes = $this->quoteService->buscaOrcamentosServico($this->session->userId) ?? [];
+        $quotes = $this->quoteService->findsQuotesByUserId($this->session->userId) ?? [];
         
         echo $this->template->render("home.html", 
         [
