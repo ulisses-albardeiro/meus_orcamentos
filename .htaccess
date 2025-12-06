@@ -5,6 +5,7 @@ RewriteEngine on
 </FilesMatch>
 
 RewriteCond %{REQUEST_URI} ^/storage [NC]
+RewriteCond %{REQUEST_URI} !\.pdf$ [NC]
 RewriteRule ^ - [F,L]
 
 RewriteCond %{SCRIPT_FILENAME} !-f
